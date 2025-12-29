@@ -10,10 +10,10 @@ public class ArrowCreate : MonoBehaviour
     // public float diffMin = 0f;
     // private bool isCorrect;
     private bool isMatching = false;
-    public ArrowSlider arrowList;
+    // public ArrowSlider arrowSlider;
 
 
-    private enum Direction
+    public enum Direction
     {
         upArrow,
         rightArrow,
@@ -21,7 +21,7 @@ public class ArrowCreate : MonoBehaviour
         leftArrow
     }
 
-    private static readonly Dictionary<Direction, float> ArrowType = new()
+    public static readonly Dictionary<Direction, float> ArrowType = new()
     {
         { Direction.upArrow, 0f },
         { Direction.rightArrow, -90f },
@@ -29,7 +29,8 @@ public class ArrowCreate : MonoBehaviour
         { Direction.leftArrow, 90f }
     };
 
-    private Direction direction;
+    public Direction direction;
+    // private int ID;
 
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -37,7 +38,11 @@ public class ArrowCreate : MonoBehaviour
     {
         direction = (Direction)Random.Range(0, 4);
         transform.rotation = Quaternion.Euler(0f, 0f, ArrowType[direction]);
-        arrowList.AddArrow(gameObject);
+        // ID = GetInstanceID();
+        // arrowList.AddArrow(gameObject);
+        // Debug.Log("COMP First arrow ID: " + arrowList.firstArrowID);
+        // Debug.Log("COMP First arrow ID: " + ID);
+
     }
 
     // Update is called once per frame
@@ -46,25 +51,6 @@ public class ArrowCreate : MonoBehaviour
 
     }
 
-    public void OnDanceMove(InputAction.CallbackContext context)
-    {
-        if (context.performed)
-        {
-            Debug.Log("DanceMove pressed: " + context.control.name);
-            if (context.control.name == direction.ToString())
-            {
-                Debug.Log("Matched arrow: " + direction.ToString());
-                isMatching = true;
-                // Direction itself is your "ID":
-                // - as enum: Direction
-                // - as string: Direction.ToString() -> "Up"/"Down"/...
-                // - as int: (int)Direction -> 0..3
-                Destroy(gameObject);
-            }
-            else
-                Debug.Log("Mismatched arrow. Expected: " + direction.ToString() + ", but got: " + context.control.name);
-        }
-    }
 
 
 }
