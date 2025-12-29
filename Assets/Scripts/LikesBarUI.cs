@@ -3,24 +3,28 @@ using UnityEngine;
 
 public class LikesBarUI : MonoBehaviour
 {
-    public float Likes, MaxLikes, Width, Height;
+    public float score, target, Width, Height;
+
 
 
     [SerializeField]
     private RectTransform likesBar;
 
-    public void setMaxLikes(float maxLikes)
+    public void SetStart(float levelScore, float levelTarget)
     {
-        MaxLikes = maxLikes;
-        // Likes = MaxLikes;
+        score = levelScore; // likes starting point
+        target = levelTarget; // likes end point
+        Debug.Log(" Score:" + score + " Target:" + target);
         // UpdateLikesBar();
     }
 
-    public void updateLikes(float updatedScore)
+    public void UpdateScore(float gain)
     {
-        Likes = updatedScore;
-        float newWidth = (Likes / MaxLikes) * Width;
+        score += gain;
+        score = Mathf.Clamp(score, 0f, target);
+        float newWidth = (score / target) * Width;
         likesBar.sizeDelta = new Vector2(newWidth, Height);
+        Debug.Log(gain + " Score:" + score);
         // UpdateLikesBar();
     }
 }
