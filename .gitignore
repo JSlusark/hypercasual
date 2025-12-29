@@ -1,0 +1,83 @@
+# Unity generated folders
+[Ll]ibrary/
+[Tt]emp/
+[Oo]bj/
+[Bb]uild/
+[Bb]uilds/
+[Mm]emoryCaptures/
+[Ll]ogs/
+[Rr]ecordings/
+[Cc]rashReports/
+UserSettings/
+Artifacts/
+
+
+# OS / editor
+.DS_Store
+.vscode/
+.vs/
+.idea/
+
+# Visual Studio / Rider / Mono
+*.csproj
+*.unityproj
+*.sln
+*.suo
+*.swp
+*.swo
+*.tmp
+*.user
+*.userprefs
+*.pidb
+*.booproj
+*.svd
+*.pdb
+*.mdb
+*.opendb
+*.VC.db
+
+# Unity generated asset meta and builds
+*.apk
+*.aab
+*.xcodeproj/
+*.xcworkspace/
+*.xcuserdata/
+
+# Asset store tools (if present)
+Assets/AssetStoreTools*
+
+# Serialized file types you usually don't need
+*.log
+*.autosave
+*.stacktrace
+
+
+# Additional Unity/Platform build outputs
+ExportedObj/
+.build/
+.gradle/
+[Tt]estResults/
+*.unitypackage
+
+# Unity addressables & cache (keep settings, ignore generated)
+/[Aa]ssets/AddressableAssetsData/*/*.bin*
+/[Aa]ssets/AddressableAssetsData/*/UnityBuiltInShaders*
+
+# Plastic SCM (if ever enabled)
+PlasticWorkspace/.plastic/
+
+# Rider / VS Code extra
+.idea/
+.vscode/
+*.DotSettings.user
+*.csproj.user
+.config
+
+# Crash + profiler extra
+*.crash
+*.mem
+*.heap
+
+#Dotnet SDK tarballs
+dotnet-sdk-9.0.200-linux-x64.tar.gz
+*.slnx
