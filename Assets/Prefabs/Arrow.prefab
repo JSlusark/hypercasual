@@ -27,8 +27,8 @@ Transform:
   m_GameObject: {fileID: 727210284137785253}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 3, z: 0}
-  m_LocalScale: {x: 0.2026, y: 0.2026, z: 0.2026}
+  m_LocalPosition: {x: 5.5, y: 3, z: 0}
+  m_LocalScale: {x: 0.1339996, y: 0.1339996, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -82,8 +82,8 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_MaskInteraction: 0
-  m_Sprite: {fileID: -765150924802650856, guid: 6babff4e8ba364f8991b684fe9678860, type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Sprite: {fileID: -5762557708214888063, guid: 2969c57251a9541cb86aa273a5f74076, type: 3}
+  m_Color: {r: 0.19215687, g: 0.3019608, b: 0.4745098, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -104,4 +104,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b584b1977767d44e6844089bd29acfed, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::MakeMove
+  Width: 1
+  Height: 1
   direction: 0

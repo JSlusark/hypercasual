@@ -23,26 +23,30 @@ public class LikesBarUI : MonoBehaviour
         Debug.Log(" Score:" + score + " Target:" + target);
     }
 
+
+
     public void UpdateScore(float gain)
     {
+        float newWidth;
         score += gain;
+
+        if (score >= target) // reset score if over target
+            score = 0f;
+
         score = Mathf.Clamp(score, 0f, target);
-        float newWidth = (score / target) * Width;
+        newWidth = (score / target) * Width; // needs to be fixed
         likesBar.sizeDelta = new Vector2(newWidth, Height);
+
         var barImage = likesBar.GetComponent<UnityEngine.UI.Image>();
 
         if (gain < 0)
         {
             heartIcon.sprite = heartBreak;           // change sprite
-            // heartIcon.GetComponent<UnityEngine.UI.Image>().sprite = Resources.Load<UnityEngine.Sprite>("heart_break");
-            // likesBar.GetComponent<UnityEngine.UI.Image>().color = failColor;
             barImage.color = failColor;
         }
         else
         {
             heartIcon.sprite = heartBeat;           // change sprite
-            // heartIcon.GetComponent<UnityEngine.UI.Image>().sprite = Resources.Load<UnityEngine.Sprite>("heart_beat");
-            // likesBar.GetComponent<UnityEngine.UI.Image>().color = successColor;
             barImage.color = successColor;
         }
         Debug.Log(gain + " Score:" + score);
