@@ -360,11 +360,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 38638b8634b4a477e8e789a9461b2eb6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: '::'
+  likesBar: {fileID: 1302111546}
   arrow: {fileID: 727210284137785253, guid: 5a663a571011f4e7fb9e2240cebdf60a, type: 3}
+  firstColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
+  successColor: {r: 0.08611512, g: 1, b: 0, a: 1}
+  failColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
   arrowCount: 5
   listPosition: {x: -0.7, y: 3.2, z: 0}
   spacing: 1
-  likesBar: {fileID: 1302111546}
 --- !u!4 &891783941
 Transform:
   m_ObjectHideFlags: 0
@@ -494,7 +497,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_MaskInteraction: 0
-  m_Sprite: {fileID: 21300000, guid: eceb506f899434fa7a0fb6d624602340, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 45e3260190c4f48b0be1aa88221f28b8, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -513,7 +516,7 @@ Transform:
   m_GameObject: {fileID: 964491159}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -165.363, y: -294.15, z: 0}
+  m_LocalPosition: {x: -114.43, y: -204.28, z: 0}
   m_LocalScale: {x: 0.17973875, y: 0.20987293, z: 0.20987293}
   m_ConstrainProportionsScale: 1
   m_Children: []
@@ -763,7 +766,7 @@ RectTransform:
   m_GameObject: {fileID: 1302111544}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.9061325, y: 0.8851, z: 0.8851}
+  m_LocalScale: {x: 0.6795994, y: 0.8851, z: 0.8851}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 374817803}
@@ -771,7 +774,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 23.4, y: -213.7}
+  m_AnchoredPosition: {x: 18, y: -175}
   m_SizeDelta: {x: 211.5328, y: 17}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1302111546
@@ -790,11 +793,14 @@ MonoBehaviour:
   target: 0
   Width: 270
   Height: 17
+  transitionTime: 0.3
   likesBar: {fileID: 374817803}
   heartIcon: {fileID: 964491160}
+  heartFull: {fileID: 21300000, guid: 45e3260190c4f48b0be1aa88221f28b8, type: 3}
   heartBeat: {fileID: 21300000, guid: eceb506f899434fa7a0fb6d624602340, type: 3}
   heartBreak: {fileID: 21300000, guid: b37910224a85844878dbc2b6b59d6bf4, type: 3}
-  successColor: {r: 0.93333334, g: 0.08235294, b: 0.49803922, a: 1}
+  baseColor: {r: 0.93333334, g: 0.08235294, b: 0.49803922, a: 1}
+  successColor: {r: 0.96862745, g: 0.23137255, b: 0.49803922, a: 1}
   failColor: {r: 0.15686275, g: 0.15686275, b: 0.15686275, a: 1}
 --- !u!114 &1302111547
 MonoBehaviour:

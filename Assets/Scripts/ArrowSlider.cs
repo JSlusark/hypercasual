@@ -22,6 +22,11 @@ public class ArrowSlider : MonoBehaviour
     public LikesBarUI likesBar;
     public GameObject arrow;
 
+    public Color firstColor = Color.yellow;
+    public Color successColor = Color.red;
+    public Color failColor = Color.gray;
+
+
     // list item
     private List<GameObject> arrowSequence = new();
     private ArrowCreate firstArrow;
@@ -54,7 +59,7 @@ public class ArrowSlider : MonoBehaviour
         if (arrowSequence.Count > 0)
         {
             firstArrow = arrowSequence[0].GetComponent<ArrowCreate>();
-            firstArrow.GetComponent<SpriteRenderer>().color = Color.yellow;
+            firstArrow.GetComponent<SpriteRenderer>().color = firstColor;
         }
     }
 
@@ -70,15 +75,53 @@ public class ArrowSlider : MonoBehaviour
 
     private void ContinueArrowSequence()
     {
-        getFirstInSequence(); // highlight new first arrow
         GameObject newArrow = Instantiate(arrow);
         arrowSequence.Add(newArrow);
+        getFirstInSequence(); // highlights the new first arrow
+
+        StartCoroutine(SlideArrows(0.2f)); // coroutine + interpolation for sliding arrows
+    }
+
+    private IEnumerator SlideArrows(float duration = 0.2f)
+    {
+        float elapsed = 0f;
+
+        // Cache start & target positions
+        Vector3[] startPositions = new Vector3[arrowSequence.Count];
+        Vector3[] targetPositions = new Vector3[arrowSequence.Count];
+
         for (int i = 0; i < arrowSequence.Count; i++)
         {
-            arrowSequence[i].transform.position =
-                listPosition + new Vector3(i * spacing, 0f, 0f);
+            startPositions[i] = arrowSequence[i].transform.position;
+            targetPositions[i] = GetArrowTargetPosition(i);
+        }
+
+        while (elapsed < duration)
+        {
+            elapsed += Time.deltaTime;
+            float t = Mathf.Clamp01(elapsed / duration);
+
+            for (int i = 0; i < arrowSequence.Count; i++)
+            {
+                arrowSequence[i].transform.position =
+                    Vector3.Lerp(startPositions[i], targetPositions[i], t);
+            }
+
+            yield return null;
+        }
+
+        // Snaps to final position (precision)
+        for (int i = 0; i < arrowSequence.Count; i++)
+        {
+            arrowSequence[i].transform.position = targetPositions[i];
         }
     }
+    private Vector3 GetArrowTargetPosition(int index)
+    {
+        return listPosition + new Vector3(index * spacing, 0f, 0f);
+    }
+
+
 
     public void OnDanceMove(InputAction.CallbackContext context)
     {
@@ -89,21 +132,43 @@ public class ArrowSlider : MonoBehaviour
             if (context.control.name == firstArrow.direction.ToString())
             {
                 likesBar.UpdateScore(+20f); // - 1 or multiplier if combo chain active
-                Debug.Log("💔 +100  | Score:" + likesBar.score);
+                Debug.Log("❤️ +100  | Score:" + likesBar.score);
                 Debug.Log("Matched arrow: " + firstArrow.direction + "point +1");
-                RemoveArrow();
+
+
                 // if max likes is not reached
-                ContinueArrowSequence();
-                // else level complete (add 1 video, show dancanimation and create a new sequence from scratch)
+                StartCoroutine(showSuccessArrow());
+                // add another coroutrine where if level complete (add 1 video, show dancanimation and create a new sequence from scratch)
 
             }
             else
             {
+                StartCoroutine(showFailedArrow());
                 likesBar.UpdateScore(-10f); // - 1 or multiplier if combo chain active
                 Debug.Log("💔 -50  | Score:" + likesBar.score);
                 Debug.Log("Mismatched arrow. Expected: " + firstArrow.direction + "point -1");
             }
-        }
 
+
+        }
+    }
+
+    public IEnumerator showSuccessArrow()
+    {
+        firstArrow.GetComponent<SpriteRenderer>().color = successColor;
+        yield return new WaitForSeconds(0.1f);
+        if (firstArrow != null)
+            firstArrow.GetComponent<SpriteRenderer>().color = firstColor;
+        RemoveArrow();
+        ContinueArrowSequence();
+
+    }
+
+    public IEnumerator showFailedArrow()
+    {
+        firstArrow.GetComponent<SpriteRenderer>().color = failColor;
+        yield return new WaitForSeconds(0.1f);
+        if (firstArrow != null)
+            firstArrow.GetComponent<SpriteRenderer>().color = firstColor;
     }
 }
