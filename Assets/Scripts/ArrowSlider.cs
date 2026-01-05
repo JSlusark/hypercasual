@@ -127,13 +127,13 @@ public class ArrowSlider : MonoBehaviour
     {
         if (context.performed)
         {
-            Debug.Log("DanceMove pressed: " + context.control.name);
+            // Debug.Log("DanceMove pressed: " + context.control.name);
 
             if (context.control.name == firstArrow.direction.ToString())
             {
                 likesBar.UpdateScore(+20f); // - 1 or multiplier if combo chain active
-                Debug.Log("❤️ +100  | Score:" + likesBar.score);
-                Debug.Log("Matched arrow: " + firstArrow.direction + "point +1");
+                // Debug.Log("❤️ +100  | Score:" + likesBar.score);
+                // Debug.Log("Matched arrow: " + firstArrow.direction + "point +1");
 
 
                 // if max likes is not reached
@@ -145,8 +145,8 @@ public class ArrowSlider : MonoBehaviour
             {
                 StartCoroutine(showFailedArrow());
                 likesBar.UpdateScore(-10f); // - 1 or multiplier if combo chain active
-                Debug.Log("💔 -50  | Score:" + likesBar.score);
-                Debug.Log("Mismatched arrow. Expected: " + firstArrow.direction + "point -1");
+                // Debug.Log("💔 -50  | Score:" + likesBar.score);
+                // Debug.Log("Mismatched arrow. Expected: " + firstArrow.direction + "point -1");
             }
 
 

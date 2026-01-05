@@ -25,7 +25,7 @@ public class LikesBarUI : MonoBehaviour
     {
         score = levelScore; // likes starting point
         target = levelTarget; // likes end point
-        Debug.Log(" Score:" + score + " Target:" + target);
+        // Debug.Log(" Score:" + score + " Target:" + target);
     }
 
 
@@ -35,8 +35,9 @@ public class LikesBarUI : MonoBehaviour
         float newWidth;
         score += gain;
 
-        if (score >= target) // resets score if over target
-            score = 0f;
+        // if (score >= target) // resets score if over target
+        //     return;
+        // // score = 0f;
 
         score = Mathf.Clamp(score, 0f, target); // unsure if doing something else
         newWidth = (score / target) * Width; // needs to be fixed
@@ -75,5 +76,11 @@ public class LikesBarUI : MonoBehaviour
         heartIcon.sprite = heartFull;
         heartIcon.color = baseColor;
         barImage.color = baseColor;
+    }
+
+    public void ResetScore()
+    {
+        score = 0f;
+        likesBar.sizeDelta = new Vector2(0f, Height);
     }
 }

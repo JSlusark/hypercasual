@@ -42,6 +42,8 @@ Artifacts/
 *.xcodeproj/
 *.xcworkspace/
 *.xcuserdata/
+Assets/TextMesh Pro/
+Assets/TextMesh Pro.meta
 
 # Asset store tools (if present)
 Assets/AssetStoreTools*
