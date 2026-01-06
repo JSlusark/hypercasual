@@ -16,6 +16,12 @@ public class LikesBarUI : MonoBehaviour
     [SerializeField] private Sprite heartBeat;              // normal heart sprite
     [SerializeField] private Sprite heartBreak;             // broken heart sprite
 
+    [SerializeField] private SpriteRenderer dancerSprite;    // dancer sprite for color change feedback
+    [SerializeField] private Sprite dancerSuccess;    // dancer sprite change feedback
+    [SerializeField] private Sprite dancerFail;    // dancer sprite change feedback
+    [SerializeField] private Sprite dancerIdle;    // dancer sprite change feedback
+    [SerializeField] private Sprite dancerAnimation;    //idle animation or completion animation
+
     public Color baseColor = Color.red;
     public Color successColor = Color.green;
     public Color failColor = Color.gray;
@@ -45,30 +51,34 @@ public class LikesBarUI : MonoBehaviour
 
         Color colorState;
         Sprite heartState;
+        Sprite dancerState;
 
         if (gain < 0)
         {
             colorState = failColor;
             heartState = heartBreak;
+            dancerState = dancerFail;
         }
         else
         {
             colorState = successColor;
             heartState = heartBeat;
+            dancerState = dancerSuccess;
         }
 
-        StartCoroutine(showErrorTrigger(colorState, heartState, transitionTime));
+        StartCoroutine(showErrorTrigger(colorState, heartState, dancerState, transitionTime));
 
         Debug.Log(gain + " Score:" + score);
     }
 
-    public IEnumerator showErrorTrigger(Color colorState, Sprite heartState, float duration)
+    public IEnumerator showErrorTrigger(Color colorState, Sprite heartState, Sprite dancerState, float duration)
     {
         // Could substitute the static state change with actual animation
         var barImage = likesBar.GetComponent<UnityEngine.UI.Image>();
         barImage.color = colorState;
         heartIcon.sprite = heartState;           // change sprite
         heartIcon.color = colorState;
+        dancerSprite.sprite = dancerState;
 
         yield return new WaitForSeconds(duration);
 
@@ -76,6 +86,7 @@ public class LikesBarUI : MonoBehaviour
         heartIcon.sprite = heartFull;
         heartIcon.color = baseColor;
         barImage.color = baseColor;
+        dancerSprite.sprite = dancerIdle;
     }
 
     public void ResetScore()

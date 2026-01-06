@@ -252,7 +252,7 @@ GameObject:
   - component: {fileID: 501958579}
   - component: {fileID: 501958578}
   m_Layer: 0
-  m_Name: avatar
+  m_Name: dancer
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -801,6 +801,11 @@ MonoBehaviour:
   heartFull: {fileID: 21300000, guid: 45e3260190c4f48b0be1aa88221f28b8, type: 3}
   heartBeat: {fileID: 21300000, guid: eceb506f899434fa7a0fb6d624602340, type: 3}
   heartBreak: {fileID: 21300000, guid: b37910224a85844878dbc2b6b59d6bf4, type: 3}
+  dancerSprite: {fileID: 501958578}
+  dancerSuccess: {fileID: -7217490356221040218, guid: be2817da888404e58aef988c1e115016, type: 3}
+  dancerFail: {fileID: -2318045846349371952, guid: 86ef4b4765d2e4a57bbb55a81962cb39, type: 3}
+  dancerIdle: {fileID: 8793639957104055765, guid: ce2506c1cee224cb29db751cc483c305, type: 3}
+  dancerAnimation: {fileID: 0}
   baseColor: {r: 0.93333334, g: 0.08235294, b: 0.49803922, a: 1}
   successColor: {r: 0.96862745, g: 0.23137255, b: 0.49803922, a: 1}
   failColor: {r: 0.15686275, g: 0.15686275, b: 0.15686275, a: 1}
