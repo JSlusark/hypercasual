@@ -4,7 +4,7 @@ using UnityEngine.InputSystem;
 
 public class ArrowCreate : MonoBehaviour
 {
-    private bool isMatching = false;
+    // private bool isMatching = false;
     public float Width = 1f;
     public float Height = 1f;
 
