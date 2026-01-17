@@ -1,10 +1,16 @@
 fileFormatVersion: 2
-guid: be2817da888404e58aef988c1e115016
+guid: dc0287e5c88b842b89dc4d9023263b9c
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -7217490356221040218
-    second: success_0
+      213: 2688136287738319047
+    second: punk_idle_fail 1_0
+  - first:
+      213: 4271564780642382105
+    second: punk_idle_fail 1_1
+  - first:
+      213: -615587195616417677
+    second: punk_idle_fail 1_2
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -113,23 +119,67 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: success_0
+      name: punk_idle_fail 1_0
       rect:
         serializedVersion: 2
-        x: 0
-        y: 0
-        width: 680
-        height: 936
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        x: 41
+        y: 122
+        width: 390
+        height: 818
+      alignment: 9
+      pivot: {x: 0.5, y: 0.0005}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 6a923abc2c256db90800000000000000
-      internalID: -7217490356221040218
+      spriteID: 7c0da7a16bd2e4520800000000000000
+      internalID: 2688136287738319047
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: punk_idle_fail 1_1
+      rect:
+        serializedVersion: 2
+        x: 534
+        y: 122
+        width: 390
+        height: 810
+      alignment: 9
+      pivot: {x: 0.5, y: 0.0005}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 91132494985a74b30800000000000000
+      internalID: 4271564780642382105
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: punk_idle_fail 1_2
+      rect:
+        serializedVersion: 2
+        x: 1026
+        y: 122
+        width: 390
+        height: 786
+      alignment: 9
+      pivot: {x: 0.5, y: 0.0005}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 378210505bef477f0800000000000000
+      internalID: -615587195616417677
       vertices: []
       indices: 
       edges: []
@@ -138,7 +188,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 
+    spriteID: e1651486aff6d4b8db7988df08ce13a1
     internalID: 0
     vertices: []
     indices: 
@@ -146,9 +196,13 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     spriteCustomMetadata:
-      entries: []
+      entries:
+      - key: SpriteEditor.SliceSettings
+        value: '{"sliceOnImport":false,"gridCellCount":{"x":1.0,"y":1.0},"gridSpriteSize":{"x":64.0,"y":64.0},"gridSpriteOffset":{"x":0.0,"y":0.0},"gridSpritePadding":{"x":0.0,"y":0.0},"pivot":{"x":0.5,"y":0.5},"pivotPixels":{"x":0.0,"y":0.0},"autoSlicingMethod":0,"spriteAlignment":0,"pivotUnitMode":0,"slicingType":0,"keepEmptyRects":false,"isAlternate":false}'
     nameFileIdTable:
-      success_0: -7217490356221040218
+      punk_idle_fail 1_0: 2688136287738319047
+      punk_idle_fail 1_1: 4271564780642382105
+      punk_idle_fail 1_2: -615587195616417677
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

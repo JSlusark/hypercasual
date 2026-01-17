@@ -6,7 +6,7 @@ using UnityEngine.InputSystem;
 
 /*
 
-consecutive commands might not be best,
+consecutive arrowPrefabs might not be best,
 fruit ninja for example has calm periods between series of swipes
 and would be better to implement that later in anothe branch to
 see if it works better for gameplay.
@@ -19,30 +19,23 @@ bigger levels have longer swipes (max 10 arrows then complicates with special ar
 public class ArrowSlider : MonoBehaviour
 {
     // imported components that will interact with this script
-    public LikesBarUI likesBar;
-    public GameObject arrow;
+    public VideoBarUI videoBar;
+    public GameObject arrowPrefab;
+    public float arrowPrefab_spacing = 1.2f;
 
-    public Color firstColor = Color.yellow;
-    public Color successColor = Color.red;
-    public Color failColor = Color.gray;
-
-
-    // list item
-    private List<GameObject> arrowSequence = new();
-    private ArrowCreate firstArrow;
-    public int arrowCount = 5;
-    // starting position of list
-    public Vector3 listPosition = new Vector3(-0.5f, 3f, 0f);
-    public float spacing = 1.2f;
+    private List<GameObject> arrowPrefabSequence = new();
+    public int sequenceSize = 5;
+    public Vector3 sequencePosition = new Vector3(-1f, 1.26f, -0.4f);
+    private ArrowCreate firstPrefabArrow;
 
 
     void Start()
     {
-        for (int i = 0; i < arrowCount; i++)
+        for (int i = 0; i < sequenceSize; i++)
         {
-            GameObject newArrow = Instantiate(arrow);
-            newArrow.transform.position = listPosition + new Vector3(i * spacing, 0f, 0f);
-            arrowSequence.Add(newArrow);
+            GameObject newArrowPrefab = Instantiate(arrowPrefab, transform);
+            newArrowPrefab.transform.localPosition = GetArrowTargetPosition(i);
+            arrowPrefabSequence.Add(newArrowPrefab);
         }
         getFirstInSequence();
     }
@@ -56,27 +49,31 @@ public class ArrowSlider : MonoBehaviour
 
     public void getFirstInSequence()
     {
-        if (arrowSequence.Count > 0)
+        if (arrowPrefabSequence.Count > 0)
         {
-            firstArrow = arrowSequence[0].GetComponent<ArrowCreate>();
-            firstArrow.GetComponent<SpriteRenderer>().color = firstColor;
+            // firstPrefabArrow = arrowPrefabSequence[0].GetComponent<ArrowCreate>();
+            firstPrefabArrow = arrowPrefabSequence[0].GetComponentInChildren<ArrowCreate>();
+
+            // firstPrefabArrow.GetComponent<SpriteRenderer>().color = firstColor;
         }
     }
 
     public void RemoveArrow()
     {
-        if (arrowSequence.Count == 0)
+        if (arrowPrefabSequence.Count == 0)
             return;
-        GameObject removedArrow = arrowSequence[0];
-        arrowSequence.RemoveAt(0);
+        GameObject removedArrow = arrowPrefabSequence[0];
+        arrowPrefabSequence.RemoveAt(0);
         Destroy(removedArrow);
     }
 
 
+
     private void ContinueArrowSequence()
     {
-        GameObject newArrow = Instantiate(arrow);
-        arrowSequence.Add(newArrow);
+        GameObject newArrowPrefab = Instantiate(arrowPrefab, transform);
+        arrowPrefabSequence.Add(newArrowPrefab);
+        newArrowPrefab.transform.localPosition = GetArrowTargetPosition(arrowPrefabSequence.Count - 1);
         getFirstInSequence(); // highlights the new first arrow
 
         StartCoroutine(SlideArrows(0.2f)); // coroutine + interpolation for sliding arrows
@@ -87,12 +84,12 @@ public class ArrowSlider : MonoBehaviour
         float elapsed = 0f;
 
         // Cache start & target positions
-        Vector3[] startPositions = new Vector3[arrowSequence.Count];
-        Vector3[] targetPositions = new Vector3[arrowSequence.Count];
+        Vector3[] startPositions = new Vector3[arrowPrefabSequence.Count];
+        Vector3[] targetPositions = new Vector3[arrowPrefabSequence.Count];
 
-        for (int i = 0; i < arrowSequence.Count; i++)
+        for (int i = 0; i < arrowPrefabSequence.Count; i++)
         {
-            startPositions[i] = arrowSequence[i].transform.position;
+            startPositions[i] = arrowPrefabSequence[i].transform.localPosition;
             targetPositions[i] = GetArrowTargetPosition(i);
         }
 
@@ -101,9 +98,9 @@ public class ArrowSlider : MonoBehaviour
             elapsed += Time.deltaTime;
             float t = Mathf.Clamp01(elapsed / duration);
 
-            for (int i = 0; i < arrowSequence.Count; i++)
+            for (int i = 0; i < arrowPrefabSequence.Count; i++)
             {
-                arrowSequence[i].transform.position =
+                arrowPrefabSequence[i].transform.localPosition =
                     Vector3.Lerp(startPositions[i], targetPositions[i], t);
             }
 
@@ -111,29 +108,37 @@ public class ArrowSlider : MonoBehaviour
         }
 
         // Snaps to final position (precision)
-        for (int i = 0; i < arrowSequence.Count; i++)
+        for (int i = 0; i < arrowPrefabSequence.Count; i++)
         {
-            arrowSequence[i].transform.position = targetPositions[i];
+            arrowPrefabSequence[i].transform.localPosition = targetPositions[i];
         }
     }
+
     private Vector3 GetArrowTargetPosition(int index)
     {
-        return listPosition + new Vector3(index * spacing, 0f, 0f);
+        return sequencePosition + new Vector3(index * arrowPrefab_spacing, 0f, 0f);
     }
 
 
 
     public void OnDanceMove(InputAction.CallbackContext context)
     {
+        Debug.Log("Input received: " + context.control.name);
         if (context.performed)
         {
             // Debug.Log("DanceMove pressed: " + context.control.name);
 
-            if (context.control.name == firstArrow.direction.ToString())
+            if (firstPrefabArrow == null)
             {
-                likesBar.UpdateScore(+20f); // - 1 or multiplier if combo chain active
-                // Debug.Log("❤️ +100  | Score:" + likesBar.score);
-                // Debug.Log("Matched arrow: " + firstArrow.direction + "point +1");
+                Debug.LogWarning("firstPrefabArrow is null (missing ArrowCreate on the first prefab?)");
+                return;
+            }
+
+            if (context.control.name == firstPrefabArrow.direction.ToString())
+            {
+                videoBar.UpdateScore(+20f); // - 1 or multiplier if combo chain active
+                Debug.Log("❤️ +100  | Score:" + videoBar.score);
+                // Debug.Log("Matched arrow: " + firstPrefabArrow.direction + "point +1");
 
 
                 // if max likes is not reached
@@ -143,10 +148,10 @@ public class ArrowSlider : MonoBehaviour
             }
             else
             {
-                StartCoroutine(showFailedArrow());
-                likesBar.UpdateScore(-10f); // - 1 or multiplier if combo chain active
-                // Debug.Log("💔 -50  | Score:" + likesBar.score);
-                // Debug.Log("Mismatched arrow. Expected: " + firstArrow.direction + "point -1");
+                // StartCoroutine(showFailedArrow());
+                videoBar.UpdateScore(-10f); // - 1 or multiplier if combo chain active
+                Debug.Log("💔 -50  | Score:" + videoBar.score);
+                // Debug.Log("Mismatched arrow. Expected: " + firstPrefabArrow.direction + "point -1");
             }
 
 
@@ -155,10 +160,10 @@ public class ArrowSlider : MonoBehaviour
 
     public IEnumerator showSuccessArrow()
     {
-        firstArrow.GetComponent<SpriteRenderer>().color = successColor;
+        // firstPrefabArrow.GetComponent<SpriteRenderer>().color = successColor;
         yield return new WaitForSeconds(0.1f);
-        if (firstArrow != null)
-            firstArrow.GetComponent<SpriteRenderer>().color = firstColor;
+        // if (firstPrefabArrow != null)
+        // firstPrefabArrow.GetComponent<SpriteRenderer>().color = firstColor;
         RemoveArrow();
         ContinueArrowSequence();
 
@@ -166,9 +171,10 @@ public class ArrowSlider : MonoBehaviour
 
     public IEnumerator showFailedArrow()
     {
-        firstArrow.GetComponent<SpriteRenderer>().color = failColor;
+        // firstPrefabArrow.GetComponent<SpriteRenderer>().color = failColor;
         yield return new WaitForSeconds(0.1f);
-        if (firstArrow != null)
-            firstArrow.GetComponent<SpriteRenderer>().color = firstColor;
+        // if (firstPrefabArrow != null)
+        // firstPrefabArrow.GetComponent<SpriteRenderer>().color = firstColor;
     }
+
 }

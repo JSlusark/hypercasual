@@ -4,20 +4,20 @@ using System.Collections.Generic;
 using Mono.Cecil.Cil;
 // using UnityEngine.UI;
 
-public class LikesBarUI : MonoBehaviour
+public class VideoBarUI : MonoBehaviour
 {
     public float score, target, Width, Height;
     public float transitionTime = 0.3f; // global macro for time based transitions
 
-    [SerializeField] private RectTransform likesBar;
+    [SerializeField] private RectTransform videoBar;
 
-    [SerializeField] private SpriteRenderer heartIcon;      // SpriteRenderer component
-    [SerializeField] private Sprite heartFull;              // normal heart sprite
-    [SerializeField] private Sprite heartBeat;              // normal heart sprite
-    [SerializeField] private Sprite heartBreak;             // broken heart sprite
+    [SerializeField] private SpriteRenderer videoIcon;      // SpriteRenderer component
+    [SerializeField] private Sprite videoScatter;             // broken heart sprite
+    [SerializeField] private Sprite videoBreak;             // broken heart sprite
+    [SerializeField] private Sprite videoFail;             // broken heart sprite
+
 
     [SerializeField] private SpriteRenderer dancerSprite;    // dancer sprite for color change feedback
-    [SerializeField] private Sprite dancerSuccess;    // dancer sprite change feedback
     [SerializeField] private Sprite dancerFail;    // dancer sprite change feedback
     [SerializeField] private Sprite dancerIdle;    // dancer sprite change feedback
     [SerializeField] private Sprite dancerAnimation;    //idle animation or completion animation
@@ -47,26 +47,27 @@ public class LikesBarUI : MonoBehaviour
 
         score = Mathf.Clamp(score, 0f, target); // unsure if doing something else
         newWidth = (score / target) * Width; // needs to be fixed
-        likesBar.sizeDelta = new Vector2(newWidth, Height);
+        videoBar.sizeDelta = new Vector2(newWidth, Height);
 
-        Color colorState;
-        Sprite heartState;
-        Sprite dancerState;
+        // Color colorState;
+        // Sprite heartState;
+        // Sprite dancerState;
 
         if (gain < 0)
         {
-            colorState = failColor;
-            heartState = heartBreak;
-            dancerState = dancerFail;
-        }
-        else
-        {
-            colorState = successColor;
-            heartState = heartBeat;
-            dancerState = dancerSuccess;
-        }
+            // colorState = failColor;
+            // heartState = videoScatter;
+            // dancerState = dancerFail;
 
-        StartCoroutine(showErrorTrigger(colorState, heartState, dancerState, transitionTime));
+        }
+        // else
+        // {
+        //     colorState = successColor;
+        //     heartState = heartBeat;
+        //     dancerState = dancerSuccess;
+        // }
+
+        // StartCoroutine(showErrorTrigger(colorState, heartState, dancerState, transitionTime));
 
         Debug.Log(gain + " Score:" + score);
     }
@@ -74,24 +75,24 @@ public class LikesBarUI : MonoBehaviour
     public IEnumerator showErrorTrigger(Color colorState, Sprite heartState, Sprite dancerState, float duration)
     {
         // Could substitute the static state change with actual animation
-        var barImage = likesBar.GetComponent<UnityEngine.UI.Image>();
-        barImage.color = colorState;
-        heartIcon.sprite = heartState;           // change sprite
-        heartIcon.color = colorState;
-        dancerSprite.sprite = dancerState;
+        // var barImage = videoBar.GetComponent<UnityEngine.UI.Image>();
+        // barImage.color = colorState;
+        // videoIcon.sprite = heartState;           // change sprite
+        // videoIcon.color = colorState;
+        // dancerSprite.sprite = dancerState;
 
         yield return new WaitForSeconds(duration);
 
-        // Resets to base state for heartIcon and barImage
-        heartIcon.sprite = heartFull;
-        heartIcon.color = baseColor;
-        barImage.color = baseColor;
-        dancerSprite.sprite = dancerIdle;
+        // Resets to base state for videoIcon and barImage
+        // videoIcon.sprite = heartFull;
+        // videoIcon.color = baseColor;
+        // barImage.color = baseColor;
+        // dancerSprite.sprite = dancerIdle;
     }
 
     public void ResetScore()
     {
         score = 0f;
-        likesBar.sizeDelta = new Vector2(0f, Height);
+        videoBar.sizeDelta = new Vector2(0f, Height);
     }
 }

@@ -55,16 +55,16 @@ public class Timer : MonoBehaviour
 
         if (seconds <= 5f)
         {
-            Debug.Log("⏰ Timer is running low: " + seconds + " seconds left!");
+            // Debug.Log("⏰ Timer is running low: " + seconds + " seconds left!");
             timerText.color = warningColor;
         }
     }
 
     // resets timer
-    public void ResetTimer(bool levelWon)
+    public void ResetTimer()
     {
-        if (levelWon)
-            StartCoroutine(BlinkAndResetRoutine()); // should move this on a high level later
+        // if (levelWon)
+        // StartCoroutine(BlinkAndResetRoutine()); // should move this on a high level later
         ResetTimerValues();
     }
 

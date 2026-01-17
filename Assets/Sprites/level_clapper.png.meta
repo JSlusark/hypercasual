@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: 5e5d4b394167b43d18ea99819b6032b2
+guid: adc5afd4dcb8f4c29b1580a998b7839e
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -510696221047065443
-    second: reel_icon_0
+      213: 2524810335578406158
+    second: level_clapper_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -113,13 +113,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: reel_icon_0
+      name: level_clapper_0
       rect:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 800
-        height: 800
+        width: 718
+        height: 765
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -128,8 +128,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: d94fa542e74a9e8f0800000000000000
-      internalID: -510696221047065443
+      spriteID: e0db2698f9de90320800000000000000
+      internalID: 2524810335578406158
       vertices: []
       indices: 
       edges: []
@@ -148,7 +148,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      reel_icon_0: -510696221047065443
+      level_clapper_0: 2524810335578406158
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
