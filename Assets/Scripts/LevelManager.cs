@@ -4,6 +4,7 @@ using UnityEngine.SocialPlatforms.Impl; // Important for UI
 using Unity.VisualScripting;
 using System.Collections;
 using UnityEditorInternal;
+using UnityEngine.SceneManagement; // Needed for restarting
 
 
 /*
@@ -24,11 +25,31 @@ public class LevelManager : MonoBehaviour
     [SerializeField] private TextMeshProUGUI levelNumber;
     [SerializeField] private VideoBarUI VideoBar;
     [SerializeField] private Timer levelTimer;   // 👈 ADD THIS
+    public GameObject gameOverPanel; // Drag your Panel here in Inspector
+
 
     void Start()
     {
         Debug.Log("Level Started! Target Likes: " + levelTarget);
         VideoBar.SetStart(levelScore, levelTarget);
+    }
+
+    public void GameOver()
+    {
+        // 1. Pause the game (optional, stops physics/movement)
+        Time.timeScale = 0f;
+
+        // 2. Show the Game Over screen
+        gameOverPanel.SetActive(true);
+    }
+
+    public void RetryGame()
+    {
+        // Unpause before reloading!
+        Time.timeScale = 1f;
+
+        // Reloads the currently active scene
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 
     void Update()
@@ -55,7 +76,9 @@ public class LevelManager : MonoBehaviour
         {
             // Debug.Log("⏰ Time's up! You had " + (levelTarget - VideoBar.score) + " likes left to complete another reel!");
             VideoBar.ResetScore();
+            GameOver();
             // FINISHED SESSION
+
             // Debug.Log("Total reels made: " + videoCompleted);
 
             // SHOW GAME OBVER HERE
