@@ -1,12 +1,12 @@
 using UnityEngine;
-using System.Collections;
 
-public class VideoBarUI : MonoBehaviour
+public class ScoreBar : MonoBehaviour
 {
 
-    public float score;
     [Tooltip("Score needed to complete a level")]
-    public float maxScore;
+    public float maxScore = 100f;
+    private float score;
+
     public float Width;
     public float Height;
 
@@ -14,22 +14,18 @@ public class VideoBarUI : MonoBehaviour
     [SerializeField] private SpriteRenderer videoIcon;      // SpriteRenderer component
     [SerializeField] private SpriteRenderer dancerSprite;    // dancer sprite  (might need to move to another script later)
 
-    public void SetStart(float levelScore, float levelTarget)
+    public void SetStart()
     {
-        /*
-            - levelScore and levelTarget come from LevelManager (values change at every level)
-            - instead of using these values, I should probably just decrease videoBar growth score at every new level
-         */
-        score = levelScore;
-        maxScore = levelTarget;
+        score = 0;
+        videoBar.sizeDelta = new Vector2(score, Height);
     }
 
 
-
-    public void UpdateScore(float gain)
+    public void UpdateLength(float point)
     {
         float newWidth;
-        score += gain;
+        score += point;
+        // Debug.Log($"💖 {point} | Score: {score}");
         /*
             NOTE: when score reaches target it does not show full bar,
             instead it starts from 0 again.
@@ -38,17 +34,10 @@ public class VideoBarUI : MonoBehaviour
         score = Mathf.Clamp(score, 0f, maxScore); // unsure if doing something else
         newWidth = (score / maxScore) * Width; // needs to be fixed
         videoBar.sizeDelta = new Vector2(newWidth, Height);
-        Debug.Log(gain + " Score:" + score);
     }
 
-    public IEnumerator showErrorTrigger(Color colorState, Sprite heartState, Sprite dancerState, float duration)
+    public bool MaxScoreReached()
     {
-        yield return new WaitForSeconds(duration);
-    }
-
-    public void ResetScore()
-    {
-        score = 0f;
-        videoBar.sizeDelta = new Vector2(0f, Height);
+        return score >= maxScore;
     }
 }

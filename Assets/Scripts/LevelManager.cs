@@ -13,74 +13,104 @@ using UnityEngine.SceneManagement; // Needed for restarting
 
 public class LevelManager : MonoBehaviour
 {
-    private float levelScore = 0f; // starting point of likes, is always 0 unless some special bonus carried over from previous level or booster
-    private float levelTarget = 100f; // this should become higher at every level
-    private int videoCompleted = 0;
 
-    // private bool levelWon = false;
-    // private bool pausePlay = false;
-    // float transitionTime = 0.5f;
+    public static LevelManager Instance { get; private set; }
+
+    // level data
+    public bool levelComplete = false;
+    public float pointGain; // to be decreased as level difficulty goes up
+    public float pointLoss;
+
+    // global game data
+    private int completedLevels;
+    public int highScore;
+    public int expPoints;
+
+    // UI components
     Color originalColor;
-
+    public GameObject gameOverPanel;
+    [SerializeField] private ScoreBar ScoreBar;
+    [SerializeField] private Timer timer;
     [SerializeField] private TextMeshProUGUI levelNumber;
-    [SerializeField] private VideoBarUI VideoBar;
-    [SerializeField] private Timer timer;   // 👈 ADD THIS
-    public GameObject gameOverPanel; // Drag your Panel here in Inspector
+    [SerializeField] private TextMeshProUGUI highScoreUI;
 
 
+
+
+    private void Awake() // Awake is use to initialize any variables or game state before Start()
+    {
+        if (Instance != null && Instance != this) // Ensures only one instance exists by killing duplicates
+            Destroy(this);
+        else
+        {
+            Instance = this;
+            // DontDestroyOnLoad(gameObject); // Optional: Persist through scenes
+        }
+    }
+
+    private void OnDestroy()
+    {
+        // important for scene singletons, clears the static reference to avoid issues
+        // when other scenes are trying to access it
+        if (Instance == this)
+            Instance = null;
+    }
+
+
+    /// ___ Level Management ___ ///
     void Start()
     {
-        Debug.Log("Level Started! Target Likes: " + levelTarget);
-        VideoBar.SetStart(levelScore, levelTarget);
-    }
+        highScore = PlayerPrefs.GetInt("HighScore", 0); // loads saved high score
+        highScoreUI.text = highScore.ToString();
 
-    public void GameOver()
-    {
-        // 1. Pause the game (optional, stops physics/movement)
-        Time.timeScale = 0f;
-
-        // 2. Show the Game Over screen
-        gameOverPanel.SetActive(true);
-    }
-
-    public void RetryGame()
-    {
-        // needs to unpause the game before reloading
-        // Time.timeScale = 1f;
-
-        // Reloads the currently active scene
-        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+        Debug.Log($"High Score: {highScore}");
+        ScoreBar.SetStart();
     }
 
     void Update()
     {
-        if (VideoBar.score >= levelTarget && timer.GetTimeLeft() > 0)
+        if (ScoreBar.MaxScoreReached() && !timer.IsTimeup())
         {
-            videoCompleted++;
-            levelNumber.text = videoCompleted.ToString();
-            VideoBar.ResetScore();
+            completedLevels++;
+            levelNumber.text = completedLevels.ToString();
+            ScoreBar.SetStart();
         }
-        else if (VideoBar.score < levelTarget && timer.GetTimeLeft() <= 0/*  or 3 mistakes done */)
+        else if (!ScoreBar.MaxScoreReached() && timer.IsTimeup())
         {
-            VideoBar.ResetScore();
-            GameOver();
-            /*
-            Instead of retry, show game calculations here:
-            videos made, followers/exp calculation (based on videos and streaks) and coins earned.
-            Then bring user to main menu.
-             */
+            if (completedLevels > highScore) // to be changed with scoring system later
+            {
+                Debug.Log("New High Score!");
+                highScore = completedLevels;
+                // simple test with unity's pre-built persistence layer
+                PlayerPrefs.SetInt("HighScore", highScore);
+                PlayerPrefs.Save();
+            }
+            highScoreUI.text = highScore.ToString();
+            EndLevel();
         }
     }
 
-    // pause/play logic when player completes a level and dance animation plays (timer needs to stop during this moment and resume after)
-    // private IEnumerator pauseForTransition()
-    // {
-    //     // yield return new WaitForSeconds(waitTime);
-    //     // Reset level logic here
-    //     pausePlay = true;
-    //     // transition starts here
-    //     yield return new WaitForSeconds(transitionTime);// Transition stays still for  some time
-    //     // return to previous state
-    // }
+    public void RetryGame()
+    {
+        // Reloads the currently active scene
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+    }
+
+    public void EndLevel()
+    {
+        // Pauses the game
+        Time.timeScale = 0f;
+        // Shows the Game Over screen
+        gameOverPanel.SetActive(true);
+    }
+
+    /// ___ Score Management ___ ///
+    public void UpdateScore(bool hasScored)
+    {
+        float point = hasScored ? pointGain : pointLoss;
+        ScoreBar.UpdateLength(point);
+    }
+
+
 
 }

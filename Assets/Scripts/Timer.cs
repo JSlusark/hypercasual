@@ -36,16 +36,9 @@ public class Timer : MonoBehaviour
     }
 
 
-
-    // Getters
-    public float GetTimeLeft()
+    public bool IsTimeup()
     {
-        return timeRemaining;
+        return timeRemaining < 0f;
     }
 
-    private void stoptimer()
-    {
-
-
-    }
 }

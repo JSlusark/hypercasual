@@ -19,13 +19,9 @@ need to also see in which context to run different commands (like inverted arrow
 public class ArrowSlider : MonoBehaviour
 {
     // imported components that will interact with this script
-    public VideoBarUI videoBar;
     public GameObject arrowPrefab;
     public float arrowPrefab_spacing = 1.2f;
 
-    // putting them here, but these should be in level manager and change per level
-    public float scoreIncrease = 20f;
-    public float scoreDecrease = 10f;
 
     private List<GameObject> arrowPrefabSequence = new();
     public int sequenceSize = 5;
@@ -121,7 +117,7 @@ public class ArrowSlider : MonoBehaviour
 
     public void OnDanceMove(InputAction.CallbackContext context)
     {
-        Debug.Log("Input received: " + context.control.name);
+        // Debug.Log("Input received: " + context.control.name);
         if (context.performed)
         {
             // if (firstPrefabArrow == null) // debugging null reference
@@ -129,20 +125,15 @@ public class ArrowSlider : MonoBehaviour
             //     Debug.LogWarning("firstPrefabArrow is null (missing ArrowCreate on the first prefab?)");
             //     return;
             // }
-
+            bool hasScored = false;
             if (context.control.name == firstPrefabArrow.direction.ToString())
             {
-                videoBar.UpdateScore(+20f); // can add multiplier if combo chain active
-                Debug.Log($"❤️ +100  | Score: {videoBar.score}");
+                hasScored = true;
                 RemoveArrow();
                 ContinueArrowSequence();
 
             }
-            else
-            {
-                videoBar.UpdateScore(-10f);
-                Debug.Log($"💔 -50  | Score: {videoBar.score}");
-            }
+            LevelManager.Instance.UpdateScore(hasScored);
         }
     }
 }
