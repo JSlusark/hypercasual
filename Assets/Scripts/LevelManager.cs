@@ -24,7 +24,7 @@ public class LevelManager : MonoBehaviour
 
     [SerializeField] private TextMeshProUGUI levelNumber;
     [SerializeField] private VideoBarUI VideoBar;
-    [SerializeField] private Timer levelTimer;   // 👈 ADD THIS
+    [SerializeField] private Timer timer;   // 👈 ADD THIS
     public GameObject gameOverPanel; // Drag your Panel here in Inspector
 
 
@@ -45,8 +45,8 @@ public class LevelManager : MonoBehaviour
 
     public void RetryGame()
     {
-        // Unpause before reloading!
-        Time.timeScale = 1f;
+        // needs to unpause the game before reloading
+        // Time.timeScale = 1f;
 
         // Reloads the currently active scene
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
@@ -54,37 +54,25 @@ public class LevelManager : MonoBehaviour
 
     void Update()
     {
-        if (VideoBar.score >= levelTarget && levelTimer.GetTimeLeft() > 0)
+        if (VideoBar.score >= levelTarget && timer.GetTimeLeft() > 0)
         {
-            // levelWon = true;
-            //pause for top level transition, i might just use it when doin a big
-            // transition with animation when reached x amount of levels
-
-
-            //Might use the flag change only in conditionals and encapsulate the rest outside somewhere else
             videoCompleted++;
-            Debug.Log("📼 Reel published on time with " + levelTimer.GetTimeLeft() + "seconds left and " + VideoBar.score + " likes total!");
             levelNumber.text = videoCompleted.ToString();
-            // VideoBar.SetStart(0f, levelTarget);
             VideoBar.ResetScore();
-            // levelTimer.ResetTimer(levelWon);
-            Debug.Log("🎬 New reel started. In this " + videoCompleted + "th reel, you have " + levelTimer.timeAvailable + " seconds to get " + levelTarget + " likes!");
-            Debug.Log("Timer of new level: " + levelTimer.GetTimeLeft());
-
         }
-        else if (VideoBar.score < levelTarget && levelTimer.GetTimeLeft() <= 0/*  or 3 mistakes done */)
+        else if (VideoBar.score < levelTarget && timer.GetTimeLeft() <= 0/*  or 3 mistakes done */)
         {
-            // Debug.Log("⏰ Time's up! You had " + (levelTarget - VideoBar.score) + " likes left to complete another reel!");
             VideoBar.ResetScore();
             GameOver();
-            // FINISHED SESSION
-
-            // Debug.Log("Total reels made: " + videoCompleted);
-
-            // SHOW GAME OBVER HERE
+            /*
+            Instead of retry, show game calculations here:
+            videos made, followers/exp calculation (based on videos and streaks) and coins earned.
+            Then bring user to main menu.
+             */
         }
     }
 
+    // pause/play logic when player completes a level and dance animation plays (timer needs to stop during this moment and resume after)
     // private IEnumerator pauseForTransition()
     // {
     //     // yield return new WaitForSeconds(waitTime);

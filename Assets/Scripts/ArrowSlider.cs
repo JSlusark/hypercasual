@@ -13,7 +13,7 @@ see if it works better for gameplay.
 
 smaller levels have smaller swipes (3 arrows)
 bigger levels have longer swipes (max 10 arrows then complicates with special arrows)
-
+need to also see in which context to run different commands (like inverted arrows, diappearing arrows, etc)
  */
 
 public class ArrowSlider : MonoBehaviour
@@ -22,6 +22,10 @@ public class ArrowSlider : MonoBehaviour
     public VideoBarUI videoBar;
     public GameObject arrowPrefab;
     public float arrowPrefab_spacing = 1.2f;
+
+    // putting them here, but these should be in level manager and change per level
+    public float scoreIncrease = 20f;
+    public float scoreDecrease = 10f;
 
     private List<GameObject> arrowPrefabSequence = new();
     public int sequenceSize = 5;
@@ -49,18 +53,13 @@ public class ArrowSlider : MonoBehaviour
 
     public void getFirstInSequence()
     {
-        if (arrowPrefabSequence.Count > 0)
-        {
-            // firstPrefabArrow = arrowPrefabSequence[0].GetComponent<ArrowCreate>();
+        if (arrowPrefabSequence.Count > 0) // put as conditional for safety
             firstPrefabArrow = arrowPrefabSequence[0].GetComponentInChildren<ArrowCreate>();
-
-            // firstPrefabArrow.GetComponent<SpriteRenderer>().color = firstColor;
-        }
     }
 
     public void RemoveArrow()
     {
-        if (arrowPrefabSequence.Count == 0)
+        if (arrowPrefabSequence.Count == 0) // safety check
             return;
         GameObject removedArrow = arrowPrefabSequence[0];
         arrowPrefabSequence.RemoveAt(0);
@@ -75,7 +74,6 @@ public class ArrowSlider : MonoBehaviour
         arrowPrefabSequence.Add(newArrowPrefab);
         newArrowPrefab.transform.localPosition = GetArrowTargetPosition(arrowPrefabSequence.Count - 1);
         getFirstInSequence(); // highlights the new first arrow
-
         StartCoroutine(SlideArrows(0.2f)); // coroutine + interpolation for sliding arrows
     }
 
@@ -126,55 +124,25 @@ public class ArrowSlider : MonoBehaviour
         Debug.Log("Input received: " + context.control.name);
         if (context.performed)
         {
-            // Debug.Log("DanceMove pressed: " + context.control.name);
-
-            if (firstPrefabArrow == null)
-            {
-                Debug.LogWarning("firstPrefabArrow is null (missing ArrowCreate on the first prefab?)");
-                return;
-            }
+            // if (firstPrefabArrow == null) // debugging null reference
+            // {
+            //     Debug.LogWarning("firstPrefabArrow is null (missing ArrowCreate on the first prefab?)");
+            //     return;
+            // }
 
             if (context.control.name == firstPrefabArrow.direction.ToString())
             {
-                videoBar.UpdateScore(+20f); // - 1 or multiplier if combo chain active
-                Debug.Log("❤️ +100  | Score:" + videoBar.score);
-                // Debug.Log("Matched arrow: " + firstPrefabArrow.direction + "point +1");
-
-
-                // if max likes is not reached
-                StartCoroutine(showSuccessArrow());
-                // add another coroutrine where if level complete (add 1 video, show dancanimation and create a new sequence from scratch)
+                videoBar.UpdateScore(+20f); // can add multiplier if combo chain active
+                Debug.Log($"❤️ +100  | Score: {videoBar.score}");
+                RemoveArrow();
+                ContinueArrowSequence();
 
             }
             else
             {
-                // StartCoroutine(showFailedArrow());
-                videoBar.UpdateScore(-10f); // - 1 or multiplier if combo chain active
-                Debug.Log("💔 -50  | Score:" + videoBar.score);
-                // Debug.Log("Mismatched arrow. Expected: " + firstPrefabArrow.direction + "point -1");
+                videoBar.UpdateScore(-10f);
+                Debug.Log($"💔 -50  | Score: {videoBar.score}");
             }
-
-
         }
     }
-
-    public IEnumerator showSuccessArrow()
-    {
-        // firstPrefabArrow.GetComponent<SpriteRenderer>().color = successColor;
-        yield return new WaitForSeconds(0.1f);
-        // if (firstPrefabArrow != null)
-        // firstPrefabArrow.GetComponent<SpriteRenderer>().color = firstColor;
-        RemoveArrow();
-        ContinueArrowSequence();
-
-    }
-
-    public IEnumerator showFailedArrow()
-    {
-        // firstPrefabArrow.GetComponent<SpriteRenderer>().color = failColor;
-        yield return new WaitForSeconds(0.1f);
-        // if (firstPrefabArrow != null)
-        // firstPrefabArrow.GetComponent<SpriteRenderer>().color = firstColor;
-    }
-
 }

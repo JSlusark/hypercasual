@@ -1,37 +1,27 @@
 using UnityEngine;
 using System.Collections;
-using System.Collections.Generic;
-using Mono.Cecil.Cil;
-// using UnityEngine.UI;
 
 public class VideoBarUI : MonoBehaviour
 {
-    public float score, target, Width, Height;
-    public float transitionTime = 0.3f; // global macro for time based transitions
+
+    public float score;
+    [Tooltip("Score needed to complete a level")]
+    public float maxScore;
+    public float Width;
+    public float Height;
 
     [SerializeField] private RectTransform videoBar;
-
     [SerializeField] private SpriteRenderer videoIcon;      // SpriteRenderer component
-    [SerializeField] private Sprite videoScatter;             // broken heart sprite
-    [SerializeField] private Sprite videoBreak;             // broken heart sprite
-    [SerializeField] private Sprite videoFail;             // broken heart sprite
-
-
-    [SerializeField] private SpriteRenderer dancerSprite;    // dancer sprite for color change feedback
-    [SerializeField] private Sprite dancerFail;    // dancer sprite change feedback
-    [SerializeField] private Sprite dancerIdle;    // dancer sprite change feedback
-    [SerializeField] private Sprite dancerAnimation;    //idle animation or completion animation
-
-    public Color baseColor = Color.red;
-    public Color successColor = Color.green;
-    public Color failColor = Color.gray;
-
+    [SerializeField] private SpriteRenderer dancerSprite;    // dancer sprite  (might need to move to another script later)
 
     public void SetStart(float levelScore, float levelTarget)
     {
-        score = levelScore; // likes starting point
-        target = levelTarget; // likes end point
-        // Debug.Log(" Score:" + score + " Target:" + target);
+        /*
+            - levelScore and levelTarget come from LevelManager (values change at every level)
+            - instead of using these values, I should probably just decrease videoBar growth score at every new level
+         */
+        score = levelScore;
+        maxScore = levelTarget;
     }
 
 
@@ -40,54 +30,20 @@ public class VideoBarUI : MonoBehaviour
     {
         float newWidth;
         score += gain;
-
-        // if (score >= target) // resets score if over target
-        //     return;
-        // // score = 0f;
-
-        score = Mathf.Clamp(score, 0f, target); // unsure if doing something else
-        newWidth = (score / target) * Width; // needs to be fixed
+        /*
+            NOTE: when score reaches target it does not show full bar,
+            instead it starts from 0 again.
+            I want to show the full bar before it resets because user completed the level
+         */
+        score = Mathf.Clamp(score, 0f, maxScore); // unsure if doing something else
+        newWidth = (score / maxScore) * Width; // needs to be fixed
         videoBar.sizeDelta = new Vector2(newWidth, Height);
-
-        // Color colorState;
-        // Sprite heartState;
-        // Sprite dancerState;
-
-        if (gain < 0)
-        {
-            // colorState = failColor;
-            // heartState = videoScatter;
-            // dancerState = dancerFail;
-
-        }
-        // else
-        // {
-        //     colorState = successColor;
-        //     heartState = heartBeat;
-        //     dancerState = dancerSuccess;
-        // }
-
-        // StartCoroutine(showErrorTrigger(colorState, heartState, dancerState, transitionTime));
-
         Debug.Log(gain + " Score:" + score);
     }
 
     public IEnumerator showErrorTrigger(Color colorState, Sprite heartState, Sprite dancerState, float duration)
     {
-        // Could substitute the static state change with actual animation
-        // var barImage = videoBar.GetComponent<UnityEngine.UI.Image>();
-        // barImage.color = colorState;
-        // videoIcon.sprite = heartState;           // change sprite
-        // videoIcon.color = colorState;
-        // dancerSprite.sprite = dancerState;
-
         yield return new WaitForSeconds(duration);
-
-        // Resets to base state for videoIcon and barImage
-        // videoIcon.sprite = heartFull;
-        // videoIcon.color = baseColor;
-        // barImage.color = baseColor;
-        // dancerSprite.sprite = dancerIdle;
     }
 
     public void ResetScore()
