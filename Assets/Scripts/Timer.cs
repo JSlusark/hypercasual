@@ -1,99 +1,80 @@
-using System.Runtime.Serialization;
 using UnityEngine;
-using TMPro;
+using UnityEngine.UI; // Required for the Image component
 using System.Collections;
-
 
 public class Timer : MonoBehaviour
 {
+    // Change from TextMeshPro to Image
+    [SerializeField] Image timerBar;
 
-    [SerializeField] TextMeshProUGUI timerText;
-    /*
-     Field: aka variable, a storage location for data that sits in memory  - sraric?
-     Property: a smat wrapper arpund a field that provides controlled access to it, uses get and set methods
-      you also create thsi when handling data taht does not belong to your class directly
-     */
-    public float timeAvailable = 20; // seconds
+    public float timeAvailable = 20f; // Total time
     private float timer;
     private bool pauseTimer = false;
+
+    // Settings for the shrinking effect
     private float blinkDuration = 0.2f;
-
-    private float originalFontSize = 36f;
-    private float blinkFontSize = 37f;
-
 
     Color originalColor = Color.white;
     Color blinkColor = new Color32(150, 255, 191, 255);
     Color warningColor = Color.red;
     Color successColor = new Color32(58, 255, 135, 255);
-    Color failColor = Color.gray;
 
-    // main methods
     void Start()
     {
+        Time.timeScale = 1f; // Added thsi because of pause time in gameover - Forces the game to unpause and fixes bug (there could ne a better place to put this line)
+
+        // Ensures the bar starts full
         timer = timeAvailable;
-        timerText.text = $"{00:00}:{timeAvailable:00}";
+        timerBar.fillAmount = 1f; // IMPORTANT: Set this to 1f (full), not 'timeAvailable' (20)
     }
 
     void Update()
     {
-        if (!pauseTimer) // also pause commands collection and pay dance animation
+        if (!pauseTimer)
             UpdateTimer();
     }
 
-    // updates timer
     void UpdateTimer()
     {
         timer -= Time.deltaTime;
+        // Debug Log to check values
+        Debug.Log($"Timer: {timer} | Fill: {timer / timeAvailable}");
 
-        int minutes = Mathf.FloorToInt(timer / 60f);
-        int seconds = Mathf.FloorToInt(timer % 60f);
-        if (seconds <= 0)
-            timerText.text = $"{00:00}:{00:00}";
-        else
-            timerText.text = $"{minutes:00}:{seconds:00}";
+        // --- THE MATH FOR THE BAR ---
+        // Calculates the percentage (0.0 to 1.0)
+        // If timer is 10 and max is 20, result is 0.5 (half full)
+        float fillPercentage = timer / timeAvailable;
 
-        if (seconds <= 5f)
-        {
-            // Debug.Log("⏰ Timer is running low: " + seconds + " seconds left!");
-            timerText.color = warningColor;
-        }
+        // Applies to the UI Image
+        timerBar.fillAmount = fillPercentage;
+
+        if (timer <= 5f)
+            timerBar.color = warningColor;
     }
 
-    // resets timer
-    public void ResetTimer()
-    {
-        // if (levelWon)
-        // StartCoroutine(BlinkAndResetRoutine()); // should move this on a high level later
-        ResetTimerValues();
-    }
+    // leaving this in case i want to use it in future
+    /*
+     public void ResetTimer()
+      {
+          timer = timeAvailable;
+          timerBar.fillAmount = 1f; // Make bar full again
+          timerBar.color = originalColor;
+      }
 
-    // reset timer helpers
-    private void ResetTimerValues()
-    {
-        timer = timeAvailable;
-        if (timerText.color != originalColor)
-            timerText.color = originalColor;
-
-        // Format to show 00:60 (or whatever timeAvailable is)
-        timerText.text = $"00:{timeAvailable:00}";
-    }
-
-    private IEnumerator BlinkAndResetRoutine()
-    {
-        pauseTimer = true;
-        for (int i = 0; i < 2; i++)
-        {
-            timerText.color = blinkColor;
-            timerText.fontSize = blinkFontSize;
-            yield return new WaitForSeconds(blinkDuration);
-            timerText.color = successColor;
-            timerText.fontSize = originalFontSize;
-            yield return new WaitForSeconds(blinkDuration);
-        }
-        ResetTimerValues();
-        pauseTimer = false;
-    }
+//      Blinks bar and then resets timer - could use for special reset effects
+      private IEnumerator BlinkAndResetRoutine()
+      {
+          pauseTimer = true;
+          for (int i = 0; i < 2; i++)
+          {
+              timerBar.color = blinkColor;
+              yield return new WaitForSeconds(blinkDuration);
+              timerBar.color = successColor;
+              yield return new WaitForSeconds(blinkDuration);
+          }
+          ResetTimer(); // Use the standard reset
+          pauseTimer = false;
+      } */
 
     // Getters
     public float GetTimeLeft()
