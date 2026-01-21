@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: ce2506c1cee224cb29db751cc483c305
+guid: c5af7fefec05c479d9c5355b419990d8
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 8793639957104055765
-    second: idle_0
+      213: -5090879937577951274
+    second: vogue_idle_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -113,13 +113,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: idle_0
+      name: vogue_idle_0
       rect:
         serializedVersion: 2
-        x: 0
+        x: 17
         y: 0
-        width: 680
-        height: 936
+        width: 507
+        height: 757
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -128,8 +128,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 5d55ed543f8490a70800000000000000
-      internalID: 8793639957104055765
+      spriteID: 6dfd08e5baf8959b0800000000000000
+      internalID: -5090879937577951274
       vertices: []
       indices: 
       edges: []
@@ -148,7 +148,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      idle_0: 8793639957104055765
+      vogue_idle_0: -5090879937577951274
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

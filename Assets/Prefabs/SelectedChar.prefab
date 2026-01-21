@@ -1,0 +1,57 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &8116068529487613103
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 3318157880507374275}
+  - component: {fileID: 8108371661393060059}
+  m_Layer: 0
+  m_Name: SelectedChar
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &3318157880507374275
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8116068529487613103}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 141.61485, y: 240.1021, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &8108371661393060059
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8116068529487613103}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c40fc0a4eadb949f4a44d52d13462bfa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: '::'
+  sr: {fileID: 0}
+  skins:
+  - {fileID: 21300000, guid: 8aebb05a2e15d44c581c8f351334fd42, type: 3}
+  - {fileID: 21300000, guid: 827120630d4ae48afbe96f09b6bf875e, type: 3}
+  - {fileID: -5090879937577951274, guid: c5af7fefec05c479d9c5355b419990d8, type: 3}
+  skinNames:
+  - Punk
+  - Street
+  - Vogue
+  playerSkin: {fileID: 8116068529487613103}
+  skinName: {fileID: 0}
