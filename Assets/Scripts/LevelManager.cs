@@ -23,7 +23,8 @@ public class LevelManager : MonoBehaviour
 
     // global game data
     private int completedLevels;
-    public int highScore;
+    public int prevHighScore;
+    public int newHighScore;
     public int expPoints;
 
     // UI components
@@ -33,6 +34,7 @@ public class LevelManager : MonoBehaviour
     [SerializeField] private Timer timer;
     [SerializeField] private TextMeshProUGUI levelNumber;
     [SerializeField] private TextMeshProUGUI highScoreUI;
+    [SerializeField] private TextMeshProUGUI highScoreMessageUI;
 
 
 
@@ -60,10 +62,10 @@ public class LevelManager : MonoBehaviour
     /// ___ Level Management ___ ///
     void Start()
     {
-        highScore = PlayerPrefs.GetInt("HighScore", 0); // loads saved high score
-        highScoreUI.text = highScore.ToString();
+        prevHighScore = PlayerPrefs.GetInt("HighScore", 0); // loads saved high score
+        highScoreUI.text = prevHighScore.ToString();
 
-        Debug.Log($"High Score: {highScore}");
+        // Debug.Log($"High Score: {highScore}");
         ScoreBar.SetStart();
     }
 
@@ -77,15 +79,24 @@ public class LevelManager : MonoBehaviour
         }
         else if (!ScoreBar.MaxScoreReached() && timer.IsTimeup())
         {
-            if (completedLevels > highScore) // to be changed with scoring system later
+            string message;
+            if (completedLevels > prevHighScore) // to be changed with scoring system later
             {
-                Debug.Log("New High Score!");
-                highScore = completedLevels;
+                // Debug.Log("New High Score!");
+                newHighScore = completedLevels;
+                message = "You got a new High Score!";
                 // simple test with unity's pre-built persistence layer
-                PlayerPrefs.SetInt("HighScore", highScore);
+                PlayerPrefs.SetInt("HighScore", newHighScore);
                 PlayerPrefs.Save();
             }
-            highScoreUI.text = highScore.ToString();
+            else
+            {
+                newHighScore = prevHighScore;
+                message = "Try again to beat your High Score";
+            }
+
+            highScoreMessageUI.text = message;
+            highScoreUI.text = newHighScore.ToString();
             EndLevel();
         }
     }

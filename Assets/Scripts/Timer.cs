@@ -6,7 +6,7 @@ public class Timer : MonoBehaviour
     [SerializeField] Image timerBar;
 
     [Tooltip("Total time available for gameplay (in seconds)")]
-    public float timeMax = 20f;
+    public float timeMax;
     private float timeRemaining;
 
     Color originalColor = new Color32(36, 255, 0, 255);
