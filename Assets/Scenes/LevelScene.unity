@@ -128,7 +128,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 86043500}
-  - component: {fileID: 86043499}
+  - component: {fileID: 86043501}
+  - component: {fileID: 86043502}
   m_Layer: 0
   m_Name: LevelManager
   m_TagString: Untagged
@@ -136,30 +137,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &86043499
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 86043498}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9c4b3233720994e6a9ae2fa56bdece5e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: '::'
-  levelComplete: 0
-  pointGain: 20
-  pointLoss: -10
-  prevHighScore: 0
-  newHighScore: 0
-  expPoints: 0
-  gameOverPanel: {fileID: 1561155546}
-  ScoreBar: {fileID: 1302111546}
-  timer: {fileID: 466360583}
-  levelNumber: {fileID: 2058843272}
-  highScoreUI: {fileID: 1874439343}
-  highScoreMessageUI: {fileID: 1589849346}
 --- !u!4 &86043500
 Transform:
   m_ObjectHideFlags: 0
@@ -175,6 +152,44 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &86043501
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 86043498}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e512baba218924da9ae5f8044eb786fa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: '::'
+  character: {fileID: 501958578}
+--- !u!114 &86043502
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 86043498}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9c4b3233720994e6a9ae2fa56bdece5e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::LevelManager
+  levelComplete: 0
+  pointGain: 40
+  pointLoss: -20
+  prevHighScore: 0
+  newHighScore: 0
+  expPoints: 0
+  character: {fileID: 501958578}
+  gameOverPanel: {fileID: 1561155546}
+  ScoreBar: {fileID: 1302111546}
+  timer: {fileID: 466360583}
+  levelNumber: {fileID: 2058843272}
+  highScoreUI: {fileID: 1874439343}
+  highScoreMessageUI: {fileID: 1589849346}
 --- !u!1 &152780747
 GameObject:
   m_ObjectHideFlags: 0
@@ -446,7 +461,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 0}
+  m_Sprite: {fileID: -5836713271973203417, guid: d8387224b629844298400ffd2b578e83, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -610,7 +625,7 @@ GameObject:
   - component: {fileID: 501958578}
   - component: {fileID: 501958580}
   m_Layer: 0
-  m_Name: dancer
+  m_Name: character
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -665,7 +680,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_MaskInteraction: 0
-  m_Sprite: {fileID: -6911317149841456206, guid: bb35e94c4c42e4d12aeefabe8c3d15b9, type: 3}
+  m_Sprite: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -673,7 +688,7 @@ SpriteRenderer:
   m_Size: {x: 3.9, y: 8.18}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 1
+  m_WasSpriteAssigned: 0
   m_SpriteSortPoint: 0
 --- !u!4 &501958579
 Transform:
@@ -684,7 +699,7 @@ Transform:
   m_GameObject: {fileID: 501958577}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.01, y: -3.31, z: 0}
+  m_LocalPosition: {x: 0.01, y: -1.15, z: 0}
   m_LocalScale: {x: 0.61071366, y: 0.61071366, z: 0.61071366}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -698,7 +713,7 @@ Animator:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 501958577}
-  m_Enabled: 1
+  m_Enabled: 0
   m_Avatar: {fileID: 0}
   m_Controller: {fileID: 9100000, guid: f096281e424c24d27abfa146afd6dd0a, type: 2}
   m_CullingMode: 0
@@ -1230,7 +1245,6 @@ MonoBehaviour:
   Height: 6
   videoBar: {fileID: 374817803}
   videoIcon: {fileID: 0}
-  dancerSprite: {fileID: 501958578}
 --- !u!114 &1302111547
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2127,14 +2141,14 @@ PrefabInstance:
     - target: {fileID: 7800837962763313572, guid: 546ef5441917d43c3a77c854f8d12889, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 86043499}
+      objectReference: {fileID: 11500000, guid: 9c4b3233720994e6a9ae2fa56bdece5e, type: 3}
     - target: {fileID: 7800837962763313572, guid: 546ef5441917d43c3a77c854f8d12889, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
       value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 7800837962763313572, guid: 546ef5441917d43c3a77c854f8d12889, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: RetryGame
+      value: 
       objectReference: {fileID: 0}
     - target: {fileID: 7800837962763313572, guid: 546ef5441917d43c3a77c854f8d12889, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName

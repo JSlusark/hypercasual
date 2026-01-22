@@ -12,7 +12,6 @@ public class ScoreBar : MonoBehaviour
 
     [SerializeField] private RectTransform videoBar;
     [SerializeField] private SpriteRenderer videoIcon;      // SpriteRenderer component
-    [SerializeField] private SpriteRenderer dancerSprite;    // dancer sprite  (might need to move to another script later)
 
     public void SetStart()
     {
@@ -25,7 +24,7 @@ public class ScoreBar : MonoBehaviour
     {
         float newWidth;
         score += point;
-        // Debug.Log($"💖 {point} | Score: {score}");
+        Debug.Log($"💖 {point} | Score: {score}");
         /*
             NOTE: when score reaches target it does not show full bar,
             instead it starts from 0 again.

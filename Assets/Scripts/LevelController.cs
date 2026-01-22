@@ -1,34 +1,23 @@
+using System;
 using UnityEngine;
 using TMPro;
-using UnityEngine.SocialPlatforms.Impl; // Important for UI
-using Unity.VisualScripting;
-using System.Collections;
-using UnityEditorInternal;
-using UnityEngine.SceneManagement; // Needed for restarting
+using UnityEngine.SceneManagement;
 
-
-/*
-    Level: keeps track of what is required at every level.
-*/
-
-public class LevelManager : MonoBehaviour
+public class LevelController : MonoBehaviour
 {
+    public static LevelController Instance { get; private set; }
 
-    public static LevelManager Instance { get; private set; }
 
-    // level data
     public bool levelComplete = false;
-    public float pointGain; // to be decreased as level difficulty goes up
+    public float pointGain;
     public float pointLoss;
 
-    // global game data
     private int completedLevels;
     public int prevHighScore;
     public int newHighScore;
     public int expPoints;
 
-    // UI components
-    Color originalColor;
+    [SerializeField] private SpriteRenderer character;
     public GameObject gameOverPanel;
     [SerializeField] private ScoreBar ScoreBar;
     [SerializeField] private Timer timer;
@@ -36,40 +25,32 @@ public class LevelManager : MonoBehaviour
     [SerializeField] private TextMeshProUGUI highScoreUI;
     [SerializeField] private TextMeshProUGUI highScoreMessageUI;
 
-
-
-
-    private void Awake() // Awake is use to initialize any variables or game state before Start()
+    private void Awake()
     {
-        if (Instance != null && Instance != this) // Ensures only one instance exists by killing duplicates
+        if (Instance != null && Instance != this)
             Destroy(this);
         else
-        {
             Instance = this;
-            // DontDestroyOnLoad(gameObject); // Optional: Persist through scenes
-        }
     }
 
     private void OnDestroy()
     {
-        // important for scene singletons, clears the static reference to avoid issues
-        // when other scenes are trying to access it
         if (Instance == this)
             Instance = null;
     }
 
-
-    /// ___ Level Management ___ ///
-    void Start()
+    private void Start()
     {
-        prevHighScore = PlayerPrefs.GetInt("HighScore", 0); // loads saved high score
+        prevHighScore = PlayerPrefs.GetInt("HighScore", 0);
         highScoreUI.text = prevHighScore.ToString();
 
-        // Debug.Log($"High Score: {highScore}");
+        if (character != null && DataLayer.Instance != null && DataLayer.Instance.selectedCharacter.characterSprite != null)
+            character.sprite = DataLayer.Instance.selectedCharacter.characterSprite;
+
         ScoreBar.SetStart();
     }
 
-    void Update()
+    private void Update()
     {
         if (ScoreBar.MaxScoreReached() && !timer.IsTimeup())
         {
@@ -119,9 +100,7 @@ public class LevelManager : MonoBehaviour
     public void UpdateScore(bool hasScored)
     {
         float point = hasScored ? pointGain : pointLoss;
+        Debug.Log($"UPDATE SCORE -  {point}");
         ScoreBar.UpdateLength(point);
     }
-
-
-
 }

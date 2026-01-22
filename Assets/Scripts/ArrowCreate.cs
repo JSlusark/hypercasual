@@ -33,7 +33,7 @@ public class ArrowCreate : MonoBehaviour
     {
         direction = (Direction)Random.Range(0, 4);
         transform.rotation = Quaternion.Euler(0f, 0f, ArrowType[direction]);
-        // Debug.Log($"Arrow direction:[{direction}] angle:{ArrowType[direction]}");
+        Debug.Log($"Arrow direction:[{direction}] angle:{ArrowType[direction]}");
 
     }
 
