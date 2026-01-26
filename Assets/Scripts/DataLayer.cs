@@ -1,72 +1,23 @@
-using System.Data.Common;
 using UnityEngine;
 
-/*
-	Model(data) provides the data structure to be used by the Controller(logic) and rendered by the View(UI).
-	Data has to persist across scenes.
 
-	DataLayer is the persistence layer.
-	Monobehaviour: the class logic script that can be attached to game objects in unity
-	GameObject: anything that is added in the hierarchy in unity, hey become useful by having Components attached (scripts, SpriteRenderer, Rigidbody, etc).
-
-	Serialiser: a system that converts objects/fields in memory into stored data, and later reconstructs them.
-	[System.Serializable]: makes the struct serializable( able to be saved in memory from a persistance object)
- */
-
-public class DataLayer : MonoBehaviour // name of c class bluerint, Monobehaviour  makes so that the class can be attached to game objects in unity
+public class DataLayer : MonoBehaviour
 {
+	// === MACROS PLAYERPREFS ===
+	private const string ACTIVE_CHARACTER = "SelectedCharacter";
+	private const string HIGHSCORE = "HighScore";
 
-	// [System.Serializable] // makes the struct serializable( able to be saved in memory from a persistance object)
-	// public struct CharacterData // data on the selected charcter, persistent while playing the game
-	// {
-	// 	[SerializeField] private SpriteRenderer selectedCharacterSprite; // sprite renderer of the selected character
+	// =========== ATTRIBUTES ==========
+	[Header("Character Database")]
+	public CharacterData[] characterList; // Drag your .asset files here!
+	private int selectedCharacter = 0;
 
-	// 	// public int characterIndex;        // passed to the LevelController so it can render the selected character in the levelScene
-
-	// 	// to be expanded with fields like:
-	// 	// public int[] experiencePerCharacter;
-	// 	// public bool[] unlockedCharacters;
-	// }
-
+	// =========== PUBLIC GETTERS ==========
+	public int GetCharacterIndex => selectedCharacter; // public getter for selectedCharacter
 
 
-
-	[System.Serializable]
-	public struct Character // holds data on each character available
-	{
-		// public bool isSelected; // is this the currently selected character
-		// public IdentifierCase identifierCase; // unique identifier for the character
-		// public int index; // index of the character in the selectionOptions array
-		// 				  // public GameObject characterPrefab;
-		public bool isUnlocked;
-		public string characterDanceStyle;
-		public Sprite characterSprite;
-		public AnimationClip idleAnimation; // animation played when the player is idle
-		public AnimationClip failAnimation; // animation played when the player fails a move
-		public AnimationClip levelCompleteAnimation; // animation played when dance level increases
-		public int highScore; // highest score achieved with this character in a dance session
-							  // public int level; // level required to unlock the character's evolution
-							  // public int expPoints;
-							  // public int evolutionLevel; // number of evolution levels for this character
-							  // public int evolutionState; // number of evolution levels for this character
-
-	}
-
-	// i am tempted to put selectionOptions here too
-	// but that would couple the data layer with
-	// the definition layer
-	// breaking the separation of concerns principle
-	// ---- data layer vs definition layer.. is selectionoptions really definition layer though?
-
-	// public CharacterData CharacterData; // We need to instantiate the struct to use the properties inside it,
-	public Character[] characterList; // since its's just a data container it does not need to be static
-	public Character selectedCharacter; // selected character data
-
-
-	public static DataLayer Instance; // the GLOBAL static variable initialization, holds THIS when Awake
-
-
-
+	// =========== SINGLETON PATTERN AND DATA PERSISTENCE ==========
+	public static DataLayer Instance;
 	private void Awake() // inizializer method called when the script instance is being loaded and before any Start methods
 	{
 		if (Instance != null) // if instance is not null means it was aleady assigned before by another SelectionState instance
@@ -76,13 +27,59 @@ public class DataLayer : MonoBehaviour // name of c class bluerint, Monobehaviou
 		}
 		Instance = this; // assigns THIS to the inialized static variable, making it a globally accessible(persistent) singleton(unique)
 		DontDestroyOnLoad(gameObject); // it's what ensures persistence as it tells the editor to not destroy the gameObject that contains this script, so that its attributes and methods persists across scenes
+									   // Debug.Log($"[DataLayer] Created instance: {GetInstanceID()}"); // helps to debug if we have multiple instances
 
-		// for (int i = 0; i < characterList.Length; i++)
-		// {
-		// 		characterList[i].index = i;
-		// 		characterList[i].index = i;
+		// Should i move these into their own class? Like a SaveLoadManager?
+		LoadAllHighscores();
+		LoadSelectedCharacter();
+	}
 
-		// }
 
+	// ========== SAVE / LOAD FUNCTIONS TEST ==========
+	public void SaveCharacterScore(int scoreFromGame, ref string message)
+	{
+		CharacterData character = characterList[selectedCharacter];
+		string key = HIGHSCORE + character.danceStyleName;
+
+		if (character.SetNewHighScore(scoreFromGame))
+		{
+			PlayerPrefs.SetInt(HIGHSCORE + character.danceStyleName, character.highScore); // saves character.highScore to a device storage with key HIGHSCORE+character.danceStyleName
+			PlayerPrefs.Save(); // forces save to disk
+			message = "You got a new High Score!";
+			Debug.Log($"New highscore {character.highScore} for {character.danceStyleName} saved to device.");
+		}
+
+	}
+
+	private void LoadAllHighscores()
+	{
+		string key;
+
+		foreach (CharacterData character in characterList)
+		{
+			key = HIGHSCORE + character.danceStyleName;
+			character.highScore = PlayerPrefs.GetInt(key, 0);
+		}
+
+		Debug.Log("All high scores loaded from device.");
+	}
+
+	public void SaveActiveCharacter(int newSelection)
+	{
+		if (newSelection != selectedCharacter) // makes sense to overwrite and save only if selection changed
+		{
+			selectedCharacter = newSelection;
+			PlayerPrefs.SetInt(ACTIVE_CHARACTER, selectedCharacter);
+			PlayerPrefs.Save();
+			Debug.Log($"Selection saved to device character[{selectedCharacter}]: {characterList[selectedCharacter].danceStyleName}.");
+		}
+		else
+			Debug.Log("Selection unchanged, nothing saved to device.");
+	}
+
+	private void LoadSelectedCharacter()
+	{
+		selectedCharacter = PlayerPrefs.GetInt(ACTIVE_CHARACTER, 0);
+		Debug.Log($"Loaded previous character selection: [{selectedCharacter}]: {characterList[selectedCharacter].danceStyleName}");
 	}
 }

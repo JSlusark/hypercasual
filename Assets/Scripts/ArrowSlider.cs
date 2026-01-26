@@ -131,10 +131,7 @@ public class ArrowSlider : MonoBehaviour
                 hasScored = true;
                 RemoveArrow();
                 ContinueArrowSequence();
-                Debug.Log($"ONDANCE MOVE - MOVE MATCHED");
-
             }
-            Debug.Log($"ONDANCE MOVE - MOVE NOT MATCHE");
 
             LevelController.Instance.UpdateScore(hasScored);
         }

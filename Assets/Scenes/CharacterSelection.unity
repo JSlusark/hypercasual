@@ -365,47 +365,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::SelectionState
   characterList:
-  - isUnlocked: 0
-    characterDanceStyle: Punk
-    characterSprite: {fileID: 21300000, guid: 8aebb05a2e15d44c581c8f351334fd42, type: 3}
-    idleAnimation: {fileID: 0}
-    failAnimation: {fileID: 0}
-    levelCompleteAnimation: {fileID: 0}
-    level: 0
-    expPoints: 0
-    evolutionLevel: 0
-    evolutionState: 0
-  - isUnlocked: 0
-    characterDanceStyle: Street
-    characterSprite: {fileID: 21300000, guid: 827120630d4ae48afbe96f09b6bf875e, type: 3}
-    idleAnimation: {fileID: 0}
-    failAnimation: {fileID: 0}
-    levelCompleteAnimation: {fileID: 0}
-    level: 0
-    expPoints: 0
-    evolutionLevel: 0
-    evolutionState: 0
-  - isUnlocked: 0
-    characterDanceStyle: Vogue
-    characterSprite: {fileID: -5090879937577951274, guid: c5af7fefec05c479d9c5355b419990d8, type: 3}
-    idleAnimation: {fileID: 0}
-    failAnimation: {fileID: 0}
-    levelCompleteAnimation: {fileID: 0}
-    level: 0
-    expPoints: 0
-    evolutionLevel: 0
-    evolutionState: 0
-  selectedCharacter:
-    isUnlocked: 0
-    characterDanceStyle: 
-    characterSprite: {fileID: 0}
-    idleAnimation: {fileID: 0}
-    failAnimation: {fileID: 0}
-    levelCompleteAnimation: {fileID: 0}
-    level: 0
-    expPoints: 0
-    evolutionLevel: 0
-    evolutionState: 0
+  - {fileID: 11400000, guid: dd1b3bf71d7dc4cf3b12fbb25f8e2120, type: 2}
+  - {fileID: 11400000, guid: ddd69648de3a44471a48d49d664dce8a, type: 2}
+  - {fileID: 11400000, guid: 182ad6e80388e4c9da5d775d154beb9e, type: 2}
 --- !u!4 &229736462
 Transform:
   m_ObjectHideFlags: 0
@@ -881,7 +843,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: New Text
+  m_text: Punk
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -1160,15 +1122,15 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_MaskInteraction: 0
-  m_Sprite: {fileID: 0}
+  m_Sprite: {fileID: 21300000, guid: 8aebb05a2e15d44c581c8f351334fd42, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 1, y: 1}
+  m_Size: {x: 3.6, y: 7.69}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 0
+  m_WasSpriteAssigned: 1
   m_SpriteSortPoint: 0
 --- !u!4 &1649866147
 Transform:
@@ -1456,7 +1418,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c40fc0a4eadb949f4a44d52d13462bfa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: '::'
-  characterSprite: {fileID: 1649866146}
+  baseSprite: {fileID: 1649866146}
   danceStyleName: {fileID: 1437770155}
 --- !u!4 &2059621727
 Transform:

@@ -24,7 +24,7 @@ public class ScoreBar : MonoBehaviour
     {
         float newWidth;
         score += point;
-        Debug.Log($"💖 {point} | Score: {score}");
+        // Debug.Log($"💖 {point} | Score: {score}");
         /*
             NOTE: when score reaches target it does not show full bar,
             instead it starts from 0 again.

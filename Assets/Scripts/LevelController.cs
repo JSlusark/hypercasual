@@ -1,4 +1,3 @@
-using System;
 using UnityEngine;
 using TMPro;
 using UnityEngine.SceneManagement;
@@ -6,8 +5,6 @@ using UnityEngine.SceneManagement;
 public class LevelController : MonoBehaviour
 {
     public static LevelController Instance { get; private set; }
-
-
     public bool levelComplete = false;
     public float pointGain;
     public float pointLoss;
@@ -25,6 +22,11 @@ public class LevelController : MonoBehaviour
     [SerializeField] private TextMeshProUGUI highScoreUI;
     [SerializeField] private TextMeshProUGUI highScoreMessageUI;
 
+    private CharacterData selectedCharacter;
+
+
+    private string message = "Try again to beat your High Score";
+
     private void Awake()
     {
         if (Instance != null && Instance != this)
@@ -41,12 +43,12 @@ public class LevelController : MonoBehaviour
 
     private void Start()
     {
-        prevHighScore = PlayerPrefs.GetInt("HighScore", 0);
-        highScoreUI.text = prevHighScore.ToString();
+        int index = DataLayer.Instance.GetCharacterIndex; // cache selected character index
+        selectedCharacter = DataLayer.Instance.characterList[index];
 
-        if (character != null && DataLayer.Instance != null && DataLayer.Instance.selectedCharacter.characterSprite != null)
-            character.sprite = DataLayer.Instance.selectedCharacter.characterSprite;
-
+        Debug.Log($"Player selected {selectedCharacter.danceStyleName} with high score {selectedCharacter.highScore}");
+        completedLevels = 0;
+        character.sprite = DataLayer.Instance.characterList[index].baseSprite;
         ScoreBar.SetStart();
     }
 
@@ -60,31 +62,17 @@ public class LevelController : MonoBehaviour
         }
         else if (!ScoreBar.MaxScoreReached() && timer.IsTimeup())
         {
-            string message;
-            if (completedLevels > prevHighScore) // to be changed with scoring system later
-            {
-                // Debug.Log("New High Score!");
-                newHighScore = completedLevels;
-                message = "You got a new High Score!";
-                // simple test with unity's pre-built persistence layer
-                PlayerPrefs.SetInt("HighScore", newHighScore);
-                PlayerPrefs.Save();
-            }
-            else
-            {
-                newHighScore = prevHighScore;
-                message = "Try again to beat your High Score";
-            }
-
+            DataLayer.Instance.SaveCharacterScore(completedLevels, ref message);
             highScoreMessageUI.text = message;
-            highScoreUI.text = newHighScore.ToString();
+            highScoreUI.text = selectedCharacter.highScore.ToString();
             EndLevel();
         }
     }
 
+
     public void RetryGame()
     {
-        // Reloads the currently active scene
+        // Time.timeScale = 1f; // important, since EndLevel() pauses time
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 
@@ -96,11 +84,10 @@ public class LevelController : MonoBehaviour
         gameOverPanel.SetActive(true);
     }
 
-    /// ___ Score Management ___ ///
     public void UpdateScore(bool hasScored)
     {
         float point = hasScored ? pointGain : pointLoss;
-        Debug.Log($"UPDATE SCORE -  {point}");
         ScoreBar.UpdateLength(point);
     }
+
 }
