@@ -1,7 +1,7 @@
 using UnityEngine;
 
 
-public class DataLayer : MonoBehaviour
+public class GameManager : MonoBehaviour
 {
 	// === MACROS PLAYERPREFS ===
 	private const string ACTIVE_CHARACTER = "SelectedCharacter";
@@ -17,17 +17,17 @@ public class DataLayer : MonoBehaviour
 
 
 	// =========== SINGLETON PATTERN AND DATA PERSISTENCE ==========
-	public static DataLayer Instance;
+	public static GameManager Instance { get; private set; }
 	private void Awake() // inizializer method called when the script instance is being loaded and before any Start methods
 	{
-		if (Instance != null) // if instance is not null means it was aleady assigned before by another SelectionState instance
+		if (Instance != null) // avoids creating of multiple instances by destroying any new gameObject
 		{
-			Destroy(gameObject); // destroys the gameObject to avoid we have a duplicate instance of SelectionState
+			Destroy(gameObject); //
 			return;
 		}
 		Instance = this; // assigns THIS to the inialized static variable, making it a globally accessible(persistent) singleton(unique)
-		DontDestroyOnLoad(gameObject); // it's what ensures persistence as it tells the editor to not destroy the gameObject that contains this script, so that its attributes and methods persists across scenes
-									   // Debug.Log($"[DataLayer] Created instance: {GetInstanceID()}"); // helps to debug if we have multiple instances
+		DontDestroyOnLoad(gameObject); // it's what ensures persistence across scenes, never destroys
+									   // Debug.Log($"[GameManager] Created instance: {GetInstanceID()}"); // helps to debug if we have multiple instances
 
 		// Should i move these into their own class? Like a SaveLoadManager?
 		LoadAllHighscores();

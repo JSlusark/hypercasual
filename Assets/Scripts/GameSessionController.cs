@@ -2,14 +2,12 @@ using UnityEngine;
 using TMPro;
 using UnityEngine.SceneManagement;
 
-public class LevelController : MonoBehaviour
+public class GameSessionController : MonoBehaviour
 {
-    public static LevelController Instance { get; private set; }
-    public bool levelComplete = false;
     public float pointGain;
     public float pointLoss;
 
-    private int completedLevels;
+    private int completedRounds;
     public int prevHighScore;
     public int newHighScore;
     public int expPoints;
@@ -27,28 +25,31 @@ public class LevelController : MonoBehaviour
 
     private string message = "Try again to beat your High Score";
 
+
+
+    public static GameSessionController Instance { get; private set; }
     private void Awake()
     {
-        if (Instance != null && Instance != this)
-            Destroy(this);
-        else
-            Instance = this;
-    }
+        Debug.Log($"[GameSessionController] Awake called. Current Instance: {(Instance == null ? "null" : "exists")}, This: {GetInstanceID()}");
 
-    private void OnDestroy()
-    {
-        if (Instance == this)
-            Instance = null;
+        if (Instance != null)
+        {
+            // Debug.LogWarning($"[GameSessionController] Duplicate detected! Destroying this instance: {GetInstanceID()}");
+            Destroy(gameObject);
+            return;
+        }
+        Instance = this;
+        // Debug.Log($"[GameSessionController] Instance set to: {GetInstanceID()}");
     }
 
     private void Start()
     {
-        int index = DataLayer.Instance.GetCharacterIndex; // cache selected character index
-        selectedCharacter = DataLayer.Instance.characterList[index];
+        int index = GameManager.Instance.GetCharacterIndex; // cache selected character index
+        selectedCharacter = GameManager.Instance.characterList[index];
 
         Debug.Log($"Player selected {selectedCharacter.danceStyleName} with high score {selectedCharacter.highScore}");
-        completedLevels = 0;
-        character.sprite = DataLayer.Instance.characterList[index].baseSprite;
+        completedRounds = 0;
+        character.sprite = GameManager.Instance.characterList[index].baseSprite;
         ScoreBar.SetStart();
     }
 
@@ -56,13 +57,13 @@ public class LevelController : MonoBehaviour
     {
         if (ScoreBar.MaxScoreReached() && !timer.IsTimeup())
         {
-            completedLevels++;
-            levelNumber.text = completedLevels.ToString();
+            completedRounds++;
+            levelNumber.text = completedRounds.ToString();
             ScoreBar.SetStart();
         }
         else if (!ScoreBar.MaxScoreReached() && timer.IsTimeup())
         {
-            DataLayer.Instance.SaveCharacterScore(completedLevels, ref message);
+            GameManager.Instance.SaveCharacterScore(completedRounds, ref message);
             highScoreMessageUI.text = message;
             highScoreUI.text = selectedCharacter.highScore.ToString();
             EndLevel();
@@ -72,8 +73,7 @@ public class LevelController : MonoBehaviour
 
     public void RetryGame()
     {
-        // Time.timeScale = 1f; // important, since EndLevel() pauses time
-        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name); //automatically destroys GameSessionController instance and creates a new one
     }
 
     public void EndLevel()

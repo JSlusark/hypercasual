@@ -8,7 +8,7 @@ using TMPro;
     [SerializeField] : makes private fields visible and editable in the Unity Inspector.
  */
 
-public class SelectionController : MonoBehaviour
+public class CharacterSelectionController : MonoBehaviour
 {
 
     [Header("UI Components")]
@@ -24,8 +24,8 @@ public class SelectionController : MonoBehaviour
 
     private void Start()
     {
-        selection = DataLayer.Instance.GetCharacterIndex;
-        listLength = DataLayer.Instance.characterList.Length;
+        selection = GameManager.Instance.GetCharacterIndex;
+        listLength = GameManager.Instance.characterList.Length;
         ShowCharacter();
     }
 
@@ -49,13 +49,13 @@ public class SelectionController : MonoBehaviour
 
     public void PlayGame()
     {
-        DataLayer.Instance.SaveActiveCharacter(selection);
+        GameManager.Instance.SaveActiveCharacter(selection);
         SceneManager.LoadScene("LevelScene");
     }
 
     private void ShowCharacter()
     {
-        activeCharacter = DataLayer.Instance.characterList[selection];
+        activeCharacter = GameManager.Instance.characterList[selection];
         baseSprite.sprite = activeCharacter.baseSprite;
         danceStyleName.text = activeCharacter.danceStyleName;
     }

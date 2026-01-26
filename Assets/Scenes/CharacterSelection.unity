@@ -346,7 +346,7 @@ GameObject:
   - component: {fileID: 229736462}
   - component: {fileID: 229736461}
   m_Layer: 0
-  m_Name: Percistence Layer
+  m_Name: Game Manager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1141,11 +1141,11 @@ Transform:
   m_GameObject: {fileID: 1649866145}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.1, y: 0.2, z: 0}
+  m_LocalPosition: {x: -102.1, y: -181.05, z: 0}
   m_LocalScale: {x: 0.98038584, y: 0.98038584, z: 0.98038584}
   m_ConstrainProportionsScale: 1
   m_Children: []
-  m_Father: {fileID: 0}
+  m_Father: {fileID: 2020528207}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1851114082
 GameObject:
@@ -1379,6 +1379,7 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1437770154}
+  - {fileID: 1649866147}
   - {fileID: 1237086729}
   - {fileID: 557917190}
   - {fileID: 1546697893}
@@ -1400,7 +1401,7 @@ GameObject:
   - component: {fileID: 2059621727}
   - component: {fileID: 2059621726}
   m_Layer: 0
-  m_Name: Selection Controller
+  m_Name: Character Selection
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1579,6 +1580,5 @@ SceneRoots:
   - {fileID: 1851114085}
   - {fileID: 229736462}
   - {fileID: 2059621727}
-  - {fileID: 1649866147}
   - {fileID: 2020528207}
   - {fileID: 42714266}
