@@ -2,63 +2,51 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using TMPro;
 
-/*
-    Controllers(logic) mediates between Model(data) and View(UI).
-    Orchestrates logic: Reacts to input, events, scene lifecycle.
-    [SerializeField] : makes private fields visible and editable in the Unity Inspector.
- */
-
 public class CharacterSelectionController : MonoBehaviour
 {
 
     [Header("UI Components")]
     [SerializeField] private SpriteRenderer baseSprite;
-    [SerializeField] private TextMeshProUGUI danceStyleName;
+    [SerializeField] private TextMeshProUGUI danceStyle;
 
-    // [Header("Script Data")]
+    [Header("Script Data")]
     private int listLength;
-    private int selection;
-
-    private CharacterData activeCharacter;
-
+    private int index;
 
     private void Start()
     {
-        selection = GameManager.Instance.GetCharacterIndex;
-        listLength = GameManager.Instance.characterList.Length;
-        ShowCharacter();
+        listLength = GameManager.Instance.CharacterList.Length;
+        index = GameManager.Instance.Index;
+        ShowCharacterUI();
     }
 
     public void NextCharacter()
     {
-
-        selection = (selection + 1) % listLength;
-        ShowCharacter();
+        index = (index + 1) % listLength;
+        ShowCharacterUI();
     }
 
     public void PreviousCharacter()
     {
-        selection--;
-        if (selection < 0)
-            selection = listLength - 1;
-        // selection = characterList.Length - 1;
+        index--;
+        if (index < 0)
+            index = listLength - 1;
 
-        ShowCharacter();
+        ShowCharacterUI();
     }
 
 
     public void PlayGame()
     {
-        GameManager.Instance.SaveActiveCharacter(selection);
+        GameManager.Instance.LoadCharacter(index);
         SceneManager.LoadScene("LevelScene");
     }
 
-    private void ShowCharacter()
+    private void ShowCharacterUI()
     {
-        activeCharacter = GameManager.Instance.characterList[selection];
-        baseSprite.sprite = activeCharacter.baseSprite;
-        danceStyleName.text = activeCharacter.danceStyleName;
+        CharacterData character = GameManager.Instance.CharacterList[index];
+        baseSprite.sprite = character.baseSprite;
+        danceStyle.text = character.danceStyle;
+        Debug.Log($"Switched to Character: {character.danceStyle}  | Index: {index} | High Score: {character.highScore}");
     }
-
-
 }

@@ -83,3 +83,8 @@ PlasticWorkspace/.plastic/
 #Dotnet SDK tarballs
 dotnet-sdk-9.0.200-linux-x64.tar.gz
 *.slnx
+
+
+# Notes folder - where i keep personal notes for thoughts and ideas on the project
+📝 notes
+📝 notes/*

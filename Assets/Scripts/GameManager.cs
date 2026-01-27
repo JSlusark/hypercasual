@@ -1,85 +1,148 @@
+using System.IO;
+using Unity.VisualScripting;
 using UnityEngine;
-
 
 public class GameManager : MonoBehaviour
 {
-	// === MACROS PLAYERPREFS ===
-	private const string ACTIVE_CHARACTER = "SelectedCharacter";
-	private const string HIGHSCORE = "HighScore";
-
-	// =========== ATTRIBUTES ==========
-	[Header("Character Database")]
-	public CharacterData[] characterList; // Drag your .asset files here!
-	private int selectedCharacter = 0;
-
-	// =========== PUBLIC GETTERS ==========
-	public int GetCharacterIndex => selectedCharacter; // public getter for selectedCharacter
+    public static GameManager Instance { get; private set; }
 
 
-	// =========== SINGLETON PATTERN AND DATA PERSISTENCE ==========
-	public static GameManager Instance { get; private set; }
-	private void Awake() // inizializer method called when the script instance is being loaded and before any Start methods
-	{
-		if (Instance != null) // avoids creating of multiple instances by destroying any new gameObject
-		{
-			Destroy(gameObject); //
-			return;
-		}
-		Instance = this; // assigns THIS to the inialized static variable, making it a globally accessible(persistent) singleton(unique)
-		DontDestroyOnLoad(gameObject); // it's what ensures persistence across scenes, never destroys
-									   // Debug.Log($"[GameManager] Created instance: {GetInstanceID()}"); // helps to debug if we have multiple instances
-
-		// Should i move these into their own class? Like a SaveLoadManager?
-		LoadAllHighscores();
-		LoadSelectedCharacter();
-	}
+    [Header("Game Data")]
+    [SerializeField] private CharacterData[] characterList; // set in the inspector
+    private string saveFilePath;
+    private SaveData saveData; // loads once and saves across scenes, makes sense to keep it stored here
+    private CharacterData character;
+    private int index = 0; // default index if load fails
 
 
-	// ========== SAVE / LOAD FUNCTIONS TEST ==========
-	public void SaveCharacterScore(int scoreFromGame, ref string message)
-	{
-		CharacterData character = characterList[selectedCharacter];
-		string key = HIGHSCORE + character.danceStyleName;
+    public int Index => index;
+    public CharacterData Character => character;
+    public CharacterData[] CharacterList => characterList;
 
-		if (character.SetNewHighScore(scoreFromGame))
-		{
-			PlayerPrefs.SetInt(HIGHSCORE + character.danceStyleName, character.highScore); // saves character.highScore to a device storage with key HIGHSCORE+character.danceStyleName
-			PlayerPrefs.Save(); // forces save to disk
-			message = "You got a new High Score!";
-			Debug.Log($"New highscore {character.highScore} for {character.danceStyleName} saved to device.");
-		}
+    private void Awake()
+    {
+        if (Instance != null)
+        {
+            Destroy(gameObject);
+            return;
+        }
+        Instance = this;
+        DontDestroyOnLoad(gameObject);
+        // Debug.Log($"[GameManager] Created instance: {GetInstanceID()}"); // helps to debug if we have multiple instances
 
-	}
 
-	private void LoadAllHighscores()
-	{
-		string key;
+        saveFilePath = Application.persistentDataPath + "/savegame.json";
+        CreateSaveData();
+        LoadSaveData();
+    }
 
-		foreach (CharacterData character in characterList)
-		{
-			key = HIGHSCORE + character.danceStyleName;
-			character.highScore = PlayerPrefs.GetInt(key, 0);
-		}
 
-		Debug.Log("All high scores loaded from device.");
-	}
+    private void LoadSaveData() // loads only the active character index so that we can load a single character data instead of the whole list
+    {
+        string json = File.ReadAllText(saveFilePath); // opens and reads the save file
+        saveData = JsonUtility.FromJson<SaveData>(json); // deserializes the json data into the SaveData object
 
-	public void SaveActiveCharacter(int newSelection)
-	{
-		if (newSelection != selectedCharacter) // makes sense to overwrite and save only if selection changed
-		{
-			selectedCharacter = newSelection;
-			PlayerPrefs.SetInt(ACTIVE_CHARACTER, selectedCharacter);
-			PlayerPrefs.Save();
-			Debug.Log($"Selection saved to device character[{selectedCharacter}]: {characterList[selectedCharacter].danceStyleName}.");
-		}
-		else
-			Debug.Log("Selection unchanged, nothing saved to device.");
-	}
+        index = 0;
+        if (saveData != null && saveData.index >= 0 && saveData.index < characterList.Length)
+            index = saveData.index;
 
-	private void LoadSelectedCharacter()
-	{
-		selectedCharacter = PlayerPrefs.GetInt(ACTIVE_CHARACTER, 0);
-		Debug.Log($"Loaded previous character selection: [{selectedCharacter}]: {characterList[selectedCharacter].danceStyleName}");
-	}
+        LoadCharacter(index);
+        // Debug.Log($"Active character:  index: {index} danceStyle: {character.danceStyle} high score: {character.highScore}");
+    }
+
+
+    private void CreateSaveData() // creates a deep copy of the character list to save in memory as a json file
+    {
+        if (File.Exists(saveFilePath)) return;
+
+        saveData = new SaveData();
+        saveData.index = 0;
+        saveData.characterList = new CharacterSaveData[characterList.Length];
+
+        // Deep copy each CharacterData object
+        for (int i = 0; i < characterList.Length; i++)
+        {
+            saveData.characterList[i] = new CharacterSaveData()
+            {
+                danceStyle = characterList[i].danceStyle,
+                isUnlocked = characterList[i].isUnlocked,
+                highScore = 0
+            };
+            // Debug.Log($"Initialized save data: {i}.{characterList[i].danceStyle}");
+        }
+
+        SaveToFile();
+        Debug.Log($"[GameManager] Save file created at {saveFilePath}");
+    }
+
+
+    public void SaveCharacter()
+    {
+        if (saveData == null || character == null)
+        {
+            Debug.LogWarning("[GameManager] Cannot save: saveData or character is null");
+            return;
+        }
+
+        if (index < 0 || index >= saveData.characterList.Length)
+        {
+            Debug.LogWarning($"[GameManager] Invalid index {index} for saving");
+            return;
+        }
+
+        saveData.index = index;
+        saveData.characterList[index].highScore = character.highScore;
+        saveData.characterList[index].isUnlocked = character.isUnlocked;
+        saveData.characterList[index].danceStyle = character.danceStyle;
+
+        // Debug.Log($"[GameManager] Saved: {saveData.characterList[index].danceStyle} with score {saveData.characterList[index].highScore} ");
+        SaveToFile();
+    }
+
+
+    public void LoadCharacter(int i)
+    {
+        if (i < 0 || i >= characterList.Length) return;
+
+        index = i;
+        character = characterList[i];
+        if (saveData != null && saveData.characterList != null)
+        {
+            character.danceStyle = saveData.characterList[i].danceStyle; // not really needed but for consistency
+            character.highScore = saveData.characterList[i].highScore;
+            character.isUnlocked = saveData.characterList[i].isUnlocked;
+        }
+        // Debug.Log($"Character data loaded");
+    }
+
+    private void SaveToFile()
+    {
+        string json = JsonUtility.ToJson(saveData, true);
+        File.WriteAllText(saveFilePath, json);
+    }
+
+
+    /*
+        auto-save functions can be added  if needed
+        private void OnApplicationPause(bool pauseStatus)
+        private void OnApplicationQuit()
+    */
+
+
 }
+
+[System.Serializable]
+public class SaveData // The global data level
+{
+    public int index; // active character index
+    public CharacterSaveData[] characterList;
+}
+
+[System.Serializable]
+public class CharacterSaveData // the per-character data
+{
+    public string danceStyle;
+    public bool isUnlocked;
+    public int highScore;
+}
+

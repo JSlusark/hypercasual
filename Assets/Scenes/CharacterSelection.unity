@@ -1420,7 +1420,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: '::'
   baseSprite: {fileID: 1649866146}
-  danceStyleName: {fileID: 1437770155}
+  danceStyle: {fileID: 1437770155}
 --- !u!4 &2059621727
 Transform:
   m_ObjectHideFlags: 0

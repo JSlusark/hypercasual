@@ -4,34 +4,29 @@ using UnityEngine.SceneManagement;
 
 public class GameSessionController : MonoBehaviour
 {
+    [Header("GameSession Data")]
     public float pointGain;
     public float pointLoss;
-
-    private int completedRounds;
-    public int prevHighScore;
-    public int newHighScore;
-    public int expPoints;
-
-    [SerializeField] private SpriteRenderer character;
+    private int completedRounds = 0;
+    private CharacterData character;
+    private string message;
     public GameObject gameOverPanel;
+
+
+    [Header("UI Components")]
+    [SerializeField] private SpriteRenderer characterUI;
     [SerializeField] private ScoreBar ScoreBar;
     [SerializeField] private Timer timer;
     [SerializeField] private TextMeshProUGUI levelNumber;
     [SerializeField] private TextMeshProUGUI highScoreUI;
     [SerializeField] private TextMeshProUGUI highScoreMessageUI;
 
-    private CharacterData selectedCharacter;
-
-
-    private string message = "Try again to beat your High Score";
 
 
 
     public static GameSessionController Instance { get; private set; }
     private void Awake()
     {
-        Debug.Log($"[GameSessionController] Awake called. Current Instance: {(Instance == null ? "null" : "exists")}, This: {GetInstanceID()}");
-
         if (Instance != null)
         {
             // Debug.LogWarning($"[GameSessionController] Duplicate detected! Destroying this instance: {GetInstanceID()}");
@@ -39,17 +34,15 @@ public class GameSessionController : MonoBehaviour
             return;
         }
         Instance = this;
+        character = GameManager.Instance.Character;
+        message = "Try again to beat your High Score";
         // Debug.Log($"[GameSessionController] Instance set to: {GetInstanceID()}");
     }
 
     private void Start()
     {
-        int index = GameManager.Instance.GetCharacterIndex; // cache selected character index
-        selectedCharacter = GameManager.Instance.characterList[index];
-
-        Debug.Log($"Player selected {selectedCharacter.danceStyleName} with high score {selectedCharacter.highScore}");
-        completedRounds = 0;
-        character.sprite = GameManager.Instance.characterList[index].baseSprite;
+        // Debug.Log($"Player selected {character.danceStyle} with high score {character.highScore}");
+        characterUI.sprite = character.baseSprite;
         ScoreBar.SetStart();
     }
 
@@ -63,9 +56,13 @@ public class GameSessionController : MonoBehaviour
         }
         else if (!ScoreBar.MaxScoreReached() && timer.IsTimeup())
         {
-            GameManager.Instance.SaveCharacterScore(completedRounds, ref message);
+            if (completedRounds > character.highScore)
+            {
+                message = "New High Score Achieved!";
+                character.SetNewHighScore(completedRounds);
+            }
             highScoreMessageUI.text = message;
-            highScoreUI.text = selectedCharacter.highScore.ToString();
+            highScoreUI.text = character.highScore.ToString();
             EndLevel();
         }
     }
@@ -79,8 +76,8 @@ public class GameSessionController : MonoBehaviour
     public void EndLevel()
     {
         // Pauses the game
+        GameManager.Instance.SaveCharacter();
         Time.timeScale = 0f;
-        // Shows the Game Over screen
         gameOverPanel.SetActive(true);
     }
 

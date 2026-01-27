@@ -163,14 +163,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9c4b3233720994e6a9ae2fa56bdece5e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::LevelManager
-  levelComplete: 0
   pointGain: 40
   pointLoss: -20
-  prevHighScore: 0
-  newHighScore: 0
-  expPoints: 0
-  character: {fileID: 501958578}
   gameOverPanel: {fileID: 1561155546}
+  characterUI: {fileID: 501958578}
   ScoreBar: {fileID: 1302111546}
   timer: {fileID: 466360583}
   levelNumber: {fileID: 2058843272}

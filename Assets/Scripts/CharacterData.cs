@@ -4,8 +4,9 @@ using UnityEngine;
 public class CharacterData : ScriptableObject
 {
 	[Header("Type")]
-	public string danceStyleName; // will change all into private with getters/setters later
+	public string danceStyle; // will change all into private with getters/setters later
 	public Sprite baseSprite;
+	public bool isUnlocked;
 
 	[Header("Progress Data")]
 	public int highScore;
