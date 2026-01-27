@@ -67,12 +67,6 @@ public class GameSessionController : MonoBehaviour
         }
     }
 
-
-    public void RetryGame()
-    {
-        SceneManager.LoadScene(SceneManager.GetActiveScene().name); //automatically destroys GameSessionController instance and creates a new one
-    }
-
     public void EndLevel()
     {
         // Pauses the game
@@ -80,6 +74,26 @@ public class GameSessionController : MonoBehaviour
         Time.timeScale = 0f;
         gameOverPanel.SetActive(true);
     }
+
+    public void RetryGame()
+    {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name); //automatically destroys GameSessionController instance and creates a new one
+
+    }
+
+    public void BackToCharacterSelection()
+    {
+        Time.timeScale = 0f;
+        Debug.Log("Loading Character Selection Scene");
+        SceneManager.LoadScene("CharacterSelection");
+    }
+
+    public void ChooseAnotherCharacter()
+    {
+        Debug.Log("Loading Character Selection Scene");
+        SceneManager.LoadScene("CharacterSelection");
+    }
+
 
     public void UpdateScore(bool hasScored)
     {
