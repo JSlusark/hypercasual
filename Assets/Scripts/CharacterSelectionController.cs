@@ -1,12 +1,13 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using TMPro;
+using UnityEngine.UI;
 
 public class CharacterSelectionController : MonoBehaviour
 {
 
     [Header("UI Components")]
-    [SerializeField] private SpriteRenderer baseSprite;
+    [SerializeField] private Image baseSprite;
     [SerializeField] private TextMeshProUGUI danceStyle;
 
     [Header("Script Data")]
