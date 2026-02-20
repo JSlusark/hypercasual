@@ -678,7 +678,23 @@ PlayerSettings:
   webGLCloseOnQuit: 0
   webWasm2023: 0
   webEnableSubmoduleStrippingCompatibility: 0
-  scriptingDefineSymbols: {}
+  scriptingDefineSymbols:
+    Android: SORTIFY
+    EmbeddedLinux: SORTIFY
+    GameCoreScarlett: SORTIFY
+    GameCoreXboxOne: SORTIFY
+    Kepler: SORTIFY
+    LinuxHeadlessSimulation: SORTIFY
+    Nintendo Switch: SORTIFY
+    Nintendo Switch 2: SORTIFY
+    PS4: SORTIFY
+    PS5: SORTIFY
+    QNX: SORTIFY
+    Standalone: SORTIFY
+    VisionOS: SORTIFY
+    WebGL: SORTIFY
+    XboxOne: SORTIFY
+    tvOS: SORTIFY
   additionalCompilerArguments: {}
   platformArchitecture: {}
   scriptingBackend:
@@ -777,10 +793,10 @@ PlayerSettings:
   captureStartupLogs: {}
   activeInputHandler: 2
   windowsGamepadBackendHint: 0
-  cloudProjectId: 470b69dd-ea66-45c6-8e9f-fd0382ebefb1
+  cloudProjectId: 669e89cd-e3aa-4d67-a841-bf1bc285b92d
   framebufferDepthMemorylessMode: 0
   qualitySettingsNames: []
-  projectName: test_dance
+  projectName: DanceFluencer_Rush
   organizationId: unity_bb5464a9f64c27d3db50
   cloudEnabled: 0
   legacyClampBlendShapeWeights: 0

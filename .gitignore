@@ -44,6 +44,8 @@ Artifacts/
 *.xcuserdata/
 Assets/TextMesh Pro/
 Assets/TextMesh Pro.meta
+Assets/Sortify/
+
 
 # Asset store tools (if present)
 Assets/AssetStoreTools*
@@ -88,3 +90,5 @@ dotnet-sdk-9.0.200-linux-x64.tar.gz
 # Notes folder - where i keep personal notes for thoughts and ideas on the project
 📝 notes
 📝 notes/*
+
+Assets/Sortify.meta
