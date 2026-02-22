@@ -5,7 +5,6 @@ public class PanelManager : MonoBehaviour
 {
     public enum PanelType
     {
-        None,
         CharacterSelection,
         CharacterProfile,
         Play,
@@ -24,69 +23,65 @@ public class PanelManager : MonoBehaviour
     }
     
     public List<Panel> panelMenu; 
-    public Panel activePanel;
+    public Panel activePanel; // active panel object
     
+    public Transform uiRoot;       // root - where the instantiated panels spawn under
+    private GameObject _currentSpawnedObject;
     
     void Start()
     {
-        panelMenu.ForEach(panel => {
-            if (panel.name != activePanel.name)
-            {
-                panel.panelPrefab.SetActive(false);
-            }
-        });
-        UpdateActivePanel(activePanel); 
-    }
-    //
-    public void UpdateActivePanel(Panel selectedPanel)
-    {
-        Debug.Log($"Clicked {selectedPanel.name} ");
-            if (activePanel == null) return;
-            if (activePanel == selectedPanel) return;
-            TogglePanelView(GetPanel(activePanel.name), false); 
-            TogglePanelView(GetPanel(selectedPanel.name), true); 
-            activePanel = selectedPanel; 
-    }
-    
-    public void TogglePanelView(Panel panel, bool view)
-    {
-        panel.active = view; // need to set the old panel to inactive first
-        panel.panelPrefab.SetActive(view);
-        Debug.Log($" {panel.name} set to {view} ");
+        // panelMenu.ForEach(panel => {
+        //     if (panel.name != activePanel.name)
+        //     {
+        //         panel.panelPrefab.SetActive(false);
+        //     }
+        // });
+        TogglePanelView(GetPanel(activePanel.name), true); 
     }
     
     
-    private Panel GetPanel(PanelType panelName)
+    
+    public Panel GetPanel(PanelType panelName)
     {
         // Debug.Log($" ActivePanel{activePanel.name}  PRESSED: {panelName}");
         return panelMenu.Find(it => it.name == panelName);
     }
     
-    
-    // ________  Will create 1 script with same single function for each button, add this quickly to test now ________
-    public void OnCharacterSelectionButtonClicked()
+    public void UpdateActivePanel(Panel selectedPanel)
     {
-        UpdateActivePanel(GetPanel(PanelType.CharacterSelection));
+        Debug.Log($"Clicked: {selectedPanel.name} ");
+            if (activePanel == null || activePanel == selectedPanel) return; // unsure if leaving error message for the null so budling together
+            TogglePanelView(activePanel, false); 
+            TogglePanelView(selectedPanel, true); 
+            activePanel = selectedPanel; 
     }
     
-    public void OnCharacterProfileButtonClicked()
+    public void TogglePanelView(Panel panel, bool view)
     {
-        UpdateActivePanel(GetPanel(PanelType.CharacterProfile));
+        if (panel == null) 
+        {
+            Debug.LogError("ERROR: selected panel missing from PanelMenu!");
+            return; // Stop running the code before it crashes
+        }
+        panel.active = view; // need to set the old panel to inactive first
+        Debug.Log($" Toggle {view}: {panel.name} ");
+        // panel.panelPrefab.SetActive(view);
+        if(view)
+        {
+            _currentSpawnedObject = Instantiate(panel.panelPrefab, uiRoot, false);
+            Debug.Log($" Instantiated {_currentSpawnedObject.name} ");
+        }
+        else
+        {
+            Debug.Log($" Destroyed {_currentSpawnedObject.name} ");
+            Destroy(_currentSpawnedObject);
+        }
+        
     }
     
-    public void OnPlayButtonClicked()
+    public void OnPanelSelect(PanelType selectedPanel)
     {
-        UpdateActivePanel(GetPanel(PanelType.Play));
-    }
-    
-    public void OnShopButtonClicked()
-    {
-        UpdateActivePanel(GetPanel(PanelType.Shop));
-    }
-    
-    public void OnMissionsButtonClicked()
-    {
-        UpdateActivePanel(GetPanel(PanelType.Missions));
+        UpdateActivePanel(GetPanel(selectedPanel));
     }
     
 }

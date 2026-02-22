@@ -1,0 +1,67 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &8104295878120020789
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 8067431040220041229}
+  - component: {fileID: 828231437449728627}
+  m_Layer: 0
+  m_Name: Manager - Screen View
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &8067431040220041229
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8104295878120020789}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 551.1963, y: 850.5217, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &828231437449728627
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8104295878120020789}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 653ce85d5439541548fb559e1b66e50b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: '::'
+  panelMenu:
+  - name: 1
+    panelPrefab: {fileID: 6130686738583029684, guid: d014a27b7099a4629b5cf77de41b2e3a, type: 3}
+    active: 0
+  - name: 2
+    panelPrefab: {fileID: 6074145392535919208, guid: fe609bcd0e5e74ea1bfdc1338eccb1cd, type: 3}
+    active: 0
+  - name: 3
+    panelPrefab: {fileID: 1182286508185499827, guid: 523c9424686ea437da12ea06287ae2cf, type: 3}
+    active: 1
+  - name: 4
+    panelPrefab: {fileID: 3421947045569048292, guid: 7a8aec0c900054554a0cdfca79fa63da, type: 3}
+    active: 0
+  - name: 5
+    panelPrefab: {fileID: 5434252630276768537, guid: ca63ccd4c91e34f31a3628821e5fb08c, type: 3}
+    active: 0
+  activePanel:
+    name: 3
+    panelPrefab: {fileID: 1182286508185499827, guid: 523c9424686ea437da12ea06287ae2cf, type: 3}
+    active: 1
+  uiRoot: {fileID: 0}
