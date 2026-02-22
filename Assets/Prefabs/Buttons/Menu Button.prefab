@@ -361,5 +361,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::ScreenToggleButton
   panelManager: {fileID: 828231437449728627, guid: 676dc1d3cf34b457086ca0f11542802e, type: 3}
   targetPanel: 0
-  inactiveButton: {fileID: -982550404757437972, guid: 7f9865cf6ac20f7468e13d5a5daff8ef, type: 3}
-  activeButton: {fileID: 7613800822721531735, guid: 7f9865cf6ac20f7468e13d5a5daff8ef, type: 3}
+  defaultSprite: {fileID: -982550404757437972, guid: 7f9865cf6ac20f7468e13d5a5daff8ef, type: 3}
+  selectedSprite: {fileID: 7613800822721531735, guid: 7f9865cf6ac20f7468e13d5a5daff8ef, type: 3}

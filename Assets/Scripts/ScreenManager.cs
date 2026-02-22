@@ -1,5 +1,6 @@
 using UnityEngine;
 using System.Collections.Generic;
+using System; // used for event Action delegate
 
 public class PanelManager : MonoBehaviour
 {
@@ -11,8 +12,6 @@ public class PanelManager : MonoBehaviour
         Shop,
         Missions
     }
-    
-    
     
     [System.Serializable]
     public class Panel {
@@ -26,62 +25,56 @@ public class PanelManager : MonoBehaviour
     public Panel activePanel; // active panel object
     
     public Transform uiRoot;       // root - where the instantiated panels spawn under
-    private GameObject _currentSpawnedObject;
+    private GameObject _currentPanelInstance;
+    
+    public event Action<Panel> OnPanelChanged;
     
     void Start()
     {
-        // panelMenu.ForEach(panel => {
-        //     if (panel.name != activePanel.name)
-        //     {
-        //         panel.panelPrefab.SetActive(false);
-        //     }
-        // });
-        TogglePanelView(GetPanel(activePanel.name), true); 
+        ChangePanelVisibility(GetPanelByType(activePanel.name), true); 
+    }
+    
+    public void OnPanelSelect(PanelType targetPanel)
+    {
+        SetNewPanelView(GetPanelByType(targetPanel));
+        OnPanelChanged?.Invoke(activePanel); // sends out panel change alert to all listeners (buttons) for OnPanelChanged
+    }
+    
+    public void SetNewPanelView(Panel targetPanel)
+    {
+        if (activePanel == null || activePanel == targetPanel) return; // unsure if leaving error message for the null so budling together
+        ChangePanelVisibility(activePanel, false); 
+        ChangePanelVisibility(targetPanel, true); 
+        activePanel = targetPanel; 
     }
     
     
+    public void ChangePanelVisibility(Panel panel, bool view)
+    {
+        if (panel == null) 
+        {
+            return; // Stop running the code before it crashes
+        }
+        panel.active = view; // need to set the old panel to inactive first
+        if(view)
+        {
+            _currentPanelInstance = Instantiate(panel.panelPrefab, uiRoot, false);
+            // Debug.Log($" Instantiated {_currentPanelInstance.name} ");
+        }
+        else
+        {
+            // Debug.Log($" Destroyed {_currentPanelInstance.name} ");
+            Destroy(_currentPanelInstance);
+        }
+    }
     
-    public Panel GetPanel(PanelType panelName)
+    public Panel GetPanelByType(PanelType panelName)
     {
         // Debug.Log($" ActivePanel{activePanel.name}  PRESSED: {panelName}");
         return panelMenu.Find(it => it.name == panelName);
     }
     
-    public void UpdateActivePanel(Panel selectedPanel)
-    {
-        Debug.Log($"Clicked: {selectedPanel.name} ");
-            if (activePanel == null || activePanel == selectedPanel) return; // unsure if leaving error message for the null so budling together
-            TogglePanelView(activePanel, false); 
-            TogglePanelView(selectedPanel, true); 
-            activePanel = selectedPanel; 
-    }
-    
-    public void TogglePanelView(Panel panel, bool view)
-    {
-        if (panel == null) 
-        {
-            Debug.LogError("ERROR: selected panel missing from PanelMenu!");
-            return; // Stop running the code before it crashes
-        }
-        panel.active = view; // need to set the old panel to inactive first
-        Debug.Log($" Toggle {view}: {panel.name} ");
-        // panel.panelPrefab.SetActive(view);
-        if(view)
-        {
-            _currentSpawnedObject = Instantiate(panel.panelPrefab, uiRoot, false);
-            Debug.Log($" Instantiated {_currentSpawnedObject.name} ");
-        }
-        else
-        {
-            Debug.Log($" Destroyed {_currentSpawnedObject.name} ");
-            Destroy(_currentSpawnedObject);
-        }
         
-    }
     
-    public void OnPanelSelect(PanelType selectedPanel)
-    {
-        UpdateActivePanel(GetPanel(selectedPanel));
-    }
     
 }
