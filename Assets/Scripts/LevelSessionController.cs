@@ -1,8 +1,9 @@
 using UnityEngine;
 using TMPro;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
-public class GameSessionController : MonoBehaviour
+public class LevelSessionController : MonoBehaviour
 {
     [Header("GameSession Data")]
     public float pointGain;
@@ -14,7 +15,8 @@ public class GameSessionController : MonoBehaviour
 
 
     [Header("UI Components")]
-    [SerializeField] private SpriteRenderer characterUI;
+    // [SerializeField] private SpriteRenderer characterUI;
+    [SerializeField] private Image  characterUI;
     [SerializeField] private ScoreBar ScoreBar;
     [SerializeField] private Timer timer;
     [SerializeField] private TextMeshProUGUI levelNumber;
@@ -24,19 +26,19 @@ public class GameSessionController : MonoBehaviour
 
 
 
-    public static GameSessionController Instance { get; private set; }
+    public static LevelSessionController Instance { get; private set; }
     private void Awake()
     {
         if (Instance != null)
         {
-            // Debug.LogWarning($"[GameSessionController] Duplicate detected! Destroying this instance: {GetInstanceID()}");
+            // Debug.LogWarning($"[LevelSessionController] Duplicate detected! Destroying this instance: {GetInstanceID()}");
             Destroy(gameObject);
             return;
         }
         Instance = this;
         character = GameManager.Instance.Character;
         message = "Try again to beat your High Score";
-        // Debug.Log($"[GameSessionController] Instance set to: {GetInstanceID()}");
+        // Debug.Log($"[LevelSessionController] Instance set to: {GetInstanceID()}");
     }
 
     private void Start()
@@ -70,14 +72,14 @@ public class GameSessionController : MonoBehaviour
     public void EndLevel()
     {
         // Pauses the game
-        GameManager.Instance.SaveCharacter();
+        // GameManager.Instance.SaveCharacter();
         Time.timeScale = 0f;
         gameOverPanel.SetActive(true);
     }
 
     public void RetryGame()
     {
-        SceneManager.LoadScene(SceneManager.GetActiveScene().name); //automatically destroys GameSessionController instance and creates a new one
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name); //automatically destroys LevelSessionController instance and creates a new one
 
     }
 

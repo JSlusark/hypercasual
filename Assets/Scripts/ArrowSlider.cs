@@ -20,14 +20,23 @@ public class ArrowSlider : MonoBehaviour
 {
     // imported components that will interact with this script
     public GameObject arrowPrefab;
-    public float arrowPrefab_spacing = 1.2f;
+    public float arrowPrefab_spacing;
 
+    private PlayerInput playerInput;
+    private InputAction danceMoveAction;
 
     private List<GameObject> arrowPrefabSequence = new();
     public int sequenceSize = 5;
-    public Vector3 sequencePosition = new Vector3(-1f, 1.26f, -0.4f);
+    public Vector3 sequencePosition;
     private ArrowCreate firstPrefabArrow;
 
+    
+    private void Awake()
+    {
+        playerInput = GetComponent<PlayerInput>();
+        danceMoveAction = playerInput.actions["DanceMove"];
+        danceMoveAction.performed += OnDanceMove;
+    }
 
     void Start()
     {
@@ -40,12 +49,7 @@ public class ArrowSlider : MonoBehaviour
         getFirstInSequence();
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-
-    }
-
+  
 
     public void getFirstInSequence()
     {
@@ -63,6 +67,11 @@ public class ArrowSlider : MonoBehaviour
     }
 
 
+    private void OnDestroy()
+    {
+        if (danceMoveAction != null)
+            danceMoveAction.performed -= OnDanceMove;
+    }
 
     private void ContinueArrowSequence()
     {
@@ -112,28 +121,19 @@ public class ArrowSlider : MonoBehaviour
     {
         return sequencePosition + new Vector3(index * arrowPrefab_spacing, 0f, 0f);
     }
+    
 
-
-
-    public void OnDanceMove(InputAction.CallbackContext context)
+    private void OnDanceMove(InputAction.CallbackContext context)
     {
-        // Debug.Log("Input received: " + context.control.name);
-        if (context.performed)
-        {
-            // if (firstPrefabArrow == null) // debugging null reference
-            // {
-            //     Debug.LogWarning("firstPrefabArrow is null (missing ArrowCreate on the first prefab?)");
-            //     return;
-            // }
-            bool hasScored = false;
-            if (context.control.name == firstPrefabArrow.direction.ToString())
-            {
-                hasScored = true;
-                RemoveArrow();
-                ContinueArrowSequence();
-            }
+        bool hasScored = false;
 
-            GameSessionController.Instance.UpdateScore(hasScored);
+        if (context.control.name == firstPrefabArrow.direction.ToString())
+        {
+            hasScored = true;
+            RemoveArrow();
+            ContinueArrowSequence();
         }
+
+        LevelSessionController.Instance.UpdateScore(hasScored);
     }
 }

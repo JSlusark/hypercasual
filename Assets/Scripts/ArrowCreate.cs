@@ -5,6 +5,7 @@ using UnityEngine.InputSystem;
 public class ArrowCreate : MonoBehaviour
 {
     // private bool isMatching = false;
+    [SerializeField] private Transform arrowSymbol;
     public float Width = 1f;
     public float Height = 1f;
 
@@ -32,17 +33,10 @@ public class ArrowCreate : MonoBehaviour
     void Start()
     {
         direction = (Direction)Random.Range(0, 4);
-        transform.rotation = Quaternion.Euler(0f, 0f, ArrowType[direction]);
+        arrowSymbol.localRotation = Quaternion.Euler(0f, 0f, ArrowType[direction]);
         // Debug.Log($"Arrow direction:[{direction}] angle:{ArrowType[direction]}");
 
     }
-
-    // Update is called once per frame
-    void Update()
-    {
-
-    }
-
 
 
 }
