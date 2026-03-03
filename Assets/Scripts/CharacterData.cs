@@ -3,11 +3,15 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "NewCharacter", menuName = "DancerGame/CharacterData")]
 public class CharacterData : ScriptableObject
 {
-	[Header("Type")]
+	[Header("Character Info")]
+	public string dancerName;
 	public string danceStyle; // will change all into private with getters/setters later
 	public Sprite baseSprite;
+	
+	[Header("Character State")]
 	public bool isUnlocked;
-
+	public float costToUnlock;
+	
 	[Header("Progress Data")]
 	public int highScore;
 

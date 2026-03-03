@@ -9,6 +9,8 @@ public class CharacterSelectionController : MonoBehaviour
     [Header("UI Components")]
     [SerializeField] private Image baseSprite;
     [SerializeField] private TextMeshProUGUI danceStyle;
+    [SerializeField] private TextMeshProUGUI dancerName;
+    [SerializeField] private TextMeshProUGUI dancerPrice;
 
     [Header("Script Data")]
     private int listLength;
@@ -47,7 +49,22 @@ public class CharacterSelectionController : MonoBehaviour
     {
         CharacterData character = GameManager.Instance.CharacterList[index];
         baseSprite.sprite = character.baseSprite;
-        danceStyle.text = character.danceStyle;
+        
+        if(!character.isUnlocked)
+        {
+            baseSprite.color = new Color(0f, 0f, 0f, 0.5f); // 50% alpha
+            dancerPrice.text = $"{character.costToUnlock} $";
+            dancerName.text = "???";
+            danceStyle.text = "Unknown";
+            
+        }
+        else
+        { 
+            baseSprite.color = Color.white;
+            dancerPrice.text = "Select";
+            danceStyle.text = character.danceStyle;
+            dancerName.text = character.dancerName;
+        }
         Debug.Log($"Switched to Character: {character.danceStyle}  | Index: {index} | High Score: {character.highScore}");
     }
 }

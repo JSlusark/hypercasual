@@ -24,7 +24,7 @@ public class PanelManager : MonoBehaviour
     public List<Panel> panelMenu; 
     public Panel activePanel; // active panel object
     
-    public Transform uiRoot;       // root - where the instantiated panels spawn under
+    // public Transform uiRoot;       // root - where the instantiated panels spawn under
     private GameObject _currentPanelInstance;
     
     public event Action<Panel> OnPanelChanged;
@@ -58,7 +58,7 @@ public class PanelManager : MonoBehaviour
         panel.active = view; // need to set the old panel to inactive first
         if(view)
         {
-            _currentPanelInstance = Instantiate(panel.panelPrefab, uiRoot, false);
+            _currentPanelInstance = Instantiate(panel.panelPrefab);
             // Debug.Log($" Instantiated {_currentPanelInstance.name} ");
         }
         else

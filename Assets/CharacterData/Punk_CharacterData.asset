@@ -12,7 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d7a5cd12a431b42529ae81a1f108a8f0, type: 3}
   m_Name: Punk_CharacterData
   m_EditorClassIdentifier: Assembly-CSharp::CharacterData
-  danceStyle: Moshing
+  dancerName: Moxi Riot
+  danceStyle: Moshpit
   baseSprite: {fileID: 21300000, guid: 8aebb05a2e15d44c581c8f351334fd42, type: 3}
   isUnlocked: 1
-  highScore: 7
+  costToUnlock: 800
+  highScore: 0
