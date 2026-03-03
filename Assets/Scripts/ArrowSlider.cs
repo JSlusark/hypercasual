@@ -134,6 +134,6 @@ public class ArrowSlider : MonoBehaviour
             ContinueArrowSequence();
         }
 
-        LevelSessionController.Instance.UpdateScore(hasScored);
+        PlaySessionController.Instance.OnCommandTrigger(hasScored);
     }
 }
