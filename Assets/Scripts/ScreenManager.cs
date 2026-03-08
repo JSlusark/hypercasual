@@ -32,6 +32,7 @@ public class PanelManager : MonoBehaviour
     void Start()
     {
         ChangePanelVisibility(GetPanelByType(activePanel.name), true); 
+        OnPanelChanged?.Invoke(activePanel);
     }
     
     public void OnPanelSelect(PanelType targetPanel)
