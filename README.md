@@ -58,7 +58,7 @@ Follow these steps to open and play the current build in the Unity Editor.
 5. Double-click on `Game` to load it.
 6. Press the `Play` button at the top of the Unity Editor to test the game. 
 
-> When you first open the project, Unity may default to the PC/Standalone platform. To run this correctly, please go to `File > Build Settings`, select Android under the Platforms list, and click `Switch Platform` to be able to play the game in it's intended size and orientation.
+> When you first open the project, text may be invisible and Unity may default to the PC platform. <br/> To run this correctly, please go to `Window` > `TextMeshPro` > `Import TMP Essential Resources`, then go to `File` > `Build Settings`, select `Android`, and click `Switch Platform` to play the game with its intended text, size, and orientation.
 
 **Controls in Editor:**
 - Use the mouse to navigate menus and select characters.
