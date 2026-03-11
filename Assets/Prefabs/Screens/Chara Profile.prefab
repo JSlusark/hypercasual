@@ -151,10 +151,11 @@ GameObject:
   - component: {fileID: 3430599059993972273}
   - component: {fileID: 5790140836845803781}
   - component: {fileID: 1889643684027127937}
+  - component: {fileID: 5227281601271874555}
   m_Layer: 5
   m_Name: Chara Profile
   m_TagString: Untagged
-  m_Icon: {fileID: 7250588514170254948, guid: 0000000000000000d000000000000000, type: 0}
+  m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
@@ -279,3 +280,22 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!114 &5227281601271874555
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8339082342934915379}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: eee71b90219f4c6fb8779aa2c115a6a4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::CharacterProfileScreenController
+  panel:
+    name: 1
+    assignedlayer: 0
+    panelPrefab: {fileID: 8339082342934915379}
+    controller: {fileID: 5227281601271874555}
+    active: 0
+  panelPrefab: {fileID: 8339082342934915379}

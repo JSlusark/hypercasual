@@ -4,33 +4,29 @@ using UnityEngine.UI;
 
 public class ScreenUpdateButtonState : MonoBehaviour
 {
-    [SerializeField] private PanelManager panelManager;
-    [SerializeField] private PanelManager.PanelType targetPanel;
+    [SerializeField] private ScreenManager panelManager; // import reference to panel manager to use event signal for panel changes
+    [SerializeField] private ScreenManager.PanelName targetPanel;
     [SerializeField] private Sprite defaultSprite;
     [SerializeField] private Sprite selectedSprite;
 
 
-    private void Start()
+    private void Awake()
     {
-        Debug.Log($"Button started {targetPanel}");
-        panelManager.OnPanelChanged += UpdateButtonState; // subscribes to panel change event from panel manager
+        panelManager.OnPanelChanged += UpdateButtonState; // assigns the UpdateButtonState method to listen for onPanelChanged event
     }
 
     private void OnDestroy()
     {
         panelManager.OnPanelChanged -= UpdateButtonState; // unsubscribes from panel change event to prevent memory leaks
     }
-
-    // private void UpdateButtonState(PanelManager.Panel activePanel)
-    // {
-    //     UpdateButtonState(); // delegate method to match the event signature, calls the original logic to update the button's appearance
-    // }
     
-    private void UpdateButtonState(PanelManager.Panel activePanel)
+    
+    private void UpdateButtonState(ScreenManager.Panel activePanel)
     {
         // Debug.Log($"Panel manager activated: {panelManager.activePanel.name }, button's target panel: {targetPanel}");
         if (activePanel.name == targetPanel)
         {
+            Debug.Log($"[BUTTON HIGHLIGHT] {targetPanel}");
             GetComponent<Image>().sprite = selectedSprite;
             transform.localScale = new Vector3(1f, 1.15f, 1f);
         }

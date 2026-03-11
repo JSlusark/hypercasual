@@ -160,10 +160,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 7827192}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4ade1817d1e294285842fd5520a425d4, type: 3}
+  m_Script: {fileID: 11500000, guid: 9b69ddace89214984b55ddc7f8bb26ac, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayScreenManager
-  lowerBar: {fileID: 301669711}
+  panelManager: {fileID: 1306289431}
+  targetPanel: 0
+  defaultSprite: {fileID: -982550404757437972, guid: 7f9865cf6ac20f7468e13d5a5daff8ef, type: 3}
+  selectedSprite: {fileID: 7613800822721531735, guid: 7f9865cf6ac20f7468e13d5a5daff8ef, type: 3}
 --- !u!1 &36152227
 GameObject:
   m_ObjectHideFlags: 0
@@ -196,6 +199,37 @@ Transform:
   - {fileID: 1171901153}
   - {fileID: 1435040163}
   - {fileID: 7827193}
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &67947481
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 67947482}
+  m_Layer: 0
+  m_Name: Controllers
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &67947482
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 67947481}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 543.8401, y: 951.1625, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &72991879
@@ -334,7 +368,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4233027373717122907, guid: 9a767b28e51d243ce824a674ef7f8f1e, type: 3}
       propertyPath: targetPanel
-      value: 4
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 4233027373717122907, guid: 9a767b28e51d243ce824a674ef7f8f1e, type: 3}
       propertyPath: panelManager
@@ -838,7 +872,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4233027373717122907, guid: 9a767b28e51d243ce824a674ef7f8f1e, type: 3}
       propertyPath: targetPanel
-      value: 3
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 4233027373717122907, guid: 9a767b28e51d243ce824a674ef7f8f1e, type: 3}
       propertyPath: panelManager
@@ -1687,6 +1721,18 @@ PrefabInstance:
       value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 828231437449728627, guid: 676dc1d3cf34b457086ca0f11542802e, type: 3}
+      propertyPath: currentPanel.name
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 828231437449728627, guid: 676dc1d3cf34b457086ca0f11542802e, type: 3}
+      propertyPath: panelMenu.Array.size
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 828231437449728627, guid: 676dc1d3cf34b457086ca0f11542802e, type: 3}
+      propertyPath: activePanel.controller
+      value: 
+      objectReference: {fileID: 6400589469014205744, guid: 523c9424686ea437da12ea06287ae2cf, type: 3}
+    - target: {fileID: 828231437449728627, guid: 676dc1d3cf34b457086ca0f11542802e, type: 3}
       propertyPath: activePanel.panelPrefab
       value: 
       objectReference: {fileID: 8339082342934915379, guid: 523c9424686ea437da12ea06287ae2cf, type: 3}
@@ -1711,6 +1757,46 @@ PrefabInstance:
       value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 828231437449728627, guid: 676dc1d3cf34b457086ca0f11542802e, type: 3}
+      propertyPath: panelMenu.Array.data[5].name
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 828231437449728627, guid: 676dc1d3cf34b457086ca0f11542802e, type: 3}
+      propertyPath: panelMenu.Array.data[6].name
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 828231437449728627, guid: 676dc1d3cf34b457086ca0f11542802e, type: 3}
+      propertyPath: panelMenu.Array.data[7].name
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 828231437449728627, guid: 676dc1d3cf34b457086ca0f11542802e, type: 3}
+      propertyPath: panelMenu.Array.data[3].layer
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 828231437449728627, guid: 676dc1d3cf34b457086ca0f11542802e, type: 3}
+      propertyPath: panelMenu.Array.data[4].layer
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 828231437449728627, guid: 676dc1d3cf34b457086ca0f11542802e, type: 3}
+      propertyPath: panelMenu.Array.data[0].controller
+      value: 
+      objectReference: {fileID: 242164115469228998, guid: e860aba2c086b4427b50980dbe4de051, type: 3}
+    - target: {fileID: 828231437449728627, guid: 676dc1d3cf34b457086ca0f11542802e, type: 3}
+      propertyPath: panelMenu.Array.data[1].controller
+      value: 
+      objectReference: {fileID: 5227281601271874555, guid: fe609bcd0e5e74ea1bfdc1338eccb1cd, type: 3}
+    - target: {fileID: 828231437449728627, guid: 676dc1d3cf34b457086ca0f11542802e, type: 3}
+      propertyPath: panelMenu.Array.data[2].controller
+      value: 
+      objectReference: {fileID: 6400589469014205744, guid: 523c9424686ea437da12ea06287ae2cf, type: 3}
+    - target: {fileID: 828231437449728627, guid: 676dc1d3cf34b457086ca0f11542802e, type: 3}
+      propertyPath: panelMenu.Array.data[5].controller
+      value: 
+      objectReference: {fileID: 160859428686029297, guid: 7a8aec0c900054554a0cdfca79fa63da, type: 3}
+    - target: {fileID: 828231437449728627, guid: 676dc1d3cf34b457086ca0f11542802e, type: 3}
+      propertyPath: panelMenu.Array.data[6].controller
+      value: 
+      objectReference: {fileID: 4413635289437747324, guid: ca63ccd4c91e34f31a3628821e5fb08c, type: 3}
+    - target: {fileID: 828231437449728627, guid: 676dc1d3cf34b457086ca0f11542802e, type: 3}
       propertyPath: panelMenu.Array.data[0].panelPrefab
       value: 
       objectReference: {fileID: 8339082342934915379, guid: e860aba2c086b4427b50980dbe4de051, type: 3}
@@ -1725,11 +1811,35 @@ PrefabInstance:
     - target: {fileID: 828231437449728627, guid: 676dc1d3cf34b457086ca0f11542802e, type: 3}
       propertyPath: panelMenu.Array.data[3].panelPrefab
       value: 
-      objectReference: {fileID: 8339082342934915379, guid: 7a8aec0c900054554a0cdfca79fa63da, type: 3}
+      objectReference: {fileID: 7468435406557708552, guid: 41aa8d2728cb74a9092750918859e773, type: 3}
     - target: {fileID: 828231437449728627, guid: 676dc1d3cf34b457086ca0f11542802e, type: 3}
       propertyPath: panelMenu.Array.data[4].panelPrefab
       value: 
+      objectReference: {fileID: 1001144755556303198, guid: e358fbcb8bb8d4871b125df9a0a41b70, type: 3}
+    - target: {fileID: 828231437449728627, guid: 676dc1d3cf34b457086ca0f11542802e, type: 3}
+      propertyPath: panelMenu.Array.data[5].panelPrefab
+      value: 
+      objectReference: {fileID: 8339082342934915379, guid: 7a8aec0c900054554a0cdfca79fa63da, type: 3}
+    - target: {fileID: 828231437449728627, guid: 676dc1d3cf34b457086ca0f11542802e, type: 3}
+      propertyPath: panelMenu.Array.data[6].panelPrefab
+      value: 
       objectReference: {fileID: 8339082342934915379, guid: ca63ccd4c91e34f31a3628821e5fb08c, type: 3}
+    - target: {fileID: 828231437449728627, guid: 676dc1d3cf34b457086ca0f11542802e, type: 3}
+      propertyPath: panelMenu.Array.data[7].panelPrefab
+      value: 
+      objectReference: {fileID: 8339082342934915379, guid: ca63ccd4c91e34f31a3628821e5fb08c, type: 3}
+    - target: {fileID: 828231437449728627, guid: 676dc1d3cf34b457086ca0f11542802e, type: 3}
+      propertyPath: panelMenu.Array.data[2].assignedlayer
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 828231437449728627, guid: 676dc1d3cf34b457086ca0f11542802e, type: 3}
+      propertyPath: panelMenu.Array.data[3].assignedlayer
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 828231437449728627, guid: 676dc1d3cf34b457086ca0f11542802e, type: 3}
+      propertyPath: panelMenu.Array.data[4].assignedlayer
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 8067431040220041229, guid: 676dc1d3cf34b457086ca0f11542802e, type: 3}
       propertyPath: m_LocalPosition.x
       value: 7.356201
@@ -1787,3 +1897,4 @@ SceneRoots:
   - {fileID: 745699892}
   - {fileID: 36152228}
   - {fileID: 943131162}
+  - {fileID: 67947482}

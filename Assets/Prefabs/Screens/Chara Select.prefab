@@ -1362,6 +1362,7 @@ GameObject:
   - component: {fileID: 3430599059993972273}
   - component: {fileID: 3229739463475492440}
   - component: {fileID: 276904806544178876}
+  - component: {fileID: 242164115469228998}
   m_Layer: 5
   m_Name: Chara Select
   m_TagString: Untagged
@@ -1495,6 +1496,25 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!114 &242164115469228998
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8339082342934915379}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 71c967d3b72c4186b75d2654dbbc057f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::CharacterSelectionScreenController
+  panel:
+    name: 0
+    assignedlayer: 0
+    panelPrefab: {fileID: 8339082342934915379}
+    controller: {fileID: 242164115469228998}
+    active: 0
+  panelPrefab: {fileID: 8339082342934915379}
 --- !u!1 &8418344835865458935
 GameObject:
   m_ObjectHideFlags: 0

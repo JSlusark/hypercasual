@@ -151,10 +151,11 @@ GameObject:
   - component: {fileID: 3430599059993972273}
   - component: {fileID: 3673069995183914208}
   - component: {fileID: 7211395216207674978}
+  - component: {fileID: 160859428686029297}
   m_Layer: 5
   m_Name: Shop
   m_TagString: Untagged
-  m_Icon: {fileID: 7250588514170254948, guid: 0000000000000000d000000000000000, type: 0}
+  m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
@@ -279,3 +280,22 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!114 &160859428686029297
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8339082342934915379}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e56e05cba8854e7a9e1930ac3c0e847c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ShopScreenScreenController
+  panel:
+    name: 5
+    assignedlayer: 0
+    panelPrefab: {fileID: 8339082342934915379}
+    controller: {fileID: 160859428686029297}
+    active: 0
+  panelPrefab: {fileID: 8339082342934915379}
