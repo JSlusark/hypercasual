@@ -130,7 +130,7 @@ GameObject:
   - component: {fileID: 7827193}
   - component: {fileID: 7827194}
   m_Layer: 0
-  m_Name: Manager - Menu Bars
+  m_Name: MenuBar Manager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -160,13 +160,15 @@ MonoBehaviour:
   m_GameObject: {fileID: 7827192}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9b69ddace89214984b55ddc7f8bb26ac, type: 3}
+  m_Script: {fileID: 11500000, guid: 15f2bec077684476fb514cc1fbfd31c3, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::PlayScreenManager
-  panelManager: {fileID: 1306289431}
-  targetPanel: 0
-  defaultSprite: {fileID: -982550404757437972, guid: 7f9865cf6ac20f7468e13d5a5daff8ef, type: 3}
-  selectedSprite: {fileID: 7613800822721531735, guid: 7f9865cf6ac20f7468e13d5a5daff8ef, type: 3}
+  m_EditorClassIdentifier: '::'
+  buttons:
+  - {fileID: 1621343329}
+  - {fileID: 286598764}
+  - {fileID: 2050420519}
+  - {fileID: 731102466}
+  - {fileID: 1924058031}
 --- !u!1 &36152227
 GameObject:
   m_ObjectHideFlags: 0
@@ -177,7 +179,7 @@ GameObject:
   m_Component:
   - component: {fileID: 36152228}
   m_Layer: 0
-  m_Name: Managers
+  m_Name: _Managers
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -196,40 +198,8 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 1171901153}
-  - {fileID: 1435040163}
   - {fileID: 7827193}
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &67947481
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 67947482}
-  m_Layer: 0
-  m_Name: Controllers
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &67947482
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 67947481}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 543.8401, y: 951.1625, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
+  - {fileID: 1435040163}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &72991879
@@ -249,11 +219,19 @@ PrefabInstance:
       value: Play
       objectReference: {fileID: 0}
     - target: {fileID: 4233027373717122907, guid: 9a767b28e51d243ce824a674ef7f8f1e, type: 3}
+      propertyPath: screenName
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 4233027373717122907, guid: 9a767b28e51d243ce824a674ef7f8f1e, type: 3}
       propertyPath: targetPanel
       value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 4233027373717122907, guid: 9a767b28e51d243ce824a674ef7f8f1e, type: 3}
       propertyPath: panelManager
+      value: 
+      objectReference: {fileID: 1306289431}
+    - target: {fileID: 4233027373717122907, guid: 9a767b28e51d243ce824a674ef7f8f1e, type: 3}
+      propertyPath: screenManager
       value: 
       objectReference: {fileID: 1306289431}
     - target: {fileID: 4549464571286722458, guid: 9a767b28e51d243ce824a674ef7f8f1e, type: 3}
@@ -350,6 +328,17 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 4549464571286722458, guid: 9a767b28e51d243ce824a674ef7f8f1e, type: 3}
   m_PrefabInstance: {fileID: 1039242155}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &286598764 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 4233027373717122907, guid: 9a767b28e51d243ce824a674ef7f8f1e, type: 3}
+  m_PrefabInstance: {fileID: 1039242155}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9b69ddace89214984b55ddc7f8bb26ac, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ScreenToggleButton
 --- !u!1001 &287187516
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -367,11 +356,19 @@ PrefabInstance:
       value: Missions
       objectReference: {fileID: 0}
     - target: {fileID: 4233027373717122907, guid: 9a767b28e51d243ce824a674ef7f8f1e, type: 3}
+      propertyPath: screenName
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 4233027373717122907, guid: 9a767b28e51d243ce824a674ef7f8f1e, type: 3}
       propertyPath: targetPanel
       value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 4233027373717122907, guid: 9a767b28e51d243ce824a674ef7f8f1e, type: 3}
       propertyPath: panelManager
+      value: 
+      objectReference: {fileID: 1306289431}
+    - target: {fileID: 4233027373717122907, guid: 9a767b28e51d243ce824a674ef7f8f1e, type: 3}
+      propertyPath: screenManager
       value: 
       objectReference: {fileID: 1306289431}
     - target: {fileID: 4549464571286722458, guid: 9a767b28e51d243ce824a674ef7f8f1e, type: 3}
@@ -717,6 +714,57 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 457207219}
   m_CullTransparentMesh: 1
+--- !u!1 &556650424
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 556650425}
+  - component: {fileID: 556650426}
+  m_Layer: 0
+  m_Name: MissionsScreenController
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &556650425
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 556650424}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1371539694}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &556650426
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 556650424}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5c821b44be5f461ca4fcddb417c9ac2a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::MissionsScreenController
+  panel:
+    name: 0
+    assignedlayer: 0
+    screenPrefab: {fileID: 0}
+    controller: {fileID: 0}
+    active: 0
+  Instance: {fileID: 0}
 --- !u!1 &572462494
 GameObject:
   m_ObjectHideFlags: 0
@@ -871,11 +919,19 @@ PrefabInstance:
       value: Shop
       objectReference: {fileID: 0}
     - target: {fileID: 4233027373717122907, guid: 9a767b28e51d243ce824a674ef7f8f1e, type: 3}
+      propertyPath: screenName
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 4233027373717122907, guid: 9a767b28e51d243ce824a674ef7f8f1e, type: 3}
       propertyPath: targetPanel
       value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 4233027373717122907, guid: 9a767b28e51d243ce824a674ef7f8f1e, type: 3}
       propertyPath: panelManager
+      value: 
+      objectReference: {fileID: 1306289431}
+    - target: {fileID: 4233027373717122907, guid: 9a767b28e51d243ce824a674ef7f8f1e, type: 3}
+      propertyPath: screenManager
       value: 
       objectReference: {fileID: 1306289431}
     - target: {fileID: 4549464571286722458, guid: 9a767b28e51d243ce824a674ef7f8f1e, type: 3}
@@ -967,11 +1023,73 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9a767b28e51d243ce824a674ef7f8f1e, type: 3}
+--- !u!1 &650378978
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 650378979}
+  - component: {fileID: 650378980}
+  m_Layer: 0
+  m_Name: PlayScreenController
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &650378979
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 650378978}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0.000061035156, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1371539694}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &650378980
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 650378978}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6be685d2dffd442a81f6c010e28829d1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PlayScreenController
+  panel:
+    name: 0
+    assignedlayer: 0
+    screenPrefab: {fileID: 0}
+    controller: {fileID: 0}
+    active: 0
+  Instance: {fileID: 0}
 --- !u!224 &731102465 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 4549464571286722458, guid: 9a767b28e51d243ce824a674ef7f8f1e, type: 3}
   m_PrefabInstance: {fileID: 625879056}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &731102466 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 4233027373717122907, guid: 9a767b28e51d243ce824a674ef7f8f1e, type: 3}
+  m_PrefabInstance: {fileID: 625879056}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9b69ddace89214984b55ddc7f8bb26ac, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ScreenToggleButton
 --- !u!1 &745699889
 GameObject:
   m_ObjectHideFlags: 0
@@ -1051,6 +1169,108 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &852393546
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 852393547}
+  - component: {fileID: 852393548}
+  m_Layer: 0
+  m_Name: ShopScreenController
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &852393547
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 852393546}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1371539694}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &852393548
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 852393546}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e56e05cba8854e7a9e1930ac3c0e847c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ShopScreenController
+  panel:
+    name: 0
+    assignedlayer: 0
+    screenPrefab: {fileID: 0}
+    controller: {fileID: 0}
+    active: 0
+  Instance: {fileID: 0}
+--- !u!1 &940199138
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 940199139}
+  - component: {fileID: 940199140}
+  m_Layer: 0
+  m_Name: CharcterSelectionScreenController
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &940199139
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 940199138}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1371539694}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &940199140
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 940199138}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 71c967d3b72c4186b75d2654dbbc057f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::CharacterSelectionScreenController
+  panel:
+    name: 0
+    assignedlayer: 0
+    screenPrefab: {fileID: 0}
+    controller: {fileID: 0}
+    active: 0
+  Instance: {fileID: 0}
 --- !u!1 &943131158
 GameObject:
   m_ObjectHideFlags: 0
@@ -1171,11 +1391,19 @@ PrefabInstance:
       value: Profile
       objectReference: {fileID: 0}
     - target: {fileID: 4233027373717122907, guid: 9a767b28e51d243ce824a674ef7f8f1e, type: 3}
+      propertyPath: screenName
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4233027373717122907, guid: 9a767b28e51d243ce824a674ef7f8f1e, type: 3}
       propertyPath: targetPanel
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4233027373717122907, guid: 9a767b28e51d243ce824a674ef7f8f1e, type: 3}
       propertyPath: panelManager
+      value: 
+      objectReference: {fileID: 1306289431}
+    - target: {fileID: 4233027373717122907, guid: 9a767b28e51d243ce824a674ef7f8f1e, type: 3}
+      propertyPath: screenManager
       value: 
       objectReference: {fileID: 1306289431}
     - target: {fileID: 4549464571286722458, guid: 9a767b28e51d243ce824a674ef7f8f1e, type: 3}
@@ -1267,54 +1495,6 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9a767b28e51d243ce824a674ef7f8f1e, type: 3}
---- !u!1 &1171901151
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1171901153}
-  - component: {fileID: 1171901152}
-  m_Layer: 0
-  m_Name: Charcater Persistence
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &1171901152
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1171901151}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e28b0e5ad1b3f456c94d7da090de3a87, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::SelectionState
-  characterList:
-  - {fileID: 11400000, guid: dd1b3bf71d7dc4cf3b12fbb25f8e2120, type: 2}
-  - {fileID: 11400000, guid: ddd69648de3a44471a48d49d664dce8a, type: 2}
-  - {fileID: 11400000, guid: 182ad6e80388e4c9da5d775d154beb9e, type: 2}
---- !u!4 &1171901153
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1171901151}
-  serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -1023.706, y: -1347.701, z: 0}
-  m_LocalScale: {x: 2.56, y: 2.56, z: 2.56}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 36152228}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1306289431 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 828231437449728627, guid: 676dc1d3cf34b457086ca0f11542802e, type: 3}
@@ -1326,6 +1506,75 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 653ce85d5439541548fb559e1b66e50b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: '::'
+--- !u!1 &1346037264
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1346037265}
+  m_Layer: 0
+  m_Name: _Services
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1346037265
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1346037264}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 532.1778, y: 951.42773, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 2008202974}
+  - {fileID: 1908818308}
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1371539693
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1371539694}
+  m_Layer: 0
+  m_Name: Controllers
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1371539694
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1371539693}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 532.1778, y: 951.42773, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 940199139}
+  - {fileID: 1776073839}
+  - {fileID: 650378979}
+  - {fileID: 852393547}
+  - {fileID: 556650425}
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &1435040163 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8067431040220041229, guid: 676dc1d3cf34b457086ca0f11542802e, type: 3}
@@ -1463,6 +1712,14 @@ PrefabInstance:
       propertyPath: panelManager
       value: 
       objectReference: {fileID: 1306289431}
+    - target: {fileID: 4233027373717122907, guid: 9a767b28e51d243ce824a674ef7f8f1e, type: 3}
+      propertyPath: screenManager
+      value: 
+      objectReference: {fileID: 1306289431}
+    - target: {fileID: 4271262488912217393, guid: 9a767b28e51d243ce824a674ef7f8f1e, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: ScreenToggleView, Assembly-CSharp
+      objectReference: {fileID: 0}
     - target: {fileID: 4549464571286722458, guid: 9a767b28e51d243ce824a674ef7f8f1e, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -1557,11 +1814,104 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 4549464571286722458, guid: 9a767b28e51d243ce824a674ef7f8f1e, type: 3}
   m_PrefabInstance: {fileID: 1570658795}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1621343329 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 4233027373717122907, guid: 9a767b28e51d243ce824a674ef7f8f1e, type: 3}
+  m_PrefabInstance: {fileID: 1570658795}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9b69ddace89214984b55ddc7f8bb26ac, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ScreenToggleButton
+--- !u!1 &1776073838
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1776073839}
+  - component: {fileID: 1776073840}
+  m_Layer: 0
+  m_Name: ProfileScreenController
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1776073839
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1776073838}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1371539694}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1776073840
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1776073838}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 71c967d3b72c4186b75d2654dbbc057f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::CharacterSelectionScreenController
+  panel:
+    name: 0
+    assignedlayer: 0
+    screenPrefab: {fileID: 0}
+    controller: {fileID: 0}
+    active: 0
+  Instance: {fileID: 0}
 --- !u!224 &1829676939 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 4549464571286722458, guid: 9a767b28e51d243ce824a674ef7f8f1e, type: 3}
   m_PrefabInstance: {fileID: 72991879}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1908818307
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1908818308}
+  m_Layer: 0
+  m_Name: Config
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1908818308
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1908818307}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1346037265}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1912443776
 GameObject:
   m_ObjectHideFlags: 0
@@ -1704,6 +2054,59 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 4549464571286722458, guid: 9a767b28e51d243ce824a674ef7f8f1e, type: 3}
   m_PrefabInstance: {fileID: 287187516}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1924058031 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 4233027373717122907, guid: 9a767b28e51d243ce824a674ef7f8f1e, type: 3}
+  m_PrefabInstance: {fileID: 287187516}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9b69ddace89214984b55ddc7f8bb26ac, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ScreenToggleButton
+--- !u!1 &2008202973
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2008202974}
+  m_Layer: 0
+  m_Name: Game
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2008202974
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2008202973}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1346037265}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2050420519 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 4233027373717122907, guid: 9a767b28e51d243ce824a674ef7f8f1e, type: 3}
+  m_PrefabInstance: {fileID: 72991879}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9b69ddace89214984b55ddc7f8bb26ac, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ScreenToggleButton
 --- !u!1001 &6585329483242446468
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1717,6 +2120,14 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 0}
     - target: {fileID: 828231437449728627, guid: 676dc1d3cf34b457086ca0f11542802e, type: 3}
+      propertyPath: menuBar
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 828231437449728627, guid: 676dc1d3cf34b457086ca0f11542802e, type: 3}
+      propertyPath: menuBarManager
+      value: 
+      objectReference: {fileID: 7827194}
+    - target: {fileID: 828231437449728627, guid: 676dc1d3cf34b457086ca0f11542802e, type: 3}
       propertyPath: activePanel.name
       value: 2
       objectReference: {fileID: 0}
@@ -1729,13 +2140,41 @@ PrefabInstance:
       value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 828231437449728627, guid: 676dc1d3cf34b457086ca0f11542802e, type: 3}
+      propertyPath: screenMenu.Array.size
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 828231437449728627, guid: 676dc1d3cf34b457086ca0f11542802e, type: 3}
       propertyPath: activePanel.controller
       value: 
       objectReference: {fileID: 6400589469014205744, guid: 523c9424686ea437da12ea06287ae2cf, type: 3}
     - target: {fileID: 828231437449728627, guid: 676dc1d3cf34b457086ca0f11542802e, type: 3}
+      propertyPath: menuButtons.Array.size
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 828231437449728627, guid: 676dc1d3cf34b457086ca0f11542802e, type: 3}
       propertyPath: activePanel.panelPrefab
       value: 
       objectReference: {fileID: 8339082342934915379, guid: 523c9424686ea437da12ea06287ae2cf, type: 3}
+    - target: {fileID: 828231437449728627, guid: 676dc1d3cf34b457086ca0f11542802e, type: 3}
+      propertyPath: 'menuButtons.Array.data[0]'
+      value: 
+      objectReference: {fileID: 1621343329}
+    - target: {fileID: 828231437449728627, guid: 676dc1d3cf34b457086ca0f11542802e, type: 3}
+      propertyPath: 'menuButtons.Array.data[1]'
+      value: 
+      objectReference: {fileID: 286598764}
+    - target: {fileID: 828231437449728627, guid: 676dc1d3cf34b457086ca0f11542802e, type: 3}
+      propertyPath: 'menuButtons.Array.data[2]'
+      value: 
+      objectReference: {fileID: 2050420519}
+    - target: {fileID: 828231437449728627, guid: 676dc1d3cf34b457086ca0f11542802e, type: 3}
+      propertyPath: 'menuButtons.Array.data[3]'
+      value: 
+      objectReference: {fileID: 731102466}
+    - target: {fileID: 828231437449728627, guid: 676dc1d3cf34b457086ca0f11542802e, type: 3}
+      propertyPath: 'menuButtons.Array.data[4]'
+      value: 
+      objectReference: {fileID: 1924058031}
     - target: {fileID: 828231437449728627, guid: 676dc1d3cf34b457086ca0f11542802e, type: 3}
       propertyPath: panelMenu.Array.data[0].name
       value: 0
@@ -1775,6 +2214,22 @@ PrefabInstance:
     - target: {fileID: 828231437449728627, guid: 676dc1d3cf34b457086ca0f11542802e, type: 3}
       propertyPath: panelMenu.Array.data[4].layer
       value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 828231437449728627, guid: 676dc1d3cf34b457086ca0f11542802e, type: 3}
+      propertyPath: screenMenu.Array.data[1].name
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 828231437449728627, guid: 676dc1d3cf34b457086ca0f11542802e, type: 3}
+      propertyPath: screenMenu.Array.data[2].name
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 828231437449728627, guid: 676dc1d3cf34b457086ca0f11542802e, type: 3}
+      propertyPath: screenMenu.Array.data[3].name
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 828231437449728627, guid: 676dc1d3cf34b457086ca0f11542802e, type: 3}
+      propertyPath: screenMenu.Array.data[4].name
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 828231437449728627, guid: 676dc1d3cf34b457086ca0f11542802e, type: 3}
       propertyPath: panelMenu.Array.data[0].controller
@@ -1829,6 +2284,26 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 8339082342934915379, guid: ca63ccd4c91e34f31a3628821e5fb08c, type: 3}
     - target: {fileID: 828231437449728627, guid: 676dc1d3cf34b457086ca0f11542802e, type: 3}
+      propertyPath: screenMenu.Array.data[0].controller
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 828231437449728627, guid: 676dc1d3cf34b457086ca0f11542802e, type: 3}
+      propertyPath: screenMenu.Array.data[1].controller
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 828231437449728627, guid: 676dc1d3cf34b457086ca0f11542802e, type: 3}
+      propertyPath: screenMenu.Array.data[2].controller
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 828231437449728627, guid: 676dc1d3cf34b457086ca0f11542802e, type: 3}
+      propertyPath: screenMenu.Array.data[3].controller
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 828231437449728627, guid: 676dc1d3cf34b457086ca0f11542802e, type: 3}
+      propertyPath: screenMenu.Array.data[4].controller
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 828231437449728627, guid: 676dc1d3cf34b457086ca0f11542802e, type: 3}
       propertyPath: panelMenu.Array.data[2].assignedlayer
       value: 0
       objectReference: {fileID: 0}
@@ -1839,6 +2314,30 @@ PrefabInstance:
     - target: {fileID: 828231437449728627, guid: 676dc1d3cf34b457086ca0f11542802e, type: 3}
       propertyPath: panelMenu.Array.data[4].assignedlayer
       value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 828231437449728627, guid: 676dc1d3cf34b457086ca0f11542802e, type: 3}
+      propertyPath: screenMenu.Array.data[0].screenPrefab
+      value: 
+      objectReference: {fileID: 8339082342934915379, guid: e860aba2c086b4427b50980dbe4de051, type: 3}
+    - target: {fileID: 828231437449728627, guid: 676dc1d3cf34b457086ca0f11542802e, type: 3}
+      propertyPath: screenMenu.Array.data[1].screenPrefab
+      value: 
+      objectReference: {fileID: 8339082342934915379, guid: fe609bcd0e5e74ea1bfdc1338eccb1cd, type: 3}
+    - target: {fileID: 828231437449728627, guid: 676dc1d3cf34b457086ca0f11542802e, type: 3}
+      propertyPath: screenMenu.Array.data[2].screenPrefab
+      value: 
+      objectReference: {fileID: 8339082342934915379, guid: 523c9424686ea437da12ea06287ae2cf, type: 3}
+    - target: {fileID: 828231437449728627, guid: 676dc1d3cf34b457086ca0f11542802e, type: 3}
+      propertyPath: screenMenu.Array.data[3].screenPrefab
+      value: 
+      objectReference: {fileID: 8339082342934915379, guid: 7a8aec0c900054554a0cdfca79fa63da, type: 3}
+    - target: {fileID: 828231437449728627, guid: 676dc1d3cf34b457086ca0f11542802e, type: 3}
+      propertyPath: screenMenu.Array.data[4].screenPrefab
+      value: 
+      objectReference: {fileID: 8339082342934915379, guid: ca63ccd4c91e34f31a3628821e5fb08c, type: 3}
+    - target: {fileID: 828231437449728627, guid: 676dc1d3cf34b457086ca0f11542802e, type: 3}
+      propertyPath: screenMenu.Array.data[3].assignedlayer
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8067431040220041229, guid: 676dc1d3cf34b457086ca0f11542802e, type: 3}
       propertyPath: m_LocalPosition.x
@@ -1882,7 +2381,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8104295878120020789, guid: 676dc1d3cf34b457086ca0f11542802e, type: 3}
       propertyPath: m_Name
-      value: Manager - Screen View
+      value: ScreenManager
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -1895,6 +2394,7 @@ SceneRoots:
   m_Roots:
   - {fileID: 1912443779}
   - {fileID: 745699892}
+  - {fileID: 1346037265}
   - {fileID: 36152228}
+  - {fileID: 1371539694}
   - {fileID: 943131162}
-  - {fileID: 67947482}

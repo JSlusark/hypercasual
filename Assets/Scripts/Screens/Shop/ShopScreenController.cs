@@ -1,6 +1,8 @@
 using UnityEngine;
 
-public class ShopScreenScreenController : ScreenController { }
+public class ShopScreenController : ScreenController {
+    
+}
 
 
 /*

@@ -8,7 +8,7 @@
  - set new high score if true
  
  */
-public class PlaySessionData
+public class PlaySessionModel
 {
     public int CompletedRounds { get; private set; }
     public int HighScore { get; private set; }
@@ -18,7 +18,7 @@ public class PlaySessionData
     private readonly float _pointLoss;
     private string _highScoreMessage;
 
-    public PlaySessionData(float gain, float loss, int highScore) // constructor in C#
+    public PlaySessionModel(float gain, float loss, int highScore) // constructor in C#
     {
         _pointGain = gain;
         _pointLoss = loss;

@@ -1,7 +1,6 @@
 using UnityEngine;
 
-public class PlayScreenController : ScreenController
-{
+public class PlayScreenController : ScreenController {
     
 }
 

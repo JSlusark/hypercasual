@@ -1,8 +1,8 @@
 using UnityEditor;
 using UnityEngine;
 
-[CustomPropertyDrawer(typeof(ScreenManager.Panel))]
-public class PanelPropertyDrawer : PropertyDrawer
+[CustomPropertyDrawer(typeof(ScreenManager.Screen))]
+public class ScreenPropertyDrawer : PropertyDrawer
 {
     public override void OnGUI(Rect position, SerializedProperty property, GUIContent label)
     {

@@ -11,7 +11,7 @@ public class PlaySessionController : MonoBehaviour
 
     
     [Header("Level Session Data")]
-    private PlaySessionData _sessionData;
+    private PlaySessionModel _sessionData;
     
     [Header("PlaySession Data")]
     [SerializeField] private float pointGain;
@@ -19,7 +19,7 @@ public class PlaySessionController : MonoBehaviour
     // [SerializeField] private int completedRounds = 0;
     [SerializeField] private CharacterData characterData;
     // [SerializeField] private string message;
-    [SerializeField] private GameObject gameOverPanel;
+    [SerializeField] private GameObject gameOverScreen;
 
 
     [Header("UI Components")]
@@ -53,7 +53,7 @@ public class PlaySessionController : MonoBehaviour
 
     private void Start()
     {
-        _sessionData = new PlaySessionData(pointGain, pointLoss, characterData.highScore);
+        _sessionData = new PlaySessionModel(pointGain, pointLoss, characterData.highScore);
         // Debug.Log($"Player selected {character.danceStyle} with high score {character.highScore}");
         characterUI.sprite = characterData.baseSprite;
         ScoreBar.SetStart();
@@ -92,7 +92,7 @@ public class PlaySessionController : MonoBehaviour
         // Pauses the game
         // GameManager.Instance.SaveCharacter();
         Time.timeScale = 0f;
-        gameOverPanel.SetActive(true);
+        gameOverScreen.SetActive(true);
     }
 
     
