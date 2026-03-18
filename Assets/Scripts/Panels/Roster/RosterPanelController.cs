@@ -11,52 +11,45 @@ using UnityEngine;
 
 public class RosterPanelController : PanelController
 {
-
-    [Header("View Scripts from the prefab")] [SerializeField]
     private DancerCard dancerCard;
-
-    [SerializeField] private RosterButtons[] buttons;
-    [SerializeField] private int i;
-
-
-    // overriding show as we can get the view components and sub to events from the controller only after the prefab is instantiated
-    public override void Show() 
+    private RosterButtons[] buttons;
+    private RosterNavigator<CharacterData> _navigator;
+    private int _cardIndex = 0;
+    
+    public override void Show()
     {
         base.Show();
-        
-        dancerCard = this.PanelInstance.GetComponentInChildren<DancerCard>();
-        buttons = this.PanelInstance.GetComponentsInChildren<RosterButtons>();
+        _navigator = new RosterNavigator<CharacterData>(GameManager.Instance.CharactersDatabase.characters, _cardIndex);
+        dancerCard = PanelInstance.GetComponentInChildren<DancerCard>();
+        buttons = PanelInstance.GetComponentsInChildren<RosterButtons>();
 
         foreach (var button in buttons)
             button.OnRequestTrigger += HandleButtonRequest;
-        dancerCard.ShowCharacter(GameManager.Instance.CharactersDatabase.characters[i]);
+        
+        dancerCard.ShowCharacter(_navigator.Select());
     }
 
-    // overriding hide so taht we can unsub from events only when the prefab is active and avoid null reference errors
     public override void Hide()
     {
         foreach (var button in buttons)
             button.OnRequestTrigger -= HandleButtonRequest;
+        _cardIndex = _navigator.SelectedCharacterIndex; // saves index of the selected character to show as card when  reloading the roster panel
         base.Hide();
     }
 
-    private void HandleButtonRequest(RosterButtons.Request request)
+    private void HandleButtonRequest(RosterButtons.Request request) // moved list navigation logic in its own model class
     {
-        var characters = GameManager.Instance.CharactersDatabase.characters;
         switch (request)
         {
             case RosterButtons.Request.ShowPrevious:
-                i = (i - 1 + characters.Count) % characters.Count;
+                dancerCard.ShowCharacter(_navigator.Previous());
                 break;
             case RosterButtons.Request.ShowNext:
-                i = (i + 1) % characters.Count;
+                dancerCard.ShowCharacter(_navigator.Next());
                 break;
-            // character tracked from gameManager so that it is used correctly in other scenes
             case RosterButtons.Request.SelectCharacter:
-                GameManager.Instance.SetSelectedCharacter(characters[i]);
+                GameManager.Instance.SetSelectedCharacter(_navigator.Select());
                 break;
         }
-
-        dancerCard.ShowCharacter(characters[i]);
     }
 }

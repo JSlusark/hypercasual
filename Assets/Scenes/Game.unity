@@ -1105,6 +1105,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayScreenController
   panelPrefab: {fileID: 8339082342934915379, guid: 523c9424686ea437da12ea06287ae2cf, type: 3}
+  characterSprite: {fileID: 0}
 --- !u!224 &731102465 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 4549464571286722458, guid: 9a767b28e51d243ce824a674ef7f8f1e, type: 3}
@@ -1301,9 +1302,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CharacterSelectionScreenController
   panelPrefab: {fileID: 8339082342934915379, guid: e860aba2c086b4427b50980dbe4de051, type: 3}
-  dancerCard: {fileID: 0}
-  buttons: []
-  i: 0
 --- !u!1 &943131158
 GameObject:
   m_ObjectHideFlags: 0
@@ -2181,6 +2179,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::GameManager
   characterDatabase: {fileID: 11400000, guid: 864e3092188754f36ab31652b5b0a872, type: 2}
+  defaultCharacter: {fileID: 11400000, guid: dd1b3bf71d7dc4cf3b12fbb25f8e2120, type: 2}
 --- !u!114 &2050420519 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 4233027373717122907, guid: 9a767b28e51d243ce824a674ef7f8f1e, type: 3}

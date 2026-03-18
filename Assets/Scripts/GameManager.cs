@@ -21,6 +21,9 @@ public class GameManager : MonoBehaviour
         Instance = this;
         DontDestroyOnLoad(gameObject);
         // Debug.Log($"[OldGameManager] Created instance: {GetInstanceID()}"); // helps to debug if we have multiple instances
+        
+        // sets default character to start here for now
+        SelectedCharacter = defaultCharacter;
     }
     
     public CharactersDatabase CharactersDatabase => characterDatabase;
