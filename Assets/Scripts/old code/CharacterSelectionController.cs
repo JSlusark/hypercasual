@@ -7,7 +7,7 @@ public class CharacterSelectionController : MonoBehaviour
 {
 
     [Header("UI Components")]
-    [SerializeField] private Image baseSprite;
+    [SerializeField] private Image idleSprite;
     [SerializeField] private TextMeshProUGUI danceStyle;
     [SerializeField] private TextMeshProUGUI dancerName;
     [SerializeField] private TextMeshProUGUI dancerPrice;
@@ -18,8 +18,8 @@ public class CharacterSelectionController : MonoBehaviour
 
     private void Start()
     {
-        listLength = GameManager.Instance.CharacterList.Length;
-        index = GameManager.Instance.Index;
+        listLength = OldGameManager.Instance.CharacterList.Length;
+        index = OldGameManager.Instance.Index;
         ShowCharacterUI();
     }
 
@@ -41,30 +41,30 @@ public class CharacterSelectionController : MonoBehaviour
 
     public void PlayGame()
     {
-        GameManager.Instance.LoadCharacter(index);
+        OldGameManager.Instance.LoadCharacter(index);
         SceneManager.LoadScene("LevelScene");
     }
 
     private void ShowCharacterUI()
     {
-        CharacterData character = GameManager.Instance.CharacterList[index];
-        baseSprite.sprite = character.baseSprite;
+        CharacterData character = OldGameManager.Instance.CharacterList[index];
+        idleSprite.sprite = character.idleSprite;
         
-        if(!character.isUnlocked)
-        {
-            baseSprite.color = new Color(0f, 0f, 0f, 0.5f); // 50% alpha
-            dancerPrice.text = $"{character.costToUnlock} $";
-            dancerName.text = "???";
-            danceStyle.text = "Unknown";
-            
-        }
-        else
-        { 
-            baseSprite.color = Color.white;
-            dancerPrice.text = "Select";
-            danceStyle.text = character.danceStyle;
-            dancerName.text = character.dancerName;
-        }
-        Debug.Log($"Switched to Character: {character.danceStyle}  | Index: {index} | High Score: {character.highScore}");
+        // if(!character.isUnlocked)
+        // {
+        //     idleSprite.color = new Color(0f, 0f, 0f, 0.5f); // 50% alpha
+        //     dancerPrice.text = $"{character.costToUnlock} $";
+        //     dancerName.text = "???";
+        //     danceStyle.text = "Unknown";
+        //     
+        // }
+        // else
+        // { 
+        //     idleSprite.color = Color.white;
+        //     dancerPrice.text = "Select";
+        //     danceStyle.text = character.danceStyle;
+        //     dancerName.text = character.dancerName;
+        // }
+        // Debug.Log($"Switched to Character: {character.danceStyle}  | Index: {index} | High Score: {character.highScore}");
     }
 }

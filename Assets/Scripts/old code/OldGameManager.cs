@@ -2,9 +2,9 @@ using System.IO;
 using Unity.VisualScripting;
 using UnityEngine;
 
-public class GameManager : MonoBehaviour
+public class OldGameManager : MonoBehaviour
 {
-    public static GameManager Instance { get; private set; }
+    public static OldGameManager Instance { get; private set; }
 
 
     [Header("Game Data")]
@@ -28,7 +28,7 @@ public class GameManager : MonoBehaviour
         }
         Instance = this;
         DontDestroyOnLoad(gameObject);
-        // Debug.Log($"[GameManager] Created instance: {GetInstanceID()}"); // helps to debug if we have multiple instances
+        // Debug.Log($"[OldGameManager] Created instance: {GetInstanceID()}"); // helps to debug if we have multiple instances
 
 
         saveFilePath = Application.persistentDataPath + "/savegame.json";
@@ -65,14 +65,14 @@ public class GameManager : MonoBehaviour
             saveData.characterList[i] = new CharacterSaveData()
             {
                 danceStyle = characterList[i].danceStyle,
-                isUnlocked = characterList[i].isUnlocked,
+                // isUnlocked = characterList[i].isUnlocked,
                 highScore = 0
             };
             // Debug.Log($"Initialized save data: {i}.{characterList[i].danceStyle}");
         }
 
         SaveToFile();
-        Debug.Log($"[GameManager] Save file created at {saveFilePath}");
+        Debug.Log($"[OldGameManager] Save file created at {saveFilePath}");
     }
 
 
@@ -80,22 +80,22 @@ public class GameManager : MonoBehaviour
     {
         if (saveData == null || character == null)
         {
-            Debug.LogWarning("[GameManager] Cannot save: saveData or character is null");
+            Debug.LogWarning("[OldGameManager] Cannot save: saveData or character is null");
             return;
         }
 
         if (index < 0 || index >= saveData.characterList.Length)
         {
-            Debug.LogWarning($"[GameManager] Invalid index {index} for saving");
+            Debug.LogWarning($"[OldGameManager] Invalid index {index} for saving");
             return;
         }
 
         saveData.index = index;
-        saveData.characterList[index].highScore = character.highScore;
-        saveData.characterList[index].isUnlocked = character.isUnlocked;
+        // saveData.characterList[index].highScore = character.highScore;
+        // saveData.characterList[index].isUnlocked = character.isUnlocked;
         saveData.characterList[index].danceStyle = character.danceStyle;
 
-        // Debug.Log($"[GameManager] Saved: {saveData.characterList[index].danceStyle} with score {saveData.characterList[index].highScore} ");
+        // Debug.Log($"[OldGameManager] Saved: {saveData.characterList[index].danceStyle} with score {saveData.characterList[index].highScore} ");
         SaveToFile();
     }
 
@@ -109,8 +109,8 @@ public class GameManager : MonoBehaviour
         if (saveData != null && saveData.characterList != null)
         {
             character.danceStyle = saveData.characterList[i].danceStyle; // not really needed but for consistency
-            character.highScore = saveData.characterList[i].highScore;
-            character.isUnlocked = saveData.characterList[i].isUnlocked;
+            // character.highScore = saveData.characterList[i].highScore;
+            // character.isUnlocked = saveData.characterList[i].isUnlocked;
         }
         // Debug.Log($"Character data loaded");
     }

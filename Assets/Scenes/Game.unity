@@ -790,7 +790,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::MissionsScreenController
   panelPrefab: {fileID: 8339082342934915379, guid: ca63ccd4c91e34f31a3628821e5fb08c, type: 3}
-  _panelInstance: {fileID: 0}
 --- !u!1 &572462494
 GameObject:
   m_ObjectHideFlags: 0
@@ -1106,7 +1105,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayScreenController
   panelPrefab: {fileID: 8339082342934915379, guid: 523c9424686ea437da12ea06287ae2cf, type: 3}
-  _panelInstance: {fileID: 0}
 --- !u!224 &731102465 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 4549464571286722458, guid: 9a767b28e51d243ce824a674ef7f8f1e, type: 3}
@@ -1258,7 +1256,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ShopScreenController
   panelPrefab: {fileID: 8339082342934915379, guid: 7a8aec0c900054554a0cdfca79fa63da, type: 3}
-  _panelInstance: {fileID: 0}
 --- !u!1 &940199138
 GameObject:
   m_ObjectHideFlags: 0
@@ -1304,7 +1301,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CharacterSelectionScreenController
   panelPrefab: {fileID: 8339082342934915379, guid: e860aba2c086b4427b50980dbe4de051, type: 3}
-  _panelInstance: {fileID: 0}
+  dancerCard: {fileID: 0}
+  buttons: []
+  i: 0
 --- !u!1 &943131158
 GameObject:
   m_ObjectHideFlags: 0
@@ -1570,7 +1569,6 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 2008202974}
   - {fileID: 1908818308}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -1923,11 +1921,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 1776073838}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 71c967d3b72c4186b75d2654dbbc057f, type: 3}
+  m_Script: {fileID: 11500000, guid: eee71b90219f4c6fb8779aa2c115a6a4, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::CharacterSelectionScreenController
+  m_EditorClassIdentifier: Assembly-CSharp::ProfilePanelController
   panelPrefab: {fileID: 8339082342934915379, guid: fe609bcd0e5e74ea1bfdc1338eccb1cd, type: 3}
-  _panelInstance: {fileID: 0}
 --- !u!224 &1829676939 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 4549464571286722458, guid: 9a767b28e51d243ce824a674ef7f8f1e, type: 3}
@@ -2148,8 +2145,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2008202974}
+  - component: {fileID: 2008202975}
   m_Layer: 0
-  m_Name: Game
+  m_Name: GameManager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2163,13 +2161,26 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2008202973}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 532.1778, y: 951.42773, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 1346037265}
+  m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2008202975
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2008202973}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6f383a5579ae42988ebcd4fc6e3d8fb1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::GameManager
+  characterDatabase: {fileID: 11400000, guid: 864e3092188754f36ab31652b5b0a872, type: 2}
 --- !u!114 &2050420519 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 4233027373717122907, guid: 9a767b28e51d243ce824a674ef7f8f1e, type: 3}
@@ -2198,6 +2209,7 @@ SceneRoots:
   m_Roots:
   - {fileID: 1912443779}
   - {fileID: 745699892}
+  - {fileID: 2008202974}
   - {fileID: 1346037265}
   - {fileID: 36152228}
   - {fileID: 1371539694}

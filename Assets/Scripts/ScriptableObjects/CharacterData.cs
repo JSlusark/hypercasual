@@ -6,22 +6,10 @@ public class CharacterData : ScriptableObject
 	[Header("Character Info")]
 	public string dancerName;
 	public string danceStyle; // will change all into private with getters/setters later
-	public Sprite baseSprite;
-	
-	[Header("Character State")]
-	public bool isUnlocked;
+	public Sprite idleSprite;
+	public Sprite rosterSprite;
 	public float costToUnlock;
 	
-	[Header("Progress Data")]
-	public int highScore;
-
-	public bool SetNewHighScore(int newScore)
-	{
-		if (newScore > highScore)
-		{
-			highScore = newScore;
-			return true;
-		}
-		return false;
-	}
+	// Progress Data of a character is in CharacterProgress.cs (which handles runtime data)
+	
 }

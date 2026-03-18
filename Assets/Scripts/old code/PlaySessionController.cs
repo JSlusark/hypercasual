@@ -46,16 +46,16 @@ public class PlaySessionController : MonoBehaviour
             return;
         }
         Instance = this;
-        characterData = GameManager.Instance.Character;
+        characterData = OldGameManager.Instance.Character;
         // message = "Try again to beat your High Score";
         // Debug.Log($"[PlaySessionController] Instance set to: {GetInstanceID()}");
     }
 
     private void Start()
     {
-        _sessionData = new PlaySessionModel(pointGain, pointLoss, characterData.highScore);
+        // _sessionData = new PlaySessionModel(pointGain, pointLoss, characterData.highScore);
         // Debug.Log($"Player selected {character.danceStyle} with high score {character.highScore}");
-        characterUI.sprite = characterData.baseSprite;
+        characterUI.sprite = characterData.idleSprite;
         ScoreBar.SetStart();
     }
 
@@ -73,7 +73,7 @@ public class PlaySessionController : MonoBehaviour
             if (newHighScore)
             {
                 // message = "New High Score Achieved!";
-                characterData.SetNewHighScore(_sessionData.HighScore);
+                // characterData.SetNewHighScore(_sessionData.HighScore);
             }
             // highScoreMessageUI.text = _sessionData.HighScore.ToString();
             highScoreUI.text = _sessionData.HighScore.ToString();
@@ -90,7 +90,7 @@ public class PlaySessionController : MonoBehaviour
     public void ShowResultScreen()
     {
         // Pauses the game
-        // GameManager.Instance.SaveCharacter();
+        // OldGameManager.Instance.SaveCharacter();
         Time.timeScale = 0f;
         gameOverScreen.SetActive(true);
     }

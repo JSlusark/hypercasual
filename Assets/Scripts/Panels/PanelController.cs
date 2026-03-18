@@ -10,30 +10,32 @@ using UnityEngine;
 public abstract class PanelController : MonoBehaviour
 {
     [SerializeField] protected GameObject panelPrefab;
-    [SerializeField] private GameObject _panelInstance;
+    protected GameObject PanelInstance;
 
-    public void Show()
+    public virtual void Show() 
     {
-        if (_panelInstance != null)
+        if (PanelInstance != null)
         {
             Debug.LogWarning($"[PanelController] {panelPrefab.name} is already shown.");
             return;
         }
 
         Debug.Log($"[PanelController] Show: {panelPrefab.name}");
-        _panelInstance = Instantiate(panelPrefab);
+        PanelInstance = Instantiate(panelPrefab);
     }
 
-    public void Hide()
+    public virtual void Hide()
     {
-        if (_panelInstance == null)
+        if (PanelInstance == null)
         {
             Debug.LogWarning($"[PanelController] {panelPrefab.name} is not currently shown.");
             return;
         }
 
         Debug.Log($"[PanelController] Hide: {panelPrefab.name}");
-        Destroy(_panelInstance);
-        _panelInstance = null;
+        Destroy(PanelInstance);
+        PanelInstance = null;
     }
+    
+    
 }

@@ -149,6 +149,7 @@ GameObject:
   - component: {fileID: 2208323174637155280}
   - component: {fileID: 9129155697918921441}
   - component: {fileID: 2014905324784999722}
+  - component: {fileID: 6511917664714407639}
   m_Layer: 5
   m_Name: Select Button
   m_TagString: Untagged
@@ -258,9 +259,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: CharacterSelectionController, Assembly-CSharp
-        m_MethodName: 
+      - m_Target: {fileID: 6511917664714407639}
+        m_TargetAssemblyTypeName: RosterButtons, Assembly-CSharp
+        m_MethodName: OnButtonClick
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -269,7 +270,20 @@ MonoBehaviour:
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 0
-        m_CallState: 1
+        m_CallState: 2
+--- !u!114 &6511917664714407639
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 591115743293666952}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ebac6c4cc37e4459bed7ff35ff432ccb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::RosterButtons
+  buttonRequest: 2
 --- !u!1 &1128598942856148682
 GameObject:
   m_ObjectHideFlags: 0
@@ -282,6 +296,7 @@ GameObject:
   - component: {fileID: 1895544131731784445}
   - component: {fileID: 3942832324686900562}
   - component: {fileID: 1287947742129207689}
+  - component: {fileID: 6036024328297696485}
   m_Layer: 5
   m_Name: Prev Button
   m_TagString: Untagged
@@ -391,9 +406,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 3209011715681918558}
-        m_TargetAssemblyTypeName: CharacterSelectionController, Assembly-CSharp
-        m_MethodName: NextCharacter
+      - m_Target: {fileID: 6036024328297696485}
+        m_TargetAssemblyTypeName: RosterButtons, Assembly-CSharp
+        m_MethodName: OnButtonClick
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -402,7 +417,20 @@ MonoBehaviour:
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 0
-        m_CallState: 1
+        m_CallState: 2
+--- !u!114 &6036024328297696485
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1128598942856148682}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ebac6c4cc37e4459bed7ff35ff432ccb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::RosterButtons
+  buttonRequest: 0
 --- !u!1 &1241284655413193777
 GameObject:
   m_ObjectHideFlags: 0
@@ -540,54 +568,6 @@ MonoBehaviour:
   m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
---- !u!1 &2170106149981648124
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 4907791265908988216}
-  - component: {fileID: 3209011715681918558}
-  m_Layer: 0
-  m_Name: '[CONTROLLER] character selection'
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &4907791265908988216
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2170106149981648124}
-  serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -1019.8659, y: -1356.5386, z: 0}
-  m_LocalScale: {x: 2.56, y: 2.56, z: 2.56}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 8148129296913038846}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &3209011715681918558
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2170106149981648124}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c40fc0a4eadb949f4a44d52d13462bfa, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: '::'
-  baseSprite: {fileID: 1348605015136394021}
-  danceStyle: {fileID: 1673076263762037996}
-  dancerName: {fileID: 5643761566102611605}
-  dancerPrice: {fileID: 2039580095443677289}
 --- !u!1 &3688237189877204805
 GameObject:
   m_ObjectHideFlags: 0
@@ -876,6 +856,7 @@ GameObject:
   - component: {fileID: 81593671808697236}
   - component: {fileID: 7898926871251705625}
   - component: {fileID: 1556306568938021584}
+  - component: {fileID: 7838066267961063085}
   m_Layer: 5
   m_Name: Next Button
   m_TagString: Untagged
@@ -985,9 +966,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 3209011715681918558}
-        m_TargetAssemblyTypeName: CharacterSelectionController, Assembly-CSharp
-        m_MethodName: NextCharacter
+      - m_Target: {fileID: 7838066267961063085}
+        m_TargetAssemblyTypeName: RosterButtons, Assembly-CSharp
+        m_MethodName: OnButtonClick
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -996,7 +977,20 @@ MonoBehaviour:
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 0
-        m_CallState: 1
+        m_CallState: 2
+--- !u!114 &7838066267961063085
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5098606683444158850}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ebac6c4cc37e4459bed7ff35ff432ccb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::RosterButtons
+  buttonRequest: 1
 --- !u!1 &6528142010554040352
 GameObject:
   m_ObjectHideFlags: 0
@@ -1285,7 +1279,7 @@ GameObject:
   - component: {fileID: 5435262535699359648}
   - component: {fileID: 1348605015136394021}
   m_Layer: 5
-  m_Name: Character
+  m_Name: Preview Image
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1381,7 +1375,6 @@ RectTransform:
   m_LocalScale: {x: 0, y: 0, z: 0}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 4907791265908988216}
   - {fileID: 5158978105027498627}
   - {fileID: 5196110650453221140}
   - {fileID: 7089486471565066542}
@@ -1506,8 +1499,9 @@ GameObject:
   - component: {fileID: 5196110650453221140}
   - component: {fileID: 6204697387856191442}
   - component: {fileID: 6275915498092001772}
+  - component: {fileID: 4014260423907977036}
   m_Layer: 5
-  m_Name: Card
+  m_Name: Dancer Card
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1574,6 +1568,21 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!114 &4014260423907977036
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8418344835865458935}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1632650a75e24ab38ac8a02387b3b999, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::DancerCard
+  dancerName: {fileID: 5643761566102611605}
+  previewImage: {fileID: 1348605015136394021}
+  danceStyle: {fileID: 1673076263762037996}
 --- !u!1 &8804207680918457445
 GameObject:
   m_ObjectHideFlags: 0
@@ -1586,7 +1595,7 @@ GameObject:
   - component: {fileID: 8783937955590926453}
   - component: {fileID: 5643761566102611605}
   m_Layer: 5
-  m_Name: Name
+  m_Name: Dancer Name
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

@@ -14,7 +14,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::CharacterData
   dancerName: Jean Star
   danceStyle: Vogue
-  baseSprite: {fileID: -5090879937577951274, guid: c5af7fefec05c479d9c5355b419990d8, type: 3}
-  isUnlocked: 0
+  idleSprite: {fileID: -5090879937577951274, guid: c5af7fefec05c479d9c5355b419990d8, type: 3}
+  rosterSprite: {fileID: -5090879937577951274, guid: c5af7fefec05c479d9c5355b419990d8, type: 3}
   costToUnlock: 900
-  highScore: 0
