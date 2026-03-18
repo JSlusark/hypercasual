@@ -7,7 +7,7 @@ using UnityEngine.UI;
      It is attached as a script component to each button in the menu.
      */
     
-public class MenuButton : MonoBehaviour
+public class PanelEmitterButton : MonoBehaviour
 {
     
     [SerializeField] private Sprite defaultSprite;
@@ -15,12 +15,12 @@ public class MenuButton : MonoBehaviour
     
     [SerializeField] private Image image;
     
-    public event Action<MenuButton> OnMenuButtonClick;
+    public event Action<PanelEmitterButton> OnMenuButtonClick;
     
     
     public void OnClick()
     {
-        OnMenuButtonClick?.Invoke(this); // emits signal with carried ScreeName on click 
+        OnMenuButtonClick?.Invoke(this); // emits signal with button instance that is clicked 
     }
 
 

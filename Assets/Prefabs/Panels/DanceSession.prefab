@@ -776,7 +776,7 @@ GameObject:
   - component: {fileID: 586970379696086554}
   - component: {fileID: 8992852687866396495}
   m_Layer: 0
-  m_Name: Session
+  m_Name: DanceSession
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

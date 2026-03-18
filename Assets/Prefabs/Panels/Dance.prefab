@@ -258,7 +258,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 6400589469014205744}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: PlayScreenManager, Assembly-CSharp
         m_MethodName: ShowSessionScreen
         m_Mode: 1
@@ -359,9 +359,8 @@ GameObject:
   - component: {fileID: 3430599059993972273}
   - component: {fileID: 3461157347467663339}
   - component: {fileID: 7723503312781948306}
-  - component: {fileID: 6400589469014205744}
   m_Layer: 5
-  m_Name: Play
+  m_Name: Dance
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -489,22 +488,3 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
---- !u!114 &6400589469014205744
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8339082342934915379}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6be685d2dffd442a81f6c010e28829d1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::PlayScreenManager
-  panel:
-    name: 2
-    assignedlayer: 0
-    panelPrefab: {fileID: 8339082342934915379}
-    controller: {fileID: 6400589469014205744}
-    active: 1
-  panelPrefab: {fileID: 8339082342934915379}
