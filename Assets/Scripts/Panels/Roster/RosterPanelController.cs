@@ -29,7 +29,7 @@ public class RosterPanelController : PanelController
 
         foreach (var button in buttons)
             button.OnRequestTrigger += HandleButtonRequest;
-        dancerCard.ShowCharacter(GameManager.Instance.CharacterDatabase.characters[i]);
+        dancerCard.ShowCharacter(GameManager.Instance.CharactersDatabase.characters[i]);
     }
 
     // overriding hide so taht we can unsub from events only when the prefab is active and avoid null reference errors
@@ -42,7 +42,7 @@ public class RosterPanelController : PanelController
 
     private void HandleButtonRequest(RosterButtons.Request request)
     {
-        var characters = GameManager.Instance.CharacterDatabase.characters;
+        var characters = GameManager.Instance.CharactersDatabase.characters;
         switch (request)
         {
             case RosterButtons.Request.ShowPrevious:

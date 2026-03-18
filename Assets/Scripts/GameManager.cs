@@ -2,7 +2,10 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
-    [SerializeField] private CharacterDatabase characterDatabase;
+    [SerializeField] private CharactersDatabase characterDatabase;
+    [SerializeField] private CharacterData defaultCharacter;
+    
+    
     public static GameManager Instance { get; private set; } // Singleton instance shared globally
     public CharacterData SelectedCharacter { get; private set; }
     
@@ -20,11 +23,11 @@ public class GameManager : MonoBehaviour
         // Debug.Log($"[OldGameManager] Created instance: {GetInstanceID()}"); // helps to debug if we have multiple instances
     }
     
-    public CharacterDatabase CharacterDatabase => characterDatabase;
+    public CharactersDatabase CharactersDatabase => characterDatabase;
     
     public void SetSelectedCharacter(CharacterData character)
     {
         SelectedCharacter = character;
-        Debug.Log($"[GAME MANAGER] Selected new Charater {SelectedCharacter.name}");
+        Debug.Log($"[GAME MANAGER] Selected new Character {SelectedCharacter.name}");
     }
 }

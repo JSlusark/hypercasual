@@ -10,6 +10,9 @@ public class CharacterData : ScriptableObject
 	public Sprite rosterSprite;
 	public float costToUnlock;
 	
-	// Progress Data of a character is in CharacterProgress.cs (which handles runtime data)
+	// Leaving a note: was advised from Claude to remove Progress Data as they should handled at runtime, not handling for now
+	[Header("Progress")]
+	public bool isUnlocked;
+	public int highScore;
 	
 }
