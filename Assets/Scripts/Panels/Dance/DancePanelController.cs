@@ -10,9 +10,7 @@ public class DancePanelController : PanelController {
     {
         base.Show();
         characterSprite = PanelInstance.GetComponentInChildren<CharacterView>();
-        
         characterSprite.ShowIdle(GameManager.Instance.SelectedCharacter.idleSprite);
-        // characterSprite.ShowIdle(GameManager.Instance.SelectedCharacter.
      }
 
     
