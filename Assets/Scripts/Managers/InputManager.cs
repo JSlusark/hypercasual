@@ -44,7 +44,7 @@ public class InputManager : Singleton<InputManager>
     void StartTouchPrimary(InputAction.CallbackContext ctx)
     {
         Vector2 position = swipeControls.Touch.PrimaryPosition.ReadValue<Vector2>();
-        Debug.Log($"Touch started: {position}");
+        // Debug.Log($"Touch started: {position}");
         if(onStartTouch != null)
             onStartTouch( position, (float)ctx.startTime );
     }
@@ -52,7 +52,7 @@ public class InputManager : Singleton<InputManager>
     void EndTouchPrimary(InputAction.CallbackContext ctx)
     {
         Vector2 position = swipeControls.Touch.PrimaryPosition.ReadValue<Vector2>();
-        Debug.Log($"Touch ended: {position}");
+        // Debug.Log($"Touch ended: {position}");
         if(onEndTouch != null) 
             onEndTouch(position, (float)ctx.time);
     }
