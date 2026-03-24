@@ -1,13 +1,13 @@
 {
     "version": 1,
-    "name": "SwipeControls",
+    "name": "TouchInputActions",
     "maps": [
         {
             "name": "Touch",
             "id": "bdc9f81b-01cd-4a84-a7ae-cd55cda3d2ea",
             "actions": [
                 {
-                    "name": "PrimaryContact",
+                    "name": "TouchContact",
                     "type": "PassThrough",
                     "id": "e30d2662-81ef-4103-a61d-00f97816ab42",
                     "expectedControlType": "Button",
@@ -16,7 +16,7 @@
                     "initialStateCheck": false
                 },
                 {
-                    "name": "PrimaryPosition",
+                    "name": "TouchPosition",
                     "type": "PassThrough",
                     "id": "8ea29985-17c3-4762-9220-5a514526267c",
                     "expectedControlType": "Vector2",
@@ -33,7 +33,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "PrimaryContact",
+                    "action": "TouchContact",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -44,7 +44,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "PrimaryPosition",
+                    "action": "TouchPosition",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

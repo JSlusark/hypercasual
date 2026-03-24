@@ -1,7 +1,7 @@
 using UnityEngine;
 
 /*
- * Later make it inherit from Singleton as InputManager
+ * Later make it inherit from Singleton as TouchManager
  * as T will ensure it's not confused with other singleton type children
  * 
  */

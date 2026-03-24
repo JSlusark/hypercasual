@@ -5,7 +5,7 @@ using UnityEngine;
  * Used only in Inputmanager for now
  * 
  * T 's type is specified in the derivative class. Example:
- * InputManager : Singleton<InputManager>
+ * TouchManager : Singleton<TouchManager>
  * Using T will allow us to not create duplicates for the same class type
  * and use this script as a base class for other managers (example for gamemanager)
  *

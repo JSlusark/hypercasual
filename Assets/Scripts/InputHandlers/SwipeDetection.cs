@@ -6,60 +6,61 @@ public class SwipeDetection : MonoBehaviour
     [SerializeField] private float minimumSwipeDistance;
     [SerializeField] private float maximumSwipeTime;
     [SerializeField, Range(0f, 1f)] private float directionThreshold;
-    [SerializeField] private GameObject swipePreview;
+    [SerializeField] private GameObject touchIndicator;
 
-    private InputManager inputManager;
+    private TouchManager _touchManager;
     private Vector2 startPosition;
     private float startTime;
 
     private Vector2 endPosition;
     private float endTime;
 
-    private RectTransform swipePreviewRect; // used to keep mapped pixel coords on Canvas 
-    private Coroutine swipePreviewCoroutine;
+    private RectTransform touchIndicatorRect; // used to keep mapped pixel coords on Canvas 
+    private Coroutine touchIndicatorCoroutine;
 
     private void Awake()
     {
-        inputManager = InputManager.Instance;
-        swipePreviewRect =
-            swipePreview.GetComponent<RectTransform>(); // gets RectTransform component from the swipePreviewObject
+        _touchManager = TouchManager.Instance;
+        touchIndicatorRect =
+            touchIndicator.GetComponent<RectTransform>(); // gets RectTransform component from the touchIndicatorObject
     }
 
     private void OnEnable()
     {
-        inputManager.onStartTouch += SwipeStart;
-        inputManager.onEndTouch += SwipeEnd;
+        _touchManager.OnTouchStart += OnTouchStart;
+        _touchManager.OnTouchEnd += OnTouchEnd;
     }
 
     private void OnDisable()
     {
-        inputManager.onStartTouch -= SwipeStart;
-        inputManager.onEndTouch -= SwipeEnd;
+        _touchManager.OnTouchStart -= OnTouchStart;
+        _touchManager.OnTouchEnd -= OnTouchEnd;
     }
 
-    private void SwipeStart(Vector2 touchPosition, float time)
+    private void OnTouchStart(Vector2 touchPosition, float time)
     {
         startPosition = touchPosition;
         startTime = time;
-        swipePreviewRect.position = touchPosition;
-        swipePreviewCoroutine = StartCoroutine(ShowSwipePreview());
+        touchIndicatorRect.position = touchPosition;
+        touchIndicatorCoroutine = StartCoroutine(ShowSwipePreview());
     }
 
-    private void SwipeEnd(Vector2 touchPosition, float time)
+    private void OnTouchEnd(Vector2 touchPosition, float time)
     {
+        
         endPosition = touchPosition;
         endTime = time;
         DetectSwipe();
-        StopCoroutine(swipePreviewCoroutine);
-        Debug.Log($"SwipePreview ended: {swipePreview.transform.position} at time {Time.time}");
+        StopCoroutine(touchIndicatorCoroutine);
+        Debug.Log($"SwipePreview ended: {touchIndicatorRect} at time {Time.time}");
     }
 
     private IEnumerator ShowSwipePreview()
     {
-        Debug.Log($"SwipePreview started: {swipePreview.transform.position} at time {Time.time}");
+        Debug.Log($"SwipePreview started: {touchIndicatorRect} at time {Time.time}");
         while (true)
         {
-            swipePreviewRect.position = inputManager.PrimaryPosition(); // the preview follows finger movement
+            touchIndicatorRect.position = _touchManager.GetTouchPosition(); // the preview follows finger movement
             yield return
                 null; // coroutines needs to always yield a return to avoid infinite loop that freezes the game (null, waitforseconds, etc) 
         }
