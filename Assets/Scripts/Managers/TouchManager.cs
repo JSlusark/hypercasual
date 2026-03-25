@@ -11,13 +11,20 @@ public class TouchManager : Singleton<TouchManager>
 
     // Type of event that others subscribe to, from same delegate type as they share signature, "On" is used to refer "when On"
     public event TouchEventHandler OnTouchStart; // when touch action is started
-    public event TouchEventHandler OnTouchEnd; // when touch action is canceled
+    public event TouchEventHandler OnTouchEnd;   // when touch action is canceled
 
 
     private TouchInputActions touchControl;
 
-    [Header("Touch Data")]
-    [SerializeField] private Vector2 touchPosition; // makes sense to me to keep it here as used multiple times in diff methods
+    [Header("Touch Data")] [SerializeField]
+    private Vector2 startPosition; // makes sense to me to keep it here as used multiple times in diff methods
+
+    [SerializeField]
+    private Vector2 endPosition; // makes sense to me to keep it here as used multiple times in diff methods
+
+    [SerializeField]
+    private Vector2 currPosition; // makes sense to me to keep it here as used multiple times in diff methods
+
 
     protected override void Awake() // overrides base class' awake as we init touchControl object instance
     {
@@ -27,41 +34,45 @@ public class TouchManager : Singleton<TouchManager>
 
     void OnEnable()
     {
-        touchControl.Enable(); // 
-    }
+        var touchAction =
+            touchControl.Touch
+                        .TouchContact; // stores the TouchContact action, which has signature Action<InputAction.CallbackContext> by default
 
-    void OnDisable()
-    {
-        touchControl.Disable();
-    }
-
-    void Start()
-    {
-        var touchAction = touchControl.Touch.TouchContact; // stores the TouchContact action, which has signature Action<InputAction.CallbackContext> by default
-        
-        // it is better to subscribe to .started and .canceled separately to avoid problems between unity versions
+        touchControl.Enable(); // activates the TouchInputActions system so it can start listening for its input
         touchAction.started += HandleTouch;
         touchAction.canceled += HandleTouch;
     }
 
+    void OnDisable()
+    {
+        var touchAction =
+            touchControl.Touch
+                        .TouchContact; // stores the TouchContact action, which has signature Action<InputAction.CallbackContext> by default
+
+        touchControl.Disable(); // deactivates 
+        touchAction.started -= HandleTouch;
+        touchAction.canceled -= HandleTouch;
+    }
+
     void HandleTouch(InputAction.CallbackContext ctx) // Takes touchPosition on trigger
     {
-        touchPosition = touchControl.Touch.TouchPosition.ReadValue<Vector2>();
         // Debug.Log($"Touch started: {touchPosition}");
         if (ctx.started)
         {
-            OnTouchStart?.Invoke(touchPosition, (float)ctx.startTime);
+            startPosition = touchControl.Touch.TouchPosition.ReadValue<Vector2>();
+            OnTouchStart?.Invoke(startPosition, (float)ctx.startTime);
         }
         else if (ctx.canceled)
         {
-            OnTouchEnd?.Invoke(touchPosition, (float)ctx.time);
+            endPosition = touchControl.Touch.TouchPosition.ReadValue<Vector2>();
+            OnTouchEnd?.Invoke(endPosition, (float)ctx.time);
         }
     }
 
 
-    public Vector2 GetTouchPosition() 
+    public Vector2 GetTouchPosition()
     {
-        touchPosition = touchControl.Touch.TouchPosition.ReadValue<Vector2>();
-        return touchPosition;
+        currPosition = touchControl.Touch.TouchPosition.ReadValue<Vector2>();
+        return currPosition;
     }
 }
