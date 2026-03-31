@@ -10,43 +10,49 @@ using System.Collections.Generic;
 
 public class PanelManager : MonoBehaviour
 {
+    /*Subscriptions*/
+    [SerializeField] private GameObject menuBars;
+    
+    [SerializeField] private Panel activePanel; // active panel, stored to allow simple panel switching (added in the inspector, might come from database later)
+    
     [System.Serializable]
     public class Panel
     {
         public PanelEmitterButton button; // button that emits panel request to manager 
         public PanelController view; 
     }
-    
     public List<Panel> panelList;                // list of panels, populated in the inspector
-    [SerializeField] private Panel activePanel; // active panel, stored to allow simple panel switching (added in the inspector, might come from database later)
 
     
     private void Start()
     {
         SwitchActivePanel(activePanel);
+        SubScribeToActivePanelEvents();
     }
     
     public void OnEnable()
     {
         foreach (var panel in panelList)
-            panel.button.OnMenuButtonClick += HandlePanelRequest;
+            panel.button.OnMenuButtonClick += HandleNewPanelRequest;
+        
     }
 
     public void OnDisable()
     {
         foreach (var panel in panelList)
-            panel.button.OnMenuButtonClick -= HandlePanelRequest;
+            panel.button.OnMenuButtonClick -= HandleNewPanelRequest;
     }
 
-    private void HandlePanelRequest(PanelEmitterButton clickedButton)
+    private void HandleNewPanelRequest(PanelEmitterButton clickedButton)
     {
         Panel requestPanel = panelList.Find(panel => panel.button == clickedButton);
         SwitchActivePanel(requestPanel);
+        SubScribeToActivePanelEvents();
     }
-    
+
     private void SwitchActivePanel(Panel requestPanel)
     {
-
+        
         if (activePanel.view != requestPanel.view && activePanel.button != requestPanel.button)
         {
             activePanel.view.Hide();
@@ -54,8 +60,26 @@ public class PanelManager : MonoBehaviour
         }
         
         requestPanel.view.Show();
-        requestPanel.button.Select();
+        if(requestPanel.button != null) requestPanel.button.Select();
         activePanel = requestPanel;
+    }
+
+    void SubScribeToActivePanelEvents()
+    {
+        if(activePanel.view.hasSubPanel)
+            activePanel.view.OnPanelLayerRequest += HandlePanelLayerRequest;
+    }
+   
+    private void HandlePanelLayerRequest(GameObject requestedSubPanel, bool requestedMenuState)
+    {
+        Debug.Log(requestedMenuState ? "Main Layer is shown": "SubLayer is shown");
+        
+        Panel subPanel= new Panel();
+        subPanel.button = null;
+        subPanel.view = requestedSubPanel.GetComponent<PanelController>();
+        menuBars.SetActive(requestedMenuState);
+        
+        SwitchActivePanel(subPanel);
     }
     
    

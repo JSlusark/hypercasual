@@ -2,7 +2,7 @@ using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class Holdview : MonoBehaviour
+public class TouchPointerview : MonoBehaviour
 {
     [SerializeField] private float lineWidth = 5f;
 

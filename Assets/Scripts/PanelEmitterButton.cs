@@ -5,6 +5,8 @@ using UnityEngine.UI;
     /*
      Should only hold the View logic (state and interaction) for the button. 
      It is attached as a script component to each button in the menu.
+     
+
      */
     
 public class PanelEmitterButton : MonoBehaviour

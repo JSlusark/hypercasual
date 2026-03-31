@@ -33,14 +33,14 @@ public class SwipeController : MonoBehaviour
     [SerializeField] private GameObject touchIndicator;
 
     private TouchManager _touchManager;
-    private Holdview _touchTrail;
+    private TouchPointerview _touchTrail;
 
     
     
     private void Awake()
     {
         _touchManager = TouchManager.Instance;
-        _touchTrail = touchIndicator.GetComponent<Holdview>();
+        _touchTrail = touchIndicator.GetComponent<TouchPointerview>();
     }
 
 
