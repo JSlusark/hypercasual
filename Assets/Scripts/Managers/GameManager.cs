@@ -1,5 +1,11 @@
 using UnityEngine;
 
+/*
+ * Later make it inherit from Singleton as TouchManager
+ * as T will ensure it's not confused with other singleton type children
+ * 
+ */
+
 public class GameManager : MonoBehaviour
 {
     [SerializeField] private CharactersDatabase characterDatabase;
@@ -14,6 +20,7 @@ public class GameManager : MonoBehaviour
     {
         if (Instance != null)
         {
+            Debug.Log($"[GameManager] Duplicate found, destroying. Existing ID: {Instance.GetInstanceID()}, This ID: {GetInstanceID()}");
             Destroy(gameObject);
             return;
         }
@@ -23,6 +30,7 @@ public class GameManager : MonoBehaviour
         // Debug.Log($"[OldGameManager] Created instance: {GetInstanceID()}"); // helps to debug if we have multiple instances
         
         // sets default character to start here for now
+        Debug.Log($"[GameManager] Instance set. ID: {GetInstanceID()}");
         SelectedCharacter = defaultCharacter;
     }
     
