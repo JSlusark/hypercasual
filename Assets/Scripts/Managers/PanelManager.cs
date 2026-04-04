@@ -1,5 +1,9 @@
+using System;
 using UnityEngine;
 using System.Collections.Generic;
+using DefaultNamespace;
+using UnityEngine.Serialization;
+using UnityEngine.UI;
 
 /*
     This class is responsible for managing the different panels in the UI.
@@ -10,77 +14,88 @@ using System.Collections.Generic;
 
 public class PanelManager : MonoBehaviour
 {
-    /*Subscriptions*/
+    [Header("References for imported controllers")] 
     [SerializeField] private GameObject menuBars;
+    [SerializeField] private GameObject panelControllers;
+    [Header("Active Panel Info")]
+    [SerializeField] private PanelID activePanelID;
     
-    [SerializeField] private Panel activePanel; // active panel, stored to allow simple panel switching (added in the inspector, might come from database later)
-    
-    [System.Serializable]
-    public class Panel
-    {
-        public PanelEmitterButton button; // button that emits panel request to manager 
-        public PanelController view; 
-    }
-    public List<Panel> panelList;                // list of panels, populated in the inspector
+    // 
+    private PanelController[] _panelList;
+    private PanelEmitterButton[] _menuButtonList;
 
-    
+    private void Awake()
+    {
+        _menuButtonList = menuBars.GetComponentsInChildren<PanelEmitterButton>();
+        _panelList = panelControllers.GetComponentsInChildren<PanelController>();
+    }
+
     private void Start()
     {
-        SwitchActivePanel(activePanel);
-        SubScribeToActivePanelEvents();
+        SetPanelState(activePanelID, true);
     }
-    
+
     public void OnEnable()
     {
-        foreach (var panel in panelList)
-            panel.button.OnMenuButtonClick += HandleNewPanelRequest;
-        
+        SubscribeToPanelEmitterButtons(_menuButtonList);
     }
 
     public void OnDisable()
     {
-        foreach (var panel in panelList)
-            panel.button.OnMenuButtonClick -= HandleNewPanelRequest;
-    }
-
-    private void HandleNewPanelRequest(PanelEmitterButton clickedButton)
-    {
-        Panel requestPanel = panelList.Find(panel => panel.button == clickedButton);
-        SwitchActivePanel(requestPanel);
-        SubScribeToActivePanelEvents();
-    }
-
-    private void SwitchActivePanel(Panel requestPanel)
-    {
-        
-        if (activePanel.view != requestPanel.view && activePanel.button != requestPanel.button)
-        {
-            activePanel.view.Hide();
-            activePanel.button.Deselect();
-        }
-        
-        requestPanel.view.Show();
-        if(requestPanel.button != null) requestPanel.button.Select();
-        activePanel = requestPanel;
-    }
-
-    void SubScribeToActivePanelEvents()
-    {
-        if(activePanel.view.hasSubPanel)
-            activePanel.view.OnPanelLayerRequest += HandlePanelLayerRequest;
-    }
-   
-    private void HandlePanelLayerRequest(GameObject requestedSubPanel, bool requestedMenuState)
-    {
-        Debug.Log(requestedMenuState ? "Main Layer is shown": "SubLayer is shown");
-        
-        Panel subPanel= new Panel();
-        subPanel.button = null;
-        subPanel.view = requestedSubPanel.GetComponent<PanelController>();
-        menuBars.SetActive(requestedMenuState);
-        
-        SwitchActivePanel(subPanel);
+        UnsubscribeToPanelEmitterButtons(_menuButtonList);
     }
     
-   
+    private void SubscribeToPanelEmitterButtons(PanelEmitterButton[] buttons)
+    {
+        foreach (var button in buttons)
+        {
+            if (button.isInMenuBar && button.panelID.ToString() != button.name) // hard coded check to make sure menu buttons have the right panelID
+                throw new System.InvalidOperationException($"[PanelManager] Menu button \"{button.name}\" does not match with its panelID \"{button.panelID}\".");
+            button.OnPanelEmitterClick += HandlePanelSwitch;
+        }
+    }
+
+    private void UnsubscribeToPanelEmitterButtons(PanelEmitterButton[] buttons)
+    {
+        foreach (var button in buttons)
+            button.OnPanelEmitterClick -= HandlePanelSwitch;
+    }
+
+    private void HandlePanelSwitch(PanelID requestedPanelID)
+    {
+        if (requestedPanelID == activePanelID)
+        {
+            Debug.LogWarning($"[PanelManager] Nothing to switch as Panel {requestedPanelID} is already active.");
+            return;
+        }
+
+        // Debug.Log($"[PanelManager] Received panel request: {requestedPanelID}");
+        SetPanelState(activePanelID,    false);
+        SetPanelState(requestedPanelID, true);
+    }
+
+
+    private void SetPanelState(PanelID panelID, bool setActive)
+    {
+        /* Panel and paired menu button*/
+        PanelController panel = System.Array.Find(_panelList,               panel => panel.panelID   == panelID);
+        PanelEmitterButton menuButton = System.Array.Find(_menuButtonList, button => button.panelID == panelID);
+        if (setActive)
+        {
+            panel.Show();
+            menuBars.SetActive(panel.showsMenuBar);
+            if(menuButton != null) menuButton.Select();
+            if (panel.PanelEmitterButtons != null) SubscribeToPanelEmitterButtons(panel.PanelEmitterButtons);
+            activePanelID = panelID;
+        }
+        else
+        {
+            if (menuButton != null) menuButton.Deselect();
+            if (panel.PanelEmitterButtons != null) UnsubscribeToPanelEmitterButtons(panel.PanelEmitterButtons);
+            panel.Hide();
+        }
+    }
+    
+    
+    
 }

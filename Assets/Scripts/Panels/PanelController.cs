@@ -1,4 +1,6 @@
 using System;
+using DefaultNamespace;
+using UnityEditorInternal.VersionControl;
 using UnityEngine;
 
 /*
@@ -9,48 +11,43 @@ using UnityEngine;
  */
 public abstract class PanelController : MonoBehaviour
 {
-    [SerializeField] protected GameObject panelPrefab;
     protected GameObject PanelInstance;
-    public bool hasSubPanel = false;
+    
+    [Header("Panel Info")]
+    public PanelID panelID;
+    public bool showsMenuBar;
+    [SerializeField] protected GameObject panelPrefab;
+    
+    [Header("PanelEmitterButtons - needed by PanelManager")]
+    public PanelEmitterButton[] PanelEmitterButtons { get; private set; } 
+    
+
 
     public virtual void Show() 
     {
         if (PanelInstance != null)
         {
-            Debug.LogWarning($"[PanelController] {panelPrefab.name} is already shown.");
+            Debug.LogWarning($"[PanelController] {panelPrefab.name} is already instantiated - did you forget to call Hide()?");
             return;
         }
 
-        Debug.Log($"[PanelController] Show: {panelPrefab.name}");
+        // Debug.Log($"[PanelController] Show: {panelPrefab.name}");
         PanelInstance = Instantiate(panelPrefab);
+        PanelEmitterButtons = PanelInstance.GetComponentsInChildren<PanelEmitterButton>();
+        // Debug.Log($"[PanelController] Found {PanelEmitterButtons.Length} PanelEmitterButtons in {panelPrefab.name}");
     }
 
     public virtual void Hide()
     {
         if (PanelInstance == null)
         {
-            Debug.LogWarning($"[PanelController] {panelPrefab.name} is not currently shown.");
+            // Debug.LogWarning($"[PanelController] {panelPrefab.name} is not currently shown.");
             return;
         }
-
-        Debug.Log($"[PanelController] Hide: {panelPrefab.name}");
+        
+        // Debug.Log($"[PanelController] Hide: {panelPrefab.name}");
         Destroy(PanelInstance);
         PanelInstance = null;
     }
-    
-/*
-  Function is called from child class so that panel manager can subscribe to the event
-  and know what dance panel type (base preview, play, results) should be shown.
-  I am not fond of this logic as I feel the DanceSession and DanceSummary are more "overlays" of the Dance Panel
-  rather than their own separate panels. 
-  Storing this on a separate branch, so that I can keep it in case my reasoning is wrong and need to pursue this
-  path instead of the overlay one.
- */
-    public event Action<GameObject, bool> OnPanelLayerRequest;
-    protected void TriggerPanelLayer(GameObject requestedLayer, bool requestedMenuState)
-    {
-        OnPanelLayerRequest?.Invoke(requestedLayer, requestedMenuState);
-    }
-    
     
 }
