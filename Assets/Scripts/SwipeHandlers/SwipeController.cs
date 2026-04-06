@@ -5,15 +5,7 @@ using Color = UnityEngine.Color;
 
 public class SwipeController : MonoBehaviour
 {
-    public enum SwipeDirection
-    {
-        Up,
-        Down,
-        Right,
-        Left
-    }
-
-    public delegate void SwipeEventHandler(SwipeDirection direction);
+    public delegate void SwipeEventHandler(SwipeID direction);
 
     public event SwipeEventHandler OnSwipe; // when swipe is detected, it will invoke this
 
@@ -23,24 +15,24 @@ public class SwipeController : MonoBehaviour
 
     [SerializeField] private float maximumSwipeTime;
     [SerializeField, Range(0f, 1f)] private float directionThreshold;
-    [SerializeField] private SwipeDirection swipeDirection;
+    // [SerializeField] private SwipeID swipeDirection;
 
     [Header("References")]
     [SerializeField] private Vector2 _startPosition;
     [SerializeField] private Vector2 _endPosition;
     [SerializeField] private float _startTime;
     [SerializeField] private float _endTime;
-    [SerializeField] private GameObject touchIndicator;
+    // [SerializeField] private GameObject touchIndicator;
 
     private TouchManager _touchManager;
-    private TouchPointerview _touchTrail;
+    private TouchIndicatorView _touchTrail;
 
     
     
     private void Awake()
     {
         _touchManager = TouchManager.Instance;
-        _touchTrail = touchIndicator.GetComponent<TouchPointerview>();
+        // _touchTrail = touchIndicator.GetComponent<TouchIndicatorView>();
     }
 
 
@@ -60,14 +52,14 @@ public class SwipeController : MonoBehaviour
     {
         _startPosition = startPosition;
         _startTime = time;
-        _touchTrail.StartTrail(startPosition);
+        // _touchTrail.StartTrail(startPosition);
     }
 
     private void HandleSwipeEnd(Vector2 endPosition, float time)
     {
         _endPosition = endPosition;
         _endTime = time;
-        _touchTrail.StopTrail();
+        // _touchTrail.StopTrail();
         DetectSwipe();
     }
 
@@ -84,21 +76,21 @@ public class SwipeController : MonoBehaviour
         {
             // Debug.Log($"Swipe detected from {startPosition} to {endPosition}");
             Debug.DrawLine(_startPosition, _endPosition, Color.red, 1f);
-            NotifySwipeDirection(_endPosition - _startPosition);
+            NotifySwipeID(_endPosition - _startPosition);
         }
     }
 
-    private void NotifySwipeDirection(Vector2 rawDirection)
+    private void NotifySwipeID(Vector2 rawDirection)
     {
         Vector2 direction = rawDirection.normalized;
         // Dot returns 1 if exact same direction or -1 if opposite direction 
         if (Vector2.Dot(Vector2.up, direction) > directionThreshold)
-            OnSwipe?.Invoke(SwipeDirection.Up);
+            OnSwipe?.Invoke(SwipeID.Up);
         else if (Vector2.Dot(Vector2.down, direction) > directionThreshold)
-            OnSwipe?.Invoke(SwipeDirection.Down);
+            OnSwipe?.Invoke(SwipeID.Down);
         else if (Vector2.Dot(Vector2.right, direction) > directionThreshold)
-            OnSwipe?.Invoke(SwipeDirection.Right);
+            OnSwipe?.Invoke(SwipeID.Right);
         else if (Vector2.Dot(Vector2.left, direction) > directionThreshold)
-            OnSwipe?.Invoke(SwipeDirection.Left);
+            OnSwipe?.Invoke(SwipeID.Left);
     }
 }

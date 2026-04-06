@@ -4,7 +4,7 @@ using UnityEngine.EventSystems;
 
 // this scrip can be used for arrowswipe
 
-public class SwipeView : MonoBehaviour, IPointerDownHandler
+public class SwipeIndicator : MonoBehaviour, IPointerDownHandler
 {
     [Header("Movement Settings")]
     [SerializeField] private float moveDistance = 300f;   // max distance before snapping back
@@ -40,17 +40,17 @@ public class SwipeView : MonoBehaviour, IPointerDownHandler
         _isTouched = true;
     }
 
-    private void HandleSwipe(SwipeController.SwipeDirection direction)
+    private void HandleSwipe(SwipeID direction)
     {
         if (!_isTouched) return;
         _isTouched = false;
 
         Vector2 targetPosition = direction switch
         {
-            SwipeController.SwipeDirection.Up    => _originPosition + Vector2.up    * moveDistance,
-            SwipeController.SwipeDirection.Down  => _originPosition + Vector2.down  * moveDistance,
-            SwipeController.SwipeDirection.Right => _originPosition + Vector2.right * moveDistance,
-            SwipeController.SwipeDirection.Left  => _originPosition + Vector2.left  * moveDistance,
+            SwipeID.Up    => _originPosition + Vector2.up    * moveDistance,
+            SwipeID.Down  => _originPosition + Vector2.down  * moveDistance,
+            SwipeID.Right => _originPosition + Vector2.right * moveDistance,
+            SwipeID.Left  => _originPosition + Vector2.left  * moveDistance,
             _ => _originPosition
         };
 

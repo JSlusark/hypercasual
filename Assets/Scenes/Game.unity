@@ -214,7 +214,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &45627550
 Transform:
   m_ObjectHideFlags: 0
@@ -265,7 +265,6 @@ MonoBehaviour:
   _endPosition: {x: 0, y: 0}
   _startTime: 0
   _endTime: 0
-  touchIndicator: {fileID: 1278744480}
 --- !u!1001 &72991879
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -894,7 +893,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &535466791
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1736,7 +1735,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1278744481
 RectTransform:
   m_ObjectHideFlags: 0
@@ -2342,7 +2341,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &1577376395
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2794,6 +2793,7 @@ MonoBehaviour:
   panelID: 6
   showsMenuBar: 0
   panelPrefab: {fileID: 8339082342934915379, guid: 7b330581bc04a4342a33801d53e3b23b, type: 3}
+  characterSprite: {fileID: 0}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0

@@ -2,7 +2,7 @@ using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class TouchPointerview : MonoBehaviour
+public class TouchIndicatorView : MonoBehaviour
 {
     [SerializeField] private float lineWidth = 5f;
 
