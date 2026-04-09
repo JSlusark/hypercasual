@@ -9,9 +9,9 @@ public class ArrowModel
                                                                               { SwipeID.Up, 0f },
                                                                               { SwipeID.Right, -90f },
                                                                               { SwipeID.Down, 180f },
-                                                                              { SwipeID.Left, 90f }
-                                                                          };
-
+                                                                              { SwipeID.Left, 90f } };
+    
+    
     public enum ArrowType
     {
         Basic,     // average arrow that is removed on swipe
@@ -21,18 +21,23 @@ public class ArrowModel
         Hideable   // is hidden right after spawn 
     }
 
-
     public SwipeID ArrowID { get; protected set; }
     public float ArrowDirection { get; protected set; }
     public ArrowType Type { get; protected set; }
+
+    public Color Highlight { get; protected set; }
+    public Color Default { get; protected set; }
+    public Color Success { get; protected set; }
+    public Color Fail { get; protected set; }
 
     public ArrowModel()
     {
         var randomPair = ArrowDirectionMap.ElementAt(UnityEngine.Random.Range(0, ArrowDirectionMap.Count));
         ArrowID = randomPair.Key;
         ArrowDirection = randomPair.Value;
-
-        // Based on random type we should construct upon the base class with the proper derived class based on type
+        
+        
+        // Based on random type, I could construct upon the base class with the proper derived class based on type
         Type = (ArrowType)UnityEngine.Random.Range(0, System.Enum.GetNames(typeof(ArrowType)).Length);
         // return randomType switch
         //        {
@@ -47,9 +52,9 @@ public class ArrowModel
 
     public bool SwipeSuccess(SwipeID swipeID)
     {
-        Debug.Log(swipeID == ArrowID
-                      ? $"[ArrowModel] SUCCESS - Swipe:{swipeID} equals ArrowID:{ArrowID}"
-                      : $"[ArrowModel] FAIL - Swipe:{swipeID} does not match ArrowID:{ArrowID}");
+        // Debug.Log(swipeID == ArrowID
+        //               ? $"[ArrowModel] SUCCESS - Swipe:{swipeID} equals ArrowID:{ArrowID}"
+        //               : $"[ArrowModel] FAIL - Swipe:{swipeID} does not match ArrowID:{ArrowID}");
         return swipeID == ArrowID;
     }
 }

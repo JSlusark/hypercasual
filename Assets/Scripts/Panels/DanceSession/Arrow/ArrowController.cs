@@ -6,50 +6,47 @@ public class ArrowController : MonoBehaviour
 {
     [SerializeField] private ArrowView arrowView;
 
-    private SwipeController _swipeController; // to subscribe to swipes
+    // private SwipeController _swipeController; // to subscribe to swipes
     private ArrowModel _arrowModel;
-
 
 
     private void Awake()
     {
-        _swipeController = FindAnyObjectByType<SwipeController>();
-        playerInput = GetComponent<PlayerInput>();
-        danceMoveAction = playerInput.actions["DanceMove"];
-
-
         _arrowModel = new ArrowModel();
         arrowView.Show(_arrowModel.ArrowDirection);
     }
 
-    private void OnEnable()
-    {
-        _swipeController.OnSwipe += HandleDanceMove;
-        danceMoveAction.performed += OnDanceMove;
-    }
-
-    private void OnDisable()
-    {
-        _swipeController.OnSwipe -= HandleDanceMove;
-        danceMoveAction.performed -= OnDanceMove; 
-    }
-
-    private void HandleDanceMove(SwipeID swipeDirection)
+    public bool CheckDanceMove(SwipeID swipeDirection)
     {
         if (_arrowModel.SwipeSuccess(swipeDirection))
-            arrowView.ShowSuccess();
+        {
+            ShowSuccess();
+            return true;
+        }
         else
-            arrowView.ShowFail();
+        {
+            ShowFail();
+            return false;
+        }
     }
 
-    // added here as test to try also keys (it works)
-    private PlayerInput playerInput;
-    private InputAction danceMoveAction;
-    private void OnDanceMove(InputAction.CallbackContext context)
+    public void ShowPointer(bool isSelected)
     {
-        string inputName = context.control.displayName; // get the name of the control that triggered the action
-        // Debug.Log("DanceMove performed: " + inputName);
-        SwipeID swipeID = (SwipeID)System.Enum.Parse(typeof(SwipeID), inputName);
-        HandleDanceMove(swipeID);
+        if (isSelected)
+            arrowView.SetHighlight();
+        else
+            arrowView.SetDefault();
+    }
+
+    // ArrowController
+
+    public void ShowSuccess()
+    {
+        arrowView.SetSuccess();
+    }
+
+    public void ShowFail()
+    {
+        arrowView.SetFail();
     }
 }

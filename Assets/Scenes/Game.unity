@@ -260,7 +260,6 @@ MonoBehaviour:
   minimumSwipeDistance: 0.2
   maximumSwipeTime: 1
   directionThreshold: 0.9
-  swipeDirection: 0
   _startPosition: {x: 0, y: 0}
   _endPosition: {x: 0, y: 0}
   _startTime: 0
@@ -1730,7 +1729,7 @@ GameObject:
   - component: {fileID: 1278744486}
   - component: {fileID: 1278744487}
   m_Layer: 5
-  m_Name: HoldView
+  m_Name: TouchIndicator
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2336,12 +2335,12 @@ GameObject:
   - component: {fileID: 1577376396}
   - component: {fileID: 1577376395}
   m_Layer: 5
-  m_Name: TouchTests
+  m_Name: TouchTestView
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &1577376395
 MonoBehaviour:
   m_ObjectHideFlags: 0
