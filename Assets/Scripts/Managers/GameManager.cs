@@ -30,7 +30,7 @@ public class GameManager : MonoBehaviour
         // Debug.Log($"[OldGameManager] Created instance: {GetInstanceID()}"); // helps to debug if we have multiple instances
         
         // sets default character to start here for now
-        Debug.Log($"[GameManager] Instance set. ID: {GetInstanceID()}");
+        // Debug.Log($"[GameManager] Instance set. ID: {GetInstanceID()}");
         SelectedCharacter = defaultCharacter;
     }
     
@@ -39,6 +39,6 @@ public class GameManager : MonoBehaviour
     public void SetSelectedCharacter(CharacterData character)
     {
         SelectedCharacter = character;
-        Debug.Log($"[GAME MANAGER] Selected new Character {SelectedCharacter.name}");
+        // Debug.Log($"[GAME MANAGER] Selected new Character {SelectedCharacter.name}");
     }
 }

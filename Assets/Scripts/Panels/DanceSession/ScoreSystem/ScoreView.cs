@@ -10,6 +10,4 @@ public class ScoreView : MonoBehaviour
         text.text = score.ToString();
     }
     
-    
-    /*MODEL*/
 }
