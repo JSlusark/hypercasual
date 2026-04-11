@@ -6,12 +6,10 @@ using UnityEngine.UI;
 public class CharacterView : MonoBehaviour
 {
     [SerializeField] private Image characterSprite;
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-
-
+    
     private void Start()
     {
-        ShowIdle(characterSprite.sprite);
+        ShowIdle(characterSprite.sprite); // fallback?
     }
 
     public void ShowIdle(Sprite sprite)

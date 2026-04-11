@@ -2,8 +2,8 @@ using DefaultNamespace;
 using UnityEngine;
 
 /*
-     - base class for all panel controllers
-     - methods are called by panel manager when switching panels
+     - base class for all DanceSession controllers
+     - methods are called by DanceSession manager when switching panels
 
      Inheritance in C#: https://learn.microsoft.com/en-us/dotnet/csharp/fundamentals/tutorials/inheritance
  */
@@ -15,9 +15,9 @@ public abstract class PanelController : MonoBehaviour
     public PanelID panelID;
     public bool showsMenuBar;
     [SerializeField] protected GameObject panelPrefab;
-    
+
     [Header("PanelEmitterButtons - needed by PanelManager")]
-    public PanelEmitterButton[] PanelEmitterButtons { get; private set; } 
+    public PanelEmitterButton[] PanelEmitterButtons; /*{ get; private set; }*/ 
     
 
 
@@ -31,8 +31,8 @@ public abstract class PanelController : MonoBehaviour
 
         // Debug.Log($"[PanelController] Show: {panelPrefab.name}");
         PanelInstance = Instantiate(panelPrefab);
-        PanelEmitterButtons = PanelInstance.GetComponentsInChildren<PanelEmitterButton>();
-        // Debug.Log($"[PanelController] Found {PanelEmitterButtons.Length} PanelEmitterButtons in {panelPrefab.name}");
+        PanelEmitterButtons = PanelInstance.GetComponentsInChildren<PanelEmitterButton>(true); // includes inactive children
+        Debug.Log($"[PanelController] Found {PanelEmitterButtons.Length} PanelEmitterButtons in {panelPrefab.name}");
     }
 
     public virtual void Hide()

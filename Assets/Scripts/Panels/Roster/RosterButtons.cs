@@ -5,7 +5,7 @@ using System;
 
 
 /*
- * View component for character card
+ * DanceSession component for character card
  */
 
     public class RosterButtons : MonoBehaviour

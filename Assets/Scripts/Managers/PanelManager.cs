@@ -7,7 +7,7 @@ using UnityEngine.UI;
 
 /*
     This class is responsible for managing the different panels in the UI.
-    It listens to menu button clicks and switches the active panel accordingly.
+    It listens to menu button clicks and switches the active DanceSession accordingly.
     Each button is linked to its corresponding screen in a list of PanelView objects in the inspector.
 */
 
@@ -69,7 +69,7 @@ public class PanelManager : MonoBehaviour
             return;
         }
 
-        // Debug.Log($"[PanelManager] Received panel request: {requestedPanelID}");
+        // Debug.Log($"[PanelManager] Received DanceSession request: {requestedPanelID}");
         SetPanelState(activePanelID,    false);
         SetPanelState(requestedPanelID, true);
     }

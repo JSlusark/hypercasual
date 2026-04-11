@@ -4,14 +4,15 @@ using UnityEngine;
 
 public class ArrowModel
 {
-    public static readonly Dictionary<SwipeID, float> ArrowDirectionMap = new()
-                                                                          {
-                                                                              { SwipeID.Up, 0f },
-                                                                              { SwipeID.Right, -90f },
-                                                                              { SwipeID.Down, 180f },
-                                                                              { SwipeID.Left, 90f } };
+    private static readonly Dictionary<SwipeID, float> ArrowDirectionMap = new()
+                                                                           {
+                                                                               { SwipeID.Up, 0f },
+                                                                               { SwipeID.Right, -90f },
+                                                                               { SwipeID.Down, 180f },
+                                                                               { SwipeID.Left, 90f } };
     
     
+    // Arrow types derived classes ideas
     public enum ArrowType
     {
         Basic,     // average arrow that is removed on swipe
@@ -32,13 +33,13 @@ public class ArrowModel
 
     public ArrowModel()
     {
-        var randomPair = ArrowDirectionMap.ElementAt(UnityEngine.Random.Range(0, ArrowDirectionMap.Count));
+        var randomPair = ArrowDirectionMap.ElementAt(Random.Range(0, ArrowDirectionMap.Count));
         ArrowID = randomPair.Key;
         ArrowDirection = randomPair.Value;
         
         
         // Based on random type, I could construct upon the base class with the proper derived class based on type
-        Type = (ArrowType)UnityEngine.Random.Range(0, System.Enum.GetNames(typeof(ArrowType)).Length);
+        Type = (ArrowType)Random.Range(0, System.Enum.GetNames(typeof(ArrowType)).Length);
         // return randomType switch
         //        {
         //            ArrowType.Basic     => new BasicArrow(directionPair.Key, directionPair.Value),

@@ -4,7 +4,7 @@ using UnityEngine.UI;
 
 
 /*
- * View component for character card
+ * DanceSession component for character card
  */
 
     public class DancerCard : MonoBehaviour

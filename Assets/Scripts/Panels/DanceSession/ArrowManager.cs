@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using Random = UnityEngine.Random;
 
 public class ArrowManager : MonoBehaviour
 {
@@ -14,9 +15,11 @@ public class ArrowManager : MonoBehaviour
     private int _pointedIndex;
 
     private SwipeController _swipeController; // to subscribe to swipes
-
+    // private PlayerInput playerInput;
+    // private InputAction danceMoveAction;
 
     private bool _resultInProgress;
+    public event Action<bool> OnSequenceComplete; // to tell controller when point needs to be added
 
 
     private void Awake()
@@ -46,7 +49,7 @@ public class ArrowManager : MonoBehaviour
         // danceMoveAction.performed -= OnDanceMove; 
     }
 
-    private void SetActiveArrow(int activeIndex)
+    private void PointToArrow(int activeIndex)
     {
         _pointedArrow = _arrowGroup[activeIndex];
         _pointedArrow.ShowPointer(true);
@@ -55,8 +58,8 @@ public class ArrowManager : MonoBehaviour
 
     private void StartNewSequence()
     {
-        
-        _maxArrows = UnityEngine.Random.Range(3, 6); // range is decided in gameSessionPanel contrller based on how far the session goes
+        // range is decided in gameSessionPanel controller based on how far the session goe
+        _maxArrows = Random.Range(3, 6);
         for (int i = 0; i < _maxArrows; i++)
         {
             ArrowController newArrow = Instantiate(arrowController, this.transform.parent);
@@ -64,7 +67,7 @@ public class ArrowManager : MonoBehaviour
         }
 
         _pointedIndex = 0;
-        SetActiveArrow(_pointedIndex); // sets 
+        PointToArrow(_pointedIndex); // sets 
     }
 
 
@@ -76,8 +79,8 @@ public class ArrowManager : MonoBehaviour
             if (showSuccess) arrow.ShowSuccess();
             else arrow.ShowFail();
         }
-        // perhaps i can send signal for video bar to stop timer
 
+        // perhaps I can send signal for video bar to stop timer
         yield return new WaitForSeconds(0.5f);
         callback();
         _resultInProgress = false;
@@ -94,19 +97,22 @@ public class ArrowManager : MonoBehaviour
         _arrowGroup.Clear();
     }
 
+
     private void ReplaceSequence()
     {
+        OnSequenceComplete?.Invoke(true);
         StartCoroutine(WaitResultAnimation(
                                            true, () =>
                                            {
                                                RemoveSequence();
                                                StartNewSequence();
-                                               SetActiveArrow(_pointedIndex);
+                                               PointToArrow(_pointedIndex);
                                            }));
     }
 
     private void ResetProgress()
     {
+        OnSequenceComplete?.Invoke(false);
         StartCoroutine(WaitResultAnimation(false, () =>
         {
             foreach (var arrow in _arrowGroup)
@@ -115,8 +121,7 @@ public class ArrowManager : MonoBehaviour
                 arrow.ShowPointer(false);
             }
 
-            ;
-            SetActiveArrow(_pointedIndex = 0);
+            PointToArrow(_pointedIndex = 0);
         }));
     }
 
@@ -125,7 +130,7 @@ public class ArrowManager : MonoBehaviour
         if (_pointedIndex < (_maxArrows - 1))
         {
             // Debug.Log($"[ArrowManager] Advanced Sequence");
-            SetActiveArrow(++_pointedIndex); // or ++_actoveIndex?
+            PointToArrow(++_pointedIndex); // or ++_activeIndex?
         }
         else
         {
@@ -153,12 +158,12 @@ public class ArrowManager : MonoBehaviour
     // added here as test to try also keys (it works)
     // private PlayerInput playerInput;
     // private InputAction danceMoveAction;
-    // private void OnDanceMove(InputAction.CallbackContext context)
-    // {
-    //     string inputName = context.control.displayName; // get the name of the control that triggered the action
-    //     // Debug.Log("DanceMove performed: " + inputName);
-    //     SwipeID swipeID = (SwipeID)System.Enum.Parse(typeof(SwipeID), inputName);
-    //     HandleDanceMove(swipeID);
-    //     // destroy dance view and controller?
-    // }
+    private void OnDanceMove(InputAction.CallbackContext context)
+    {
+        string inputName = context.control.displayName; // get the name of the control that triggered the action
+        // Debug.Log("DanceMove performed: " + inputName);
+        SwipeID swipeID = (SwipeID)System.Enum.Parse(typeof(SwipeID), inputName);
+        HandleDanceMove(swipeID);
+        // destroy dance view and controller?
+    }
 }

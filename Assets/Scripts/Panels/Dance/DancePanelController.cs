@@ -7,10 +7,6 @@ public class DancePanelController : PanelController
 {
     [SerializeField] private CharacterView characterSprite;
     
-    private void Awake()
-    {
-    }
-
     public override void Show()
     {
         base.Show();

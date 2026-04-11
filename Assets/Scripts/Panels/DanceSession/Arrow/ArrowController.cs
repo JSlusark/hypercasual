@@ -1,12 +1,10 @@
 using UnityEngine;
-using UnityEngine.InputSystem;
 
 
 public class ArrowController : MonoBehaviour
 {
     [SerializeField] private ArrowView arrowView;
 
-    // private SwipeController _swipeController; // to subscribe to swipes
     private ArrowModel _arrowModel;
 
 

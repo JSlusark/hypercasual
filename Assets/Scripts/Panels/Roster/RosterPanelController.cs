@@ -5,7 +5,7 @@ using UnityEngine;
 
 /*
  *
- * RosterPanelController instantiates the RosterPanel prefab, manages View components of the prefab and listens to events
+ * RosterPanelController instantiates the RosterPanel prefab, manages DanceSession components of the prefab and listens to events
  *
  */
 
@@ -33,7 +33,7 @@ public class RosterPanelController : PanelController
     {
         foreach (var button in buttons)
             button.OnRequestTrigger -= HandleButtonRequest;
-        _cardIndex = _navigator.SelectedCharacterIndex; // saves index of the selected character to show as card when  reloading the roster panel
+        _cardIndex = _navigator.SelectedCharacterIndex; // saves index of the selected character to show as card when  reloading the roster DanceSession
         base.Hide();
     }
 

@@ -347,6 +347,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b584b1977767d44e6844089bd29acfed, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ArrowView
+  arrowRect: {fileID: 7400824388480137649}
   arrowSprite: {fileID: 8143854556277677388}
   arrowImage: {fileID: 4138010837991454643}
   backgroundImage: {fileID: 5746010799823649112}
@@ -354,3 +355,5 @@ MonoBehaviour:
   DefaultColor: {r: 0.5471698, g: 0.5471698, b: 0.5471698, a: 1}
   SuccessColor: {r: 0.495283, g: 1, b: 0.5213625, a: 1}
   FailColor: {r: 1, g: 0.25, b: 0.27225876, a: 1}
+  moveDistance: 20
+  moveDuration: 0.2

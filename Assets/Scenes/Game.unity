@@ -433,6 +433,7 @@ MonoBehaviour:
   panelID: 7
   showsMenuBar: 0
   panelPrefab: {fileID: 8339082342934915379, guid: 8c3828683e14343edb1e12c47c03277b, type: 3}
+  PanelEmitterButtons: []
 --- !u!4 &144164286
 Transform:
   m_ObjectHideFlags: 0
@@ -1012,6 +1013,7 @@ MonoBehaviour:
   panelID: 5
   showsMenuBar: 1
   panelPrefab: {fileID: 8339082342934915379, guid: ca63ccd4c91e34f31a3628821e5fb08c, type: 3}
+  PanelEmitterButtons: []
 --- !u!1 &572462494
 GameObject:
   m_ObjectHideFlags: 0
@@ -1428,6 +1430,7 @@ MonoBehaviour:
   panelID: 4
   showsMenuBar: 1
   panelPrefab: {fileID: 8339082342934915379, guid: 7a8aec0c900054554a0cdfca79fa63da, type: 3}
+  PanelEmitterButtons: []
 --- !u!1 &940199138
 GameObject:
   m_ObjectHideFlags: 0
@@ -1475,6 +1478,7 @@ MonoBehaviour:
   panelID: 1
   showsMenuBar: 1
   panelPrefab: {fileID: 8339082342934915379, guid: e860aba2c086b4427b50980dbe4de051, type: 3}
+  PanelEmitterButtons: []
 --- !u!1 &943131158
 GameObject:
   m_ObjectHideFlags: 0
@@ -2072,6 +2076,7 @@ MonoBehaviour:
   panelID: 3
   showsMenuBar: 1
   panelPrefab: {fileID: 8339082342934915379, guid: 523c9424686ea437da12ea06287ae2cf, type: 3}
+  PanelEmitterButtons: []
   characterSprite: {fileID: 0}
 --- !u!1 &1436063328
 GameObject:
@@ -2488,6 +2493,7 @@ MonoBehaviour:
   panelID: 2
   showsMenuBar: 1
   panelPrefab: {fileID: 8339082342934915379, guid: fe609bcd0e5e74ea1bfdc1338eccb1cd, type: 3}
+  PanelEmitterButtons: []
 --- !u!224 &1829676939 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 4549464571286722458, guid: 9a767b28e51d243ce824a674ef7f8f1e, type: 3}
@@ -2792,7 +2798,10 @@ MonoBehaviour:
   panelID: 6
   showsMenuBar: 0
   panelPrefab: {fileID: 8339082342934915379, guid: 7b330581bc04a4342a33801d53e3b23b, type: 3}
-  characterSprite: {fileID: 0}
+  PanelEmitterButtons: []
+  _sessionlevel: 0
+  _sessionTime: 20
+  _sessionScore: 0
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
