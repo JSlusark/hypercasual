@@ -7,7 +7,6 @@ public class LevelView : MonoBehaviour
     
     public void Show(int level)
     {
-        Debug.Log(level);
         text.text = level.ToString();
     }
     

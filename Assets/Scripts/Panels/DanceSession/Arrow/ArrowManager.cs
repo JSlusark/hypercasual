@@ -24,8 +24,6 @@ public class ArrowManager : MonoBehaviour
 
     private void Awake()
     {
-        Debug.Log("ArrowManager Awake");
-
         // Activates controllers for keyboard and swipe
         _swipeController = FindAnyObjectByType<SwipeController>();
         // playerInput = GetComponent<PlayerInput>();

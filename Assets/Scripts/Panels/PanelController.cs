@@ -32,7 +32,7 @@ public abstract class PanelController : MonoBehaviour
         // Debug.Log($"[PanelController] Show: {panelPrefab.name}");
         PanelInstance = Instantiate(panelPrefab);
         PanelEmitterButtons = PanelInstance.GetComponentsInChildren<PanelEmitterButton>(true); // includes inactive children
-        Debug.Log($"[PanelController] Found {PanelEmitterButtons.Length} PanelEmitterButtons in {panelPrefab.name}");
+        // Debug.Log($"[PanelController] Found {PanelEmitterButtons.Length} PanelEmitterButtons in {panelPrefab.name}");
     }
 
     public virtual void Hide()
