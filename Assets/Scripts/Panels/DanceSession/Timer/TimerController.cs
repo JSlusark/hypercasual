@@ -1,21 +1,22 @@
 using System;
 using System.Collections;
-using TMPro;
 using UnityEngine;
 
 public class TimerController : MonoBehaviour
 {
-    [SerializeField] private TimerView _timerView;
-    public event Action OnTimerEnd;
+    [SerializeField] private TimerBarView _timerBarView;
+    
+    [Header("Dynamic Values: can change from booster activation and character level")]
+    [SerializeField] private float timeValue = 20f;
 
     TimerModel _timerModel;
+    public event Action OnTimerEnd;
 
-    private float timerModel = 20f;
 
     public void Awake()
     {
         _timerModel = new TimerModel(20f, true);
-        _timerView.Show(_timerModel.Timer);
+        _timerBarView.UpdateFill(_timerModel.Timer, _timerModel.MaxTimer);
     }
 
 
@@ -29,7 +30,7 @@ public class TimerController : MonoBehaviour
     private void UpdateTimer()
     {
         _timerModel.UpdateTimer(-Time.deltaTime);
-        _timerView.Show(_timerModel.Timer);
+        _timerBarView.UpdateFill(_timerModel.Timer, _timerModel.MaxTimer);
     }
 
     private void CheckTimer()

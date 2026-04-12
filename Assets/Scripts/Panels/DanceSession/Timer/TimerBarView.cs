@@ -1,16 +1,14 @@
 using UnityEngine;
+using UnityEngine.UI;
 
 public class TimerBarView : MonoBehaviour
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    [SerializeField] Image barImage;
+    
+    public void UpdateFill(float timer, float maxTimer)
     {
-        
+        // Fill amount ranges from min 0 and max 1
+        barImage.fillAmount = timer/maxTimer;
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 }

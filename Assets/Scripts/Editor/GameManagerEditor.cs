@@ -20,7 +20,7 @@ public class GameManagerEditor : Editor
     //         EditorGUILayout.BeginVertical("box");
     //         EditorGUILayout.LabelField("Active Index:", gm.Index.ToString());
     //         EditorGUILayout.LabelField("Style Name:", gm.Character.danceStyle);
-    //         // EditorGUILayout.LabelField("Current Score:", gm.Character.highScore.ToString());
+    //         // EditorGUILayout.LabelField("Current TotalPoints:", gm.Character.highScore.ToString());
     //         // EditorGUILayout.LabelField("Unlocked:", gm.Character.isUnlocked.ToString());
     //         EditorGUILayout.EndVertical();
     //     }

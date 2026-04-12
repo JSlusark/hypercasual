@@ -64,11 +64,12 @@ public class ArrowView : MonoBehaviour
         while (timeElapsed <= timeTotal)
         {
             timeElapsed += Time.deltaTime;
+            float timeAmount = timeElapsed / timeTotal;
 
             if (timeElapsed < timeTotal / 2)
-                arrowRect.anchoredPosition = Vector2.Lerp(positionStart, positionPeak, timeElapsed / timeTotal);
+                arrowRect.anchoredPosition = Vector2.Lerp(positionStart, positionPeak, timeAmount);
             else
-                arrowRect.anchoredPosition = Vector2.Lerp(positionPeak, positionStart, timeElapsed / timeTotal);
+                arrowRect.anchoredPosition = Vector2.Lerp(positionPeak, positionStart, timeAmount);
             yield return null;
         }
     }

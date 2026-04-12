@@ -1,12 +1,6 @@
 using DefaultNamespace;
 using UnityEngine;
 
-/*
-     - base class for all DanceSession controllers
-     - methods are called by DanceSession manager when switching panels
-
-     Inheritance in C#: https://learn.microsoft.com/en-us/dotnet/csharp/fundamentals/tutorials/inheritance
- */
 public abstract class PanelController : MonoBehaviour
 {
     protected GameObject PanelInstance;

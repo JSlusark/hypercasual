@@ -2799,7 +2799,9 @@ MonoBehaviour:
   showsMenuBar: 0
   panelPrefab: {fileID: 8339082342934915379, guid: 7b330581bc04a4342a33801d53e3b23b, type: 3}
   PanelEmitterButtons: []
-  _characterSprite: {fileID: 0}
+  _arrowManager: {fileID: 0}
+  _scoreSystemController: {fileID: 0}
+  _timerController: {fileID: 0}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0

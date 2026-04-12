@@ -5,11 +5,11 @@ using UnityEngine;
 
 public class DanceSessionPanelController : PanelController
 {
-    [SerializeField] private ArrowManager _arrowManager;
-    [SerializeField] private ScoreSystemController _scoreSystemController;
-    [SerializeField] private TimerController _timerController;
+    private ArrowManager _arrowManager;
+    private ScoringController scoringController;
+    private TimerController _timerController;
 
-    // private CharacterView _characterSprite; // Might be just a Character Controller later
+    [SerializeField] private CharacterView _characterSprite; // Might be just a Character Controller later
 
     public override void Show()
     {
@@ -27,11 +27,11 @@ public class DanceSessionPanelController : PanelController
     void GetPanelComponents()
     {
         _arrowManager = PanelInstance.GetComponentInChildren<ArrowManager>();
-        _scoreSystemController = PanelInstance.GetComponentInChildren<ScoreSystemController>();
+        scoringController = PanelInstance.GetComponentInChildren<ScoringController>();
         _timerController = PanelInstance.GetComponentInChildren<TimerController>();
-        // _characterSprite = PanelInstance.GetComponentInChildren<CharacterView>();
+        _characterSprite = PanelInstance.GetComponentInChildren<CharacterView>();
 
-        // _characterSprite.ShowIdle(GameManager.Instance.SelectedCharacter.idleSprite);
+        _characterSprite.ShowIdle(GameManager.Instance.SelectedCharacter.idleSprite);
     }
 
 
@@ -52,7 +52,7 @@ public class DanceSessionPanelController : PanelController
 
     private void HandleScoreChange(bool isScored)
     {
-        if (isScored) _scoreSystemController.Refresh();
+        if (isScored) scoringController.Refresh();
         StartCoroutine(_timerController.Freeze());
     }
 
