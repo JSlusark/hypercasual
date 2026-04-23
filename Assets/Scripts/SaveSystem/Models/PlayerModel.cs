@@ -21,7 +21,6 @@ public class PlayerModel
     public PlayerModel(PlayerData data)
     {
         _data = data;
-        // GetActiveCharacter();
     }
     
     public string Name

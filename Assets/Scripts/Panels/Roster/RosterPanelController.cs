@@ -35,12 +35,6 @@ public class RosterPanelController : PanelController
         _selectButtonText =  PanelInstance.GetComponentInChildren<SelectButtonText>();
     }
 
-    private void UpdateViews(CharacterID characterID)
-    {
-        // Start component change
-        _previewCard.ShowCharacter(_data.GetCharacter(characterID));
-        _selectButtonText.UpdateText(_data.GetCharacter(characterID));
-    }
 
     private void SubscribeToEvents(bool subscribe)
     {
@@ -70,8 +64,14 @@ public class RosterPanelController : PanelController
         }
 
         UpdateViews(_previewID);
-        // _previewCard.ShowCharacter(_data.GetCharacter(_previewID));
-        // _selectButtonText.UpdateText(_data.GetCharacter(_previewID));
         
     }
+
+    private void UpdateViews(CharacterID characterID)
+    {
+        // Start component change
+        _previewCard.ShowCharacter(_data.GetCharacter(characterID));
+        _selectButtonText.UpdateText(_data.GetCharacter(characterID));
+    }
+    
 }

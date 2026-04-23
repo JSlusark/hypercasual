@@ -1597,6 +1597,7 @@ MonoBehaviour:
   dancerName: {fileID: 5643761566102611605}
   previewImage: {fileID: 1348605015136394021}
   danceStyle: {fileID: 1673076263762037996}
+  _background: {fileID: 6275915498092001772}
 --- !u!1 &8804207680918457445
 GameObject:
   m_ObjectHideFlags: 0

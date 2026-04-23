@@ -1,5 +1,6 @@
 using System;
 using DefaultNamespace;
+using DefaultNamespace.ScriptableObjects;
 using TMPro;
 using UnityEngine;
 
@@ -8,14 +9,19 @@ public class DanceSessionPanelController : PanelController
     private ArrowManager _arrowManager;
     private ScoringController scoringController;
     private TimerController _timerController;
+    private DatabaseModel _data;
+    private CharacterID _characterID;
 
     [SerializeField] private CharacterView _characterSprite; // Might be just a Character Controller later
 
     public override void Show()
     {
         base.Show();
-        GetPanelComponents();
+        // _data = GameManager.Instance.Database;
+        // _characterID = _data.Data.activeCharacterId;
+        SetPanelComponents();
         SubscribeToEvents(true);
+        // _characterSprite.ShowIdle(_data.GetCharacter(_characterID));
     }
 
     public override void Hide()
@@ -24,7 +30,7 @@ public class DanceSessionPanelController : PanelController
         base.Hide();
     }
 
-    void GetPanelComponents()
+    void SetPanelComponents()
     {
         _arrowManager = PanelInstance.GetComponentInChildren<ArrowManager>();
         scoringController = PanelInstance.GetComponentInChildren<ScoringController>();
@@ -63,21 +69,3 @@ public class DanceSessionPanelController : PanelController
         button.OnClick();
     }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

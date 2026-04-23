@@ -1,4 +1,6 @@
 using System;
+using DefaultNamespace.ScriptableObjects;
+using SaveSystem.Character;
 using UnityEngine;
 using TMPro;
 using UnityEngine.UI;
@@ -6,14 +8,21 @@ using UnityEngine.UI;
 public class CharacterView : MonoBehaviour
 {
     [SerializeField] private Image characterSprite;
-    
-    private void Start()
+    DatabaseModel _data;
+
+    private void Awake()
     {
-        ShowIdle(characterSprite.sprite); // fallback?
+        _data = GameManager.Instance.Database;
     }
 
-    public void ShowIdle(Sprite sprite)
+    private void Start()
     {
-            characterSprite.sprite = sprite;
+        ShowIdle(); // fallback?
+    }
+
+    public void ShowIdle()
+    {
+        CharacterModel character = _data.GetActiveCharacter();
+            characterSprite.sprite = character.IdleSprite;
     }
 }

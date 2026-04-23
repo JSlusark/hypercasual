@@ -9,7 +9,7 @@ using UnityEngine;
  * 
  * - Stores databasedata and databaseconfig pointers in one place
  * - Operates changes to the database saved data and instantiates save data if it does not exist
- * - Database contains a dictionary<CharacterID, CharacterModel> 
+ * - CharacterCatalogue contains a dictionary<CharacterID, CharacterModel> 
  * - Dictionary was created not only to access characterModels easier but also to instantiate each characterModel as soon as database is instantiated
  * - CharacterModel is instatiated with its own config and data (coming from configlist and data list)
  * 
@@ -25,7 +25,7 @@ public class DatabaseModel
     
     
     // Instantiated dictionary of Characters
-    public Dictionary<CharacterID, CharacterModel> Database { get; private set; }
+    public Dictionary<CharacterID, CharacterModel> CharacterCatalogue { get; private set; }
 
     public DatabaseModel(DatabaseConfig config, DatabaseData data)
     {
@@ -36,10 +36,10 @@ public class DatabaseModel
         SetActiveCharacter(Data.activeCharacterId); // it is never null and set as defualt alredy
     }
 
-    // Sets the dictionary by fiding 
+    // Creates a dictionary of instantiated characterModels
     private void SetDatabase(List<CharacterConfig> configList, List<CharacterData> dataList)
     {
-        Database = new Dictionary<CharacterID, CharacterModel>();
+        CharacterCatalogue = new Dictionary<CharacterID, CharacterModel>();
         foreach (var characterConfig in configList)
         {
             // Stores save data or the characterID that is in the config list
@@ -52,7 +52,7 @@ public class DatabaseModel
             }
             // Instantiates a new character from characterData and characterConfig lists
             CharacterModel characterModel = new CharacterModel(characterConfig, _data);
-            Database.Add(characterConfig.danceStyle, characterModel);
+            CharacterCatalogue.Add(characterConfig.danceStyle, characterModel);
         }
     }
 
@@ -67,10 +67,20 @@ public class DatabaseModel
     // returns data of a character model
     public CharacterModel GetCharacter(CharacterID id)
     {
-        if (Database.TryGetValue(id, out CharacterModel model))
+        if (CharacterCatalogue.TryGetValue(id, out CharacterModel model))
             return model;
         
-        Debug.LogError($"Character {id} not found in Database!");
+        Debug.LogError($"Character {id} not found in CharacterCatalogue!");
+        return null;
+    }
+
+    public CharacterModel GetActiveCharacter()
+    {
+        CharacterID activeCharacterId = Data.activeCharacterId;
+        if (CharacterCatalogue.TryGetValue(activeCharacterId, out CharacterModel model))
+            return model;
+        
+        Debug.LogError($"Character {activeCharacterId} not found in CharacterCatalogue!");
         return null;
     }
 }
