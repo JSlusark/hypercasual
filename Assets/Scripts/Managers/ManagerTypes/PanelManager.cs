@@ -12,7 +12,7 @@ using UnityEngine.UI;
 */
 
 
-public class PanelManager : MonoBehaviour
+public class PanelManager : Manager<PanelManager>
 {
     [Header("References for imported controllers")] 
     [SerializeField] private GameObject menuBars;
@@ -20,12 +20,14 @@ public class PanelManager : MonoBehaviour
     [Header("Active Panel Info")]
     [SerializeField] private PanelID activePanelID;
     
-    // 
+    // Panel and button lists from imported controllers
     private PanelController[] _panelList;
     private PanelEmitterButton[] _menuButtonList;
 
-    private void Awake()
+    protected override void Awake()
     {
+        base.Awake();
+        
         _menuButtonList = menuBars.GetComponentsInChildren<PanelEmitterButton>();
         _panelList = panelControllers.GetComponentsInChildren<PanelController>();
     }

@@ -4,7 +4,7 @@ using UnityEngine.InputSystem;
 
 
 [DefaultExecutionOrder(-1)] // Makes sure it runs before any other script
-public class TouchManager : Singleton<TouchManager>
+public class TouchManager : Manager<TouchManager>
 {
     // Delegates describe an event's signature, used to avoid writing Action<Vector2, float>
     public delegate void TouchEventHandler(Vector2 position, float time);

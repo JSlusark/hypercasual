@@ -8,9 +8,9 @@ using UnityEngine;
  * 
  */
 
-public class ConfigManager : Singleton<ConfigManager>
+public class ConfigManager : Manager<ConfigManager>
 {
-    [Header("Character Database")]
+    [Header("Character CharacterCatalogue")]
     [SerializeField] public DatabaseConfig databaseConfig;
     
     /*

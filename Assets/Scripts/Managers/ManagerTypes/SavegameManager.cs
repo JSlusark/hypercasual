@@ -17,7 +17,7 @@ using UnityEngine;
  * 
  */
 
-public class SavegameManager : Singleton<SavegameManager>
+public class SavegameManager : Manager<SavegameManager>
 {
     
     private string _savePath;
