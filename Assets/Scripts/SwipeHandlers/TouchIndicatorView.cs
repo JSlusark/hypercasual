@@ -4,7 +4,6 @@ using UnityEngine.UI;
 
 public class TouchIndicatorView : MonoBehaviour
 {
-    [SerializeField] private float lineWidth = 5f;
 
     [SerializeField] private RawImage _image;
     [SerializeField] private RectTransform _rectTransform;

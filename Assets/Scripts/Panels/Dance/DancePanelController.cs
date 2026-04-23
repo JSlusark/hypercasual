@@ -1,4 +1,5 @@
 using System;
+using SaveSystem.Character;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -12,7 +13,14 @@ public class DancePanelController : PanelController
         base.Show();
 
         characterSprite = PanelInstance.GetComponentInChildren<CharacterView>();
-        characterSprite.ShowIdle(GameManager.Instance.SelectedCharacter.idleSprite);
+        
+        // CAN BE TAKEN FROM CHARACTERLISTMODEL.getactiveCharacter no?ß
+        // CharacterModel activeDancer = GameManager.Instance.GetActiveCharacter();
+
+        // if (activeDancer != null)
+        // {
+        //     characterSprite.ShowIdle(activeDancer.IdleSprite);
+        // }
     }
 
 

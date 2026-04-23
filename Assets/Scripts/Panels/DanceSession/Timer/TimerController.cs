@@ -7,7 +7,6 @@ public class TimerController : MonoBehaviour
     [SerializeField] private TimerBarView _timerBarView;
     
     [Header("Dynamic Values: can change from booster activation and character level")]
-    [SerializeField] private float timeValue = 20f;
 
     TimerModel _timerModel;
     public event Action OnTimerEnd;

@@ -3,7 +3,7 @@ using UnityEngine;
 
 /*
  * Used only in Inputmanager for now
- * 
+ *
  * T 's type is specified in the derivative class. Example:
  * TouchManager : Singleton<TouchManager>
  * Using T will allow us to not create duplicates for the same class type
@@ -12,7 +12,7 @@ using UnityEngine;
  * Also we make sure here that the derivative class is a monobehaviour
  * so we can use it as a component and attach it to a gameobject in the scene
  * and also use the unity lifecycle methods like awake, start, update etc...
- * 
+ *
  */
 public class Singleton<T> : MonoBehaviour where T : MonoBehaviour
 {
@@ -24,8 +24,10 @@ public class Singleton<T> : MonoBehaviour where T : MonoBehaviour
         {
             if (_instance == null)
             {
-                _instance = FindAnyObjectByType<T>();// using any instead of first as in the awake we already manage on not creating multiples
+                _instance =
+                    FindAnyObjectByType<T>(); // using any instead of first as in the awake we already manage on not creating multiples
             }
+
             return _instance;
         }
     }
@@ -33,14 +35,13 @@ public class Singleton<T> : MonoBehaviour where T : MonoBehaviour
     // virtual allows derivatives to override the function
     protected virtual void Awake()
     {
-        if (_instance == null)
-        {
-            _instance = this as T; // ensures that the created instance is of type T (matches the type specified in the derivative class)
-            DontDestroyOnLoad(gameObject);
-        }
-        else
+        if (_instance != null) // && instance != this looks useless or may be a double check?
         {
             Destroy(gameObject);
+            return;
         }
+
+        _instance = this as T; // ensures that the created instance is of type T (matches the type specified in the derivative class)
+        DontDestroyOnLoad(gameObject); // keeps it alive
     }
 }

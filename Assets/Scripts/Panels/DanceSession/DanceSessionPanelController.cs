@@ -31,7 +31,8 @@ public class DanceSessionPanelController : PanelController
         _timerController = PanelInstance.GetComponentInChildren<TimerController>();
         _characterSprite = PanelInstance.GetComponentInChildren<CharacterView>();
 
-        _characterSprite.ShowIdle(GameManager.Instance.SelectedCharacter.idleSprite);
+        // Should be taken from character list model? or saveGamedata?
+        // _characterSprite.ShowIdle(GameManager.Instance.SelectedCharacter.idleSprite);
     }
 
 
