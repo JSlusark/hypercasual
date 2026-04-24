@@ -1,8 +1,4 @@
-using System;
-using DefaultNamespace.ScriptableObjects;
-using SaveSystem.Character;
 using UnityEngine;
-using TMPro;
 using UnityEngine.UI;
 
 public class CharacterView : MonoBehaviour
@@ -12,6 +8,7 @@ public class CharacterView : MonoBehaviour
 
     private void Awake()
     {
+        Debug.Log("CharacterView.Awake");
         _data = GameManager.Instance.Database;
     }
 

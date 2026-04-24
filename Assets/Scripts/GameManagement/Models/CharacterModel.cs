@@ -1,8 +1,6 @@
 using UnityEngine;
 using DefaultNamespace.ScriptableObjects;
 
-namespace SaveSystem.Character
-{
     public class CharacterModel
     {
         private readonly CharacterConfig _config;
@@ -13,14 +11,14 @@ namespace SaveSystem.Character
             _config = config;
             _data = data;
 
-            // sets Moshpit as the default unlocked character - might find a betrer solition?
-            if (config.danceStyle == CharacterID.Moshpit)
+            // sets Moshpit as the default unlocked character - might find a cleaner solution for this perhaps by adding in PlayerData
+            if (config.id == CharacterID.Moshpit)
                 _data.isUnlocked = true;
         }
         
         
         // Character Info
-        public CharacterID Id => _config.danceStyle;
+        public CharacterID Id => _config.id;
         public string Name => _config.dancerName; 
         public int ExperienceLevel => _data.experienceLevel;
         public float Followers => _data.followers;
@@ -56,5 +54,4 @@ namespace SaveSystem.Character
         // {
         // }
     
-    }
 }

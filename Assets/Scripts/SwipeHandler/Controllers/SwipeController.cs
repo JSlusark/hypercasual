@@ -24,28 +24,28 @@ public class SwipeController : MonoBehaviour
     [SerializeField] private float _endTime;
     // [SerializeField] private GameObject touchIndicator;
 
-    private TouchManager _touchManager;
+    private SwipeManager _swipeManager;
     private TouchIndicatorView _touchTrail;
 
     
     
     private void Awake()
     {
-        _touchManager = TouchManager.Instance;
+        _swipeManager = SwipeManager.Instance;
         // _touchTrail = touchIndicator.GetComponent<TouchIndicatorView>();
     }
 
 
     private void OnEnable()
     {
-        _touchManager.OnTouchStart += HandleSwipeStart;
-        _touchManager.OnTouchEnd += HandleSwipeEnd;
+        _swipeManager.OnTouchStart += HandleSwipeStart;
+        _swipeManager.OnTouchEnd += HandleSwipeEnd;
     }
 
     private void OnDisable()
     {
-        _touchManager.OnTouchStart -= HandleSwipeStart;
-        _touchManager.OnTouchEnd -= HandleSwipeEnd;
+        _swipeManager.OnTouchStart -= HandleSwipeStart;
+        _swipeManager.OnTouchEnd -= HandleSwipeEnd;
     }
     
     private void HandleSwipeStart(Vector2 startPosition, float time)

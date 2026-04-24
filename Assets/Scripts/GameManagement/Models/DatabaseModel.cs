@@ -1,17 +1,13 @@
 using System.Collections.Generic;
 using DefaultNamespace.ScriptableObjects;
-using SaveSystem.Character;
 using UnityEngine;
 
 /*
- * Models in this folder are being used as wrappers, since they wrap their data and config value in one place
- * to be accessed more easily through the various components.
- * 
- * - Stores databasedata and databaseconfig pointers in one place
- * - Operates changes to the database saved data and instantiates save data if it does not exist
- * - CharacterCatalogue contains a dictionary<CharacterID, CharacterModel> 
+ * - Stores saveData and config pointers for CharacterDatabase
+ * - Overwrites the database saveData and instantiates save data if it does not exist
+ * - CharacterDictionary contains a dictionary<CharacterID, CharacterModel> 
  * - Dictionary was created not only to access characterModels easier but also to instantiate each characterModel as soon as database is instantiated
- * - CharacterModel is instatiated with its own config and data (coming from configlist and data list)
+ * - CharacterModel is instatiated inside the dictionary and has refs to its own config and data (we keep config in configlist and saveData in dataList)
  * 
  */
 
@@ -22,9 +18,7 @@ public class DatabaseModel
     public DatabaseConfig Config { get; } // using this instead of private readonly to avoid writing a getter
     public DatabaseData Data { get; }
     
-    
-    
-    // Instantiated dictionary of Characters
+    // Dictionary of instantiated CharacterModels
     public Dictionary<CharacterID, CharacterModel> CharacterCatalogue { get; private set; }
 
     public DatabaseModel(DatabaseConfig config, DatabaseData data)
@@ -36,23 +30,23 @@ public class DatabaseModel
         SetActiveCharacter(Data.activeCharacterId); // it is never null and set as defualt alredy
     }
 
-    // Creates a dictionary of instantiated characterModels
+    // Creates a dictionary of instantiated characterModels, matches characterConfig field with its corresponding characterData
     private void SetDatabase(List<CharacterConfig> configList, List<CharacterData> dataList)
     {
         CharacterCatalogue = new Dictionary<CharacterID, CharacterModel>();
         foreach (var characterConfig in configList)
         {
-            // Stores save data or the characterID that is in the config list
-            CharacterData _data = dataList.Find(data => data.characterID == characterConfig.danceStyle);
-            // If we have no save data for the characterID, we have to create one (this helps when adding new charcater configs during development)
+            // Finds data for matching character config: if it returns null it means that we have no save data of that character so we have to initialize the data. This also helps when adding more character configs later.
+            CharacterData _data = dataList.Find(data => data.characterID == characterConfig.id);
             if (_data == null)
             {
-                _data = new CharacterData { characterID = characterConfig.danceStyle }; // we just assign the ID as the rest should be 0 (unless special cases)
-                dataList.Add(_data); // Add it to the main list so it gets saved later
+                Debug.Log($"Character {characterConfig.id} not found in CharacterCatalogue!");
+                _data = new CharacterData { characterID = characterConfig.id }; // we just assign the ID as the rest should be 0 (unless special cases)
+                dataList.Add(_data); // Adds it to the saved list of characters 
             }
             // Instantiates a new character from characterData and characterConfig lists
             CharacterModel characterModel = new CharacterModel(characterConfig, _data);
-            CharacterCatalogue.Add(characterConfig.danceStyle, characterModel);
+            CharacterCatalogue.Add(characterConfig.id, characterModel);
         }
     }
 

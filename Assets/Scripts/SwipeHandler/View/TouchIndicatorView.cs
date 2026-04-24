@@ -37,7 +37,7 @@ public class TouchIndicatorView : MonoBehaviour
     {
         while (true)
         {
-            Vector2 currentPosition = TouchManager.Instance.GetTouchPosition();
+            Vector2 currentPosition = SwipeManager.Instance.GetTouchPosition();
             _rectTransform.position = currentPosition;
             yield return null;
         }

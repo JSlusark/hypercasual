@@ -1,6 +1,5 @@
 using System;
 using DefaultNamespace.ScriptableObjects;
-using SaveSystem.Character;
 using UnityEngine;
 using UnityEngine.UI;
 

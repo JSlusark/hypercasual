@@ -178,7 +178,7 @@ GameObject:
   - component: {fileID: 45627551}
   - component: {fileID: 45627552}
   m_Layer: 0
-  m_Name: TouchManager
+  m_Name: SwipeManager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1352,51 +1352,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &831861961
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 831861963}
-  - component: {fileID: 831861962}
-  m_Layer: 0
-  m_Name: ConfigManager
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &831861962
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 831861961}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8e1b901793994e1fa9b2c051e7487a8e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::ConfigManager
-  databaseConfig: {fileID: 11400000, guid: ff6892dfeb5844ece83065b986b28237, type: 2}
---- !u!4 &831861963
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 831861961}
-  serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 543.8401, y: 951.1625, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 1037411846}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &852393546
 GameObject:
   m_ObjectHideFlags: 0
@@ -1445,50 +1400,6 @@ MonoBehaviour:
   showsMenuBar: 1
   panelPrefab: {fileID: 8339082342934915379, guid: 7a8aec0c900054554a0cdfca79fa63da, type: 3}
   PanelEmitterButtons: []
---- !u!1 &936837979
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 936837981}
-  - component: {fileID: 936837980}
-  m_Layer: 0
-  m_Name: SaveGameManager
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &936837980
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 936837979}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 92a56a5a09124ab5bcf70fd5639ab660, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::SavegameManager
---- !u!4 &936837981
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 936837979}
-  serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 543.8401, y: 951.1625, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 1037411846}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &940199138
 GameObject:
   m_ObjectHideFlags: 0
@@ -1650,7 +1561,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1037411846}
   m_Layer: 0
-  m_Name: --- MANAGERS ---
+  m_Name: Managers
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1670,8 +1581,6 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 2008202974}
-  - {fileID: 831861963}
-  - {fileID: 936837981}
   - {fileID: 7827193}
   - {fileID: 45627550}
   m_Father: {fileID: 0}
@@ -2768,8 +2677,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6f383a5579ae42988ebcd4fc6e3d8fb1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::GameManager
-  _savegameManager: {fileID: 936837980}
-  _configManager: {fileID: 831861962}
+  characterListSo: {fileID: 11400000, guid: ff6892dfeb5844ece83065b986b28237, type: 2}
 --- !u!114 &2050420521 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 4004228882129045596, guid: 9a767b28e51d243ce824a674ef7f8f1e, type: 3}

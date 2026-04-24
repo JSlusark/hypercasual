@@ -4,7 +4,7 @@ using UnityEngine;
 /*
  * Manager Base Class
  * T is the type specified in the derivative class. Example:
- * TouchManager : Manager<TouchManager>
+ * SwipeManager : Manager<SwipeManager>
  * 
  * Using T will allow us to check for duplicates fo the same type
  *
@@ -25,7 +25,7 @@ public class Manager<T> : MonoBehaviour where T : MonoBehaviour
 
 
         Instance = this as T; // ensures that the created instance is of type T 
-        // Debug.Log($"[{Instance.name}] Manager Awaken");
+        Debug.Log($"[{Instance.name}] Manager Awaken");
         transform.SetParent(null); // If I want to keep manager collected in a folder i need to set them as root 
         DontDestroyOnLoad(gameObject);
     }

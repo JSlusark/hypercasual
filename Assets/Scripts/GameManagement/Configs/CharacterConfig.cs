@@ -1,19 +1,15 @@
 using DefaultNamespace.ScriptableObjects;
 using UnityEngine;
-
-/*
- * Contains static immutable data for a character
- * in the character list
- * 
- */
+using UnityEngine.Serialization;
 
 
 [CreateAssetMenu(fileName = "NewCharacter", menuName = "ScriptableObject/CharacterConfig")]
 public class CharacterConfig : ScriptableObject
 {
-	[Header("Profile")]
-	public CharacterID danceStyle;
+	[FormerlySerializedAs("Id")] [Header("Profile")]
+	public CharacterID id;
 	public string dancerName;
+	public string danceStyle;
 	
 	[Header("Sprites")]
 	public Sprite rosterSprite;
