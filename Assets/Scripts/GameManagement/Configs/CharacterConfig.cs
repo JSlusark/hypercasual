@@ -6,7 +6,7 @@ using UnityEngine.Serialization;
 [CreateAssetMenu(fileName = "NewCharacter", menuName = "ScriptableObject/CharacterConfig")]
 public class CharacterConfig : ScriptableObject
 {
-	[FormerlySerializedAs("Id")] [Header("Profile")]
+	[Header("Profile")]
 	public CharacterID id;
 	public string dancerName;
 	public string danceStyle;

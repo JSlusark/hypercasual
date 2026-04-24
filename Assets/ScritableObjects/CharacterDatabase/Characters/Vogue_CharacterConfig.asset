@@ -12,8 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d7a5cd12a431b42529ae81a1f108a8f0, type: 3}
   m_Name: Vogue_CharacterConfig
   m_EditorClassIdentifier: Assembly-CSharp::CharacterData
-  danceStyle: 1
+  id: 1
   dancerName: Jean Star
+  danceStyle: 
   rosterSprite: {fileID: -5090879937577951274, guid: c5af7fefec05c479d9c5355b419990d8, type: 3}
   idleSprite: {fileID: -5090879937577951274, guid: c5af7fefec05c479d9c5355b419990d8, type: 3}
   onSuccessSprite: {fileID: 0}

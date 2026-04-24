@@ -56,8 +56,8 @@ public class ArrowManager : MonoBehaviour
 
     private void StartNewSequence()
     {
-        // range is decided in gameSessionPanel controller based on how far the session goe
-        _maxArrows = Random.Range(3, 6);
+        // range is decided based on level, should be dynamic
+        _maxArrows = Random.Range(3, 5);
         for (int i = 0; i < _maxArrows; i++)
         {
             ArrowController newArrow = Instantiate(arrowController, this.transform.parent);
