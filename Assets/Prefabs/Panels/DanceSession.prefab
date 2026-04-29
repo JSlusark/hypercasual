@@ -889,7 +889,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: '::'
   levelView: {fileID: 7436784196933262606}
   scoreBarView: {fileID: 4377921094381394359}
-  scoreStateConfig: {fileID: 11400000, guid: b0302bd3550154f988a72487ab6ccdfd, type: 2}
+  scoreConfig: {fileID: 11400000, guid: b0302bd3550154f988a72487ab6ccdfd, type: 2}
 --- !u!1 &2437248978400551448
 GameObject:
   m_ObjectHideFlags: 0
