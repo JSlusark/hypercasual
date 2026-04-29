@@ -1,21 +1,25 @@
-using System;
 using UnityEngine;
-using TMPro;
 using UnityEngine.UI;
 
 public class CharacterView : MonoBehaviour
 {
     [SerializeField] private Image characterSprite;
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
+    DatabaseModel _data;
 
+    private void Awake()
+    {
+        Debug.Log("CharacterView.Awake");
+        _data = GameManager.Instance.Database;
+    }
 
     private void Start()
     {
-        ShowIdle(characterSprite.sprite);
+        ShowIdle(); // fallback?
     }
 
-    public void ShowIdle(Sprite sprite)
+    public void ShowIdle()
     {
-            characterSprite.sprite = sprite;
+        CharacterModel character = _data.GetActiveCharacter();
+            characterSprite.sprite = character.IdleSprite;
     }
 }

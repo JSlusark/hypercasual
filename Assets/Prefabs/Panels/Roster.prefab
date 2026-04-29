@@ -1141,6 +1141,7 @@ GameObject:
   - component: {fileID: 6354984685050484167}
   - component: {fileID: 3301010813051728921}
   - component: {fileID: 2039580095443677289}
+  - component: {fileID: 2479990897081341184}
   m_Layer: 5
   m_Name: Text (TMP)
   m_TagString: Untagged
@@ -1267,6 +1268,19 @@ MonoBehaviour:
   m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
+--- !u!114 &2479990897081341184
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6893430219292691604}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1caaf8f601a2464ebea2607d5ba716b8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Panels.Roster.Views.SelectButtonText
+  text: {fileID: 2039580095443677289}
 --- !u!1 &6894337156931705413
 GameObject:
   m_ObjectHideFlags: 0
@@ -1583,6 +1597,7 @@ MonoBehaviour:
   dancerName: {fileID: 5643761566102611605}
   previewImage: {fileID: 1348605015136394021}
   danceStyle: {fileID: 1673076263762037996}
+  _background: {fileID: 6275915498092001772}
 --- !u!1 &8804207680918457445
 GameObject:
   m_ObjectHideFlags: 0

@@ -1,55 +1,77 @@
-using System;
-using Unity.VisualScripting;
-using UnityEngine;
-
-
-/*
- *
- * RosterPanelController instantiates the RosterPanel prefab, manages View components of the prefab and listens to events
- *
- */
+using DefaultNamespace.ScriptableObjects;
+using Panels.Roster.Views;
 
 public class RosterPanelController : PanelController
 {
-    private DancerCard dancerCard;
-    private RosterButtons[] buttons;
-    private RosterNavigator<CharacterData> _navigator;
-    private int _cardIndex = 0;
-    
+    private PreviewCard _previewCard;
+    private NavigationButtons[] _buttons;
+    private NavigationModel _navigationModelModel;
+    private DatabaseModel _data;
+    private CharacterID _previewID;
+    private SelectButtonText _selectButtonText;
+
+
     public override void Show()
     {
         base.Show();
-        _navigator = new RosterNavigator<CharacterData>(GameManager.Instance.CharactersDatabase.characters, _cardIndex);
-        dancerCard = PanelInstance.GetComponentInChildren<DancerCard>();
-        buttons = PanelInstance.GetComponentsInChildren<RosterButtons>();
-
-        foreach (var button in buttons)
-            button.OnRequestTrigger += HandleButtonRequest;
-        
-        dancerCard.ShowCharacter(_navigator.Select());
+        AssignFields();
+        SubscribeToEvents(true);
+        UpdateViews(_data.Data.activeCharacterId);
     }
-
     public override void Hide()
     {
-        foreach (var button in buttons)
-            button.OnRequestTrigger -= HandleButtonRequest;
-        _cardIndex = _navigator.SelectedCharacterIndex; // saves index of the selected character to show as card when  reloading the roster panel
+        SubscribeToEvents(false);
         base.Hide();
     }
+    private void AssignFields()
+    {
+        // Models
+        _data = GameManager.Instance.Database;
+        _navigationModelModel = new NavigationModel(_data);
+        
+        //Views
+        _previewCard = PanelInstance.GetComponentInChildren<PreviewCard>();
+        _buttons = PanelInstance.GetComponentsInChildren<NavigationButtons>();
+        _selectButtonText =  PanelInstance.GetComponentInChildren<SelectButtonText>();
+    }
 
-    private void HandleButtonRequest(RosterButtons.Request request) // moved list navigation logic in its own model class
+
+    private void SubscribeToEvents(bool subscribe)
+    {
+        foreach (var button in _buttons)
+        {
+            if (subscribe)
+                button.OnNavigationButton += HandleNavigationNavigationButton;
+            else
+                button.OnNavigationButton -= HandleNavigationNavigationButton;
+        }
+    }
+    
+    private void
+        HandleNavigationNavigationButton(NavigationButtons.Request request) // moved list navigation logic in its own model class
     {
         switch (request)
         {
-            case RosterButtons.Request.ShowPrevious:
-                dancerCard.ShowCharacter(_navigator.Previous());
+            case NavigationButtons.Request.ShowPrevious:
+                _previewID = _navigationModelModel.Previous();
                 break;
-            case RosterButtons.Request.ShowNext:
-                dancerCard.ShowCharacter(_navigator.Next());
+            case NavigationButtons.Request.ShowNext:
+                _previewID = _navigationModelModel.Next();
                 break;
-            case RosterButtons.Request.SelectCharacter:
-                GameManager.Instance.SetSelectedCharacter(_navigator.Select());
+            case NavigationButtons.Request.SelectCharacter:
+                _data.SetActiveCharacter(_previewID);
                 break;
         }
+
+        UpdateViews(_previewID);
+        
     }
+
+    private void UpdateViews(CharacterID characterID)
+    {
+        // Start component change
+        _previewCard.ShowCharacter(_data.GetCharacter(characterID));
+        _selectButtonText.UpdateText(_data.GetCharacter(characterID));
+    }
+    
 }
