@@ -14,11 +14,13 @@ public class CharacterConfig : ScriptableObject
 	[Header("Sprites")]
 	public Sprite rosterSprite;
 	public Sprite idleSprite;
-	public Sprite onSuccessSprite;
+	public AnimationClip idleAnimation;
+	[FormerlySerializedAs("onSuccessSprite")] public Sprite onSetComplete;
 	public Sprite onFailSprite;
-	public Sprite danceMoveSprite1;
-	public Sprite danceMoveSprite2;
-	public Sprite danceMoveSprite3;
+	public Sprite danceMoveSpriteUp;
+	public Sprite danceMoveSpriteRight;
+	public Sprite danceMoveSpriteDown;
+	public Sprite danceMoveSpriteLeft;
 	
 	[Header("Roster Info")]
 	public float costToUnlock;

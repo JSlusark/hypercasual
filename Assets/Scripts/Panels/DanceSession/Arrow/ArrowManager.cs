@@ -15,18 +15,23 @@ public class ArrowManager : MonoBehaviour
     private int _pointedIndex;
 
     private SwipeController _swipeController; // to subscribe to swipes
-    // private PlayerInput playerInput;
+    private PlayerInput playerInput;
     // private InputAction danceMoveAction;
 
     private bool _resultInProgress;
-    public event Action<bool> OnSequenceComplete; // to tell controller when point needs to be added
+    
+    /*On */
+    
+    
+    public event Action<SwipeID, bool/*isMoveSuccess*/, bool/*isSetComplete*/> OnArrowAction; // signals if set was completed or failed
+    // public event Action<SwipeID> OnArrowSuccess; // signals what arrow succeded
 
 
     private void Awake()
     {
         // Activates controllers for keyboard and swipe
         _swipeController = FindAnyObjectByType<SwipeController>();
-        // playerInput = GetComponent<PlayerInput>();
+        playerInput = GetComponent<PlayerInput>();
         // danceMoveAction = playerInput.actions["DanceMove"];
 
         // sets up list
@@ -38,6 +43,7 @@ public class ArrowManager : MonoBehaviour
     private void OnEnable()
     {
         _swipeController.OnSwipe += HandleDanceMove;
+        playerInput.onActionTriggered += OnDanceMove;
         // danceMoveAction.performed += OnDanceMove;
     }
 
@@ -45,7 +51,9 @@ public class ArrowManager : MonoBehaviour
     {
         _swipeController.OnSwipe -= HandleDanceMove;
         // danceMoveAction.performed -= OnDanceMove; 
+        playerInput.onActionTriggered -= OnDanceMove;
     }
+    
 
     private void PointToArrow(int activeIndex)
     {
@@ -98,7 +106,7 @@ public class ArrowManager : MonoBehaviour
 
     private void ReplaceSequence()
     {
-        OnSequenceComplete?.Invoke(true);
+        // OnArrowAction?.Invoke(true);
         StartCoroutine(WaitResultAnimation(
                                            true, () =>
                                            {
@@ -110,7 +118,7 @@ public class ArrowManager : MonoBehaviour
 
     private void ResetProgress()
     {
-        OnSequenceComplete?.Invoke(false);
+        OnArrowAction?.Invoke(0, false, false);
         StartCoroutine(WaitResultAnimation(false, () =>
         {
             foreach (var arrow in _arrowGroup)
@@ -123,16 +131,21 @@ public class ArrowManager : MonoBehaviour
         }));
     }
 
-    private void AdvanceProgress()
+    private void AdvanceProgress(SwipeID swipeDirection)
     {
         if (_pointedIndex < (_maxArrows - 1))
         {
-            // Debug.Log($"[ArrowManager] Advanced Sequence");
+            // Debug.Log($"[ArrowManager] Advanced Sublic event ");
+            // OnArrowSuccess?.Invoke(swipeDirection);
+        OnArrowAction?.Invoke(swipeDirection, true,false);
+            
             PointToArrow(++_pointedIndex); // or ++_activeIndex?
         }
         else
         {
             // Debug.Log($"[ArrowManager] Completed  Sequence");
+        OnArrowAction?.Invoke(swipeDirection, true, true);
+         
             ReplaceSequence();
         }
     }
@@ -142,7 +155,7 @@ public class ArrowManager : MonoBehaviour
         if (_resultInProgress) return;
         if (_pointedArrow.CheckDanceMove(swipeDirection))
         {
-            AdvanceProgress();
+            AdvanceProgress(swipeDirection);
         }
         else
         {
@@ -153,15 +166,11 @@ public class ArrowManager : MonoBehaviour
     }
 
 
-    // added here as test to try also keys (it works)
-    // private PlayerInput playerInput;
-    // private InputAction danceMoveAction;
     private void OnDanceMove(InputAction.CallbackContext context)
     {
+        if (context.action.name != "DanceMove" || !context.performed) return;
         string inputName = context.control.displayName; // get the name of the control that triggered the action
-        // Debug.Log("DanceMove performed: " + inputName);
-        SwipeID swipeID = (SwipeID)System.Enum.Parse(typeof(SwipeID), inputName);
-        HandleDanceMove(swipeID);
-        // destroy dance view and controller?
+        if (System.Enum.TryParse(inputName, out SwipeID swipeID))// converts value to enum and returns bool based on condition
+            HandleDanceMove(swipeID);
     }
 }

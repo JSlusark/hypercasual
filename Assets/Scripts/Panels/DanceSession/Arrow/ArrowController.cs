@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 
@@ -6,7 +7,6 @@ public class ArrowController : MonoBehaviour
     [SerializeField] private ArrowView arrowView;
 
     private ArrowModel _arrowModel;
-
 
     private void Awake()
     {

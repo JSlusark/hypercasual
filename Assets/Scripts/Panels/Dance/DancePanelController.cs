@@ -20,7 +20,7 @@ public class DancePanelController : PanelController
         
         characterSprite = PanelInstance.GetComponentInChildren<CharacterView>();
         
-        // characterSprite.ShowIdle(_data.GetCharacter(_characterID));
+        // characterSprite.SetSprite(_data.GetCharacter(_characterID));
         
     }
 
