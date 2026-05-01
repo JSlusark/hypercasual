@@ -14,6 +14,9 @@ public class CharacterView : MonoBehaviour
     [SerializeField] private float timeAvailable = 0.2f;
     [SerializeField] private float wiggleAmount = 15f;
     
+    
+    // added them momentarily here - after will put in audio manager
+
 
     // private void Awake()
     // {

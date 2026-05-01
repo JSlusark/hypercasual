@@ -2047,7 +2047,7 @@ MonoBehaviour:
   showsMenuBar: 1
   panelPrefab: {fileID: 8339082342934915379, guid: 523c9424686ea437da12ea06287ae2cf, type: 3}
   PanelEmitterButtons: []
-  characterSprite: {fileID: 0}
+  _characterView: {fileID: 0}
 --- !u!1 &1436063328
 GameObject:
   m_ObjectHideFlags: 0

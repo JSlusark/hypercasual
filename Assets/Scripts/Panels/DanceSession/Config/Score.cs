@@ -11,7 +11,7 @@ public class Score : ScriptableObject
 
     public void StartValues() // resets when Dance Session Controller starts
     {
-        target = 300;
+        target = 3;
         rounds = 0;
         points = 0;
     }

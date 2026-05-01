@@ -42,7 +42,12 @@ public class TimerController : MonoBehaviour
     }
 
 
-    public IEnumerator Freeze()
+    public void Stop()
+    {
+        StartCoroutine(Freeze());
+    }
+
+    private IEnumerator Freeze()
     {
         _timerModel.Pause();
         yield return new WaitForSeconds(0.5f);

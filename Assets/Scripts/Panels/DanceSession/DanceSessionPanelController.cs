@@ -9,19 +9,23 @@ public class DanceSessionPanelController : PanelController
     private ArrowManager _arrowManager;
     private ScoringController scoringController;
     private TimerController _timerController;
-    // private DatabaseModel _data;
-    // private CharacterID _characterID;
 
     [SerializeField] private CharacterView _characterView; // Might be just a Character Controller later
+
+
+    // AUDIO: added them momentarily here, will have to go to an audio manager at the end
+    [Header("DanceMove sound")] [SerializeField]
+    private AudioSource audioSource; // drag the component here
+    [SerializeField] private AudioClip audioMoveFail;
+    [SerializeField] private AudioClip audioMoveSuccess;
+
 
     public override void Show()
     {
         base.Show();
-        // _data = GameManager.Instance.Database;
-        // _characterID = _data.Data.activeCharacterId;
         SetPanelComponents();
         SubscribeToEvents(true);
-        
+
         _characterView.SetSprite(character.IdleSprite);
     }
 
@@ -46,59 +50,66 @@ public class DanceSessionPanelController : PanelController
     /*Events*/
     private void SubscribeToEvents(bool isSubscribed)
     {
+        /*
+         * Subscribes to events from other controllers
+         * While its controllers subscribe to events from their corresponding models
+         */
         if (isSubscribed)
         {
             _timerController.OnTimerEnd += HandleTimerEnd;
-            _arrowManager.OnArrowAction += HandleDanceMoveView;
-            // _arrowManager.OnArrowSuccess += HandleDanceMoveView;
+            _arrowManager.OnArrowAction += HandleDanceMove;
+            // scoringController.onRoundChange += HandleRoundChange;
         }
         else
         {
             _timerController.OnTimerEnd -= HandleTimerEnd;
-            _arrowManager.OnArrowAction -= HandleDanceMoveView;
+            _arrowManager.OnArrowAction -= HandleDanceMove;
+            // scoringController.onRoundChange -= HandleRoundChange;
         }
     }
 
-    // private void HandleDanceMoveView(SwipeID swipeID)
+
+    // private void HandleRoundChange()
     // {
-    //     Sprite moveSprite;
-    //     // if (swipeID == SwipeID.Up)
-    //         // moveSprite = 
-    //         
-    //         
+    //     Sprite idleSprite = character.IdleSprite;
+    //     Sprite transitionSprite = character.OnSetComplete;
+    //     _characterView.ShowDanceMove(transitionSprite, idleSprite);
+    //     
     // }
 
-    private void HandleDanceMoveView(SwipeID move, bool isArrowScored, bool isSetComplete)
+    // perhaps create a character controller that handles the chatacter view instead
+    private void HandleDanceMove(SwipeID move, bool isArrowScored, bool isSetComplete)
     {
         Sprite idleSprite = character.IdleSprite;
         Sprite moveSprite = character.OnFailSprite;
+        AudioClip audioFeedback = audioMoveFail;
         if (isArrowScored) // the default gets overwritten with the success moves
         {
-            scoringController.Refresh();
-            // if (isSetComplete)
-            //     moveSprite = character.OnSetComplete;
-            // else
-            // {
-                switch (move)
-                {
-                    case SwipeID.Up:
-                        moveSprite = character.DanceMoveSpriteUp;
-                        break;
-                    case SwipeID.Right:
-                        moveSprite = character.DanceMoveSpriteRight;
-                        break;
-                    case SwipeID.Down:
-                        moveSprite = character.DanceMoveSpriteDown;
-                        break;
-                    case SwipeID.Left:
-                        moveSprite = character.DanceMoveSpriteLeft;
-                        break;
-                }
-            // }
+            audioFeedback = audioMoveSuccess;
+            if (isSetComplete) scoringController.UpdateScore(); // adds score only at completed set
+            switch (move)
+            {
+                case SwipeID.Up:
+                    moveSprite = character.DanceMoveSpriteUp;
+                    break;
+                case SwipeID.Right:
+                    moveSprite = character.DanceMoveSpriteRight;
+                    break;
+                case SwipeID.Down:
+                    moveSprite = character.DanceMoveSpriteDown;
+                    break;
+                case SwipeID.Left:
+                    moveSprite = character.DanceMoveSpriteLeft;
+                    break;
+            }
         }
+
+        audioSource.PlayOneShot(audioFeedback);
+
+
+        // pass freeze config for seconds
         _characterView.ShowDanceMove(moveSprite, idleSprite);
-        StartCoroutine(_timerController.Freeze());
-        // StartCoroutine(_characterView.MoveAnimation());
+        _timerController.Stop();
     }
 
     private void HandleTimerEnd()
