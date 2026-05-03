@@ -13,10 +13,10 @@ public class NavigationModel
     private int _index;
     private List<CharacterConfig> _list;
 
-    public NavigationModel(List<CharacterConfig> configList)
+    public NavigationModel(List<CharacterConfig> configList, CharacterID activeCharacterID)
     {
         _list = configList;
-        _index = _list.FindIndex(c => c.id == SaveSystem.Instance.SaveData.activeCharacterID);
+        _index = _list.FindIndex(c => c.id == activeCharacterID);
         // Debug.Log($"Active Character: {_list[_index].id}");
     }
 

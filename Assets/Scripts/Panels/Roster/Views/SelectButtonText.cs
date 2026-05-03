@@ -20,10 +20,9 @@ namespace Panels.Roster.Views
         {
             _button = GetComponentInParent<NavigationButtons>();
             buttonImage = _button.GetComponent<Image>();
-            // _data = GameManager.Instance.Catalogue;
         }
         
-        public void UpdateText(CharacterModel character)
+        public void UpdateText(CharacterModel character, bool isActive)
         {
             CharacterConfig c = character.Config;
             CharacterData d = character.Data;

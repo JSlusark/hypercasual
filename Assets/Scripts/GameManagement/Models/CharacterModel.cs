@@ -10,9 +10,6 @@ public class CharacterModel
     {
         Config = config;
         Data = data;
-        
-        if(Config.id == CharacterID.Moshpit)
-            Unlock();
     }
 
     public void Unlock()

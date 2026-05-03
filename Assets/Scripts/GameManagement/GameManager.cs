@@ -18,9 +18,9 @@ public class GameManager : Manager<GameManager>
          * and the other "submanagers" as pure c# singletons, as it can make it easier
          * to convert the logic to another engine.
          *
-         * All other monobehaviour singletons are created before 
-         * 
+         * For now, Awake order is set in Edit>ProjectSettings>Script Execution Order
          */
+        
         _saveSystem = SaveSystem.Instance;
     }
 

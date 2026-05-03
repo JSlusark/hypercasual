@@ -19,7 +19,7 @@ public class PreviewCard : MonoBehaviour
     {
     }
 
-    public void ShowCharacter(CharacterModel character) // characterModel
+    public void Show(CharacterModel character, bool isActiveCharacter) // characterModel
     {
         CharacterConfig c = character.Config;
         CharacterData d = character.Data;
@@ -31,11 +31,6 @@ public class PreviewCard : MonoBehaviour
         previewImage.color = isUnlocked ? Color.white : Color.black;
         _background.color = isUnlocked ? Color.deepSkyBlue : Color.gray4;
         // CatalogueModel _data = GameManager.Instance.Catalogue;
-        if (c.id == SaveSystem.Instance.SaveData.activeCharacterID)
-        {
-            _background.color = Color.green;
-        }
-
-
+        if (isActiveCharacter) _background.color = Color.green;
     }
 }

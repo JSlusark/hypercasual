@@ -7,7 +7,8 @@ public class CharacterCatalogue : Singleton<CharacterCatalogue>
     public Dictionary<CharacterID, CharacterModel> characterCatalogue { get; private set; }
     public CharacterModel activeCharacter { get; private set; }
 
-    public List<CharacterConfig> configList;
+    // IReadOnlyList only locks assignment, still need private set to not allow mutations outside
+    public List<CharacterConfig> configList { get; private set; }
 
     protected override void Initialize()
     { 
@@ -15,7 +16,7 @@ public class CharacterCatalogue : Singleton<CharacterCatalogue>
         Create();
         SetActiveCharacter(SaveSystem.Instance.SaveData.activeCharacterID);
     }
-
+    
     private void Create()
     {
         configList = ConfigManager.Instance.CharacterCatalogue.catalogueConfig;
@@ -30,19 +31,19 @@ public class CharacterCatalogue : Singleton<CharacterCatalogue>
             if (_characterData == null)
             {
                 // Debug.Log($"Character {characterConfig.id} not found in CatalogueConfig!");
-                _characterData = new CharacterData
-                                 {
-                                     id = characterConfig.id
-                                 };           // we just assign the ID as the rest should be 0 (unless special cases)
+                _characterData = new CharacterData {id = characterConfig.id};  // we just assign the ID as the rest should be 0 (unless special cases)
                 dataList.Add(_characterData); // Adds it to the saved list of characters 
             }
 
             // Instantiates a new character from characterData and characterConfig lists
             CharacterModel characterModel = new CharacterModel(characterConfig, _characterData);
+            // Adding default unlock for moshpit 
+            if (characterConfig.id == CharacterID.Moshpit && !characterModel.Data.isUnlocked) characterModel.Unlock();
             characterCatalogue.Add(characterConfig.id, characterModel);
-            Debug.Log($"Character {characterConfig.id} created");
         }
     }
+    
+    public bool IsActive(CharacterID id) => activeCharacter?.Data.id == id;
 
     public void SetActiveCharacter(CharacterID id)
     {

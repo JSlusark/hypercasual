@@ -1,4 +1,5 @@
 using DefaultNamespace;
+using DefaultNamespace.ScriptableObjects;
 using UnityEngine;
 
 public abstract class PanelController : MonoBehaviour
@@ -17,6 +18,7 @@ public abstract class PanelController : MonoBehaviour
     [Header("Catalogue instance")]
     protected CharacterCatalogue CharacterCatalogue;
     protected CharacterModel ActiveCharacter;
+    protected CharacterID ActiveCharacterID;
 
 
     public virtual void Show() 
@@ -33,6 +35,7 @@ public abstract class PanelController : MonoBehaviour
      
         CharacterCatalogue = CharacterCatalogue.Instance;
         ActiveCharacter = CharacterCatalogue.activeCharacter;
+        ActiveCharacterID = CharacterCatalogue.activeCharacter.Data.id;
 
         // Debug.Log($"[PanelController] Found {PanelEmitterButtons.Length} PanelEmitterButtons in {panelPrefab.name}");
     }

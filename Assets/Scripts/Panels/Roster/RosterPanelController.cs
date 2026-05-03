@@ -5,7 +5,7 @@ public class RosterPanelController : PanelController
 {
     private PreviewCard _previewCard;
     private NavigationButtons[] _buttons;
-    private NavigationModel _navigationModelModel;
+    private NavigationModel _navigationModel;
     private CharacterID _previewID;
     private SelectButtonText _selectButtonText;
 
@@ -15,7 +15,7 @@ public class RosterPanelController : PanelController
         base.Show();
         AssignFields();
         SubscribeToEvents(true);
-        UpdateViews(SaveSystem.Instance.SaveData.activeCharacterID);
+        UpdateViews(ActiveCharacterID);
     }
     public override void Hide()
     {
@@ -24,8 +24,10 @@ public class RosterPanelController : PanelController
     }
     private void AssignFields()
     {
+        _previewID = ActiveCharacterID; 
+        
         // Models
-        _navigationModelModel = new NavigationModel(CharacterCatalogue.configList);
+        _navigationModel = new NavigationModel(CharacterCatalogue.configList, ActiveCharacterID);
         
         //Views
         _previewCard = PanelInstance.GetComponentInChildren<PreviewCard>();
@@ -51,10 +53,10 @@ public class RosterPanelController : PanelController
         switch (request)
         {
             case NavigationButtons.Request.ShowPrevious:
-                _previewID = _navigationModelModel.Previous();
+                _previewID = _navigationModel.Previous();
                 break;
             case NavigationButtons.Request.ShowNext:
-                _previewID = _navigationModelModel.Next();
+                _previewID = _navigationModel.Next();
                 break;
             case NavigationButtons.Request.SelectCharacter:
                 CharacterCatalogue.SetActiveCharacter(_previewID);
@@ -68,8 +70,8 @@ public class RosterPanelController : PanelController
     private void UpdateViews(CharacterID id)
     {
         CharacterModel character = CharacterCatalogue.GetCharacter(id); 
-        _previewCard.ShowCharacter(character);
-        _selectButtonText.UpdateText(character);
+        _previewCard.Show(character, CharacterCatalogue.IsActive(id));
+        _selectButtonText.UpdateText(character, CharacterCatalogue.IsActive(id));
     }
     
 }
