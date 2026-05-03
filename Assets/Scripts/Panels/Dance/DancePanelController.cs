@@ -13,7 +13,7 @@ public class DancePanelController : PanelController
     {
         base.Show();
         _characterView = PanelInstance.GetComponentInChildren<CharacterView>();
-        _characterView.SetSprite(character.IdleSprite);
+        _characterView.SetSprite(CharacterCatalogue.activeCharacter.Config.idleSprite);
     }
 
 

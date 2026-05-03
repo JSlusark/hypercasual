@@ -31,6 +31,7 @@ public class SwipeController : MonoBehaviour
     
     private void Awake()
     {
+        Debug.Log("CONTROL Awake");
         _swipeManager = SwipeManager.Instance;
         // _touchTrail = touchIndicator.GetComponent<TouchIndicatorView>();
     }

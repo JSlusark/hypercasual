@@ -6,7 +6,7 @@ using UnityEngine.UI;
 public class CharacterView : MonoBehaviour
 {
     [SerializeField] private Image characterSprite;
-    // DatabaseModel _data;
+    // CatalogueModel _data;
     // private CharacterModel character;
 
     [Header("On dance move animation")] [SerializeField]
@@ -21,7 +21,7 @@ public class CharacterView : MonoBehaviour
     // private void Awake()
     // {
     //     Debug.Log("CharacterView.Awake");
-    //     // _data = GameManager.Instance.Database;
+    //     // _data = GameManager.Instance.Catalogue;
     //     // character = _data.GetActiveCharacter();
     //     // Debug.Log("Active character config: " + character.Name + " | OnFailSprite: " + character.OnFailSprite);
     // }

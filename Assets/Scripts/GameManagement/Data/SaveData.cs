@@ -1,4 +1,7 @@
 using System;
+using System.Collections.Generic;
+using DefaultNamespace.ScriptableObjects;
+using UnityEngine.Serialization;
 
 /*
  * Called Plain old C# Objects(POCO) or Data Containers.
@@ -10,11 +13,9 @@ using System;
 [Serializable]
 public class SaveData
 {
-    public DatabaseData databaseData = new DatabaseData();
-    /*
-     *  public SettingsData settingsData
-     *  public WalletData Wallet
-     *   public Wallet Wallet = new Wallet();
-     *
-     */
+    public CharacterID activeCharacterID;
+    public List<CharacterData> catalogueData;
+    //public WalletData
+    // public SettingsData
+    // public PlayerData
 }

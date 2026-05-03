@@ -10,7 +10,7 @@ using UnityEngine;
 public class CharacterData
 {
     [Header("Character Data")]
-    public CharacterID characterID; // is overwritten with the CharacterConfig characterID when DatabaseModel creates its CharacterDatabase Dictionary and constructs each character model in a loop based on databaseconfig 
+    public CharacterID id; // is overwritten with the CharacterConfig characterID when CatalogueModel creates its CatalogueConfig Dictionary and constructs each character model in a loop based on databaseconfig 
     
     [Header("Character Data")]
     public int experienceLevel; 

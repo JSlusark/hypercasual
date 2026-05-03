@@ -19,6 +19,8 @@ public class DanceSessionPanelController : PanelController
     [SerializeField] private AudioClip audioMoveFail;
     [SerializeField] private AudioClip audioMoveSuccess;
 
+    
+    private CharacterModel _character;
 
     public override void Show()
     {
@@ -26,7 +28,9 @@ public class DanceSessionPanelController : PanelController
         SetPanelComponents();
         SubscribeToEvents(true);
 
-        _characterView.SetSprite(character.IdleSprite);
+
+        _character = CharacterCatalogue.activeCharacter;
+        _characterView.SetSprite(_character.Config.idleSprite);
     }
 
     public override void Hide()
@@ -80,8 +84,8 @@ public class DanceSessionPanelController : PanelController
     // perhaps create a character controller that handles the chatacter view instead
     private void HandleDanceMove(SwipeID move, bool isArrowScored, bool isSetComplete)
     {
-        Sprite idleSprite = character.IdleSprite;
-        Sprite moveSprite = character.OnFailSprite;
+        Sprite idleSprite = _character.Config.idleSprite;
+        Sprite moveSprite = _character.Config.onFailSprite;
         AudioClip audioFeedback = audioMoveFail;
         if (isArrowScored) // the default gets overwritten with the success moves
         {
@@ -90,16 +94,16 @@ public class DanceSessionPanelController : PanelController
             switch (move)
             {
                 case SwipeID.Up:
-                    moveSprite = character.DanceMoveSpriteUp;
+                    moveSprite = _character.Config.danceMoveSpriteUp;
                     break;
                 case SwipeID.Right:
-                    moveSprite = character.DanceMoveSpriteRight;
+                    moveSprite = _character.Config.danceMoveSpriteRight;
                     break;
                 case SwipeID.Down:
-                    moveSprite = character.DanceMoveSpriteDown;
+                    moveSprite = _character.Config.danceMoveSpriteDown;
                     break;
                 case SwipeID.Left:
-                    moveSprite = character.DanceMoveSpriteLeft;
+                    moveSprite = _character.Config.danceMoveSpriteLeft;
                     break;
             }
         }

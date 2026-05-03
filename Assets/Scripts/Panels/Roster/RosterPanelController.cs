@@ -6,7 +6,6 @@ public class RosterPanelController : PanelController
     private PreviewCard _previewCard;
     private NavigationButtons[] _buttons;
     private NavigationModel _navigationModelModel;
-    private DatabaseModel _data;
     private CharacterID _previewID;
     private SelectButtonText _selectButtonText;
 
@@ -16,7 +15,7 @@ public class RosterPanelController : PanelController
         base.Show();
         AssignFields();
         SubscribeToEvents(true);
-        UpdateViews(_data.Data.activeCharacterId);
+        UpdateViews(SaveSystem.Instance.SaveData.activeCharacterID);
     }
     public override void Hide()
     {
@@ -26,8 +25,7 @@ public class RosterPanelController : PanelController
     private void AssignFields()
     {
         // Models
-        _data = GameManager.Instance.Database;
-        _navigationModelModel = new NavigationModel(_data);
+        _navigationModelModel = new NavigationModel(CharacterCatalogue.configList);
         
         //Views
         _previewCard = PanelInstance.GetComponentInChildren<PreviewCard>();
@@ -59,7 +57,7 @@ public class RosterPanelController : PanelController
                 _previewID = _navigationModelModel.Next();
                 break;
             case NavigationButtons.Request.SelectCharacter:
-                _data.SetActiveCharacter(_previewID);
+                CharacterCatalogue.SetActiveCharacter(_previewID);
                 break;
         }
 
@@ -67,11 +65,11 @@ public class RosterPanelController : PanelController
         
     }
 
-    private void UpdateViews(CharacterID characterID)
+    private void UpdateViews(CharacterID id)
     {
-        // Start component change
-        _previewCard.ShowCharacter(_data.GetCharacter(characterID));
-        _selectButtonText.UpdateText(_data.GetCharacter(characterID));
+        CharacterModel character = CharacterCatalogue.GetCharacter(id); 
+        _previewCard.ShowCharacter(character);
+        _selectButtonText.UpdateText(character);
     }
     
 }

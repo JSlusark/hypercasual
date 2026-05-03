@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 515c2f3d5b99407299b681f0bc268964, type: 3}
   m_Name: CharacterList
   m_EditorClassIdentifier: Assembly-CSharp::CharacterListConfig
-  CharacterDatabase:
+  catalogueConfig:
+  - {fileID: 11400000, guid: ddd69648de3a44471a48d49d664dce8a, type: 2}
   - {fileID: 11400000, guid: dd1b3bf71d7dc4cf3b12fbb25f8e2120, type: 2}
   - {fileID: 11400000, guid: 182ad6e80388e4c9da5d775d154beb9e, type: 2}
-  - {fileID: 11400000, guid: ddd69648de3a44471a48d49d664dce8a, type: 2}

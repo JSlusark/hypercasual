@@ -4,35 +4,24 @@ using UnityEngine.Serialization;
 
 public class GameManager : Manager<GameManager>
 {
-    [Header("Save Systems")] private SaveSystem _saveSystem;
-
-    [Header("Configurations - Scriptable Objects")] [SerializeField]
-    private DatabaseConfig characterListSo;
-
-    [Header("Main Game Models")] public DatabaseModel Database;
+    SaveSystem _saveSystem;
+    // [SerializeField] private SwipeManager _swipeManager;
+    // [SerializeField] private PanelManager _panelManager;
+    // [SerializeField] private ConfigManager _configManager;
 
 
-    protected override void Awake() // Uses the Instance of the GameManager so that it persists across scenes 
+    protected override void Awake()  
     {
         base.Awake();
-        StartSaveSystem();
-        InitModels();
-        if (Database == null)
-        {
-            Debug.LogError("Database is null!");
-            
-        }
-    }
-
-
-    private void StartSaveSystem()
-    {
-        _saveSystem = new SaveSystem();
-    }
-
-    private void InitModels()
-    {
-        Database = new DatabaseModel(characterListSo, _saveSystem.SaveData.databaseData);
+        /*
+         * The ideal would be having just gamemanager as a monobehaviour
+         * and the other "submanagers" as pure c# singletons, as it can make it easier
+         * to convert the logic to another engine.
+         *
+         * All other monobehaviour singletons are created before 
+         * 
+         */
+        _saveSystem = SaveSystem.Instance;
     }
 
 

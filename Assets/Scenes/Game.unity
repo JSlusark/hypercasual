@@ -1580,9 +1580,10 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
+  - {fileID: 1214105941}
   - {fileID: 2008202974}
-  - {fileID: 7827193}
   - {fileID: 45627550}
+  - {fileID: 7827193}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1039242155
@@ -1722,6 +1723,51 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9a767b28e51d243ce824a674ef7f8f1e, type: 3}
+--- !u!1 &1214105940
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1214105941}
+  - component: {fileID: 1214105942}
+  m_Layer: 0
+  m_Name: Config
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1214105941
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1214105940}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1037411846}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1214105942
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1214105940}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6c17a4b5854447179602271c386a5113, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ConfigManager
+  characterCatalogue: {fileID: 11400000, guid: ff6892dfeb5844ece83065b986b28237, type: 2}
 --- !u!1 &1278744480
 GameObject:
   m_ObjectHideFlags: 0
@@ -2677,7 +2723,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6f383a5579ae42988ebcd4fc6e3d8fb1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::GameManager
-  characterListSo: {fileID: 11400000, guid: ff6892dfeb5844ece83065b986b28237, type: 2}
 --- !u!114 &2050420521 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 4004228882129045596, guid: 9a767b28e51d243ce824a674ef7f8f1e, type: 3}

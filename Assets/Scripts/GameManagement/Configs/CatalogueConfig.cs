@@ -1,11 +1,12 @@
 using System.Collections.Generic;
 using DefaultNamespace.ScriptableObjects;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 
 [CreateAssetMenu(fileName = "CharacterList", menuName = "ScriptableObject/CharacterList")]
-public class DatabaseConfig : ScriptableObject
+public class CatalogueConfig : ScriptableObject
 {
-    public List<CharacterConfig> CharacterDatabase;
+    [SerializeField] public List<CharacterConfig> catalogueConfig;
 
 }

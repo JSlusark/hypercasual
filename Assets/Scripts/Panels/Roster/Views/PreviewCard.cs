@@ -21,15 +21,17 @@ public class PreviewCard : MonoBehaviour
 
     public void ShowCharacter(CharacterModel character) // characterModel
     {
-    
-        bool isUnlocked = character.IsUnlocked;
-        dancerName.text = isUnlocked ? character.Name : "Locked Dancer";
-        danceStyle.text = isUnlocked ? character.Id.ToString() : "Unknown";
-        previewImage.sprite = character.RosterSprite;
+        CharacterConfig c = character.Config;
+        CharacterData d = character.Data;
+
+        bool isUnlocked = d.isUnlocked;
+        dancerName.text = isUnlocked ? c.dancerName : "Locked Dancer";
+        danceStyle.text = isUnlocked ? c.id.ToString() : "Unknown";
+        previewImage.sprite = c.rosterSprite;
         previewImage.color = isUnlocked ? Color.white : Color.black;
         _background.color = isUnlocked ? Color.deepSkyBlue : Color.gray4;
-        DatabaseModel _data = GameManager.Instance.Database;
-        if (character.Id == _data.Data.activeCharacterId)
+        // CatalogueModel _data = GameManager.Instance.Catalogue;
+        if (c.id == SaveSystem.Instance.SaveData.activeCharacterID)
         {
             _background.color = Color.green;
         }

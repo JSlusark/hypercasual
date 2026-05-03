@@ -34,8 +34,7 @@ public class ScoringController : MonoBehaviour
 
     void Awake()
     {
-        DatabaseModel _data = GameManager.Instance.Database;
-        _character = _data.GetActiveCharacter();
+        _character = CharacterCatalogue.Instance.activeCharacter;
 
         _scoringModel = new ScoringModel(scoreConfig, _character);
         _scoreBarFill = _scoringModel.Points / _scoringModel.Target;

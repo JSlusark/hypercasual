@@ -1,5 +1,8 @@
+using System.Collections.Generic;
 using System.IO;
 using System.Threading;
+using DefaultNamespace.ScriptableObjects;
+using NUnit.Framework;
 using UnityEngine;
 
 
@@ -13,19 +16,19 @@ using UnityEngine;
 /// In a bigger project within a team it would be ideal to make its constructor internal and share the
 /// same assembly definition with GameManager. 
 /// </summary>
-
-public class SaveSystem
+public class SaveSystem : Singleton<SaveSystem>
 {
-    private readonly string _savePath;
+    private string _savePath;
     public SaveData SaveData { get; private set; }
-    private CancellationTokenSource _timerCancellation;
+    // private CancellationTokenSource _timerCancellation;
 
-    public SaveSystem()
+    protected override void Initialize()
     {
         Debug.Log("Starting SaveSystem");
         _savePath = Path.Combine(Application.persistentDataPath, "savegame.json");
         Load();
     }
+
 
     public void Load()
     {
@@ -38,10 +41,22 @@ public class SaveSystem
         else
         {
             Debug.Log("No save found on device, creating new save file.");
-            SaveData = new SaveData();
+            SaveData = GetNewSaveData();
             Save();
         }
     }
+
+    private SaveData GetNewSaveData()
+    {
+        return new SaveData()
+               {
+                   activeCharacterID = CharacterID.Moshpit,
+                   catalogueData = new List<CharacterData>(),
+                   // settingsData = new SettingsData { ... }
+                   // walletData = new WalletData { ... }
+               };
+    }
+
 
     public void Save()
     {
