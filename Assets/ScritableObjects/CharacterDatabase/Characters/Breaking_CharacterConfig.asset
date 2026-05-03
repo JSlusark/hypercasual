@@ -17,7 +17,8 @@ MonoBehaviour:
   danceStyle: 
   rosterSprite: {fileID: 21300000, guid: 827120630d4ae48afbe96f09b6bf875e, type: 3}
   idleSprite: {fileID: 21300000, guid: 827120630d4ae48afbe96f09b6bf875e, type: 3}
-  onSuccessSprite: {fileID: 0}
+  idleAnimation: {fileID: 0}
+  onSetComplete: {fileID: 0}
   onFailSprite: {fileID: 0}
   danceMoveSprite1: {fileID: 0}
   danceMoveSprite2: {fileID: 0}

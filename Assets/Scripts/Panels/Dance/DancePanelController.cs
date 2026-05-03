@@ -6,22 +6,14 @@ using UnityEngine.UI;
 
 public class DancePanelController : PanelController
 {
-    [SerializeField] private CharacterView characterSprite;
+    [SerializeField] private CharacterView _characterView;
     
-    private DatabaseModel _data;
-    private CharacterID _characterID;
     
     public override void Show()
     {
         base.Show();
-
-        // _data = GameManager.Instance.Database;
-        // _characterID = _data.Data.activeCharacterId;
-        
-        characterSprite = PanelInstance.GetComponentInChildren<CharacterView>();
-        
-        // characterSprite.ShowIdle(_data.GetCharacter(_characterID));
-        
+        _characterView = PanelInstance.GetComponentInChildren<CharacterView>();
+        _characterView.SetSprite(character.IdleSprite);
     }
 
 

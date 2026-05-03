@@ -13,6 +13,10 @@ public abstract class PanelController : MonoBehaviour
     [Header("PanelEmitterButtons - needed by PanelManager")]
     public PanelEmitterButton[] PanelEmitterButtons; /*{ get; private set; }*/ 
     
+    
+    [Header("Database instance")]
+    protected DatabaseModel data;
+    protected CharacterModel character;
 
 
     public virtual void Show() 
@@ -26,6 +30,10 @@ public abstract class PanelController : MonoBehaviour
         // Debug.Log($"[PanelController] Show: {panelPrefab.name}");
         PanelInstance = Instantiate(panelPrefab);
         PanelEmitterButtons = PanelInstance.GetComponentsInChildren<PanelEmitterButton>(true); // includes inactive children
+     
+        
+        data = GameManager.Instance.Database;
+        character = data.GetActiveCharacter();
         // Debug.Log($"[PanelController] Found {PanelEmitterButtons.Length} PanelEmitterButtons in {panelPrefab.name}");
     }
 

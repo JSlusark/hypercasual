@@ -26,11 +26,12 @@ using DefaultNamespace.ScriptableObjects;
         // Sprites
         public Sprite RosterSprite => _config.rosterSprite;
         public Sprite IdleSprite => _config.idleSprite;
-        public Sprite OnSuccessSprite => _config.onSuccessSprite;
+        public Sprite OnSetComplete => _config.onSetComplete;
         public Sprite OnFailSprite => _config.onFailSprite;
-        public Sprite DanceMoveSprite1 => _config.danceMoveSprite1;
-        public Sprite DanceMoveSprite2 => _config.danceMoveSprite2;
-        public Sprite DanceMoveSprite3 => _config.danceMoveSprite3;
+        public Sprite DanceMoveSpriteUp => _config.danceMoveSpriteUp;
+        public Sprite DanceMoveSpriteRight => _config.danceMoveSpriteRight;
+        public Sprite DanceMoveSpriteDown => _config.danceMoveSpriteDown;
+        public Sprite DanceMoveSpriteLeft => _config.danceMoveSpriteLeft;
 
        // Roster info
         public bool IsUnlocked => _data.isUnlocked;
