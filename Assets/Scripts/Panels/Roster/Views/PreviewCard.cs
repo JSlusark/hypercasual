@@ -19,7 +19,7 @@ public class PreviewCard : MonoBehaviour
     {
     }
 
-    public void Show(CharacterModel character, bool isActiveCharacter) // characterModel
+    public void Show(Character character, bool isActiveCharacter) // characterModel
     {
         CharacterConfig c = character.Config;
         CharacterData d = character.Data;

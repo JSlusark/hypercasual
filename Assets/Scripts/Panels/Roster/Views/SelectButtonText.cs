@@ -22,7 +22,7 @@ namespace Panels.Roster.Views
             buttonImage = _button.GetComponent<Image>();
         }
         
-        public void UpdateText(CharacterModel character, bool isActive)
+        public void UpdateText(Character character, bool isActive)
         {
             CharacterConfig c = character.Config;
             CharacterData d = character.Data;

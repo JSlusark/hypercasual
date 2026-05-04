@@ -13,7 +13,7 @@ public class ScoringModel
     public event Action<int> OnRoundChange;
 
 
-    public ScoringModel(Score config, CharacterModel character)
+    public ScoringModel(Score config, Character character)
     {
         c = config;
         c.StartValues();

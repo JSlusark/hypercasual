@@ -16,9 +16,9 @@ public abstract class PanelController : MonoBehaviour
     
     
     [Header("Catalogue instance")]
-    protected CharacterCatalogue CharacterCatalogue;
-    protected CharacterModel ActiveCharacter;
-    protected CharacterID ActiveCharacterID;
+    protected CharacterCatalogue _characterCatalogue;
+    protected Character _activeCharacter;
+    protected CharacterID _activeCharacterID;
 
 
     public virtual void Show() 
@@ -33,9 +33,9 @@ public abstract class PanelController : MonoBehaviour
         PanelInstance = Instantiate(panelPrefab);
         PanelEmitterButtons = PanelInstance.GetComponentsInChildren<PanelEmitterButton>(true); // includes inactive children
      
-        CharacterCatalogue = CharacterCatalogue.Instance;
-        ActiveCharacter = CharacterCatalogue.activeCharacter;
-        ActiveCharacterID = CharacterCatalogue.activeCharacter.Data.id;
+        _characterCatalogue = CharacterCatalogue.Instance;
+        _activeCharacter = _characterCatalogue.activeCharacter;
+        _activeCharacterID = _characterCatalogue.activeCharacter.Data.id;
 
         // Debug.Log($"[PanelController] Found {PanelEmitterButtons.Length} PanelEmitterButtons in {panelPrefab.name}");
     }
@@ -49,7 +49,7 @@ public abstract class PanelController : MonoBehaviour
         }
         
         // Debug.Log($"[PanelController] Hide: {panelPrefab.name}");
-        Destroy(PanelInstance);
+        DestroyImmediate(PanelInstance);
         PanelInstance = null;
     }
     

@@ -13,9 +13,8 @@ using UnityEngine.Serialization;
 [Serializable]
 public class SaveData
 {
+    public String PlayerName; // Can convert to playerData with Name, number of dancers, most successful dancer, etc..
     public CharacterID activeCharacterID;
-    public List<CharacterData> catalogueData;
-    //public WalletData
-    // public SettingsData
-    // public PlayerData
+    public List<CharacterData> characterCatalogue; 
+    public WalletData wallet;
 }

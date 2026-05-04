@@ -23,5 +23,5 @@ public class CharacterConfig : ScriptableObject
 	public Sprite danceMoveSpriteLeft;
 	
 	[Header("Roster Info")]
-	public float costToUnlock;
+	public int costToUnlock;
 }

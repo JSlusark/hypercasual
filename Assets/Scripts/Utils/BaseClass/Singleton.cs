@@ -1,9 +1,11 @@
 /*
  * Singleton for pure classes.
- * 
+ *
  * Singleton here is created by lazy instantiation: it gets instanced for the 1st time only when needed.
- * 
+ *
  */
+
+using UnityEngine;
 
 public abstract class Singleton<T> where T : Singleton<T>, new()
 {
@@ -29,5 +31,8 @@ public abstract class Singleton<T> where T : Singleton<T>, new()
         return instance;
     }
 
-    protected virtual void Initialize() { }
+    protected virtual void Initialize()
+    {
+    }
+    
 }

@@ -5,10 +5,7 @@ using UnityEngine.Serialization;
 public class GameManager : Manager<GameManager>
 {
     SaveSystem _saveSystem;
-    // [SerializeField] private SwipeManager _swipeManager;
-    // [SerializeField] private PanelManager _panelManager;
-    // [SerializeField] private ConfigManager _configManager;
-
+    
 
     protected override void Awake()  
     {
@@ -27,8 +24,8 @@ public class GameManager : Manager<GameManager>
 
     ///    <summary>
     /// Unity built in methods for to handle when app is paused or quit
-    ///- By default, on mobile Pause is always triggered before Quit (so saving needs to be a synchronous operation)
-    ///     - This is not the case on Desktop
+    /// - By default, on mobile Pause is always triggered before Quit (so saving needs to be a synchronous operation)
+    /// - This is not the case on Desktop
     ///    </summary>
     private void OnApplicationPause(bool isPaused)
     {

@@ -22,7 +22,7 @@ public class ScoringController : MonoBehaviour
     [SerializeField] private AudioClip audioTriumphant;
 
 
-    CharacterModel _character;
+    Character _character;
 
     // [Header("Dynamic Values: can change from booster applied, character level and/or session level progress")]
     // I expect this data may come from Game Manager and stored in the corresponding Character Data
@@ -35,7 +35,6 @@ public class ScoringController : MonoBehaviour
     void Awake()
     {
         _character = CharacterCatalogue.Instance.activeCharacter;
-
         _scoringModel = new ScoringModel(scoreConfig, _character);
         _scoreBarFill = _scoringModel.Points / _scoringModel.Target;
         roundView.Show(_scoringModel.Rounds);

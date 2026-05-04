@@ -20,7 +20,7 @@ public class DanceSessionPanelController : PanelController
     [SerializeField] private AudioClip audioMoveSuccess;
 
     
-    private CharacterModel _character;
+    private Character _character;
 
     public override void Show()
     {
@@ -29,7 +29,7 @@ public class DanceSessionPanelController : PanelController
         SubscribeToEvents(true);
 
 
-        _character = CharacterCatalogue.activeCharacter;
+        _character = _characterCatalogue.activeCharacter;
         _characterView.SetSprite(_character.Config.idleSprite);
     }
 

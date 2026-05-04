@@ -7,7 +7,7 @@ public class CharacterView : MonoBehaviour
 {
     [SerializeField] private Image characterSprite;
     // CatalogueModel _data;
-    // private CharacterModel character;
+    // private Character character;
 
     [Header("On dance move animation")] [SerializeField]
     private float timePassed = 0f;
