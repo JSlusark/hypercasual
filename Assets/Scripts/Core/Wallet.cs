@@ -3,6 +3,10 @@ using UnityEngine;
 
 public class Wallet : Singleton<Wallet>
 {
+    
+    public event Action<int> OnCoinsUpdate;
+    
+    
     public WalletData Data { get; private set; }
     public WalletConfig Config { get; private set; }
 
@@ -26,6 +30,8 @@ public class Wallet : Singleton<Wallet>
             Data.maxCoinsReached = false;
             Data.coins += amount;
         }
+        
+        OnCoinsUpdate?.Invoke(Data.coins);
     }
 
 
@@ -33,6 +39,7 @@ public class Wallet : Singleton<Wallet>
     {
         if (Data.coins < amount) return false; // avoiding negative values
         Data.coins -= amount;
+        OnCoinsUpdate?.Invoke(Data.coins);
         return true;
     }
 }

@@ -18,7 +18,7 @@ public class WalletController : PrefabController<WalletController>
         AddEvents(); // has to be called before show, as we subscribe inside base class
         base.Awake();
 
-        coinsView.Show(Wallet.Instance.Data.coins);
+        coinsView.Show(wallet.Data.coins);
     }
 
     private void OnEnable()
@@ -37,13 +37,20 @@ public class WalletController : PrefabController<WalletController>
                       () => coinsView.OnCoinIncrease += HandleCoinIncrease,
                       () => coinsView.OnCoinIncrease -= HandleCoinIncrease
                      );
+        RegisterEvent(
+                      () => wallet.OnCoinsUpdate += HandleWalletUpdate,
+                      () => wallet.OnCoinsUpdate -= HandleWalletUpdate
+                     );
     }
 
     private void HandleCoinIncrease(int coin)
     {
         Debug.Log(coin);
         wallet.IncreaseCoins(coin);
-        coinsView.Show(Wallet.Instance.Data.coins);
-
+    }
+    
+    private void HandleWalletUpdate(int coin)
+    {
+        coinsView.Show(wallet.Data.coins);
     }
 }
