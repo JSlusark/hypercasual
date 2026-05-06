@@ -6,31 +6,12 @@ using UnityEngine.UI;
 public class CharacterView : MonoBehaviour
 {
     [SerializeField] private Image characterSprite;
-    // CatalogueModel _data;
-    // private Character character;
 
     [Header("On dance move animation")] [SerializeField]
     private float timePassed = 0f;
     [SerializeField] private float timeAvailable = 0.2f;
     [SerializeField] private float wiggleAmount = 15f;
     
-    
-    // added them momentarily here - after will put in audio manager
-
-
-    // private void Awake()
-    // {
-    //     Debug.Log("CharacterView.Awake");
-    //     // _data = GameManager.Instance.Catalogue;
-    //     // character = _data.GetActiveCharacter();
-    //     // Debug.Log("Active character config: " + character.Name + " | OnFailSprite: " + character.OnFailSprite);
-    // }
-
-    // private void Start()
-    // {
-    //     SetSprite();
-    // }
-
     public void SetSprite(Sprite idle)
     {
         characterSprite.sprite = idle;

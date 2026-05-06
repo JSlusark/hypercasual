@@ -20,6 +20,13 @@ public class Character
     public void Unlock()
     {
             Data.isUnlocked = true; 
-            // Debug.Log($"{Config.dancerName} has been unlocked!");
+            // Debug.Log($"{Config.name} has been unlocked!");
+    }
+
+    public void UpdateExperience(int rounds, float points)
+    {
+        // Data.level =  // need to calculate based on exp bar max
+        Data.followers += (rounds * points);
+        
     }
 }

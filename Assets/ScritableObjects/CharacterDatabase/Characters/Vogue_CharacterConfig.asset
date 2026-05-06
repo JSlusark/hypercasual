@@ -13,13 +13,19 @@ MonoBehaviour:
   m_Name: Vogue_CharacterConfig
   m_EditorClassIdentifier: Assembly-CSharp::CharacterData
   id: 1
-  dancerName: Jean Star
-  danceStyle: 
+  name: Jean Star
+  costToUnlock: 900
   rosterSprite: {fileID: -5090879937577951274, guid: c5af7fefec05c479d9c5355b419990d8, type: 3}
-  idleSprite: {fileID: -5090879937577951274, guid: c5af7fefec05c479d9c5355b419990d8, type: 3}
+  idleAnimation: {fileID: 0}
+  reelBackground:
+  - {fileID: 3167209408248242512, guid: 8b8e305292ef945efa544f1a4819cd3c, type: 3}
   onSuccessSprite: {fileID: 0}
   onFailSprite: {fileID: 0}
-  danceMoveSprite1: {fileID: 0}
-  danceMoveSprite2: {fileID: 0}
-  danceMoveSprite3: {fileID: 0}
-  costToUnlock: 900
+  danceMoveSpriteUp: {fileID: -1789783047714028474, guid: 5af0f257bbbd64e7db72a55325205c4e, type: 3}
+  danceMoveSpriteRight: {fileID: -935739236741852543, guid: ee1ce5585ca5340dd815f9390de6a7cf, type: 3}
+  danceMoveSpriteDown: {fileID: 4282041581734270292, guid: 5710af2a762d14653893686b683ae7d2, type: 3}
+  danceMoveSpriteLeft: {fileID: -4396882722451657706, guid: 8a8480c14aefa47c1943244c11e67816, type: 3}
+  onSuccessSound: {fileID: 8300000, guid: bd32d909f58834a2a9fdd834d2dd6b7d, type: 3}
+  idleSprite: {fileID: -5090879937577951274, guid: c5af7fefec05c479d9c5355b419990d8, type: 3}
+  studioBackground:
+  - {fileID: -965982255467776543, guid: 31f6a4d08d1304549871008c73baaddd, type: 3}

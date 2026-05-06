@@ -8,15 +8,18 @@ public class DancePanelController : PanelController
 {
     [SerializeField] private CharacterView _characterView;
     [SerializeField] private WalletController _walletController;
-
+    [SerializeField] private BackgroundView _backgroundView;
     
     public override void Show()
     {
         base.Show();
-        _characterView = PanelInstance.GetComponentInChildren<CharacterView>();
-        _characterView.SetSprite(_characterCatalogue.activeCharacter.Config.idleSprite);
-
         _walletController = PanelInstance.GetComponentInChildren<WalletController>();
+       
+        _characterView = PanelInstance.GetComponentInChildren<CharacterView>();
+        _backgroundView = PanelInstance.GetComponentInChildren<BackgroundView>();
+        
+        _characterView.SetSprite(_characterCatalogue.activeCharacter.Config.idleSprite);
+        _backgroundView.Show(_characterCatalogue.activeCharacter.Config.reelBackground[0]); // 0 by default, meant to change in Dance Summary as rounds progress
     }
 
 

@@ -17,7 +17,7 @@ public class ScoringModel
     {
         c = config;
         c.StartValues();
-        SetPower(character.Data.experienceLevel);
+        SetPower(character.Data.level);
         // Rounds = startRounds;
         // Target = 300;
         // Points = 0; // if player starts with a different amount of points we make it proportional

@@ -25,7 +25,7 @@ public class PreviewCard : MonoBehaviour
         CharacterData d = character.Data;
 
         bool isUnlocked = d.isUnlocked;
-        dancerName.text = isUnlocked ? c.dancerName : "Locked Dancer";
+        dancerName.text = isUnlocked ? c.name : "Locked Dancer";
         danceStyle.text = isUnlocked ? c.id.ToString() : "Unknown";
         previewImage.sprite = c.rosterSprite;
         previewImage.color = isUnlocked ? Color.white : Color.black;

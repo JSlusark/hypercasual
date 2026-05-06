@@ -13,14 +13,19 @@ MonoBehaviour:
   m_Name: Breaking_CharacterConfig
   m_EditorClassIdentifier: Assembly-CSharp::CharacterData
   id: 2
-  dancerName: Brad Tuy
-  danceStyle: 
-  rosterSprite: {fileID: 21300000, guid: 827120630d4ae48afbe96f09b6bf875e, type: 3}
-  idleSprite: {fileID: 21300000, guid: 827120630d4ae48afbe96f09b6bf875e, type: 3}
-  idleAnimation: {fileID: 0}
-  onSetComplete: {fileID: 0}
-  onFailSprite: {fileID: 0}
-  danceMoveSprite1: {fileID: 0}
-  danceMoveSprite2: {fileID: 0}
-  danceMoveSprite3: {fileID: 0}
+  name: Brad Tuy
   costToUnlock: 800
+  rosterSprite: {fileID: 21300000, guid: 827120630d4ae48afbe96f09b6bf875e, type: 3}
+  idleAnimation: {fileID: 0}
+  reelBackground:
+  - {fileID: -8625725295831688959, guid: 94b4cc3aed71f411982a404fb18e2f38, type: 3}
+  onSuccessSprite: {fileID: 0}
+  onFailSprite: {fileID: 0}
+  danceMoveSpriteUp: {fileID: -4678248386991960444, guid: 110797da82e9148dab42d4a2ad7ff1c8, type: 3}
+  danceMoveSpriteRight: {fileID: 4282041581734270292, guid: b322da36363a649ccb6d5f5726b0a12f, type: 3}
+  danceMoveSpriteDown: {fileID: -935739236741852543, guid: 165835b25e7d242d2968fdd149dd6d4d, type: 3}
+  danceMoveSpriteLeft: {fileID: -4396882722451657706, guid: d7bb164c02ea748c5899802720ed8b11, type: 3}
+  onSuccessSound: {fileID: 8300000, guid: 869995d0e69b14d4cbc463e90eb5e453, type: 3}
+  idleSprite: {fileID: 21300000, guid: 827120630d4ae48afbe96f09b6bf875e, type: 3}
+  studioBackground:
+  - {fileID: 1841874730368073233, guid: f59215ed4b4464a368356c6a4095bda6, type: 3}
