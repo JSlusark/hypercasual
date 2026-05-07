@@ -18,7 +18,7 @@ public abstract class PrefabController<T> : MonoBehaviour where T : MonoBehaviou
     private static T _instance;
     protected List<(Action onEnable, Action onDisable)> _eventList = new();
 
-    protected virtual void Awake()
+    private void Awake()
     {
         if (_instance != null)
         {
@@ -28,7 +28,9 @@ public abstract class PrefabController<T> : MonoBehaviour where T : MonoBehaviou
         }
 
         _instance = this as T;
+        OnAwake();
     }
+    protected abstract void OnAwake(); // abstract flags the compiler that it needs to be overriden in derivative classes
 
     protected virtual void OnDestroy()
     {
@@ -42,18 +44,25 @@ public abstract class PrefabController<T> : MonoBehaviour where T : MonoBehaviou
         
         _instance = null;
     }
-
-    protected virtual void AddEvents()
+    
+    
+    
+    // un/subscribes to events when constructed in base and again in derivatives
+    private void OnEnable() 
     {
-        // RegisterEvent(
-        //               () => signalHolder.Event += HandleEvent,
-        //               () => signalHolder.Event -= HandleEvent
-        //              );
+        SubscribeToEvents(true);
     }
 
-    protected void RegisterEvent(Action onEnable, Action onDisable)
+    private void OnDisable()
     {
-        Debug.Log($"[{GetType().Name}] Registering {onEnable.GetType().Name}");
+        SubscribeToEvents(false);
+    }
+    
+    protected virtual void AddEvents() { }
+
+    protected void RegisterEvent(string eventName, Action onEnable, Action onDisable)
+    {
+        Debug.Log($"[{GetType().Name}] Registered to {eventName}");
         _eventList.Add((onEnable, onDisable));
     }
 

@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using UnityEngine.Serialization;
 
@@ -12,35 +13,27 @@ public class WalletController : PrefabController<WalletController>
     [SerializeField] private CoinsView coinsView;
     private Wallet wallet;
 
-    protected override void Awake()
+    protected override void OnAwake()
     {
         wallet = Wallet.Instance;
-        AddEvents(); // has to be called before show, as we subscribe inside base class
-        base.Awake();
+        AddEvents();
+    }
 
+    private void Start()
+    {
         coinsView.Show(wallet.Data.coins);
-    }
-
-    private void OnEnable()
-    {
-        SubscribeToEvents(true);
-    }
-
-    private void OnDisable()
-    {
-        SubscribeToEvents(false);
     }
 
     protected override void AddEvents()
     {
-        RegisterEvent(
-                      () => coinsView.OnCoinIncrease += HandleCoinIncrease,
-                      () => coinsView.OnCoinIncrease -= HandleCoinIncrease
-                     );
-        RegisterEvent(
-                      () => wallet.OnCoinsUpdate += HandleWalletUpdate,
-                      () => wallet.OnCoinsUpdate -= HandleWalletUpdate
-                     );
+        RegisterEvent(nameof(coinsView.OnCoinIncrease),
+                                 () => coinsView.OnCoinIncrease += HandleCoinIncrease,
+                             () => coinsView.OnCoinIncrease -= HandleCoinIncrease
+                            );
+        RegisterEvent(nameof(wallet.OnCoinsUpdate),
+                                 () => wallet.OnCoinsUpdate += HandleWalletUpdate,
+                             () => wallet.OnCoinsUpdate -= HandleWalletUpdate
+                            );
     }
 
     private void HandleCoinIncrease(int coin)
