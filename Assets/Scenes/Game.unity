@@ -2181,6 +2181,7 @@ MonoBehaviour:
   DanceSessionScore: {fileID: 0}
   _characterView: {fileID: 0}
   _walletController: {fileID: 6460458872198219497, guid: 9e45440bf1b984ad28401861a9cd6a7e, type: 3}
+  _backgroundView: {fileID: 0}
 --- !u!1 &1478063003
 GameObject:
   m_ObjectHideFlags: 0
