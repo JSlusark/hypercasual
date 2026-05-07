@@ -10,6 +10,7 @@ public class DanceSessionPanelController : PanelController
     private ScoringController scoringController;
     private TimerController _timerController;
     private BackgroundView _backgroundView;
+    private CoinSpawnerController _coinSpawnerController;
 
     [SerializeField] private CharacterView _characterView; // Might be just a Character Controller later
 
@@ -43,13 +44,12 @@ public class DanceSessionPanelController : PanelController
     void SetPanelComponents()
     {
         _character = _characterCatalogue.activeCharacter;
-        
         _arrowManager = PanelInstance.GetComponentInChildren<ArrowManager>();
         scoringController = PanelInstance.GetComponentInChildren<ScoringController>();
         _timerController = PanelInstance.GetComponentInChildren<TimerController>();
+        _coinSpawnerController = PanelInstance.GetComponentInChildren<CoinSpawnerController>();
         _characterView = PanelInstance.GetComponentInChildren<CharacterView>();
         _backgroundView = PanelInstance.GetComponentInChildren<BackgroundView>();
-
     }
 
 
@@ -64,13 +64,11 @@ public class DanceSessionPanelController : PanelController
         {
             _timerController.OnTimerEnd += HandleTimerEnd;
             _arrowManager.OnArrowAction += HandleDanceMove;
-            // scoringController.onRoundChange += HandleRoundChange;
         }
         else
         {
             _timerController.OnTimerEnd -= HandleTimerEnd;
             _arrowManager.OnArrowAction -= HandleDanceMove;
-            // scoringController.onRoundChange -= HandleRoundChange;
         }
     }
     
@@ -115,4 +113,5 @@ public class DanceSessionPanelController : PanelController
         var button = System.Array.Find(PanelEmitterButtons, b => b.panelID == PanelID.DanceSummary);
         button.OnClick();
     }
+    
 }

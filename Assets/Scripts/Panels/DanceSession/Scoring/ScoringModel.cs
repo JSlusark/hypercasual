@@ -4,19 +4,19 @@ using UnityEngine.TextCore.Text;
 
 public class ScoringModel
 {
-    private Score c;
+    private DanceSession c;
     private float _power; // max points generated on round 0 based on character level
     public float Points => c.points;
     public int Rounds => c.rounds;
-    public int Target => c.target;
+    public int Target => c.roundTarget;
 
     public event Action<int> OnRoundChange;
 
 
-    public ScoringModel(Score config, Character character)
+    public ScoringModel(DanceSession config, Character character)
     {
         c = config;
-        c.StartValues();
+        c.Initialize();
         SetPower(character.Data.level);
         // Rounds = startRounds;
         // Target = 300;

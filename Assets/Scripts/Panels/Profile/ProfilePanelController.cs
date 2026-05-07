@@ -18,7 +18,7 @@ public class ProfilePanelController : PanelController
     private void UpdateViews()
     {
         
-        Debug.Log($"studioIndex: {_activeCharacter.Data.studioIndex}, array length: {_activeCharacter.Config.studioBackground.Length}");
+        // Debug.Log($"studioIndex: {_activeCharacter.Data.studioIndex}, array length: {_activeCharacter.Config.studioBackground.Length}");
         Sprite bg = _activeCharacter.Config.studioBackground[_activeCharacter.Data.studioIndex];
         Sprite portrait = _activeCharacter.Config.idleSprite;
         var name = _activeCharacter.Config.name;

@@ -24,14 +24,14 @@ public abstract class Manager<T> : MonoBehaviour where T : MonoBehaviour
     {
         if (Instance != null && Instance != this) // prevents new instances are created
         {
-            Debug.Log($"[{Instance.name}] Duplicate found, destroying. Existing ID: {Instance.GetInstanceID()}, Duplicate ID: {GetInstanceID()}");
+            // Debug.Log($"[{Instance.name}] Duplicate found, destroying. Existing ID: {Instance.GetInstanceID()}, Duplicate ID: {GetInstanceID()}");
             Destroy(gameObject);
             return;
         }
 
 
         Instance = this as T; // ensures that the created instance is of type T 
-        Debug.Log($"[{Instance.name}] Manager Awaken");
+        // Debug.Log($"[{Instance.name}] Manager Awaken");
         transform.SetParent(null); // If I want to keep manager collected in a folder i need to set them as root 
         DontDestroyOnLoad(gameObject);
     }

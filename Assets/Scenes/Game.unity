@@ -478,7 +478,7 @@ MonoBehaviour:
   showsMenuBar: 0
   panelPrefab: {fileID: 8339082342934915379, guid: 8c3828683e14343edb1e12c47c03277b, type: 3}
   PanelEmitterButtons: []
-  DanceSessionScore: {fileID: 0}
+  danceSessionDanceSession: {fileID: 0}
 --- !u!4 &144164286
 Transform:
   m_ObjectHideFlags: 0
@@ -913,7 +913,7 @@ MonoBehaviour:
   showsMenuBar: 1
   panelPrefab: {fileID: 8339082342934915379, guid: ca63ccd4c91e34f31a3628821e5fb08c, type: 3}
   PanelEmitterButtons: []
-  DanceSessionScore: {fileID: 0}
+  danceSessionDanceSession: {fileID: 0}
 --- !u!1001 &625879056
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1194,7 +1194,7 @@ MonoBehaviour:
   showsMenuBar: 1
   panelPrefab: {fileID: 8339082342934915379, guid: 7a8aec0c900054554a0cdfca79fa63da, type: 3}
   PanelEmitterButtons: []
-  DanceSessionScore: {fileID: 0}
+  danceSessionDanceSession: {fileID: 0}
 --- !u!1 &940199138
 GameObject:
   m_ObjectHideFlags: 0
@@ -1243,7 +1243,7 @@ MonoBehaviour:
   showsMenuBar: 1
   panelPrefab: {fileID: 8339082342934915379, guid: e860aba2c086b4427b50980dbe4de051, type: 3}
   PanelEmitterButtons: []
-  DanceSessionScore: {fileID: 0}
+  danceSessionDanceSession: {fileID: 0}
 --- !u!1 &943131158
 GameObject:
   m_ObjectHideFlags: 0
@@ -2178,7 +2178,7 @@ MonoBehaviour:
   showsMenuBar: 1
   panelPrefab: {fileID: 8339082342934915379, guid: 523c9424686ea437da12ea06287ae2cf, type: 3}
   PanelEmitterButtons: []
-  DanceSessionScore: {fileID: 0}
+  danceSessionDanceSession: {fileID: 0}
   _characterView: {fileID: 0}
   _walletController: {fileID: 6460458872198219497, guid: 9e45440bf1b984ad28401861a9cd6a7e, type: 3}
   _backgroundView: {fileID: 0}
@@ -2710,7 +2710,7 @@ MonoBehaviour:
   showsMenuBar: 1
   panelPrefab: {fileID: 8339082342934915379, guid: fe609bcd0e5e74ea1bfdc1338eccb1cd, type: 3}
   PanelEmitterButtons: []
-  DanceSessionScore: {fileID: 0}
+  danceSessionDanceSession: {fileID: 0}
   _profileView: {fileID: 0}
 --- !u!224 &1829676939 stripped
 RectTransform:
@@ -3137,7 +3137,7 @@ MonoBehaviour:
   showsMenuBar: 0
   panelPrefab: {fileID: 8339082342934915379, guid: 7b330581bc04a4342a33801d53e3b23b, type: 3}
   PanelEmitterButtons: []
-  DanceSessionScore: {fileID: 0}
+  danceSessionDanceSession: {fileID: 0}
   _characterView: {fileID: 8468253186705475889, guid: 33ff412540866434a9b80512bb1b35d4, type: 3}
   audioSource: {fileID: 2144193901}
   audioMoveFail: {fileID: 8300000, guid: e1089bc6f7b504b1187c08a3ce55e748, type: 3}

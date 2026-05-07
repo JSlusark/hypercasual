@@ -22,7 +22,7 @@ public abstract class PrefabController<T> : MonoBehaviour where T : MonoBehaviou
     {
         if (_instance != null)
         {
-            Debug.LogWarning($"[{typeof(T).Name}] was already instantiated");
+            // Debug.LogWarning($"[{typeof(T).Name}] was already instantiated");
             Destroy(gameObject); 
             return;
         }
@@ -36,7 +36,7 @@ public abstract class PrefabController<T> : MonoBehaviour where T : MonoBehaviou
     {
         if (_instance == null)
         {
-            Debug.LogWarning($"[{typeof(T).Name}] was is already null");
+            // Debug.LogWarning($"[{typeof(T).Name}] was is already null");
             return;
         }
 
@@ -51,7 +51,10 @@ public abstract class PrefabController<T> : MonoBehaviour where T : MonoBehaviou
     private void OnEnable() 
     {
         SubscribeToEvents(true);
+        Enable(); // <-------------------------- quick workaround - i will change this
     }
+
+    protected virtual void Enable() { }
 
     private void OnDisable()
     {
@@ -68,6 +71,7 @@ public abstract class PrefabController<T> : MonoBehaviour where T : MonoBehaviou
 
     protected void SubscribeToEvents(bool isSubscribed)
     {
+        Debug.Log($"[{GetType().Name}] Subscribed to {isSubscribed}");
         foreach (var entry in _eventList)
         {
             if (isSubscribed) entry.onEnable();

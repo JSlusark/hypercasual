@@ -57,7 +57,7 @@ public class CharacterCatalogue : Singleton<CharacterCatalogue>
         else
         {
             var wallet = Wallet.Instance;
-            if (wallet.DecreaseCoins(character.Config.costToUnlock))
+            if (wallet.RemoveCoins(character.Config.costToUnlock))
             {
                 SaveSystem.Instance.SaveData.activeCharacterID = id;
                 activeCharacter = character;
@@ -72,7 +72,7 @@ public class CharacterCatalogue : Singleton<CharacterCatalogue>
     {
         if (!characterCatalogue.TryGetValue(id, out Character characterModel))
         {
-            Debug.LogError($"Character {id} not found in _characterCatalogue!");
+            // Debug.LogError($"Character {id} not found in _characterCatalogue!");
             return null;
         }
 

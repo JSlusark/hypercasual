@@ -25,7 +25,7 @@ MonoBehaviour:
   danceMoveSpriteRight: {fileID: -935739236741852543, guid: ee1ce5585ca5340dd815f9390de6a7cf, type: 3}
   danceMoveSpriteDown: {fileID: 4282041581734270292, guid: 5710af2a762d14653893686b683ae7d2, type: 3}
   danceMoveSpriteLeft: {fileID: -4396882722451657706, guid: 8a8480c14aefa47c1943244c11e67816, type: 3}
-  onSuccessSound: {fileID: 8300000, guid: bd32d909f58834a2a9fdd834d2dd6b7d, type: 3}
+  onSetSuccess: {fileID: 8300000, guid: 448f138ee4edd44358b1dd43fae5b9d3, type: 3}
   idleSprite: {fileID: -5090879937577951274, guid: c5af7fefec05c479d9c5355b419990d8, type: 3}
   studioBackground:
   - {fileID: -965982255467776543, guid: 31f6a4d08d1304549871008c73baaddd, type: 3}

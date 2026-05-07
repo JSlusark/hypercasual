@@ -21,8 +21,8 @@ public abstract class PanelController : MonoBehaviour
     protected CharacterID _activeCharacterID;
     
     
-    [Header("Score from last round")]
-    [SerializeField] protected Score DanceSessionScore;
+    [Header("DanceSession from last round")]
+    [SerializeField] protected DanceSession danceSessionDanceSession;
 
 
     public virtual void Show() 

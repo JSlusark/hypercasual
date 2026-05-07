@@ -1258,7 +1258,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::MainController
   resultView: {fileID: 8743271407493673332}
-  scoreConfig: {fileID: 11400000, guid: b0302bd3550154f988a72487ab6ccdfd, type: 2}
+  danceSessionConfig: {fileID: 11400000, guid: b0302bd3550154f988a72487ab6ccdfd, type: 2}
 --- !u!1001 &8405074874877737547
 PrefabInstance:
   m_ObjectHideFlags: 0

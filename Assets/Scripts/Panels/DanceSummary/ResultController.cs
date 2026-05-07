@@ -6,18 +6,23 @@ public class ResultController : MonoBehaviour
 
     [SerializeField] private ResultView resultView;
     
-    [SerializeField] Score scoreConfig; 
+    [SerializeField] DanceSession danceSessionConfig; 
     
     void Start()
     {
-        var rounds = scoreConfig.rounds.ToString();
-        var followers = (scoreConfig.rounds * scoreConfig.points).ToString("F0");
-        var tips = "N/A";
+
+        Debug.Log($"[Wallet model] Coins in wallet");
+        Wallet.Instance.AddCoins(danceSessionConfig.coins);
+        
+        
+        var rounds = danceSessionConfig.rounds.ToString();
+        var followers = (danceSessionConfig.rounds * danceSessionConfig.points).ToString("F0");
+        var tips = danceSessionConfig.coins.ToString();
         
         resultView.Show(rounds, followers, tips);
        
         Character character = CharacterCatalogue.Instance.activeCharacter;
-        character.UpdateExperience(scoreConfig.rounds, scoreConfig.points);
+        character.UpdateExperience(danceSessionConfig.rounds, danceSessionConfig.points);
         
     }
 

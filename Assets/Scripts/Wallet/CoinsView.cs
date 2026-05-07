@@ -15,7 +15,7 @@ public class CoinsView : MonoBehaviour
     [SerializeField] private TextMeshProUGUI coinsText;
     [SerializeField] private Button coinsTopUpButton;
 
-    public event Action<int> OnCoinIncrease;
+    public event Action<int> OnCoinsTopUp;
 
     public void Show(float amount)
     {
@@ -25,7 +25,6 @@ public class CoinsView : MonoBehaviour
 
     public void onAddCoins()
     {
-        Debug.Log("clicked coin");
-        OnCoinIncrease?.Invoke(100);
+        OnCoinsTopUp?.Invoke(100);
     }
 }

@@ -31,7 +31,7 @@ public class CharacterConfig : ScriptableObject
 	public Sprite danceMoveSpriteLeft;
 	
 	[Header("🔊 Audio")]
-	public AudioClip onSuccessSound;
+	public AudioClip onSetSuccess;
 	
 	
 	[Header("----------- PROFILE CONFIGS -----------")]

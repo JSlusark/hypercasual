@@ -10,9 +10,8 @@ public class ScoringController : MonoBehaviour
     [SerializeField] private ScoreBarView scoreBarView;
     private float _scoreBarFill;
 
-    [SerializeField] private Score scoreConfig;
+    [SerializeField] private DanceSession danceSessionConfig;
     private ScoringModel _scoringModel;
-    // public event Action onRoundChange;
     private bool _setCompleted;
 
     
@@ -26,7 +25,7 @@ public class ScoringController : MonoBehaviour
     void Awake()
     {
         _character = CharacterCatalogue.Instance.activeCharacter;
-        _scoringModel = new ScoringModel(scoreConfig, _character);
+        _scoringModel = new ScoringModel(danceSessionConfig, _character);
         _scoreBarFill = _scoringModel.Points / _scoringModel.Target;
         roundView.Show(_scoringModel.Rounds);
     }
@@ -34,6 +33,7 @@ public class ScoringController : MonoBehaviour
     private void OnEnable()
     {
         _scoringModel.OnRoundChange += HandleRoundView;
+        
     }
 
     private void OnDisable()
@@ -44,7 +44,7 @@ public class ScoringController : MonoBehaviour
     private void HandleRoundView(int round)
     {
         roundView.UpdateRound(_scoringModel.Rounds);
-        audioSource.PlayOneShot(_character.Config.onSuccessSound);
+        audioSource.PlayOneShot(_character.Config.onSetSuccess);
     }
 
 
@@ -57,6 +57,6 @@ public class ScoringController : MonoBehaviour
 
     private void OnDestroy()
     {
-        Debug.Log($"Destroyed scoring controller {_scoringModel.GetTotalPoints()}");
+        // Debug.Log($"Destroyed scoring controller {_scoringModel.GetTotalPoints()}");
     }
 }

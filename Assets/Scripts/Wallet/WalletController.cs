@@ -11,39 +11,47 @@ using UnityEngine.Serialization;
 public class WalletController : PrefabController<WalletController>
 {
     [SerializeField] private CoinsView coinsView;
-    private Wallet wallet;
+    private AudioSource audiosource;
 
     protected override void OnAwake()
     {
-        wallet = Wallet.Instance;
         AddEvents();
+        Debug.Log($"[{GetType().Name}] Initializing {nameof(WalletController)}");
     }
 
     private void Start()
     {
-        coinsView.Show(wallet.Data.coins);
+        coinsView.Show(Wallet.Instance.Data.coins);
     }
+
+    protected override void Enable() // <-------------------------- quick workaround - i will change this!!!
+    {
+        coinsView.Show(Wallet.Instance.Data.coins);
+        
+    }
+
 
     protected override void AddEvents()
     {
-        RegisterEvent(nameof(coinsView.OnCoinIncrease),
-                                 () => coinsView.OnCoinIncrease += HandleCoinIncrease,
-                             () => coinsView.OnCoinIncrease -= HandleCoinIncrease
+        RegisterEvent(nameof(coinsView.OnCoinsTopUp),
+                                 () => coinsView.OnCoinsTopUp += HandleCoinsTopUp,
+                             () => coinsView.OnCoinsTopUp -= HandleCoinsTopUp
                             );
-        RegisterEvent(nameof(wallet.OnCoinsUpdate),
-                                 () => wallet.OnCoinsUpdate += HandleWalletUpdate,
-                             () => wallet.OnCoinsUpdate -= HandleWalletUpdate
+        RegisterEvent(nameof(Wallet.Instance.OnCoinsUpdate),
+                                 () => Wallet.Instance.OnCoinsUpdate += HandleCoinsView,
+                             () => Wallet.Instance.OnCoinsUpdate -= HandleCoinsView
                             );
     }
 
-    private void HandleCoinIncrease(int coin)
+    private void HandleCoinsTopUp(int coin)
     {
         Debug.Log(coin);
-        wallet.IncreaseCoins(coin);
+        Wallet.Instance.AddCoins(coin);
     }
     
-    private void HandleWalletUpdate(int coin)
+    private void HandleCoinsView(int coin)
     {
-        coinsView.Show(wallet.Data.coins);
+        Debug.Log($"CoinsView updated with {coin}");
+        coinsView.Show(Wallet.Instance.Data.coins);
     }
 }

@@ -67,7 +67,7 @@ public class PanelManager : Manager<PanelManager>
     {
         if (requestedPanelID == activePanelID)
         {
-            Debug.LogWarning($"[PanelManager] Nothing to switch as Panel {requestedPanelID} is already active.");
+            // Debug.LogWarning($"[PanelManager] Nothing to switch as Panel {requestedPanelID} is already active.");
             return;
         }
 
