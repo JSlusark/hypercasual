@@ -1,7 +1,8 @@
 using UnityEngine;
 
-public class DanceSummaryController : PanelController {
-    
-    
+public class DanceSummaryController : PanelController
+{
+
+  
     
 }

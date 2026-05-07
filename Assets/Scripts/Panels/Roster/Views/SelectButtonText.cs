@@ -8,7 +8,7 @@ namespace Panels.Roster.Views
 {
     public class SelectButtonText : MonoBehaviour
     {
-        private DatabaseModel _data;
+        // private CatalogueModel _data;
         [SerializeField] TextMeshProUGUI text;
 
         private NavigationButtons _button;
@@ -20,14 +20,16 @@ namespace Panels.Roster.Views
         {
             _button = GetComponentInParent<NavigationButtons>();
             buttonImage = _button.GetComponent<Image>();
-            _data = GameManager.Instance.Database;
         }
         
-        public void UpdateText(CharacterModel character)
+        public void UpdateText(Character character, bool isActive)
         {
-            if (character.IsUnlocked)
+            CharacterConfig c = character.Config;
+            CharacterData d = character.Data;
+            
+            if (d.isUnlocked)
             {
-                if (character.Id != _data.GetActiveCharacter().Id)
+                if (c.id != SaveSystem.Instance.SaveData.activeCharacterID)
                 {
                     text.text = "Select";
                     buttonImage.color = Color.cadetBlue;
@@ -40,7 +42,7 @@ namespace Panels.Roster.Views
             }
             else
             {
-                text.text = "$ " + character.CostToUnlock.ToString();
+                text.text = "$ " + c.costToUnlock.ToString();
                 text.color = Color.white;
                 buttonImage.color = Color.gray6;
             }

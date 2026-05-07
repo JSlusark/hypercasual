@@ -13,11 +13,11 @@ public class ScoringModel
     public event Action<int> OnRoundChange;
 
 
-    public ScoringModel(Score config, CharacterModel character)
+    public ScoringModel(Score config, Character character)
     {
         c = config;
         c.StartValues();
-        SetPower(character.ExperienceLevel);
+        SetPower(character.Data.level);
         // Rounds = startRounds;
         // Target = 300;
         // Points = 0; // if player starts with a different amount of points we make it proportional

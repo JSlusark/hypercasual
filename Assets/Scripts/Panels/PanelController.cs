@@ -1,4 +1,5 @@
 using DefaultNamespace;
+using DefaultNamespace.ScriptableObjects;
 using UnityEngine;
 
 public abstract class PanelController : MonoBehaviour
@@ -14,9 +15,14 @@ public abstract class PanelController : MonoBehaviour
     public PanelEmitterButton[] PanelEmitterButtons; /*{ get; private set; }*/ 
     
     
-    [Header("Database instance")]
-    protected DatabaseModel data;
-    protected CharacterModel character;
+    [Header("Catalogue instance")]
+    protected CharacterCatalogue _characterCatalogue;
+    protected Character _activeCharacter;
+    protected CharacterID _activeCharacterID;
+    
+    
+    [Header("Score from last round")]
+    [SerializeField] protected Score DanceSessionScore;
 
 
     public virtual void Show() 
@@ -27,13 +33,14 @@ public abstract class PanelController : MonoBehaviour
             return;
         }
 
-        // Debug.Log($"[PanelController] Show: {panelPrefab.name}");
+        Debug.Log($"[PanelController] Show: {panelPrefab.name}");
         PanelInstance = Instantiate(panelPrefab);
         PanelEmitterButtons = PanelInstance.GetComponentsInChildren<PanelEmitterButton>(true); // includes inactive children
      
-        
-        data = GameManager.Instance.Database;
-        character = data.GetActiveCharacter();
+        _characterCatalogue = CharacterCatalogue.Instance;
+        _activeCharacter = _characterCatalogue.activeCharacter;
+        _activeCharacterID = _characterCatalogue.activeCharacter.Data.id;
+
         // Debug.Log($"[PanelController] Found {PanelEmitterButtons.Length} PanelEmitterButtons in {panelPrefab.name}");
     }
 
@@ -46,7 +53,7 @@ public abstract class PanelController : MonoBehaviour
         }
         
         // Debug.Log($"[PanelController] Hide: {panelPrefab.name}");
-        Destroy(PanelInstance);
+        DestroyImmediate(PanelInstance);
         PanelInstance = null;
     }
     

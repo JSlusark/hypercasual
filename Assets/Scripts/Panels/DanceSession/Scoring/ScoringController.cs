@@ -16,27 +16,16 @@ public class ScoringController : MonoBehaviour
     private bool _setCompleted;
 
     
-    // AUDIO: added them momentarily here, will have to go to an audio manager at the end
+    // AUDIO: added momentarily here, will have to go to an audio manager at the end
     [Header("DanceMove sound")] [SerializeField]
-    private AudioSource audioSource; // drag the component here
-    [SerializeField] private AudioClip audioTriumphant;
+    private AudioSource audioSource; 
 
 
-    CharacterModel _character;
-
-    // [Header("Dynamic Values: can change from booster applied, character level and/or session level progress")]
-    // I expect this data may come from Game Manager and stored in the corresponding Character Data
-    // [SerializeField]
-    // private float characterLevelValue = 0;
-    //
-    // [SerializeField] private int rounds = 0;
-    // [SerializeField] private float startScoreValue = 0;
+    Character _character;
 
     void Awake()
     {
-        DatabaseModel _data = GameManager.Instance.Database;
-        _character = _data.GetActiveCharacter();
-
+        _character = CharacterCatalogue.Instance.activeCharacter;
         _scoringModel = new ScoringModel(scoreConfig, _character);
         _scoreBarFill = _scoringModel.Points / _scoringModel.Target;
         roundView.Show(_scoringModel.Rounds);
@@ -55,9 +44,7 @@ public class ScoringController : MonoBehaviour
     private void HandleRoundView(int round)
     {
         roundView.UpdateRound(_scoringModel.Rounds);
-        audioSource.PlayOneShot(audioTriumphant);
-        
-        // if round > Beginner emit event for the view to change bg
+        audioSource.PlayOneShot(_character.Config.onSuccessSound);
     }
 
 

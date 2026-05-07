@@ -40,7 +40,7 @@ public class RoundView : MonoBehaviour
         while (elapsed < duration)
         {
             elapsed += Time.deltaTime;
-            Debug.Log(elapsed); // "5"
+            // Debug.Log(elapsed); // "5"
             float t = Mathf.Clamp01(elapsed / duration );
             int current = Mathf.FloorToInt(Mathf.Lerp(start, targetLevel, t));
             // text.text = current.ToString();

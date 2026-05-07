@@ -2,14 +2,20 @@ using UnityEngine;
 
 
 /*
- * Manager Base Class
+ * Singleton for mono-behaviour manager classes.
+ *
+ * The instance of this class is decided from unity based on scene load order,
+ * it happens inside Awake, therefore we need to put a singleton enforcement
+ * check i this specific function to avoid it duplicates and that it destroys itself at
+ * every log.
+ * 
  * T is the type specified in the derivative class. Example:
  * SwipeManager : Manager<SwipeManager>
- * 
- * Using T will allow us to check for duplicates fo the same type
+ * Using T will allow us to check for duplicates for the same type
+ *
  *
  */
-public class Manager<T> : MonoBehaviour where T : MonoBehaviour
+public abstract class Manager<T> : MonoBehaviour where T : MonoBehaviour
 {
     public static T Instance { get; private set; }
 

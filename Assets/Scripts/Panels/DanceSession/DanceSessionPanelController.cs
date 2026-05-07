@@ -9,6 +9,7 @@ public class DanceSessionPanelController : PanelController
     private ArrowManager _arrowManager;
     private ScoringController scoringController;
     private TimerController _timerController;
+    private BackgroundView _backgroundView;
 
     [SerializeField] private CharacterView _characterView; // Might be just a Character Controller later
 
@@ -18,7 +19,9 @@ public class DanceSessionPanelController : PanelController
     private AudioSource audioSource; // drag the component here
     [SerializeField] private AudioClip audioMoveFail;
     [SerializeField] private AudioClip audioMoveSuccess;
-
+    
+    
+    private Character _character;
 
     public override void Show()
     {
@@ -26,7 +29,9 @@ public class DanceSessionPanelController : PanelController
         SetPanelComponents();
         SubscribeToEvents(true);
 
-        _characterView.SetSprite(character.IdleSprite);
+
+        _characterView.SetSprite(_character.Config.idleSprite);
+        _backgroundView.Show(_character.Config.reelBackground[0]); // meant to increase when progressing through rounds
     }
 
     public override void Hide()
@@ -37,13 +42,14 @@ public class DanceSessionPanelController : PanelController
 
     void SetPanelComponents()
     {
+        _character = _characterCatalogue.activeCharacter;
+        
         _arrowManager = PanelInstance.GetComponentInChildren<ArrowManager>();
         scoringController = PanelInstance.GetComponentInChildren<ScoringController>();
         _timerController = PanelInstance.GetComponentInChildren<TimerController>();
         _characterView = PanelInstance.GetComponentInChildren<CharacterView>();
+        _backgroundView = PanelInstance.GetComponentInChildren<BackgroundView>();
 
-        // Should be taken from character list model? or saveGamedata?
-        // _characterView.SetSprite(GameManager.Instance.SelectedCharacter.idleSprite);
     }
 
 
@@ -67,21 +73,13 @@ public class DanceSessionPanelController : PanelController
             // scoringController.onRoundChange -= HandleRoundChange;
         }
     }
-
-
-    // private void HandleRoundChange()
-    // {
-    //     Sprite idleSprite = character.IdleSprite;
-    //     Sprite transitionSprite = character.OnSetComplete;
-    //     _characterView.ShowDanceMove(transitionSprite, idleSprite);
-    //     
-    // }
+    
 
     // perhaps create a character controller that handles the chatacter view instead
     private void HandleDanceMove(SwipeID move, bool isArrowScored, bool isSetComplete)
     {
-        Sprite idleSprite = character.IdleSprite;
-        Sprite moveSprite = character.OnFailSprite;
+        Sprite idleSprite = _character.Config.idleSprite;
+        Sprite moveSprite = _character.Config.onFailSprite;
         AudioClip audioFeedback = audioMoveFail;
         if (isArrowScored) // the default gets overwritten with the success moves
         {
@@ -90,16 +88,16 @@ public class DanceSessionPanelController : PanelController
             switch (move)
             {
                 case SwipeID.Up:
-                    moveSprite = character.DanceMoveSpriteUp;
+                    moveSprite = _character.Config.danceMoveSpriteUp;
                     break;
                 case SwipeID.Right:
-                    moveSprite = character.DanceMoveSpriteRight;
+                    moveSprite = _character.Config.danceMoveSpriteRight;
                     break;
                 case SwipeID.Down:
-                    moveSprite = character.DanceMoveSpriteDown;
+                    moveSprite = _character.Config.danceMoveSpriteDown;
                     break;
                 case SwipeID.Left:
-                    moveSprite = character.DanceMoveSpriteLeft;
+                    moveSprite = _character.Config.danceMoveSpriteLeft;
                     break;
             }
         }

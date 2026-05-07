@@ -5,18 +5,17 @@ public class RosterPanelController : PanelController
 {
     private PreviewCard _previewCard;
     private NavigationButtons[] _buttons;
-    private NavigationModel _navigationModelModel;
-    private DatabaseModel _data;
+    private NavigationModel _navigationModel;
     private CharacterID _previewID;
     private SelectButtonText _selectButtonText;
-
+    
 
     public override void Show()
     {
         base.Show();
         AssignFields();
         SubscribeToEvents(true);
-        UpdateViews(_data.Data.activeCharacterId);
+        UpdateViews(_activeCharacterID);
     }
     public override void Hide()
     {
@@ -25,9 +24,10 @@ public class RosterPanelController : PanelController
     }
     private void AssignFields()
     {
+        _previewID = _activeCharacterID; 
+        
         // Models
-        _data = GameManager.Instance.Database;
-        _navigationModelModel = new NavigationModel(_data);
+        _navigationModel = new NavigationModel(ConfigManager.Instance.CharacterCatalogue, _activeCharacterID);
         
         //Views
         _previewCard = PanelInstance.GetComponentInChildren<PreviewCard>();
@@ -53,13 +53,13 @@ public class RosterPanelController : PanelController
         switch (request)
         {
             case NavigationButtons.Request.ShowPrevious:
-                _previewID = _navigationModelModel.Previous();
+                _previewID = _navigationModel.Previous();
                 break;
             case NavigationButtons.Request.ShowNext:
-                _previewID = _navigationModelModel.Next();
+                _previewID = _navigationModel.Next();
                 break;
             case NavigationButtons.Request.SelectCharacter:
-                _data.SetActiveCharacter(_previewID);
+                _characterCatalogue.SetActiveCharacter(_previewID);
                 break;
         }
 
@@ -67,11 +67,11 @@ public class RosterPanelController : PanelController
         
     }
 
-    private void UpdateViews(CharacterID characterID)
+    private void UpdateViews(CharacterID id)
     {
-        // Start component change
-        _previewCard.ShowCharacter(_data.GetCharacter(characterID));
-        _selectButtonText.UpdateText(_data.GetCharacter(characterID));
+        Character character = _characterCatalogue.GetCharacter(id); 
+        _previewCard.Show(character, _characterCatalogue.IsActive(id));
+        _selectButtonText.UpdateText(character, _characterCatalogue.IsActive(id));
     }
     
 }
