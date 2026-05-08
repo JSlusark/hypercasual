@@ -15,7 +15,7 @@ using UnityEngine.UI;
 public class PanelManager : Manager<PanelManager>
 {
     [Header("References for imported controllers")] 
-    [SerializeField] private GameObject menuBars;
+    // [SerializeField] private GameObject menuBars;
     [SerializeField] private GameObject panelControllers;
     [Header("Active Panel Info")]
     [SerializeField] private PanelID activePanelID;
@@ -24,11 +24,9 @@ public class PanelManager : Manager<PanelManager>
     private PanelController[] _panelList;
     private PanelEmitterButton[] _menuButtonList;
 
-    protected override void Awake()
+    protected override void OnAwake()
     {
-        base.Awake();
-        
-        _menuButtonList = menuBars.GetComponentsInChildren<PanelEmitterButton>();
+        _menuButtonList = MenuBarManager.Instance.GetMenuButtons(); 
         _panelList = panelControllers.GetComponentsInChildren<PanelController>();
     }
 
@@ -36,18 +34,17 @@ public class PanelManager : Manager<PanelManager>
     {
         SetPanelState(activePanelID, true);
     }
-
-    public void OnEnable()
+    
+    private void OnEnable()
     {
-        SubscribeToPanelEmitterButtons(_menuButtonList);
+        SubscribeToEvents(_menuButtonList);
     }
-
-    public void OnDisable()
+    private void OnDisable()
     {
-        UnsubscribeToPanelEmitterButtons(_menuButtonList);
+        SubscribeToEvents(_menuButtonList);
     }
     
-    private void SubscribeToPanelEmitterButtons(PanelEmitterButton[] buttons)
+    private void SubscribeToEvents(PanelEmitterButton[] buttons)
     {
         foreach (var button in buttons)
         {
@@ -57,10 +54,20 @@ public class PanelManager : Manager<PanelManager>
         }
     }
 
-    private void UnsubscribeToPanelEmitterButtons(PanelEmitterButton[] buttons)
+
+    private void UnsubscribeToEvents(PanelEmitterButton[] buttons)
     {
-        foreach (var button in buttons)
-            button.OnPanelEmitterClick -= HandlePanelSwitch;
+        if (buttons != null)
+        {
+            foreach (var button in buttons)
+                button.OnPanelEmitterClick -= HandlePanelSwitch;
+        }
+    }
+
+    private void ManagePanelEvents(PanelController panel, bool subscribe)
+    {
+        if (subscribe) SubscribeToEvents(panel.PanelEmitterButtons);
+        else UnsubscribeToEvents(panel.PanelEmitterButtons);
     }
 
     private void HandlePanelSwitch(PanelID requestedPanelID)
@@ -85,15 +92,15 @@ public class PanelManager : Manager<PanelManager>
         if (setActive)
         {
             panel.Show();
-            menuBars.SetActive(panel.showsMenuBar);
+            // MenuBarManager.Instance.actFromPanel(panel.showsMenuBar); // when panel is active it decides with a bool if menuBar should be shown
+            ManagePanelEvents(panel, true);
             if(menuButton != null) menuButton.Select();
-            if (panel.PanelEmitterButtons != null) SubscribeToPanelEmitterButtons(panel.PanelEmitterButtons);
             activePanelID = panelID;
         }
         else
         {
             if (menuButton != null) menuButton.Deselect();
-            if (panel.PanelEmitterButtons != null) UnsubscribeToPanelEmitterButtons(panel.PanelEmitterButtons);
+            ManagePanelEvents(panel, false);
             panel.Hide();
         }
     }

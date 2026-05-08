@@ -8,7 +8,7 @@ public abstract class PanelController : MonoBehaviour
     
     [Header("Panel Info")]
     public PanelID panelID;
-    public bool showsMenuBar;
+    // public bool showsMenuBar;
     [SerializeField] protected GameObject panelPrefab;
 
     [Header("PanelEmitterButtons - needed by PanelManager")]

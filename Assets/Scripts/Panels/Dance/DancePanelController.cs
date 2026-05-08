@@ -12,6 +12,7 @@ public class DancePanelController : PanelController
     
     public override void Show()
     {
+        MenuBarManager.Instance.Show();
         base.Show();
         _walletController = PanelInstance.GetComponentInChildren<WalletController>();
        

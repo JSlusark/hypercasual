@@ -34,5 +34,14 @@ public abstract class Manager<T> : MonoBehaviour where T : MonoBehaviour
         // Debug.Log($"[{Instance.name}] Manager Awaken");
         transform.SetParent(null); // If I want to keep manager collected in a folder i need to set them as root 
         DontDestroyOnLoad(gameObject);
+        OnAwake();
     }
+
+    protected virtual void OnAwake() { }
+
+    private void OnDestroy()
+    {
+        // Debug.Log($"[{Instance.name}] Manager Destroyed");
+    }
+
 }

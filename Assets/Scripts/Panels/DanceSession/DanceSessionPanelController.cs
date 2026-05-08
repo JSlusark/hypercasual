@@ -26,6 +26,7 @@ public class DanceSessionPanelController : PanelController
 
     public override void Show()
     {
+        MenuBarManager.Instance.Hide();
         base.Show();
         SetPanelComponents();
         SubscribeToEvents(true);
