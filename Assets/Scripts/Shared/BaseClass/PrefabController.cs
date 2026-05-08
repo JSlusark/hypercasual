@@ -29,6 +29,7 @@ public abstract class PrefabController<T> : MonoBehaviour where T : MonoBehaviou
 
         _instance = this as T;
         OnAwake();
+        SubscribeToEvents(true);
     }
     protected abstract void OnAwake(); // abstract flags the compiler that it needs to be overriden in derivative classes
 
@@ -40,26 +41,12 @@ public abstract class PrefabController<T> : MonoBehaviour where T : MonoBehaviou
             return;
         }
 
+        SubscribeToEvents(false);
         Debug.LogWarning($"[{typeof(T).Name}] was destroyed");
-        
         _instance = null;
     }
     
     
-    
-    // un/subscribes to events when constructed in base and again in derivatives
-    private void OnEnable() 
-    {
-        SubscribeToEvents(true);
-        Enable(); // <-------------------------- quick workaround - i will change this
-    }
-
-    protected virtual void Enable() { }
-
-    private void OnDisable()
-    {
-        SubscribeToEvents(false);
-    }
     
     protected virtual void AddEvents() { }
 
@@ -71,9 +58,9 @@ public abstract class PrefabController<T> : MonoBehaviour where T : MonoBehaviou
 
     protected void SubscribeToEvents(bool isSubscribed)
     {
-        Debug.Log($"[{GetType().Name}] Subscribed to {isSubscribed}");
         foreach (var entry in _eventList)
         {
+            Debug.Log($"[{GetType().Name}] Subscribed to event {isSubscribed}");
             if (isSubscribed) entry.onEnable();
             else entry.onDisable();
         }

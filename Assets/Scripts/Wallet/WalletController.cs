@@ -16,7 +16,6 @@ public class WalletController : PrefabController<WalletController>
     protected override void OnAwake()
     {
         AddEvents();
-        Debug.Log($"[{GetType().Name}] Initializing {nameof(WalletController)}");
     }
 
     private void Start()
@@ -24,11 +23,7 @@ public class WalletController : PrefabController<WalletController>
         coinsView.Show(Wallet.Instance.Data.coins);
     }
 
-    protected override void Enable() // <-------------------------- quick workaround - i will change this!!!
-    {
-        coinsView.Show(Wallet.Instance.Data.coins);
-        
-    }
+ 
 
 
     protected override void AddEvents()
