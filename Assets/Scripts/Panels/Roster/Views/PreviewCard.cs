@@ -19,18 +19,17 @@ public class PreviewCard : MonoBehaviour
     {
     }
 
-    public void Show(Character character, bool isActiveCharacter) // characterModel
+    public void Show(Character pointedCharacter, bool isActiveCharacter) // characterModel
     {
-        CharacterConfig c = character.Config;
-        CharacterData d = character.Data;
-
-        bool isUnlocked = d.isUnlocked;
-        dancerName.text = isUnlocked ? c.name : "Locked Dancer";
-        danceStyle.text = isUnlocked ? c.id.ToString() : "Unknown";
-        previewImage.sprite = c.rosterSprite;
-        previewImage.color = isUnlocked ? Color.white : Color.black;
-        _background.color = isUnlocked ? Color.deepSkyBlue : Color.gray4;
-        // CatalogueModel _data = GameManager.Instance.Catalogue;
+        CharacterConfig config = pointedCharacter.Config;
+        CharacterData data = pointedCharacter.Data;
+        
+        dancerName.text = data.isUnlocked ? config.name : "Locked Dancer";
+        danceStyle.text = data.isUnlocked ? config.id.ToString() : "Unknown";
+        previewImage.sprite = config.rosterSprite;
+        previewImage.color = data.isUnlocked ? Color.white : Color.black;
+        _background.color = data.isUnlocked ? Color.deepSkyBlue : Color.gray4;
+        
         if (isActiveCharacter) _background.color = Color.green;
     }
 }

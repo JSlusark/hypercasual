@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 6977812303825748440}
   - component: {fileID: 1173052666957458433}
   m_Layer: 5
-  m_Name: Studio Background
+  m_Name: Background
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -30,7 +30,7 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 8148129296913038846}
+  m_Father: {fileID: 8250770196371546051}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -86,8 +86,9 @@ GameObject:
   - component: {fileID: 8250770196371546051}
   - component: {fileID: 3658005745904665212}
   - component: {fileID: 4068037730011932425}
+  - component: {fileID: 1265286104469420643}
   m_Layer: 5
-  m_Name: Character Details
+  m_Name: Details View
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -105,10 +106,11 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
+  - {fileID: 2021633250957210292}
+  - {fileID: 9155971390802621203}
   - {fileID: 8610267139624042593}
   - {fileID: 5576147067296320172}
   - {fileID: 3369464161588055600}
-  - {fileID: 9155971390802621203}
   m_Father: {fileID: 8148129296913038846}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
@@ -154,6 +156,23 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!114 &1265286104469420643
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5003566864668477219}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f0f6cccd6e974e8ab6226db974b61929, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ProfileView
+  styleText: {fileID: 8306251981731052458}
+  nameText: {fileID: 7393177308653812738}
+  followerText: {fileID: 8598970963101942364}
+  characterSprite: {fileID: 8793780217110471009}
+  studioSprite: {fileID: 1173052666957458433}
 --- !u!1 &5960043302469767090
 GameObject:
   m_ObjectHideFlags: 0
@@ -649,11 +668,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8148129296913038846}
-  - component: {fileID: 7428355474679098258}
-  - component: {fileID: 1994300602818177234}
-  - component: {fileID: 3430599059993972273}
   - component: {fileID: 5790140836845803781}
-  - component: {fileID: 8772955899591353285}
+  - component: {fileID: -571148846907966278}
   m_Layer: 5
   m_Name: Profile
   m_TagString: Untagged
@@ -670,81 +686,17 @@ RectTransform:
   m_GameObject: {fileID: 8339082342934915379}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 2021633250957210292}
   - {fileID: 8250770196371546051}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
-  m_Pivot: {x: 0, y: 0}
---- !u!223 &7428355474679098258
-Canvas:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8339082342934915379}
-  m_Enabled: 1
-  serializedVersion: 3
-  m_RenderMode: 0
-  m_Camera: {fileID: 0}
-  m_PlaneDistance: 100
-  m_PixelPerfect: 0
-  m_ReceivesEvents: 1
-  m_OverrideSorting: 0
-  m_OverridePixelPerfect: 0
-  m_SortingBucketNormalizedSize: 0
-  m_VertexColorAlwaysGammaSpace: 0
-  m_AdditionalShaderChannelsFlag: 25
-  m_UpdateRectTransformForStandalone: 0
-  m_SortingLayerID: 0
-  m_SortingOrder: 0
-  m_TargetDisplay: 0
---- !u!114 &1994300602818177234
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8339082342934915379}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0cd44c1031e13a943bb63640046fad76, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.CanvasScaler
-  m_UiScaleMode: 1
-  m_ReferencePixelsPerUnit: 100
-  m_ScaleFactor: 1
-  m_ReferenceResolution: {x: 1080, y: 1920}
-  m_ScreenMatchMode: 0
-  m_MatchWidthOrHeight: 0.5
-  m_PhysicalUnit: 3
-  m_FallbackScreenDPI: 96
-  m_DefaultSpriteDPI: 96
-  m_DynamicPixelsPerUnit: 1
-  m_PresetInfoIsWorld: 0
---- !u!114 &3430599059993972273
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8339082342934915379}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: dc42784cf147c0c48a680349fa168899, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.GraphicRaycaster
-  m_IgnoreReversedGraphics: 1
-  m_BlockingObjects: 0
-  m_BlockingMask:
-    serializedVersion: 2
-    m_Bits: 4294967295
+  m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &5790140836845803781
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -753,7 +705,7 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8339082342934915379}
   m_CullTransparentMesh: 1
---- !u!114 &8772955899591353285
+--- !u!114 &-571148846907966278
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -762,11 +714,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 8339082342934915379}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f0f6cccd6e974e8ab6226db974b61929, type: 3}
+  m_Script: {fileID: 11500000, guid: eee71b90219f4c6fb8779aa2c115a6a4, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::ProfileView
-  styleText: {fileID: 8306251981731052458}
-  nameText: {fileID: 7393177308653812738}
-  followerText: {fileID: 8598970963101942364}
-  characterSprite: {fileID: 8793780217110471009}
-  studioSprite: {fileID: 1173052666957458433}
+  m_EditorClassIdentifier: Assembly-CSharp::ProfilePanelController
+  panelID: 2
+  PanelEmitterButtons: []
+  detailsView: {fileID: 1265286104469420643}

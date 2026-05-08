@@ -46,7 +46,7 @@ public class WalletController : PrefabController<WalletController>
     
     private void HandleCoinsView(int coin)
     {
-        Debug.Log($"CoinsView updated with {coin}");
+        // Debug.Log($"CoinsView updated with {coin}");
         coinsView.Show(Wallet.Instance.Data.coins);
     }
 }

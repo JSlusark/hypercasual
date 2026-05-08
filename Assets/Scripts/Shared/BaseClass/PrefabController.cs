@@ -33,7 +33,7 @@ public abstract class PrefabController<T> : MonoBehaviour where T : MonoBehaviou
     }
     protected abstract void OnAwake(); // abstract flags the compiler that it needs to be overriden in derivative classes
 
-    protected virtual void OnDestroy()
+    private void OnDestroy()
     {
         if (_instance == null)
         {
@@ -42,7 +42,7 @@ public abstract class PrefabController<T> : MonoBehaviour where T : MonoBehaviou
         }
 
         SubscribeToEvents(false);
-        Debug.LogWarning($"[{typeof(T).Name}] was destroyed");
+        // Debug.LogWarning($"[{typeof(T).Name}] was destroyed");
         _instance = null;
     }
     
@@ -52,7 +52,7 @@ public abstract class PrefabController<T> : MonoBehaviour where T : MonoBehaviou
 
     protected void RegisterEvent(string eventName, Action onEnable, Action onDisable)
     {
-        Debug.Log($"[{GetType().Name}] Registered to {eventName}");
+        // Debug.Log($"[{GetType().Name}] Registered to {eventName}");
         _eventList.Add((onEnable, onDisable));
     }
 
@@ -60,7 +60,7 @@ public abstract class PrefabController<T> : MonoBehaviour where T : MonoBehaviou
     {
         foreach (var entry in _eventList)
         {
-            Debug.Log($"[{GetType().Name}] Subscribed to event {isSubscribed}");
+            // Debug.Log($"[{GetType().Name}] Subscribed to event {isSubscribed}");
             if (isSubscribed) entry.onEnable();
             else entry.onDisable();
         }

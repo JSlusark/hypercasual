@@ -6,7 +6,7 @@ namespace MenuBars
     {
         public void Init()
         {
-            Debug.Log("MenuBarController Awaken");
+            // Debug.Log("MenuBarController Awaken");
         }
         
     }

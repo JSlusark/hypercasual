@@ -2,7 +2,7 @@ using System;
 using UnityEngine;
 using UnityEngine.Serialization;
 
-public class ScoringController : MonoBehaviour
+public class ScoreController : MonoBehaviour
 {
     [FormerlySerializedAs("levelView")] [SerializeField]
     private RoundView roundView;

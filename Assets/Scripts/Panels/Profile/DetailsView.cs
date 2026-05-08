@@ -2,7 +2,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 
-public class ProfileView : MonoBehaviour
+public class DetailsView : MonoBehaviour
 {
     [Header("UI References")]
     [SerializeField] private TMP_Text styleText;

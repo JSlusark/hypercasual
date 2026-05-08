@@ -14,10 +14,6 @@ public class MenuBarManager : Manager<MenuBarManager>
     {
         _topMenu = Instantiate(topMenuPrefab, menuCanvas);
         _lowMenu = Instantiate(lowMenuPrefab, menuCanvas);
-        
-        _topMenu.Init();
-        _lowMenu.Init();
-
     }
 
     public void Show()

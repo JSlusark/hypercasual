@@ -8,43 +8,39 @@ namespace Panels.Roster.Views
 {
     public class SelectButtonText : MonoBehaviour
     {
-        // private CatalogueModel _data;
         [SerializeField] TextMeshProUGUI text;
+        [SerializeField] private NavigationButtons selectButton;
 
-        private NavigationButtons _button;
-
-        // private Button _button;
-        private Image buttonImage;
+        private Image _buttonImage;
 
         private void Awake()
         {
-            _button = GetComponentInParent<NavigationButtons>();
-            buttonImage = _button.GetComponent<Image>();
+            _buttonImage = selectButton.GetComponent<Image>();
         }
         
-        public void UpdateText(Character character, bool isActive)
+        public void UpdateText(Character character)
         {
-            CharacterConfig c = character.Config;
-            CharacterData d = character.Data;
+            CharacterConfig config = character.Config;
+            CharacterData data = character.Data;
             
-            if (d.isUnlocked)
+            if (data.isUnlocked)
             {
-                if (c.id != SaveSystem.Instance.SaveData.activeCharacterID)
+                if (config.id != SaveSystem.Instance.SaveData.activeCharacterID)
                 {
                     text.text = "Select";
-                    buttonImage.color = Color.cadetBlue;
+                    _buttonImage.color = Color.cadetBlue;
                 }
                 else
                 {
                     text.text = "Selected";
-                    buttonImage.color = Color.green;
+                    _buttonImage.color = Color.green;
                 }
             }
             else
             {
-                text.text = "$ " + c.costToUnlock.ToString();
+                text.text = "$ " + config.costToUnlock.ToString();
                 text.color = Color.white;
-                buttonImage.color = Color.gray6;
+                _buttonImage.color = Color.gray6;
             }
         }
     }

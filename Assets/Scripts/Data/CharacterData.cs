@@ -19,7 +19,7 @@ public class CharacterData
     public float followers; 
     
     //Character Profile
-    public int studioIndex;
+    public int studioIndex; // in the future the index is meant to dynamically change depending from the experience level of the character
     
     
 }

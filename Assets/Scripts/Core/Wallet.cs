@@ -19,7 +19,7 @@ public class Wallet : Singleton<Wallet>
 
     public void AddCoins(int amount)
     {
-        Debug.Log($"[WALLET MODEL] Adding {amount} coins to wallet");
+        // Debug.Log($"[WALLET MODEL] Adding {amount} coins to wallet");
         if (Data.coins + amount == Config.maxCoins)
         {
             Data.maxCoinsReached = true;
@@ -30,7 +30,7 @@ public class Wallet : Singleton<Wallet>
             Data.maxCoinsReached = false;
             Data.coins += amount;
         }
-        Debug.Log($"[WALLET MODEL] Coins in Wallet updated {Data.coins}");   
+        // Debug.Log($"[WALLET MODEL] Coins in Wallet updated {Data.coins}");   
         OnCoinsUpdate?.Invoke(Data.coins);
     }
 

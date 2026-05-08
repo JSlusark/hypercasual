@@ -1,9 +1,5 @@
-using System;
 using UnityEngine;
-using System.Collections.Generic;
 using DefaultNamespace;
-using UnityEngine.Serialization;
-using UnityEngine.UI;
 
 /*
     This class is responsible for managing the different panels in the UI.
@@ -11,65 +7,53 @@ using UnityEngine.UI;
     Each button is linked to its corresponding screen in a list of PanelView objects in the inspector.
 */
 
-
 public class PanelManager : Manager<PanelManager>
 {
-    [Header("References for imported controllers")] 
-    // [SerializeField] private GameObject menuBars;
-    [SerializeField] private GameObject panelControllers;
+    [Header("References for imported controllers")]
     [Header("Active Panel Info")]
+    [SerializeField] private RectTransform Canvas;
+
     [SerializeField] private PanelID activePanelID;
-    
-    // Panel and button lists from imported controllers
-    private PanelController[] _panelList;
-    private PanelEmitterButton[] _menuButtonList;
+    [SerializeField] private PanelController[] panelPrefabList;
+
+    private PanelController activePanelInstance;
+    [SerializeField]private PanelEmitterButton[] _menuButtonList;
+
 
     protected override void OnAwake()
     {
-        _menuButtonList = MenuBarManager.Instance.GetMenuButtons(); 
-        _panelList = panelControllers.GetComponentsInChildren<PanelController>();
     }
 
     private void Start()
     {
+        _menuButtonList = MenuBarManager.Instance.GetMenuButtons();
         SetPanelState(activePanelID, true);
+        SubscribeToEvents(_menuButtonList, true);
     }
-    
-    private void OnEnable()
+
+
+    private void OnDestroy()
     {
-        SubscribeToEvents(_menuButtonList);
+        SubscribeToEvents(_menuButtonList, false);
     }
-    private void OnDisable()
+
+    private void SubscribeToEvents(PanelEmitterButton[] buttons, bool isSubscribed)
     {
-        SubscribeToEvents(_menuButtonList);
-    }
-    
-    private void SubscribeToEvents(PanelEmitterButton[] buttons)
-    {
+        if (buttons == null)
+        {
+            // Debug.Log("Panel emitter button list is null");
+            return;
+        }
+
         foreach (var button in buttons)
         {
-            if (button.isInMenuBar && button.panelID.ToString() != button.name) // hard coded check to make sure menu buttons have the right panelID
-                throw new System.InvalidOperationException($"[PanelManager] Menu button \"{button.name}\" does not match with its panelID \"{button.panelID}\".");
-            button.OnPanelEmitterClick += HandlePanelSwitch;
+            // Debug.Log($"[PanelManager] Subscribing ${activePanelInstance} button ${button.panelID}]: {isSubscribed}");
+            if (isSubscribed) button.OnPanelEmitterClick += HandlePanelSwitch;
+            else button.OnPanelEmitterClick -= HandlePanelSwitch;
         }
     }
 
-
-    private void UnsubscribeToEvents(PanelEmitterButton[] buttons)
-    {
-        if (buttons != null)
-        {
-            foreach (var button in buttons)
-                button.OnPanelEmitterClick -= HandlePanelSwitch;
-        }
-    }
-
-    private void ManagePanelEvents(PanelController panel, bool subscribe)
-    {
-        if (subscribe) SubscribeToEvents(panel.PanelEmitterButtons);
-        else UnsubscribeToEvents(panel.PanelEmitterButtons);
-    }
-
+   
     private void HandlePanelSwitch(PanelID requestedPanelID)
     {
         if (requestedPanelID == activePanelID)
@@ -84,27 +68,26 @@ public class PanelManager : Manager<PanelManager>
     }
 
 
-    private void SetPanelState(PanelID panelID, bool setActive)
+    private void SetPanelState(PanelID panelID, bool isActive)
     {
         /* Panel and paired menu button*/
-        PanelController panel = System.Array.Find(_panelList,               panel => panel.panelID   == panelID);
+        PanelController panelPrefab = System.Array.Find(panelPrefabList,   panel => panel.panelID   == panelID);
         PanelEmitterButton menuButton = System.Array.Find(_menuButtonList, button => button.panelID == panelID);
-        if (setActive)
+        
+        if (isActive)
         {
-            panel.Show();
-            // MenuBarManager.Instance.actFromPanel(panel.showsMenuBar); // when panel is active it decides with a bool if menuBar should be shown
-            ManagePanelEvents(panel, true);
-            if(menuButton != null) menuButton.Select();
+            activePanelInstance = Instantiate(panelPrefab, Canvas);
+            SubscribeToEvents(activePanelInstance.PanelEmitterButtons, true);
+            if (menuButton is not null)
+                menuButton.Select(); // != checks both for destruction and reference, is not null only for reference so less expensive
             activePanelID = panelID;
         }
         else
         {
-            if (menuButton != null) menuButton.Deselect();
-            ManagePanelEvents(panel, false);
-            panel.Hide();
+            if (menuButton is not null) menuButton.Deselect();
+            SubscribeToEvents(activePanelInstance.PanelEmitterButtons, false);
+            Destroy(activePanelInstance.gameObject);
+            activePanelInstance = null;
         }
     }
-    
-    
-    
 }
