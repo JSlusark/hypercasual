@@ -9,12 +9,21 @@ public class ArrowView : MonoBehaviour
     [SerializeField] private RectTransform arrowSprite;
     [SerializeField] private Image arrowImage;      // the arrow
     [SerializeField] private Image backgroundImage; // the container/background of the arrow
-
-    // Perhaps these could be set up differently based on arrowModel.type?
-    [SerializeField] private Color HighlightColor; // 
-    [SerializeField] private Color DefaultColor;   // 
-    [SerializeField] private Color SuccessColor;
-    [SerializeField] private Color FailColor;
+    [SerializeField] private Image highlightImage;
+    
+    [Header("Background Color")]
+    [SerializeField] private Color DefaultBackground;
+    [Header("Arrow Sprites")]
+    [SerializeField] private Sprite FailArrow;
+    [SerializeField] private Sprite SuccessArrow;
+    [SerializeField] private Sprite DefaultArrow;
+    [Header("Colors")]
+    [SerializeField] private Color activeHighlight;   // 
+    [SerializeField] private Color inactiveHighlight; // 
+    [SerializeField] private Color successColor;  // 
+    [SerializeField] private Color failedColor; // 
+    // [SerializeField] private Color DefaultColor;           // 
+    // [SerializeField] private Color ActiveColor;            // 
 
     private Vector2 _originalPosition;
     private Coroutine _moveCoroutine;
@@ -28,27 +37,31 @@ public class ArrowView : MonoBehaviour
 
     public void SetHighlight()
     {
-        arrowImage.color = HighlightColor;
-        backgroundImage.color = HighlightColor;
+        arrowImage.sprite = DefaultArrow;
+        highlightImage.color = activeHighlight;
+        backgroundImage.color = DefaultBackground;
     }
 
     public void SetDefault()
     {
-        arrowImage.color = DefaultColor;
-        backgroundImage.color = DefaultColor;
+        arrowImage.sprite = DefaultArrow;
+        highlightImage.color = inactiveHighlight;
+        backgroundImage.color = DefaultBackground;
     }
 
     public void SetSuccess()
     {
-        arrowImage.color = SuccessColor;
-        backgroundImage.color = SuccessColor;
+        highlightImage.color = successColor;
+        backgroundImage.color = successColor;
+        arrowImage.sprite = SuccessArrow;
         StartCoroutine(MoveArrow());
     }
 
     public void SetFail()
     {
-        arrowImage.color = FailColor;
-        backgroundImage.color = FailColor;
+        highlightImage.color = failedColor;
+        backgroundImage.color = failedColor;
+        arrowImage.sprite = FailArrow;
         StartCoroutine(MoveArrow());
     }
 

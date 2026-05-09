@@ -7,6 +7,7 @@ using Random = UnityEngine.Random;
 
 public class ArrowManager : MonoBehaviour
 {
+    [SerializeField] private ArrowGridController _arrowGrid;
     [SerializeField] ArrowController arrowController;
     private List<ArrowController> _arrowGroup;
     private int _maxArrows; // starts with 3 on difficulty increase reaches max 5 or 6
@@ -16,8 +17,6 @@ public class ArrowManager : MonoBehaviour
 
     private SwipeController _swipeController; // to subscribe to swipes
     private PlayerInput playerInput;
-    // private InputAction danceMoveAction;
-
     private bool _resultInProgress;
     
     /*On */
@@ -32,7 +31,6 @@ public class ArrowManager : MonoBehaviour
         // Activates controllers for keyboard and swipe
         _swipeController = FindAnyObjectByType<SwipeController>();
         playerInput = GetComponent<PlayerInput>();
-        // danceMoveAction = playerInput.actions["DanceMove"];
 
         // sets up list
         _arrowGroup = new List<ArrowController>();
@@ -65,10 +63,12 @@ public class ArrowManager : MonoBehaviour
     private void StartNewSequence()
     {
         // range is decided based on level, should be dynamic
-        _maxArrows = Random.Range(3, 5);
+        _maxArrows = Random.Range(1, 5);
+        _arrowGrid.UpdateCellSize(_maxArrows);
+        
         for (int i = 0; i < _maxArrows; i++)
         {
-            ArrowController newArrow = Instantiate(arrowController, this.transform.parent);
+            ArrowController newArrow = Instantiate(arrowController, _arrowGrid.transform);
             _arrowGroup.Add(newArrow);
         }
 
