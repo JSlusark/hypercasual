@@ -23,7 +23,7 @@ public class CoinsView : MonoBehaviour
         coinsText.text = text;
     }
 
-    public void onAddCoins()
+    public void OnAddCoins()
     {
         OnCoinsTopUp?.Invoke(100);
     }

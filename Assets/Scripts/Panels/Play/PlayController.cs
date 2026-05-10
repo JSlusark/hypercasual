@@ -6,8 +6,8 @@ using UnityEngine.UI;
 
 public class PlayController : PanelController
 {
-    [SerializeField] private CharacterView _characterView;
-    [SerializeField] private BackgroundView _backgroundView;
+    [SerializeField] private DetailsView characterDataView;
+
 
     protected override void OnAwake()
     {
@@ -16,10 +16,10 @@ public class PlayController : PanelController
 
     private void Start()
     {
-        _characterView.SetSprite(_characterCatalogue.activeCharacter.Config.idleSprite);
-        _backgroundView.Show(_characterCatalogue.activeCharacter.Config
-                                                .reelBackground
-                                                    [0]); // 0 by default, meant to change in Dance Summary as rounds progress
+        characterDataView.Setup(_activeCharacter.Config.name, _activeCharacter.Config.id.ToString(),
+                                _activeCharacter.Data.followers.ToString("F0"), _activeCharacter.Config.idleSprite,
+                                _activeCharacter.Config.reelBackground[0]);
+
     }
 
     protected override void SubscribeToEvents(bool isSubscribed)

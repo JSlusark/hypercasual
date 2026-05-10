@@ -19,7 +19,7 @@ MonoBehaviour:
   idleAnimation: {fileID: 7400000, guid: b0c1fcd827a9a45a5a1a49823125e0c1, type: 2}
   reelBackground:
   - {fileID: -708990551563883993, guid: 1e811178bc79746c284e3834d87c6c92, type: 3}
-  onSuccessSprite: {fileID: -335838902296225844, guid: bb35e94c4c42e4d12aeefabe8c3d15b9, type: 3}
+  onSuccessSprite: {fileID: 21300000, guid: 8aebb05a2e15d44c581c8f351334fd42, type: 3}
   onFailSprite: {fileID: 2688136287738319047, guid: dc0287e5c88b842b89dc4d9023263b9c, type: 3}
   danceMoveSpriteUp: {fileID: -661879198794340232, guid: 6264e3e921a2f4d45911414b13eac115, type: 3}
   danceMoveSpriteRight: {fileID: -7981465358293435062, guid: b499a08037f3e419dbf02b5ed197d3d2, type: 3}

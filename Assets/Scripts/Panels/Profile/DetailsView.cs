@@ -9,7 +9,7 @@ public class DetailsView : MonoBehaviour
     [SerializeField] private TMP_Text nameText;
     [SerializeField] private TMP_Text followerText;
     [SerializeField] private Image characterSprite;
-    [SerializeField] private Image studioSprite;
+    [SerializeField] private Image bgSprite;
 
     // A simple method to update everything at once
     public void Setup(string name, string style, string followerCount, Sprite portrait, Sprite bg)
@@ -18,6 +18,6 @@ public class DetailsView : MonoBehaviour
         nameText.text = name;
         followerText.text = $"Followers {followerCount}";
         characterSprite.sprite = portrait;
-        studioSprite.sprite = bg;
+        bgSprite.sprite = bg;
     }
 }

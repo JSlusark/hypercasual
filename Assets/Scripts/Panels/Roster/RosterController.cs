@@ -59,6 +59,6 @@ public class RosterController : PanelController
     {
         Character pointedCharacter = _characterCatalogue.GetCharacter(id);
         previewCard.Show(pointedCharacter, _characterCatalogue.IsActive(id));
-        _selectButtonText.UpdateText(pointedCharacter);
+        // _selectButtonText.UpdateText(pointedCharacter);
     }
 }
