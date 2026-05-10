@@ -3,18 +3,10 @@ using DefaultNamespace;
 using UnityEngine;
 using UnityEngine.UI;
 
-/*
- Should only hold the DanceSession logic (state and interaction) for the button.
- It is attached as a script component to each button in the menu.
-
-
- */
-
 public class PanelEmitterButton : MonoBehaviour
 {
     [Header("Button Info")]
     public PanelID panelID;
-    public bool isInMenuBar; 
     
     [Header("Image components")]
     [SerializeField] private Sprite defaultSprite;
@@ -25,6 +17,7 @@ public class PanelEmitterButton : MonoBehaviour
 
     public void OnClick()
     {
+        Debug.Log($"Menu OnClick {panelID}");
         OnPanelEmitterClick?.Invoke(panelID); // emits signal with button instance that is clicked 
     }
 

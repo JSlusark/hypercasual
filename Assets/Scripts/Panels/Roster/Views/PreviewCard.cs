@@ -10,27 +10,45 @@ using UnityEngine.UI;
 
 public class PreviewCard : MonoBehaviour
 {
-    [SerializeField] private TextMeshProUGUI dancerName;
+    [SerializeField] private GameObject info;
+    [SerializeField] private TextMeshProUGUI idText;
+    [SerializeField] private TextMeshProUGUI nameText;
+    
+    [SerializeField] private GameObject lockedInfo;
+    [SerializeField] private TextMeshProUGUI unlockCostText;
+    
     [SerializeField] private Image previewImage;
-    [SerializeField] private TextMeshProUGUI danceStyle;
     [SerializeField]private Image _background;
+    
 
-    private void Awake()
+    public void Show(Character pointedCharacter, bool isActiveCharacter) // characterModel
     {
-    }
+        
+        
+        CharacterConfig config = pointedCharacter.Config;
+        CharacterData data = pointedCharacter.Data;
 
-    public void Show(Character character, bool isActiveCharacter) // characterModel
-    {
-        CharacterConfig c = character.Config;
-        CharacterData d = character.Data;
+        
+        if (data.isUnlocked)
+        {
+            info.SetActive(true);
+            lockedInfo.SetActive(false);
+            nameText.text = config.name;
+            idText.text = config.id.ToString() + " dancer";
+        }
+        else
+        {
+            info.SetActive(false);
+            lockedInfo.SetActive(true);
+            unlockCostText.text = config.costToUnlock.ToString();
+        }
 
-        bool isUnlocked = d.isUnlocked;
-        dancerName.text = isUnlocked ? c.name : "Locked Dancer";
-        danceStyle.text = isUnlocked ? c.id.ToString() : "Unknown";
-        previewImage.sprite = c.rosterSprite;
-        previewImage.color = isUnlocked ? Color.white : Color.black;
-        _background.color = isUnlocked ? Color.deepSkyBlue : Color.gray4;
-        // CatalogueModel _data = GameManager.Instance.Catalogue;
+        previewImage.sprite = config.rosterSprite;
+        previewImage.color = data.isUnlocked ? Color.white : Color.black;
+        _background.color = data.isUnlocked ? Color.deepSkyBlue : Color.gray4;
+        
         if (isActiveCharacter) _background.color = Color.green;
     }
+    
+    
 }

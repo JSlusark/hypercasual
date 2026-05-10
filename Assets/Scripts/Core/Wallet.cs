@@ -17,9 +17,9 @@ public class Wallet : Singleton<Wallet>
         Config = ConfigManager.Instance.wallet;
     }
 
-    public void IncreaseCoins(int amount)
+    public void AddCoins(int amount)
     {
-        Debug.Log($"COINS: Data.coins{Data.coins}");
+        // Debug.Log($"[WALLET MODEL] Adding {amount} coins to wallet");
         if (Data.coins + amount == Config.maxCoins)
         {
             Data.maxCoinsReached = true;
@@ -30,12 +30,12 @@ public class Wallet : Singleton<Wallet>
             Data.maxCoinsReached = false;
             Data.coins += amount;
         }
-        
+        // Debug.Log($"[WALLET MODEL] Coins in Wallet updated {Data.coins}");   
         OnCoinsUpdate?.Invoke(Data.coins);
     }
 
 
-    public bool DecreaseCoins(int amount)
+    public bool RemoveCoins(int amount)
     {
         if (Data.coins < amount) return false; // avoiding negative values
         Data.coins -= amount;

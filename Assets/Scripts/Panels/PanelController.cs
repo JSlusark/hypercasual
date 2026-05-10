@@ -1,60 +1,41 @@
+using System;
 using DefaultNamespace;
 using DefaultNamespace.ScriptableObjects;
 using UnityEngine;
 
 public abstract class PanelController : MonoBehaviour
 {
-    protected GameObject PanelInstance;
-    
     [Header("Panel Info")]
     public PanelID panelID;
-    public bool showsMenuBar;
-    [SerializeField] protected GameObject panelPrefab;
-
     [Header("PanelEmitterButtons - needed by PanelManager")]
-    public PanelEmitterButton[] PanelEmitterButtons; /*{ get; private set; }*/ 
-    
+    public PanelEmitterButton[] PanelEmitterButtons;// { get; private set; }
     
     [Header("Catalogue instance")]
     protected CharacterCatalogue _characterCatalogue;
     protected Character _activeCharacter;
     protected CharacterID _activeCharacterID;
-    
-    
-    [Header("Score from last round")]
-    [SerializeField] protected Score DanceSessionScore;
 
-
-    public virtual void Show() 
+    
+    private void Awake()
     {
-        if (PanelInstance != null)
-        {
-            Debug.LogWarning($"[PanelController] {panelPrefab.name} is already instantiated - did you forget to call Hide()?");
-            return;
-        }
-
-        Debug.Log($"[PanelController] Show: {panelPrefab.name}");
-        PanelInstance = Instantiate(panelPrefab);
-        PanelEmitterButtons = PanelInstance.GetComponentsInChildren<PanelEmitterButton>(true); // includes inactive children
-     
+        Debug.LogWarning($"[{name}] is Awake");
         _characterCatalogue = CharacterCatalogue.Instance;
         _activeCharacter = _characterCatalogue.activeCharacter;
         _activeCharacterID = _characterCatalogue.activeCharacter.Data.id;
 
-        // Debug.Log($"[PanelController] Found {PanelEmitterButtons.Length} PanelEmitterButtons in {panelPrefab.name}");
+        OnAwake();
+        SubscribeToEvents(true);
     }
 
-    public virtual void Hide()
+
+    private void OnDestroy()
     {
-        if (PanelInstance == null)
-        {
-            // Debug.LogWarning($"[PanelController] {panelPrefab.name} is not currently shown.");
-            return;
-        }
-        
-        // Debug.Log($"[PanelController] Hide: {panelPrefab.name}");
-        DestroyImmediate(PanelInstance);
-        PanelInstance = null;
+        SubscribeToEvents(false);
+        Debug.LogWarning($"[{name}] is destroyed");
     }
     
+
+    protected abstract void OnAwake();
+    protected abstract void SubscribeToEvents(bool isSubscribed);
+
 }

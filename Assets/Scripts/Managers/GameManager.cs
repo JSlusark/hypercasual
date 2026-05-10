@@ -6,21 +6,10 @@ public class GameManager : Manager<GameManager>
 {
     SaveSystem _saveSystem;
     
-
-    protected override void Awake()  
+    protected override void OnAwake()
     {
-        base.Awake();
-        /*
-         * The ideal would be having just gamemanager as a monobehaviour
-         * and the other "submanagers" as pure c# singletons, as it can make it easier
-         * to convert the logic to another engine.
-         *
-         * For now, Awake order is set in Edit>ProjectSettings>Script Execution Order
-         */
-        
         _saveSystem = SaveSystem.Instance;
     }
-
 
     ///    <summary>
     /// Unity built in methods for to handle when app is paused or quit

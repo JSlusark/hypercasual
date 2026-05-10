@@ -1,0 +1,24 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5b5bcbd0e8d44e21b5442216df206d15, type: 3}
+  m_Name: DanceSession
+  m_EditorClassIdentifier: Assembly-CSharp::DanceSession
+  rounds: 0
+  points: 0
+  coins: 8
+  roundTarget: 3
+  sessionTimer: 20
+  coinValue: 2
+  coinTimer: 3
+  audioOnFailedMove: {fileID: 8300000, guid: e1089bc6f7b504b1187c08a3ce55e748, type: 3}
+  audioOnSuccessMove: {fileID: 8300000, guid: 6c737fbbb2d4649e39aeec269ab8d7b1, type: 3}
+  audioOnCoinCollected: {fileID: 8300000, guid: 67bd2df2a8fa4474ea595657ff7d42d0, type: 3}

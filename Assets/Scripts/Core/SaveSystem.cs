@@ -22,7 +22,7 @@ public class SaveSystem : Singleton<SaveSystem>
 
     protected override void Initialize()
     {
-        Debug.Log("Starting SaveSystem");
+        // Debug.Log("Starting SaveSystem");
         _savePath = Path.Combine(Application.persistentDataPath, "savegame.json");
         Load();
     }
@@ -36,16 +36,16 @@ public class SaveSystem : Singleton<SaveSystem>
             SaveData = JsonUtility.FromJson<SaveData>(json);
             if (IsInvalid(SaveData))
             {
-                Debug.LogWarning("SaveData invalid or corrupted");
+                // Debug.LogWarning("SaveData invalid or corrupted");
                 SaveData = GetNewSaveData();
                 Save();
             }
 
-            Debug.Log("Loaded SaveData from Save System");
+            // Debug.Log("Loaded SaveData from Save System");
         }
         else
         {
-            Debug.Log("Creating new save file from Save System, creating new data");
+            // Debug.Log("Creating new save file from Save System, creating new data");
             SaveData = GetNewSaveData();
             Save();
         }
@@ -78,7 +78,7 @@ public class SaveSystem : Singleton<SaveSystem>
         File.WriteAllText(tempPath, json);
         File.Copy(tempPath, _savePath, overwrite: true);
         File.Delete(tempPath);
-        Debug.Log("Saved SaveData");
+        // Debug.Log("Saved SaveData");
     }
 
 

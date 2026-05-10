@@ -2,17 +2,16 @@ namespace DefaultNamespace
 {
     public enum PanelID
     {
-        /* PANELS ACTIVATED FROM MENU BUTTONS*/
-        // Top Menu
+        // PanelIDs triggered from top menu buttons
         Settings,
-        // Low Menu
+        // PanelIDs triggered from low menu buttons
         Roster,
         Profile,
-        Dance,
+        Play,
         Shop,
         Missions,
-        // Nested in Panel Prefabs (Overlay panels)
-        DanceSession,
-        DanceSummary
+        // PanelIDs triggered from other panels (when active)
+        PlaySession, // from play
+        PlaySummary // from play
     }
 }

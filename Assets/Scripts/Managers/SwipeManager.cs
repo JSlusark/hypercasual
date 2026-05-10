@@ -25,10 +25,8 @@ public class SwipeManager : Manager<SwipeManager>
     [SerializeField]
     private Vector2 currPosition; // makes sense to me to keep it here as used multiple times in diff methods
 
-
-    protected override void Awake() // overrides base class' awake as we init touchControl object instance
+    protected override void OnAwake()
     {
-        base.Awake();
         touchControl = new TouchInputActions();
     }
 
