@@ -19,7 +19,7 @@ public class CoinsView : MonoBehaviour
 
     public void Show(float amount)
     {
-        var text = "$" + amount.ToString("N0");
+        var text = $"$ {amount.ToString("N0")}";
         coinsText.text = text;
     }
 

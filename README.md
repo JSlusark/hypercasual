@@ -15,27 +15,56 @@
   Dancefluencer Rush is a Unity hyper-casual arcade-style mobile game that simulates the fast-paced content creation process of TikTok dance influencers. It takes inspiration from classic games like `Dance Dance Revolution`, `Just Dance` and `Osu!` but steps away from the rhythm genre to focus mainly how many moves replicated under a time limit.
   The faster you replicate moves, the more content you churn out to stay relevant, evolve your style and grow your fanbase.
 
+
+  <div align="center">
+<img src="./docs/videos/new_preview.gif" height="500" alt="Unlocked dancer select">
+</div>
+
   <br/>
   <div align="right"><a href="#dancefluencer-rush">↑ Return to top</a></div>
 
 <br/>
 
 # Current project status
-The current build focuses on the core gameplay loop: the player has to perform a sequence of directional inputs to fill a score bar and complete as many rounds as possible before the timer runs out. This concept is meant to simulate a dance influencer creating short-form content, where each round represents recording a new reel and faster input completion allows the player to produce more reels before the time limit is depleted.
+The current build delivers the main gameplay loop alongside a simple progression and character unlocking system:
+the player has to perform a sequence of directional inputs to fill a score bar and complete as many rounds as possible before the timer runs out. This concept is meant to simulate a dance influencer creating short-form content, where each round represents recording a new reel and faster input completion allows the player to produce more reels before the time limit is depleted.
 
+The features below can also be previewed on [this youtube video](https://bit.ly/jslusark_dancefluencer)
 
-### Features:
-- **Menu and Screen Navigation:** The game supports menu-based transitions across game screens and states.
-- **Character Selection:** Players can play as different dancers, each with their own high score to beat.
-- **Sequence-Based Input Challenge:** Players use arrow keys to match directional prompts, with each move validated as success or fail. The arrow sequence is generated randomly for each round, success moves fill the score bar while failed moves deplete it.
-- **Time-Based Gameplay:** Players have a limited time to complete as many rounds as possible, with the game ending when the timer runs out.
-- **Mobile UI Scaling:** UI layouts are configured to scale across different device sizes in most screens (portrait orientation only).
+### Core Systems & Features
 
-<div align="center">
-<img src="./docs/videos/screen_preview.gif" height="300" alt="Unlocked dancer select">
-<img src="./docs/videos/play_session.gif" height="300" alt="Unlocked dancer select">
-<img src="./docs/videos/device_switch.gif" height="300" alt="Unlocked dancer select">
-</div>
+- **Core Gameplay Loop:** The player must match a randomly generated set of directional inputs to fill a score bar and advance the round counter. The goal is to complete as many rounds as possible before the timer runs out.
+
+- **Scoring System:** Each completed set of inputs fills the video bar based on the character's power, which scales with their experience level. Power decreases after each round, following a clicker-game decay mechanic where early rounds are easier to complete, but returns diminish over time.
+
+- **Coin Collection System:** throughout the core game loop, coins dynamically spawn on the screen at timed intervals throughout the core game loop and can be collected with a simple tap. The coins collected during a session contribute to the player's in-game currency, however they also introduce a risk-reward element as they can distract the player from completing the sets of directional inputs required to advance rounds. 
+
+- **Input:** Supports mobile input as the game reads directional swipes and taps. On desktop, arrow keys and mouse clicks are completely supported through Unity's Input System.
+
+- **Character Roster:** Features three playable characters, each with a distinct dance style, pose set, and visual identity.
+
+- **Character Unlocking:** Characters are unlocked by spending in-game currency, which is earned during gameplay or topped up on demand from the top-up menu bar.
+
+- **Session Summary:** At the end of each session, results are displayed and written to the character's profile, updating their follower count and the player's overall wallet balance.
+
+- **Interactive Feedback:** Every player interaction triggers responsive sprite changes, animations, and audio cues.
+
+### Technical Architecture & UI
+
+- **Platform:** Builds and runs as an Android APK on real devices with no additional configuration required.
+
+- **Responsive UI:** Layouts adapt dynamically to portrait mode across common mobile aspect ratios (with a focus on iPhones and Pixel devices).
+
+- **Menu and Screen Navigation:** Menu buttons and in-game events trigger panel visibility changes and clean scene transitions.
+
+- **Save System:** Player progress and wallet balance are serialized to a JSON file and saved on pause and quit, persisting across sessions. When reopening the game, players continue exactly from where they left off with their progress fully intact.
+
+- **ScriptableObject Configs:** Character's immutable data such as sprites, audio, unlock cost, and animation data are stored in ScriptableObjects, allowing for easy tweaking and expansion.
+
+- **MVC Architecture:** The project follows a Model-View-Controller pattern for most of its core systems, ensuring a clean separation of concerns and maintainable codebase.
+
+- **Built to Scale:** While hypercasual in scope, the project is architecturally designed with hybrid-casual expansion in mind. Character progression through follower count, a missions system and cosmetic customization are all accounted for structurally, leaving clear room to grow. Placeholder panels were left for these features for futute development.
+
 
 <br/>
 

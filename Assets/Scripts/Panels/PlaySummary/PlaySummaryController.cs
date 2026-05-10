@@ -20,7 +20,7 @@ public class PlaySummaryController : PanelController
         _activeCharacter.UpdateExperience(danceSessionConfig.rounds, danceSessionConfig.points);
         _backgroundView.Show(_activeCharacter.Config
                                              .reelBackground[0]);
-        resultView.Show(danceSessionConfig.rounds.ToString(),
+        resultView.Show(_activeCharacter.Config.name,danceSessionConfig.rounds.ToString(),
                         (danceSessionConfig.rounds * danceSessionConfig.points).ToString("F0"),
                         danceSessionConfig.coins.ToString());
     }

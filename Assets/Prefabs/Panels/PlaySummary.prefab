@@ -695,6 +695,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 45a2ce0c4ea54b988c4b71b75b37c3ad, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ResultView
+  titleText: {fileID: 7310599918575295155}
   ReelText: {fileID: 8139072733538072381}
   FollowersText: {fileID: 9126404564805015792}
   TipsText: {fileID: 8938317668607371873}
