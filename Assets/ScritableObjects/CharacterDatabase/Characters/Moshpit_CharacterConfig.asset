@@ -16,7 +16,7 @@ MonoBehaviour:
   name: Moxi Riot
   costToUnlock: 0
   rosterSprite: {fileID: -4703886236799124499, guid: 5395e73e6b6734817ba64ba14701d00b, type: 3}
-  idleAnimation: {fileID: 7400000, guid: b0c1fcd827a9a45a5a1a49823125e0c1, type: 2}
+  idleAnimation: {fileID: 7400000, guid: e52e3a011467440d6ba15e34b224cb12, type: 2}
   reelBackground:
   - {fileID: -708990551563883993, guid: 1e811178bc79746c284e3834d87c6c92, type: 3}
   onSuccessSprite: {fileID: 21300000, guid: 8aebb05a2e15d44c581c8f351334fd42, type: 3}

@@ -31,7 +31,7 @@ public class PlaySessionController : PanelController
 
     private void Start()
     {
-        _characterView.SetSprite(_activeCharacter.Config.idleSprite);
+        // _characterView.SetSprite(_activeCharacter.Config.idleSprite);
         _backgroundView.Show(_activeCharacter.Config
                                              .reelBackground[0]); // in the future the index is meant to dynamically change depending from the round level
     }
@@ -83,7 +83,7 @@ public class PlaySessionController : PanelController
 
 
         // pass freeze config for seconds
-        _characterView.ShowDanceMove(moveSprite, idleSprite);
+         _characterView.ShowDanceClip(moveSprite);
         _timerController.Stop();
     }
 

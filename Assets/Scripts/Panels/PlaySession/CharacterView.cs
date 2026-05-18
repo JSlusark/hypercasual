@@ -5,44 +5,55 @@ using UnityEngine.UI;
 
 public class CharacterView : MonoBehaviour
 {
+    [Header("UI Components")]
     [SerializeField] private Image characterSprite;
+    [SerializeField] private Animator characterAnimator;
 
-    [Header("On dance move animation")] [SerializeField]
-    private float timePassed = 0f;
-    [SerializeField] private float timeAvailable = 0.2f;
-    [SerializeField] private float wiggleAmount = 15f;
+    [Header("Animation Sockets")]
+    [SerializeField] private AnimationClip idleClip;
+    [SerializeField] private AnimationClip danceClip; // keyframe template, only image changes
+    
+    private AnimatorOverrideController _animatorOverride;
+
+    private void Start()
+    {
+        // 1. Set up the local override architecture
+        _animatorOverride = new AnimatorOverrideController(characterAnimator.runtimeAnimatorController);
+        characterAnimator.runtimeAnimatorController = _animatorOverride;
+     
+        // 2. Boot up with the catalogue's active character idle
+        var activeConfig = CharacterCatalogue.Instance.activeCharacter.Config;
+        SetClip(activeConfig.idleAnimation);
+    }
     
     public void SetSprite(Sprite idle)
     {
         characterSprite.sprite = idle;
     }
 
-    public void ShowDanceMove(Sprite moveSprite, Sprite idleSprite)
+    // Changes standard looping animations (like idles)
+    public void SetClip(AnimationClip characterClip)
     {
-        StartCoroutine(MoveAnimation(moveSprite, idleSprite));
+        if (characterClip == null) return;
+
+        _animatorOverride[idleClip] = characterClip;
+        int currentState = characterAnimator.GetCurrentAnimatorStateInfo(0).fullPathHash;
+        characterAnimator.Play(currentState, 0, 0f);
     }
     
-
-    private IEnumerator MoveAnimation(Sprite moveSprite, Sprite idleSprite)
+    // Changes the graphic and triggers your shared editor wiggle clip
+    public void ShowDanceClip(Sprite danceSprite)
     {
-        characterSprite.sprite = moveSprite;
+        if (danceSprite == null) return;
 
-        Vector3 startPosition = characterSprite.transform.localPosition;
-        timePassed = 0f;
-        timeAvailable = 0.2f;
-        wiggleAmount = 15f; // degrees
-        
-        while (timePassed < timeAvailable)
-        {
-            timePassed += Time.deltaTime;
-            float progress = timePassed / timeAvailable;
-            float decay = 1f - progress; // starts strong, fades out
-            float offset = Mathf.Sin(progress * Mathf.PI * 6) * wiggleAmount * decay;
-            characterSprite.transform.localPosition = startPosition + new Vector3(offset, 0, 0);
-            yield return null;
-        }
-
-        characterSprite.transform.localPosition = startPosition;
-        characterSprite.sprite = idleSprite;
+        characterSprite.sprite = danceSprite;
+        SetClip(danceClip);
+    }
+    
+    // Triggered seamlessly by the blue diamond Animation Event on this GameObject!
+    public void OnClipEnd()
+    {
+        var activeConfig = CharacterCatalogue.Instance.activeCharacter.Config;
+        SetClip(activeConfig.idleAnimation);
     }
 }

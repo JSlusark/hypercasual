@@ -19,8 +19,8 @@ public class CharacterConfig : ScriptableObject
 	[Header("----------- DANCESESSION CONFIGS -----------")]
 	[Header("🎥 Clips")]
 	public AnimationClip idleAnimation;
-	
-	[Header("🎨 Sprites")]
+
+	[Header("🎨 Sprites")] 
 	public Sprite[] reelBackground;
 	public Sprite onSuccessSprite;
 	public Sprite onFailSprite;

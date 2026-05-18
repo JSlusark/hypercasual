@@ -128,71 +128,84 @@ TextureImporter:
     ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: iOS
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: punk_idle_spritesheet_0
+      name: sprite_idle_0
       rect:
         serializedVersion: 2
-        x: 40
-        y: 122
-        width: 390
-        height: 818
-      alignment: 9
-      pivot: {x: 0.5, y: -0.0005}
+        x: 81
+        y: 49
+        width: 367
+        height: 769
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: 2b382a18ba11610a0800000000000000
-      internalID: -6911317149841456206
+      spriteID: 2391737d6d1cd4af08a7715922a49a72
+      internalID: -1709687522
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: punk_idle_spritesheet_1
+      name: sprite_idle_1
       rect:
         serializedVersion: 2
-        x: 535
-        y: 122
-        width: 390
-        height: 810
-      alignment: 9
-      pivot: {x: 0.5, y: -0.0005}
+        x: 545
+        y: 49
+        width: 366
+        height: 761
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: 896c9a381816a3a70800000000000000
-      internalID: 8807459230164043416
+      spriteID: fcd879c2f754547d9b996383b9d85c8e
+      internalID: -1532272534
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: punk_idle_spritesheet_2
+      name: sprite_idle_2
       rect:
         serializedVersion: 2
-        x: 1027
-        y: 121
-        width: 389
-        height: 808
-      alignment: 9
-      pivot: {x: 0.5, y: -0.0005}
+        x: 1007
+        y: 49
+        width: 367
+        height: 739
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: cc750e63c4cd65bf0800000000000000
-      internalID: -335838902296225844
+      spriteID: 2b30a1dc3197f47ad9bd50444a07bfff
+      internalID: -909158436
       vertices: []
       indices: 
       edges: []
@@ -211,11 +224,11 @@ TextureImporter:
     spriteCustomMetadata:
       entries:
       - key: SpriteEditor.SliceSettings
-        value: '{"sliceOnImport":false,"gridCellCount":{"x":1.0,"y":1.0},"gridSpriteSize":{"x":256.0,"y":512.0},"gridSpriteOffset":{"x":0.0,"y":0.0},"gridSpritePadding":{"x":0.0,"y":0.0},"pivot":{"x":0.5,"y":0.5},"pivotPixels":{"x":0.0,"y":0.0},"autoSlicingMethod":0,"spriteAlignment":0,"pivotUnitMode":0,"slicingType":1,"keepEmptyRects":false,"isAlternate":false}'
+        value: '{"sliceOnImport":false,"gridCellCount":{"x":1.0,"y":1.0},"gridSpriteSize":{"x":64.0,"y":64.0},"gridSpriteOffset":{"x":0.0,"y":0.0},"gridSpritePadding":{"x":0.0,"y":0.0},"pivot":{"x":0.5,"y":0.5},"pivotPixels":{"x":0.0,"y":0.0},"autoSlicingMethod":0,"spriteAlignment":0,"pivotUnitMode":0,"slicingType":0,"keepEmptyRects":false,"isAlternate":false}'
     nameFileIdTable:
-      punk_idle_spritesheet_0: -6911317149841456206
-      punk_idle_spritesheet_1: 8807459230164043416
-      punk_idle_spritesheet_2: -335838902296225844
+      sprite_idle_0: -1709687522
+      sprite_idle_1: -1532272534
+      sprite_idle_2: -909158436
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

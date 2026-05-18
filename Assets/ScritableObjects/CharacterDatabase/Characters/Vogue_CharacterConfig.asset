@@ -16,7 +16,7 @@ MonoBehaviour:
   name: Jean Star
   costToUnlock: 900
   rosterSprite: {fileID: 4282041581734270292, guid: 5710af2a762d14653893686b683ae7d2, type: 3}
-  idleAnimation: {fileID: 0}
+  idleAnimation: {fileID: 7400000, guid: ed2b4c186cd124b51829dc05d302069d, type: 2}
   reelBackground:
   - {fileID: 3167209408248242512, guid: 8b8e305292ef945efa544f1a4819cd3c, type: 3}
   onSuccessSprite: {fileID: -5090879937577951274, guid: 86a5da1a8901f4bc78b7221238cf69d5, type: 3}

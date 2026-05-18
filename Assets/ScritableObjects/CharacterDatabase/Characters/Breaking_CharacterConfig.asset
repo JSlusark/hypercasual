@@ -16,7 +16,7 @@ MonoBehaviour:
   name: Brad Tuy
   costToUnlock: 800
   rosterSprite: {fileID: -4396882722451657706, guid: d7bb164c02ea748c5899802720ed8b11, type: 3}
-  idleAnimation: {fileID: 0}
+  idleAnimation: {fileID: 7400000, guid: 3666903913b6543f290285fcbf1fe42e, type: 2}
   reelBackground:
   - {fileID: -8625725295831688959, guid: 94b4cc3aed71f411982a404fb18e2f38, type: 3}
   onSuccessSprite: {fileID: 21300000, guid: e6f148d5ea9a54dc981139a69f68cad5, type: 3}
