@@ -15,16 +15,16 @@ MonoBehaviour:
   id: 0
   name: Moxi Riot
   costToUnlock: 0
-  rosterSprite: {fileID: -4703886236799124499, guid: 5395e73e6b6734817ba64ba14701d00b, type: 3}
+  rosterSprite: {fileID: 21300000, guid: 5395e73e6b6734817ba64ba14701d00b, type: 3}
   idleAnimation: {fileID: 7400000, guid: e52e3a011467440d6ba15e34b224cb12, type: 2}
   reelBackground:
   - {fileID: -708990551563883993, guid: 1e811178bc79746c284e3834d87c6c92, type: 3}
   onSuccessSprite: {fileID: 21300000, guid: 8aebb05a2e15d44c581c8f351334fd42, type: 3}
   onFailSprite: {fileID: 2688136287738319047, guid: dc0287e5c88b842b89dc4d9023263b9c, type: 3}
-  danceMoveSpriteUp: {fileID: -661879198794340232, guid: 6264e3e921a2f4d45911414b13eac115, type: 3}
-  danceMoveSpriteRight: {fileID: -7981465358293435062, guid: b499a08037f3e419dbf02b5ed197d3d2, type: 3}
-  danceMoveSpriteDown: {fileID: -8835402020111152126, guid: 3b7010068aecc43ccbae0d0c52646871, type: 3}
-  danceMoveSpriteLeft: {fileID: 4609114975909263971, guid: 9213575c6b69a43cb9796d27191c8457, type: 3}
+  danceMoveSpriteUp: {fileID: 21300000, guid: a16c743820e474b12a021e3566368a34, type: 3}
+  danceMoveSpriteRight: {fileID: 21300000, guid: 6264e3e921a2f4d45911414b13eac115, type: 3}
+  danceMoveSpriteDown: {fileID: 21300000, guid: 9213575c6b69a43cb9796d27191c8457, type: 3}
+  danceMoveSpriteLeft: {fileID: 21300000, guid: 63eb439ce4e334c1399ec43302391472, type: 3}
   onSetSuccess: {fileID: 8300000, guid: f7d92914be9414f59b4a34d069703627, type: 3}
   idleSprite: {fileID: 21300000, guid: 8aebb05a2e15d44c581c8f351334fd42, type: 3}
   studioBackground:
